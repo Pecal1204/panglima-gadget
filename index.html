@@ -113,7 +113,9 @@
   .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--red);}
   .stat{padding:24px 16px;text-align:center;border-right:1px solid rgba(0,0,0,.12);}
   .stat .v{font-family:var(--head);font-weight:900;font-size:28px;color:#fff;letter-spacing:-.5px;}
-  .stat .k{font-size:12.5px;color:rgba(255,255,255,.88);margin-top:3px;}
+  .stat .k{display:block;font-size:12.5px;color:rgba(255,255,255,.88);margin-top:3px;
+    text-decoration:underline;text-decoration-color:rgba(255,255,255,.4);text-underline-offset:3px;}
+  .stat .k:hover{color:#fff;text-decoration-color:#fff;}
 
   /* ============ Brands ============ */
   .brands{background:var(--bg);}
@@ -348,10 +350,10 @@
 
 <!-- ===== STATS BAR ===== -->
 <div class="stats">
-  <div class="stat"><div class="v">5.0★</div><div class="k">Google rating</div></div>
-  <div class="stat"><div class="v">Same-day</div><div class="k">Most repairs</div></div>
-  <div class="stat"><div class="v">Free</div><div class="k">Diagnostics</div></div>
-  <div class="stat"><div class="v">Warranty</div><div class="k">On every job</div></div>
+  <div class="stat"><div class="v">5.0★</div><a class="k" href="terms.html#google-rating">Google rating</a></div>
+  <div class="stat"><div class="v">Same-day</div><a class="k" href="terms.html#same-day">Most repairs</a></div>
+  <div class="stat"><div class="v">Free</div><a class="k" href="terms.html#diagnostics">Diagnostics</a></div>
+  <div class="stat"><div class="v">Warranty</div><a class="k" href="terms.html#warranty">On every job</a></div>
 </div>
 
 <!-- ===== BRANDS ===== -->
