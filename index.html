@@ -300,7 +300,6 @@
     <a href="#top" aria-label="Panglima Gadget home"><img src="logo.png" alt="Panglima Gadget"></a>
     <button class="nav-toggle" aria-label="Toggle menu" id="navToggle"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="navLinks">
-      <a href="#pricing">Pricing</a>
       <a href="#services">Services</a>
       <a href="#reviews">Reviews</a>
       <a href="#location">Location</a>
@@ -363,20 +362,6 @@
     <div class="brands-list">
       <span>iPhone</span><span>Samsung</span><span>Xiaomi</span><span>OPPO</span><span>vivo</span><span>HUAWEI</span><span>realme</span><span>ASUS</span><span>Acer</span><span>HP</span><span>Dell</span><span>Lenovo</span><span>MacBook</span>
     </div>
-  </div>
-</section>
-
-<!-- ===== PRICING ===== -->
-<section id="pricing" class="sec pricing">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h2">No surprises. Ever.</h2>
-      </div>
-      <p>Starting prices for our most common repairs. Your exact quote is confirmed free of charge, before any work begins.</p>
-    </div>
-    <div class="price-cards" id="priceCards"></div>
-    <div class="price-disclaimer">Prices shown are estimates in Ringgit Malaysia (RM) — replace with your real rates anytime.</div>
   </div>
 </section>
 
@@ -530,7 +515,6 @@
       <div>
         <div class="foot-h">Navigation</div>
         <div class="foot-col">
-          <a href="#pricing">Pricing</a>
           <a href="#services">Services</a>
           <a href="#reviews">Reviews</a>
           <a href="#location">Location</a>
@@ -698,29 +682,6 @@
     });
   }
   renderQuote();
-
-  /* ============ Render: pricing cards ============ */
-  var priceCardsEl = document.getElementById("priceCards");
-  var cardOrder = [
-    {key:"phone",  title:"Phone repair"},
-    {key:"laptop", title:"Laptop repair"},
-    {key:"tablet", title:"Tablet repair"}
-  ];
-  cardOrder.forEach(function(c){
-    var data = PRICING[c.key];
-    var card = el("div","pcard");
-    card.appendChild(txt("div","device", c.title));
-    card.appendChild(txt("div","cnote", data.note));
-    var ul = el("ul");
-    data.items.forEach(function(it){
-      var li = el("li");
-      li.appendChild(txt("span","n", it.name));
-      li.appendChild(txt("span","p", it.price));
-      ul.appendChild(li);
-    });
-    card.appendChild(ul);
-    priceCardsEl.appendChild(card);
-  });
 
   /* ============ Render: services ============ */
   var svcGridEl = document.getElementById("svcGrid");
