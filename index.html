@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panglima Gadget — Phone &amp; Laptop Repair in Telok Panglima Garang</title>
+<meta name="description" content="Fast, honest phone, laptop &amp; tablet repair in Telok Panglima Garang, Selangor. Free diagnostics, upfront pricing, same-day service &amp; warranty on every repair. WhatsApp 010-533 9970.">
+<meta name="theme-color" content="#0b0b0e">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Panglima Gadget — Get It Fixed Today">
+<meta property="og:description" content="Phones, laptops &amp; tablets — cracked, dead, or water-damaged. Free diagnostics, upfront pricing, warranty on every repair.">
+<meta property="og:image" content="https://lh3.googleusercontent.com/3CywCBeM8RS-urXgQhxvZWSkLOhYYxNySnBpwwCFLcN6nASwbMNO3MedaWKNyQGOVyhWvrVdLWRfu-kFZw=w1405">
+
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ Design tokens ============ */
+  :root{
+    --bg:#0b0b0e; --bg-alt:#0e0e12; --bg-svc:#111116; --card:#141419;
+    --row:#1e1e25; --footer:#08080a;
+    --red:#e02128; --red-hover:#c31a20; --red-light:#ff5a60;
+    --wa:#25d366; --wa-hover:#3ee87a; --wa-ink:#062b16;
+    --green:#4ade80; --gold:#ffb400;
+    --t1:#eceef2; --t2:#d3d7de; --t3:#b6bcc7; --t4:#a9afba;
+    --t5:#8b909b; --t6:#7d838f; --t7:#6a6f7a; --t8:#5f646e;
+    --b1:rgba(255,255,255,.08); --b2:rgba(255,255,255,.09); --b3:rgba(255,255,255,.1);
+    --sans:'Inter',system-ui,sans-serif; --head:'Archivo',system-ui,sans-serif;
+  }
+
+  /* ============ Reset / base ============ */
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--t1);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.5;
+  }
+  a{color:inherit;text-decoration:none;
+    transition:color .18s ease,background-color .18s ease,border-color .18s ease,transform .2s ease,box-shadow .2s ease;}
+  img{display:block;max-width:100%;}
+  h1,h2{margin:0;}
+  button{font-family:inherit;}
+  ::selection{background:var(--red);color:#fff;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  .sec{border-bottom:1px solid var(--b1);}
+  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px;}
+  .eyebrow.red{color:var(--red-light);}
+  .eyebrow.green{color:var(--green);}
+  .h2{font-family:var(--head);font-size:44px;font-weight:800;letter-spacing:-1px;line-height:1;}
+
+  @keyframes pg-live{0%,100%{opacity:1}50%{opacity:.35}}
+
+  /* ============ Header ============ */
+  header{position:sticky;top:0;z-index:60;background:rgba(11,11,14,.85);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);}
+  .nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .nav img{height:42px;width:auto;}
+  .nav-links{display:flex;align-items:center;gap:28px;font-size:14.5px;font-weight:500;color:var(--t4);}
+  .nav-links a:not(.pill):hover{color:#fff;}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:var(--wa-ink);
+    padding:11px 20px;border-radius:7px;font-weight:700;letter-spacing:.2px;}
+  .pill:hover{background:var(--wa-hover);transform:translateY(-1px);}
+  .nav-toggle{display:none;}
+
+  /* ============ Hero ============ */
+  .hero{position:relative;border-bottom:1px solid var(--b1);overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;z-index:0;opacity:.22;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;}
+  .hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(760px 380px at 80% -5%, rgba(224,33,40,.28), transparent 60%),
+              linear-gradient(180deg, rgba(11,11,14,.86), rgba(11,11,14,.94));}
+  .hero-grid{position:relative;z-index:2;padding-top:72px;padding-bottom:76px;
+    display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center;}
+  .status-chip{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:6px 14px;
+    font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:22px;
+    border:1px solid var(--red);color:var(--red-light);background:rgba(224,33,40,.12);}
+  .status-chip .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pg-live 2s infinite;}
+  .hero h1{font-family:var(--head);font-weight:900;font-size:70px;line-height:.93;
+    letter-spacing:-1.8px;margin:0 0 18px;text-wrap:balance;}
+  .hero h1 .red{color:var(--red);}
+  .hero .sub{font-size:18px;line-height:1.55;color:var(--t3);margin:0 0 30px;max-width:440px;text-wrap:pretty;}
+  .hero-cta{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
+  .btn-wa{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:var(--wa-ink);
+    padding:15px 30px;border-radius:8px;font-weight:700;font-size:16px;font-family:var(--head);}
+  .btn-wa:hover{background:var(--wa-hover);transform:translateY(-2px);}
+  .call-link{color:#fff;font-weight:600;font-size:15px;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;}
+  .call-link:hover{color:var(--red-light);border-color:var(--red-light);}
+
+  /* quote widget */
+  .quote{background:var(--card);border:1px solid var(--b3);border-radius:16px;padding:26px;box-shadow:0 24px 60px rgba(0,0,0,.5);}
+  .quote-title{font-family:var(--head);font-weight:800;font-size:18px;color:#fff;margin-bottom:4px;}
+  .quote-note{font-size:13px;color:var(--t5);margin-bottom:18px;}
+  .tabs{display:flex;gap:8px;margin-bottom:14px;}
+  .tab{flex:1;text-align:center;border-radius:8px;padding:11px;font-weight:600;font-size:13.5px;
+    font-family:var(--sans);cursor:pointer;border:none;background:var(--row);color:var(--t3);
+    transition:background-color .18s ease,color .18s ease;}
+  .tab.active{background:var(--red);color:#fff;}
+  .price-rows{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+  .price-row{display:flex;justify-content:space-between;align-items:center;background:var(--row);border-radius:8px;padding:12px 14px;}
+  .price-row .name{font-size:13.5px;color:#e8ecf2;}
+  .price-row .price{font-family:var(--head);font-weight:800;font-size:14px;color:var(--green);}
+  .quote-send{display:block;background:var(--wa);color:var(--wa-ink);text-align:center;border-radius:8px;
+    padding:13px;font-weight:700;font-size:15px;}
+  .quote-send:hover{background:var(--wa-hover);}
+  .quote-fine{font-size:11.5px;color:var(--t7);text-align:center;margin-top:10px;}
+
+  /* ============ Stats bar ============ */
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--red);}
+  .stat{padding:24px 16px;text-align:center;border-right:1px solid rgba(0,0,0,.12);}
+  .stat .v{font-family:var(--head);font-weight:900;font-size:28px;color:#fff;letter-spacing:-.5px;}
+  .stat .k{font-size:12.5px;color:rgba(255,255,255,.88);margin-top:3px;}
+
+  /* ============ Brands ============ */
+  .brands{background:var(--bg);}
+  .brands .wrap{padding-top:38px;padding-bottom:38px;display:flex;flex-direction:column;align-items:center;gap:20px;}
+  .brands-label{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--t8);}
+  .brands-list{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px 42px;
+    font-family:var(--head);font-weight:700;font-size:20px;color:#676c76;}
+
+  /* ============ Section heading rows ============ */
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+  .sec-head p{font-size:15.5px;color:var(--t4);max-width:360px;margin:0;line-height:1.6;}
+
+  /* ============ Pricing ============ */
+  .pricing{background:var(--bg-alt);}
+  .pricing .wrap{padding-top:92px;padding-bottom:92px;}
+  .pricing .sec-head{margin-bottom:46px;}
+  .price-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+  .pcard{background:var(--card);border:1px solid var(--b2);border-radius:16px;padding:28px;}
+  .pcard:hover{border-color:rgba(224,33,40,.5);transform:translateY(-3px);}
+  .pcard .device{font-family:var(--head);font-weight:800;font-size:20px;margin-bottom:6px;}
+  .pcard .cnote{font-size:13px;color:var(--t5);margin-bottom:20px;}
+  .pcard ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;}
+  .pcard li{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07);}
+  .pcard li .n{font-size:14px;color:var(--t2);}
+  .pcard li .p{font-family:var(--head);font-weight:800;font-size:15px;color:var(--green);white-space:nowrap;}
+  .price-disclaimer{margin-top:22px;font-size:13px;color:var(--t7);text-align:center;}
+
+  /* ============ Services ============ */
+  .services .wrap{padding-top:92px;padding-bottom:92px;}
+  .services .sec-head{margin-bottom:48px;}
+  .services .sec-head p{max-width:340px;}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
+    background:var(--b1);border:1px solid var(--b1);border-radius:14px;overflow:hidden;}
+  .svc{background:var(--bg-svc);padding:34px 30px;display:flex;flex-direction:column;gap:16px;min-height:204px;
+    transition:background-color .2s ease;}
+  .svc:hover{background:#16161d;}
+  .svc-ico{width:54px;height:54px;border-radius:13px;background:rgba(224,33,40,.12);
+    display:flex;align-items:center;justify-content:center;color:var(--red);}
+  .svc-title{font-family:var(--head);font-weight:700;font-size:19px;margin-top:2px;}
+  .svc-desc{font-size:14px;line-height:1.6;color:var(--t5);}
+
+  /* ============ Process ============ */
+  .process{background:var(--bg-alt);}
+  .process .wrap{padding-top:92px;padding-bottom:92px;}
+  .process .h2{margin-bottom:52px;}
+  .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;}
+  .step{border-top:2px solid var(--red);padding-top:22px;}
+  .step .n{font-family:var(--head);font-size:15px;font-weight:800;color:var(--red);letter-spacing:1px;margin-bottom:16px;}
+  .step .t{font-family:var(--head);font-weight:700;font-size:19px;margin-bottom:10px;}
+  .step .d{font-size:14.5px;line-height:1.6;color:var(--t5);}
+
+  /* ============ Why + reviews ============ */
+  .reviews{background:var(--bg);}
+  .reviews .wrap{padding-top:92px;padding-bottom:92px;display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:60px;align-items:center;}
+  .reviews .h2{margin-bottom:34px;}
+  .reasons{display:flex;flex-direction:column;gap:26px;}
+  .reason{display:flex;gap:18px;align-items:flex-start;}
+  .reason .ico{color:var(--red);flex-shrink:0;margin-top:2px;}
+  .reason .t{font-family:var(--head);font-weight:700;font-size:17px;margin-bottom:4px;}
+  .reason .d{font-size:14.5px;line-height:1.6;color:var(--t5);}
+  .rev-col{display:flex;flex-direction:column;gap:16px;}
+  .rating-card{background:var(--card);border:1px solid var(--b2);border-radius:14px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,.4);}
+  .rating-top{display:flex;align-items:center;gap:16px;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--b1);}
+  .rating-num{font-family:var(--head);font-size:50px;font-weight:900;line-height:1;}
+  .stars{color:var(--gold);font-size:17px;letter-spacing:3px;}
+  .rating-sub{font-size:13px;color:var(--t6);margin-top:5px;}
+  .rating-quote{font-size:16px;line-height:1.65;color:var(--t2);}
+  .rating-by{margin-top:16px;font-size:13px;color:var(--t6);}
+  .rev-link{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--card);
+    border:1px solid var(--b2);border-radius:14px;padding:22px 28px;}
+  .rev-link:hover{border-color:rgba(224,33,40,.5);}
+  .rev-link .t{font-family:var(--head);font-weight:700;font-size:16px;}
+  .rev-link .s{font-size:13px;color:var(--t6);margin-top:2px;}
+  .rev-link .arr{color:var(--red);font-size:22px;}
+  .socials{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .social{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--b2);
+    border-radius:12px;padding:18px 20px;font-family:var(--head);font-weight:700;font-size:15px;}
+  .social:hover{border-color:rgba(224,33,40,.5);}
+  .social svg{color:#fff;}
+
+  /* ============ Gallery ============ */
+  .gallery .wrap{padding-top:92px;padding-bottom:92px;}
+  .gallery .h2{margin-bottom:44px;}
+  .gal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;gap:14px;}
+  .gal-item{position:relative;border-radius:12px;overflow:hidden;background:var(--card);}
+  .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+  .gal-item:hover img{transform:scale(1.05);}
+
+  /* ============ Location ============ */
+  .location{background:var(--bg);}
+  .location .wrap{padding-top:92px;padding-bottom:92px;display:grid;
+    grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:60px;align-items:center;}
+  .location .h2{margin-bottom:18px;}
+  .location .lead{font-size:16px;line-height:1.65;color:var(--t4);margin:0 0 30px;}
+  .nav-btns{display:flex;flex-direction:column;gap:12px;}
+  .nav-btn{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--b2);
+    border-radius:11px;padding:17px 22px;font-weight:600;font-size:15.5px;}
+  .nav-btn:hover{border-color:rgba(224,33,40,.5);}
+  .info-tiles{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .tile{background:var(--card);border:1px solid var(--b2);border-radius:11px;padding:18px 20px;}
+  .tile .lbl{font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t6);margin-bottom:7px;}
+  .tile .val{font-weight:600;font-size:15px;}
+  .tile a.val{color:var(--red-light);}
+  .tile a.val:hover{color:#ff8a8f;}
+  .storefront{position:relative;width:100%;height:380px;border-radius:12px;overflow:hidden;background:var(--card);}
+  .storefront img{width:100%;height:100%;object-fit:cover;}
+
+  /* ============ Network ============ */
+  .network .wrap{padding-top:92px;padding-bottom:92px;}
+  .network .h2{margin-bottom:44px;}
+  .net-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+  .net-card{background:var(--card);border:1px solid var(--b2);border-radius:14px;padding:34px;
+    display:flex;flex-direction:column;gap:10px;}
+  .net-card:hover{border-color:rgba(224,33,40,.5);transform:translateY(-3px);}
+  .net-card .t{font-family:var(--head);font-weight:700;font-size:22px;}
+  .net-card .d{font-size:14.5px;color:var(--t5);line-height:1.6;}
+  .net-card .v{color:var(--red-light);font-size:14px;font-weight:600;margin-top:8px;}
+
+  /* ============ CTA ============ */
+  .cta{position:relative;background:var(--red);color:#fff;overflow:hidden;}
+  .cta .wrap{padding-top:100px;padding-bottom:100px;text-align:center;position:relative;}
+  .cta h2{font-family:var(--head);font-size:56px;font-weight:900;letter-spacing:-1.5px;
+    margin:0 0 16px;line-height:.96;text-wrap:balance;}
+  .cta p{font-size:18px;color:rgba(255,255,255,.9);margin:0 0 36px;}
+  .btn-dark{display:inline-flex;align-items:center;gap:11px;background:var(--bg);color:#fff;
+    padding:17px 38px;border-radius:8px;font-weight:700;font-size:17px;font-family:var(--head);}
+  .btn-dark:hover{background:#000;transform:translateY(-2px);}
+
+  /* ============ Footer ============ */
+  footer{background:var(--footer);}
+  footer .wrap{padding-top:56px;padding-bottom:40px;}
+  .foot-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:40px;
+    padding-bottom:36px;border-bottom:1px solid var(--b1);}
+  .foot-grid img{height:52px;width:auto;margin-bottom:16px;}
+  .foot-about{font-size:14px;color:var(--t6);line-height:1.6;max-width:300px;margin:0;}
+  .foot-about em{font-style:italic;color:var(--t4);}
+  .foot-h{font-family:var(--head);font-weight:700;font-size:13px;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--t1);margin-bottom:16px;}
+  .foot-col{display:flex;flex-direction:column;gap:11px;font-size:14.5px;color:var(--t5);}
+  .foot-col a:hover{color:var(--red-light);}
+  .copyright{padding-top:26px;font-size:13px;color:var(--t8);}
+
+  /* ============ Responsive ============ */
+  @media (max-width:940px){
+    .hero-grid{grid-template-columns:1fr;gap:36px;}
+    .hero h1{font-size:54px;letter-spacing:-1.2px;}
+    .reviews .wrap,.location .wrap{grid-template-columns:1fr;gap:40px;}
+    .h2{font-size:36px;}
+    .cta h2{font-size:40px;}
+    .price-cards,.steps{grid-template-columns:1fr 1fr;}
+    .svc-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:680px){
+    .wrap{padding:0 18px;}
+    .nav-links{position:fixed;inset:74px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;
+      background:rgba(11,11,14,.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);
+      padding:8px 18px 18px;transform:translateY(-120%);transition:transform .28s ease;z-index:59;}
+    .nav-links.open{transform:translateY(0);}
+    .nav-links a:not(.pill){padding:14px 4px;border-bottom:1px solid var(--b1);}
+    .nav-links .pill{margin-top:14px;justify-content:center;}
+    .nav-toggle{display:inline-flex;flex-direction:column;gap:5px;background:none;border:none;
+      cursor:pointer;padding:8px;}
+    .nav-toggle span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.2s;}
+    .hero h1{font-size:44px;}
+    .stats{grid-template-columns:1fr 1fr;}
+    .stat:nth-child(2){border-right:none;}
+    .price-cards,.steps,.svc-grid,.net-grid,.socials,.info-tiles{grid-template-columns:1fr;}
+    .gal-grid{grid-template-columns:1fr 1fr;grid-auto-rows:160px;}
+    .foot-grid{grid-template-columns:1fr;gap:28px;}
+    .h2{font-size:30px;}
+    .cta h2{font-size:32px;}
+    .sec-head p{max-width:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" aria-label="Panglima Gadget home"><img src="logo.png" alt="Panglima Gadget"></a>
+    <button class="nav-toggle" aria-label="Toggle menu" id="navToggle"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#pricing">Pricing</a>
+      <a href="#services">Services</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#location">Location</a>
+      <a class="pill" data-wa="general" target="_blank" rel="noopener">Get a Quote</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="top" class="hero">
+  <div class="hero-bg">
+    <img src="https://lh3.googleusercontent.com/3CywCBeM8RS-urXgQhxvZWSkLOhYYxNySnBpwwCFLcN6nASwbMNO3MedaWKNyQGOVyhWvrVdLWRfu-kFZw=w1405" alt="" loading="eager">
+  </div>
+  <div class="hero-glow"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="status-chip" id="statusChip">
+        <span class="dot" id="statusDot"></span>
+        <span id="statusLabel">Checking hours…</span>
+      </div>
+      <h1>GET IT FIXED<br><span class="red">TODAY.</span></h1>
+      <p class="sub">Phones, laptops &amp; tablets — cracked, dead, or water-damaged. Free diagnostics, upfront pricing, and a warranty on every repair.</p>
+      <div class="hero-cta">
+        <a class="btn-wa" data-wa="general" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#062b16"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.9 14.1c-.25.7-1.45 1.35-2 1.4-.5.05-.5.4-3.15-.65-2.65-1.05-4.3-3.75-4.45-3.95-.15-.2-1.1-1.45-1.1-2.75s.7-1.95.95-2.2c.25-.25.55-.3.7-.3h.5c.15 0 .4-.05.6.5.25.65.85 2.2.9 2.35.05.15.1.35 0 .55-.1.2-.15.35-.3.5l-.45.5c-.15.15-.3.3-.15.6.15.3.65 1.15 1.45 1.85 1 .9 1.85 1.15 2.15 1.3.3.15.45.1.6-.05.15-.15.7-.8.9-1.1.2-.3.4-.25.65-.15.25.1 1.6.75 1.85.9.25.15.45.2.5.3.05.15.05.65-.2 1.35z"></path></svg>
+          WhatsApp Now
+        </a>
+        <a class="call-link" href="tel:+60105339970">Call 010-533 9970</a>
+      </div>
+    </div>
+
+    <!-- Instant-quote widget -->
+    <div class="quote">
+      <div class="quote-title">Get an instant estimate</div>
+      <div class="quote-note">Choose your device, then WhatsApp us for a firm quote.</div>
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-device="phone">Phone</button>
+        <button class="tab" data-device="laptop">Laptop</button>
+        <button class="tab" data-device="tablet">Tablet</button>
+      </div>
+      <div class="price-rows" id="priceRows"></div>
+      <a class="quote-send" id="quoteSend" target="_blank" rel="noopener">Send on WhatsApp →</a>
+      <div class="quote-fine">Estimates only · final price after free diagnostics</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS BAR ===== -->
+<div class="stats">
+  <div class="stat"><div class="v">5.0★</div><div class="k">Google rating</div></div>
+  <div class="stat"><div class="v">Same-day</div><div class="k">Most repairs</div></div>
+  <div class="stat"><div class="v">Free</div><div class="k">Diagnostics</div></div>
+  <div class="stat"><div class="v">Warranty</div><div class="k">On every job</div></div>
+</div>
+
+<!-- ===== BRANDS ===== -->
+<section class="sec brands">
+  <div class="wrap">
+    <div class="brands-label">We repair every major brand</div>
+    <div class="brands-list">
+      <span>iPhone</span><span>Samsung</span><span>Xiaomi</span><span>OPPO</span><span>vivo</span><span>HUAWEI</span><span>realme</span><span>ASUS</span><span>Acer</span><span>HP</span><span>Dell</span><span>Lenovo</span><span>MacBook</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section id="pricing" class="sec pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow green">Upfront Pricing</div>
+        <h2 class="h2">No surprises. Ever.</h2>
+      </div>
+      <p>Starting prices for our most common repairs. Your exact quote is confirmed free of charge, before any work begins.</p>
+    </div>
+    <div class="price-cards" id="priceCards"></div>
+    <div class="price-disclaimer">Prices shown are estimates in Ringgit Malaysia (RM) — replace with your real rates anytime.</div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services" class="sec services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow red">Our Services</div>
+        <h2 class="h2">What we repair</h2>
+      </div>
+      <p>From cracked screens to software faults — every phone and laptop brand handled professionally.</p>
+    </div>
+    <div class="svc-grid" id="svcGrid"></div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section id="process" class="sec process">
+  <div class="wrap">
+    <div class="eyebrow red">Simple Process</div>
+    <h2 class="h2">Four simple steps to a working device</h2>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<!-- ===== WHY + REVIEWS ===== -->
+<section id="reviews" class="sec reviews">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow red">Why Panglima Gadget</div>
+      <h2 class="h2">Repairs you can trust</h2>
+      <div class="reasons" id="reasons"></div>
+    </div>
+    <div class="rev-col">
+      <div class="rating-card">
+        <div class="rating-top">
+          <div class="rating-num">5.0</div>
+          <div>
+            <div class="stars">★★★★★</div>
+            <div class="rating-sub">Outstanding rating on Google Reviews</div>
+          </div>
+        </div>
+        <div class="rating-quote">"Fast service and fair pricing. My phone was ready the same day. Highly recommended!"</div>
+        <div class="rating-by">— Panglima Gadget customer</div>
+      </div>
+      <a class="rev-link" href="https://customers-review.qubiztechtpg.workers.dev/" target="_blank" rel="noopener">
+        <div>
+          <div class="t">Read all reviews &amp; testimonials</div>
+          <div class="s">Genuine reviews from our customers</div>
+        </div>
+        <span class="arr">→</span>
+      </a>
+      <div class="socials">
+        <a class="social" href="https://www.tiktok.com/@panglima_gadget" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-1-2.82h-3.13v12.4a2.53 2.53 0 0 1-2.53 2.53 2.53 2.53 0 0 1 0-5.06c.26 0 .51.04.75.11V9.78a5.66 5.66 0 0 0-.75-.05 5.65 5.65 0 1 0 5.66 5.65V9.01a7.35 7.35 0 0 0 4.3 1.38V7.26a4.28 4.28 0 0 1-3.3-1.44z"></path></svg>
+          TikTok
+        </a>
+        <a class="social" href="https://www.facebook.com/share/19vVW3YgXq/" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"></path></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery" class="sec gallery">
+  <div class="wrap">
+    <div class="eyebrow red">Gallery</div>
+    <h2 class="h2">Behind our counter</h2>
+    <div class="gal-grid" id="galGrid"></div>
+  </div>
+</section>
+
+<!-- ===== LOCATION ===== -->
+<section id="location" class="sec location">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow red">Our Location</div>
+      <h2 class="h2">Visit our shop</h2>
+      <p class="lead">We're located in Telok Panglima Garang, Selangor. Choose your preferred navigation below to reach us with ease.</p>
+      <div class="nav-btns">
+        <a class="nav-btn" href="https://maps.app.goo.gl/ydq99CnpTsHCHSBo6" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e02128" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          Open in Google Maps
+        </a>
+        <a class="nav-btn" href="https://waze.com/ul/hw280wpg8g" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e02128" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+          Navigate with Waze
+        </a>
+      </div>
+      <div class="info-tiles">
+        <div class="tile">
+          <div class="lbl">Area</div>
+          <div class="val">Telok Panglima Garang</div>
+        </div>
+        <div class="tile">
+          <div class="lbl">WhatsApp</div>
+          <a class="val" data-wa="general" target="_blank" rel="noopener">010-533 9970</a>
+        </div>
+      </div>
+    </div>
+    <div class="storefront">
+      <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmJHopx1gfTzcyjBQrTapH_aXEn3S6pH-IUZfE3LlL3S-GbwfdFK7MvyRcovYYglhPZoLCJsVeG735oPDllOzOSHjo1gVsXLdjKoZjf2cSGrdEawchBnyf3FqQsrHl0KVVs2IE46aCjAEw=s1360-w1360-h1020-rw" alt="Panglima Gadget storefront" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== NETWORK ===== -->
+<section class="sec network">
+  <div class="wrap">
+    <div class="eyebrow red">Our Network</div>
+    <h2 class="h2">Part of the Qubiz Tech family</h2>
+    <div class="net-grid">
+      <a class="net-card" href="https://linktr.ee/qubiztech.shahalam" target="_blank" rel="noopener">
+        <div class="t">Qubiz Tech Seksyen 18</div>
+        <div class="d">Expert phone and laptop repair in Seksyen 18, Shah Alam.</div>
+        <div class="v">Visit →</div>
+      </a>
+      <a class="net-card" href="https://linktr.ee/qubiztech_academy" target="_blank" rel="noopener">
+        <div class="t">Qubiz Tech Academy</div>
+        <div class="d">Malaysia's device repair skills academy — learn the craft from expert technicians.</div>
+        <div class="v">Visit →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta">
+  <div class="wrap">
+    <h2>Device giving you trouble?<br>Get it fixed today.</h2>
+    <p>Message us on WhatsApp for a free diagnostic — most repairs done the same day.</p>
+    <a class="btn-dark" data-wa="general" target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#25d366"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.9 14.1c-.25.7-1.45 1.35-2 1.4-.5.05-.5.4-3.15-.65-2.65-1.05-4.3-3.75-4.45-3.95-.15-.2-1.1-1.45-1.1-2.75s.7-1.95.95-2.2c.25-.25.55-.3.7-.3h.5c.15 0 .4-.05.6.5.25.65.85 2.2.9 2.35.05.15.1.35 0 .55-.1.2-.15.35-.3.5l-.45.5c-.15.15-.3.3-.15.6.15.3.65 1.15 1.45 1.85 1 .9 1.85 1.15 2.15 1.3.3.15.45.1.6-.05.15-.15.7-.8.9-1.1.2-.3.4-.25.65-.15.25.1 1.6.75 1.85.9.25.15.45.2.5.3.05.15.05.65-.2 1.35z"></path></svg>
+      WhatsApp 010-533 9970
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="logo.png" alt="Panglima Gadget">
+        <p class="foot-about">Expert phone and laptop repair in Telok Panglima Garang. <em>"Relive your second life."</em></p>
+      </div>
+      <div>
+        <div class="foot-h">Navigation</div>
+        <div class="foot-col">
+          <a href="#pricing">Pricing</a>
+          <a href="#services">Services</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#location">Location</a>
+        </div>
+      </div>
+      <div>
+        <div class="foot-h">Contact</div>
+        <div class="foot-col">
+          <a data-wa="general" target="_blank" rel="noopener">WhatsApp · 010-533 9970</a>
+          <a href="https://www.tiktok.com/@panglima_gadget" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://www.facebook.com/share/19vVW3YgXq/" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://maps.app.goo.gl/ydq99CnpTsHCHSBo6" target="_blank" rel="noopener">Google Maps</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Panglima Gadget · Telok Panglima Garang, Selangor</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============ Config ============ */
+  var WHATSAPP_NUMBER = "60105339970";
+
+  // Business hours (0=Sunday ... 6=Saturday). ASSUMPTION — confirm against Google Business Profile.
+  // Mon–Sat 10:00–21:00, Sun 10:00–18:00.
+  var HOURS = {
+    0:{open:"10:00",close:"18:00"},
+    1:{open:"10:00",close:"21:00"},
+    2:{open:"10:00",close:"21:00"},
+    3:{open:"10:00",close:"21:00"},
+    4:{open:"10:00",close:"21:00"},
+    5:{open:"10:00",close:"21:00"},
+    6:{open:"10:00",close:"21:00"}
+  };
+
+  function wa(msg){
+    return "https://api.whatsapp.com/send?phone=" + WHATSAPP_NUMBER + "&text=" + encodeURIComponent(msg);
+  }
+  var WA_GENERAL = wa("Hi Panglima Gadget, I'd like to ask about your repair services.");
+
+  /* Wire every generic WhatsApp link */
+  var els = document.querySelectorAll('[data-wa="general"]');
+  for (var i=0;i<els.length;i++){ els[i].setAttribute("href", WA_GENERAL); }
+
+  /* ============ Data ============ */
+  var PRICING = {
+    phone:  { label:"Phone",  note:"iPhone · Samsung · Xiaomi · more", items:[
+      {name:"Screen replacement",  price:"RM120+"},
+      {name:"Battery replacement", price:"RM80+"},
+      {name:"Charging port",       price:"RM70+"},
+      {name:"Water damage",        price:"RM100+"}
+    ]},
+    laptop: { label:"Laptop", note:"Windows & MacBook", items:[
+      {name:"Screen replacement",  price:"RM250+"},
+      {name:"Battery replacement", price:"RM180+"},
+      {name:"SSD / RAM upgrade",   price:"RM60+"},
+      {name:"Format & reinstall",  price:"RM50+"}
+    ]},
+    tablet: { label:"Tablet", note:"iPad · Samsung Tab · more", items:[
+      {name:"Screen replacement",  price:"RM150+"},
+      {name:"Battery replacement", price:"RM120+"},
+      {name:"Charging port",       price:"RM90+"},
+      {name:"Software service",    price:"RM50+"}
+    ]}
+  };
+
+  var ns = "http://www.w3.org/2000/svg";
+  function svgEl(paths, stroke){
+    var s = document.createElementNS(ns,"svg");
+    s.setAttribute("width","26"); s.setAttribute("height","26");
+    s.setAttribute("viewBox","0 0 24 24"); s.setAttribute("fill","none");
+    s.setAttribute("stroke","currentColor"); s.setAttribute("stroke-width","1.8");
+    s.setAttribute("stroke-linecap","round"); s.setAttribute("stroke-linejoin","round");
+    for (var i=0;i<paths.length;i++){
+      var d = paths[i];
+      var node = document.createElementNS(ns, d.tag);
+      for (var a in d.attrs){ if (d.attrs.hasOwnProperty(a)) node.setAttribute(a, d.attrs[a]); }
+      s.appendChild(node);
+    }
+    return s;
+  }
+  function P(d){ return {tag:"path", attrs:{d:d}}; }
+
+  var SERVICES = [
+    {title:"Screen Replacement", desc:"Cracked screens, faulty LCDs, or unresponsive touch — for all phone and laptop brands.",
+      paths:[{tag:"rect",attrs:{x:5,y:2,width:14,height:20,rx:2}},{tag:"line",attrs:{x1:12,y1:18,x2:12,y2:18}}]},
+    {title:"Battery Replacement", desc:"Swollen batteries, rapid drain, or charging failure. We use quality, reliable batteries.",
+      paths:[{tag:"rect",attrs:{x:2,y:7,width:16,height:10,rx:2}},{tag:"line",attrs:{x1:22,y1:11,x2:22,y2:13}},{tag:"line",attrs:{x1:6,y1:10,x2:6,y2:14}},{tag:"line",attrs:{x1:10,y1:10,x2:10,y2:14}}]},
+    {title:"Water Damage", desc:"Device exposed to water? Bring it in quickly — we perform thorough cleaning and recovery.",
+      paths:[P("M12 2.7s6 6.6 6 10.3a6 6 0 0 1-12 0c0-3.7 6-10.3 6-10.3z")]},
+    {title:"Laptop Service", desc:"Slow, overheating, or won't boot — SSD/RAM upgrades, reinstallation, and hardware repair.",
+      paths:[{tag:"rect",attrs:{x:3,y:4,width:18,height:12,rx:1}},{tag:"line",attrs:{x1:2,y1:20,x2:22,y2:20}}]},
+    {title:"Charging Issues", desc:"Loose or damaged charging ports, or a charger not detected. We repair or replace the port.",
+      paths:[{tag:"polyline",attrs:{points:"13 2 3 14 12 14 11 22 21 10 12 10 13 2"}}]},
+    {title:"Data & Software", desc:"Data recovery, software reinstallation, unlocking, and system troubleshooting.",
+      paths:[{tag:"ellipse",attrs:{cx:12,cy:5,rx:9,ry:3}},P("M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"),P("M3 12c0 1.7 4 3 9 3s9-1.3 9-3")]}
+  ];
+
+  var STEPS = [
+    {n:"01", title:"Get in touch",      desc:"Send photos or a video of the issue via WhatsApp, or drop by our shop directly."},
+    {n:"02", title:"Free diagnostics",  desc:"We identify the root cause and let you know exactly what needs repair."},
+    {n:"03", title:"Quote & repair",    desc:"We provide a transparent quote first. Once you approve, we begin the work."},
+    {n:"04", title:"Done & warranted",  desc:"Your device is ready — most on the same day, backed by our service warranty."}
+  ];
+
+  var REASONS = [
+    {title:"Certified technicians", desc:"Trained through Qubiz Tech Academy — Malaysia's device repair skills academy.",
+      paths:[P("M22 10v6M2 10l10-5 10 5-10 5z"),P("M6 12v5c3 3 9 3 12 0v-5")]},
+    {title:"Transparent pricing", desc:"A clear quote before any work begins. No hidden charges.",
+      paths:[{tag:"line",attrs:{x1:12,y1:1,x2:12,y2:23}},P("M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6")]},
+    {title:"Fast turnaround", desc:"Most phone repairs are completed the same day.",
+      paths:[{tag:"circle",attrs:{cx:12,cy:12,r:9}},{tag:"polyline",attrs:{points:"12 7 12 12 15 14"}}]},
+    {title:"Service warranty", desc:"Every repair is backed by our service warranty.",
+      paths:[P("M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z"),{tag:"polyline",attrs:{points:"9 12 11 14 15 10"}}]}
+  ];
+
+  var GALLERY = [
+    "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmdHakvAQKp_BoYJsHPfn-jAHzE3PkDKY5YTOm3iRLYiwbFRGvnwc2LoW7CqgPSX006A5myQPdpj-ICnaJC8yH674n7fMQVU67joUodOUFsWLgZTwZKiycPF3b1yPhO5mejKlpE-ex3l2I9=s1360-w1360-h1020-rw",
+    "https://lh3.googleusercontent.com/-dsEQL71EHFcI8Vyf66OozlKxols-fKPD74yFuM6l7ber9jJg4iEzYgvakkIV08k6Kwxw9wGTP_cDipx_A=w1405",
+    "https://lh3.googleusercontent.com/PZK8pHSY9RYyi_khUR1baByueV2qzQ-_fbW8_3FxPCreU7f8OCFRyI3YPVymvfmbpAONh3eovc_yUBiZgw=w1405",
+    "https://lh3.googleusercontent.com/M7YZz_3SrFNrtQa5YNuzYLMiAfysYyeN2NgUw98AroQnmaLyqFgZzzzoMkTneWmYKQnnKytkP5ktr_TCuQ=w1405",
+    "https://lh3.googleusercontent.com/bxjOWmTvOQJzeqERAaRRG7zZqRqDzfiKddLJu3VwQtrfEsGrkyzxe40qUhr55IcWRo7QRL4MPUwp57oQrw=w1405",
+    "https://lh3.googleusercontent.com/RtetW9DcNX-18DlGd9PL70nXiM0BQ7lKqliffPNyOapEmIcUhvNxiX84FmvZnpJhFNlhhB0UggekyzZfKw=w1405",
+    "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlVEuQFCY5Z89uMOOK0eLz_JNDuOpxW-sqhoCiO30sN9T6PonXy1uK-hkrR1DeMXRZCW4YAdT35M3mpaJlwC39TWpg_KK7hbF0aIOeH0P-HlXO5z0ehMlUEF4w9786fZrBOv-lUmvmNqX8r=s1360-w1360-h1020-rw",
+    "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmI1ZnggopI9N_FfalHqQL4ZZjJ7USEhJ9ARZ7uxXHi08AraxPmYcJr7HR_MzaM1WfBWX5fE91vnJ0KUAq9KOU58S8GdFWN9Vuck082Ll-d4LDaxmbNuETJrb9un4DjxuZbNaJ_zAaRX3g=s1360-w1360-h1020-rw"
+  ];
+  var GAL_SPANS = [
+    {col:"span 2",row:"span 2"},{col:"span 2",row:"span 1"},{col:"span 1",row:"span 1"},{col:"span 1",row:"span 1"},
+    {col:"span 1",row:"span 1"},{col:"span 1",row:"span 1"},{col:"span 2",row:"span 1"},{col:"span 2",row:"span 1"}
+  ];
+
+  /* ============ Helpers ============ */
+  function el(tag, cls){ var e=document.createElement(tag); if(cls) e.className=cls; return e; }
+  function txt(tag, cls, text){ var e=el(tag,cls); e.textContent=text; return e; }
+
+  /* ============ Render: quote widget ============ */
+  var device = "phone";
+  var priceRowsEl = document.getElementById("priceRows");
+  var quoteSendEl = document.getElementById("quoteSend");
+  var tabButtons = document.querySelectorAll("#tabs .tab");
+
+  function renderQuote(){
+    var data = PRICING[device];
+    priceRowsEl.innerHTML = "";
+    var rows = data.items.slice(0,3);
+    for (var i=0;i<rows.length;i++){
+      var row = el("div","price-row");
+      row.appendChild(txt("span","name", rows[i].name));
+      row.appendChild(txt("span","price", rows[i].price));
+      priceRowsEl.appendChild(row);
+    }
+    quoteSendEl.setAttribute("href",
+      wa("Hi Panglima Gadget, I'd like a quote to repair my " + data.label.toLowerCase() + "."));
+    for (var t=0;t<tabButtons.length;t++){
+      tabButtons[t].classList.toggle("active", tabButtons[t].getAttribute("data-device")===device);
+    }
+  }
+  for (var t=0;t<tabButtons.length;t++){
+    tabButtons[t].addEventListener("click", function(){
+      device = this.getAttribute("data-device");
+      renderQuote();
+    });
+  }
+  renderQuote();
+
+  /* ============ Render: pricing cards ============ */
+  var priceCardsEl = document.getElementById("priceCards");
+  var cardOrder = [
+    {key:"phone",  title:"Phone repair"},
+    {key:"laptop", title:"Laptop repair"},
+    {key:"tablet", title:"Tablet repair"}
+  ];
+  cardOrder.forEach(function(c){
+    var data = PRICING[c.key];
+    var card = el("div","pcard");
+    card.appendChild(txt("div","device", c.title));
+    card.appendChild(txt("div","cnote", data.note));
+    var ul = el("ul");
+    data.items.forEach(function(it){
+      var li = el("li");
+      li.appendChild(txt("span","n", it.name));
+      li.appendChild(txt("span","p", it.price));
+      ul.appendChild(li);
+    });
+    card.appendChild(ul);
+    priceCardsEl.appendChild(card);
+  });
+
+  /* ============ Render: services ============ */
+  var svcGridEl = document.getElementById("svcGrid");
+  SERVICES.forEach(function(s){
+    var card = el("div","svc");
+    var ico = el("div","svc-ico");
+    ico.appendChild(svgEl(s.paths));
+    card.appendChild(ico);
+    card.appendChild(txt("div","svc-title", s.title));
+    card.appendChild(txt("div","svc-desc", s.desc));
+    svcGridEl.appendChild(card);
+  });
+
+  /* ============ Render: process steps ============ */
+  var stepsEl = document.getElementById("steps");
+  STEPS.forEach(function(s){
+    var step = el("div","step");
+    step.appendChild(txt("div","n", s.n));
+    step.appendChild(txt("div","t", s.title));
+    step.appendChild(txt("div","d", s.desc));
+    stepsEl.appendChild(step);
+  });
+
+  /* ============ Render: reasons ============ */
+  var reasonsEl = document.getElementById("reasons");
+  REASONS.forEach(function(r){
+    var row = el("div","reason");
+    var ico = el("div","ico");
+    ico.appendChild(svgEl(r.paths));
+    row.appendChild(ico);
+    var body = el("div");
+    body.appendChild(txt("div","t", r.title));
+    body.appendChild(txt("div","d", r.desc));
+    row.appendChild(body);
+    reasonsEl.appendChild(row);
+  });
+
+  /* ============ Render: gallery ============ */
+  var galGridEl = document.getElementById("galGrid");
+  GALLERY.forEach(function(src, i){
+    var item = el("div","gal-item");
+    var span = GAL_SPANS[i] || {col:"span 1",row:"span 1"};
+    item.style.gridColumn = span.col;
+    item.style.gridRow = span.row;
+    var img = el("img");
+    img.src = src; img.alt = "Panglima Gadget shop photo"; img.loading = "lazy";
+    item.appendChild(img);
+    galGridEl.appendChild(item);
+  });
+
+  /* ============ Live Open/Closed badge ============ */
+  var chipEl = document.getElementById("statusChip");
+  var dotEl = document.getElementById("statusDot");
+  var labelEl = document.getElementById("statusLabel");
+
+  function toMin(t){ var p=t.split(":"); return (+p[0])*60 + (+p[1]); }
+
+  function computeStatus(){
+    var now = new Date();
+    var day = now.getDay();
+    var mins = now.getHours()*60 + now.getMinutes();
+    var today = HOURS[day];
+    if (!today || today.closed){ return {open:false, label:"Closed today"}; }
+    var o = toMin(today.open), c = toMin(today.close);
+    if (mins >= o && mins < c){
+      var left = c - mins;
+      var suffix = left <= 60 ? " · closes " + today.close : " · until " + today.close;
+      return {open:true, label:"Open now" + suffix};
+    }
+    if (mins < o){ return {open:false, label:"Closed · opens " + today.open}; }
+    return {open:false, label:"Closed now"};
+  }
+
+  function renderStatus(){
+    var st = computeStatus();
+    labelEl.textContent = st.label;
+    if (st.open){
+      chipEl.style.color = "#4ade80";
+      chipEl.style.borderColor = "rgba(74,222,128,.4)";
+      chipEl.style.background = "rgba(74,222,128,.12)";
+      dotEl.style.background = "#4ade80";
+    } else {
+      chipEl.style.color = "#ff5a60";
+      chipEl.style.borderColor = "rgba(224,33,40,.4)";
+      chipEl.style.background = "rgba(224,33,40,.12)";
+      dotEl.style.background = "#e02128";
+    }
+  }
+  renderStatus();
+  setInterval(renderStatus, 30000);
+
+  /* ============ Mobile nav toggle ============ */
+  var toggle = document.getElementById("navToggle");
+  var links = document.getElementById("navLinks");
+  toggle.addEventListener("click", function(){ links.classList.toggle("open"); });
+  links.addEventListener("click", function(e){
+    if (e.target.tagName === "A") links.classList.remove("open");
+  });
+})();
+</script>
+</body>
+</html>

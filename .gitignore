@@ -1,0 +1,7 @@
+# artifact build (self-contained, not for git hosting)
+index.artifact.html
+# duplicate build output (root index.html is what Pages serves)
+dist/
+# tooling
+node_modules/
+.DS_Store
