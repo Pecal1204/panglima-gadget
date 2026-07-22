@@ -113,8 +113,8 @@
   .tab.active{background:var(--red);color:#fff;}
   .price-rows{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
   .price-row{display:flex;justify-content:space-between;align-items:center;background:var(--row);border-radius:8px;padding:12px 14px;}
-  .price-row .name{font-size:13.5px;color:#e8ecf2;}
-  .price-row .price{font-family:var(--head);font-weight:800;font-size:14px;color:var(--green);}
+  .price-row .name{min-width:0;padding-right:10px;font-size:13.5px;color:#e8ecf2;}
+  .price-row .price{flex:0 0 auto;white-space:nowrap;font-family:var(--head);font-weight:800;font-size:14px;color:var(--green);}
   .quote-send{display:block;background:var(--wa);color:var(--wa-ink);text-align:center;border-radius:8px;
     padding:13px;font-weight:700;font-size:15px;}
   .quote-send:hover{background:var(--wa-hover);}
