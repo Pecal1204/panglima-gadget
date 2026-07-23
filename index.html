@@ -13,7 +13,8 @@
 <meta property="og:description" content="Phones, laptops &amp; tablets — cracked, dead, or water-damaged. Free diagnostics, upfront pricing, warranty on every repair.">
 <meta property="og:image" content="https://lh3.googleusercontent.com/3CywCBeM8RS-urXgQhxvZWSkLOhYYxNySnBpwwCFLcN6nASwbMNO3MedaWKNyQGOVyhWvrVdLWRfu-kFZw=w1405">
 
-<link rel="icon" href="images/panglima-gadget-logo-transparent.png">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -57,7 +58,9 @@
 
   /* ============ Header ============ */
   header{position:sticky;top:0;z-index:60;background:rgba(11,11,14,.85);
-    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);}
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);
+    transition:transform .3s ease;}
+  header.header-hidden{transform:translateY(-100%);}
   .rebrand-banner{height:44px;display:flex;align-items:center;justify-content:center;gap:9px;padding:0 18px;
     background:linear-gradient(90deg,#9f1015,#e02128 50%,#9f1015);color:#fff;font-family:var(--head);
     font-size:12.5px;font-weight:600;letter-spacing:.15px;text-align:center;}
@@ -69,7 +72,7 @@
   .rebrand-badge{display:inline-flex;padding:3px 7px;border:1px solid rgba(255,255,255,.65);border-radius:999px;
     font-size:9px;font-weight:800;letter-spacing:1.2px;line-height:1;white-space:nowrap;}
   .rebrand-mobile{display:none;}
-  .nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
   .nav img{height:52px;width:auto;display:block;}
   .nav-links{display:flex;align-items:center;gap:28px;font-size:14.5px;font-weight:500;color:var(--t4);}
   .nav-links a:not(.pill):hover{color:#fff;}
@@ -292,7 +295,7 @@
     .rebrand-arrow{font-size:12px;}
     .rebrand-desktop{display:none;}
     .rebrand-mobile{display:inline;white-space:nowrap;}
-    .nav-links{position:fixed;inset:118px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;
+    .nav-links{position:fixed;inset:108px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;
       background:rgba(11,11,14,.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);
       padding:8px 18px 18px;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-12px);
       transition:opacity .2s ease,transform .28s ease,visibility 0s linear .28s;z-index:59;}
@@ -567,6 +570,30 @@
 <script>
 (function(){
   "use strict";
+
+  /* ============ Auto-hide header on scroll down, reveal on scroll up ============ */
+  (function(){
+    var header = document.querySelector("header");
+    if(!header) return;
+    var lastY = window.pageYOffset || 0;
+    var ticking = false;
+    function update(){
+      var y = window.pageYOffset || 0;
+      var navLinks = document.getElementById("navLinks");
+      var menuOpen = navLinks && navLinks.classList.contains("open");
+      // Only hide once past the header itself, and never while the mobile menu is open.
+      if(!menuOpen && y > header.offsetHeight && y > lastY){
+        header.classList.add("header-hidden");
+      } else if(y < lastY || y <= header.offsetHeight){
+        header.classList.remove("header-hidden");
+      }
+      lastY = y;
+      ticking = false;
+    }
+    window.addEventListener("scroll", function(){
+      if(!ticking){ window.requestAnimationFrame(update); ticking = true; }
+    }, {passive:true});
+  })();
 
   /* ============ Config ============ */
   var WHATSAPP_NUMBER = "60105339970";
