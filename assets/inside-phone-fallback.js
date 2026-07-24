@@ -1,0 +1,222 @@
+/* =============================================================================
+   INSIDE YOUR SMARTPHONE — content + fallback layer  (classic script, no build)
+   -----------------------------------------------------------------------------
+   Builds every piece of DOM text from PG_INSIDE_DATA so that:
+     • the interactive card, keyboard picker and overview labels are ready for
+       the 3D module to drive, and
+     • a fully accessible card grid exists even when WebGL / ES-modules / the CDN
+       are unavailable (no-WebGL, reduced-motion, or very old browsers).
+   Exposes a small API on window.PG_INSIDE used by assets/inside-phone.js.
+   ========================================================================== */
+(function (win, doc) {
+  "use strict";
+
+  var DATA = win.PG_INSIDE_DATA;
+  if (!DATA) return;
+  var C = DATA.config, CARDS = DATA.cards, TOUR = DATA.tour;
+
+  function $(id) { return doc.getElementById(id); }
+  function el(tag, cls, html) {
+    var n = doc.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  function waLink(msg) {
+    return "https://api.whatsapp.com/send?phone=" + C.whatsappNumber +
+           "&text=" + encodeURIComponent(msg);
+  }
+  function partLink(name) {
+    return waLink(C.messages.part.replace("{part}", name));
+  }
+
+  var WARN_ICON =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+    'stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>' +
+    '<line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+
+  /* Build the inner HTML shared by the interactive card and the fallback cards. */
+  function cardBody(card, index, opts) {
+    opts = opts || {};
+    var total = TOUR.length;
+    var idxLabel = index != null ? (pad(index + 1) + " / " + pad(total)) : "";
+    var warn = card.warning
+      ? '<div class="ip-warn">' + WARN_ICON + "<span><strong>Safety:</strong> " + esc(card.warning) + "</span></div>"
+      : "";
+    var nameId = opts.nameId ? ' id="' + opts.nameId + '"' : "";
+    return (
+      '<div class="ip-card-index"><span>' + (index != null ? "Component " + idxLabel : "&nbsp;") +
+        '</span><span class="tag">' + esc(card.tag) + "</span></div>" +
+      "<h3" + nameId + ">" + esc(card.name) + "</h3>" +
+      "<dl>" +
+        row("Function", card.function) +
+        row("Common problems", card.symptoms) +
+        row("Typical causes", card.causes) +
+        row("Recommended repair", card.repair) +
+      "</dl>" +
+      warn +
+      '<a class="ip-card-cta" href="' + partLink(card.name) + '" target="_blank" rel="noopener">' +
+        esc(C.copy.cardCta) +
+        ' <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>' +
+      "</a>"
+    );
+  }
+  function row(label, value) {
+    return '<div class="row"><dt>' + esc(label) + "</dt><dd>" + esc(value) + "</dd></div>";
+  }
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
+
+  /* ------------------------------------------------------------------ build */
+  var built = false;
+  var api = {
+    data: DATA,
+    waLink: waLink,
+    partLink: partLink,
+    build: build,          // idempotent; safe to call any time after the shell is parsed
+    els: {},
+    activeIndex: -1
+  };
+
+  function build() {
+    if (built) return;
+    var section = $("inside-phone");
+    if (!section) return;
+    built = true;
+
+    var e = api.els;
+    e.section    = section;
+    e.scroller   = $("ip-scroller");
+    e.stage      = $("ip-stage");
+    e.canvasWrap = $("ip-canvas-wrap");
+    e.lines      = $("ip-lines");
+    e.intro      = $("ip-intro");
+    e.deviceTag  = $("ip-device-tag");
+    e.hud        = $("ip-hud");
+    e.bar        = $("ip-bar");
+    e.phase      = $("ip-phase");
+    e.card       = $("ip-card");
+    e.labels     = $("ip-labels");
+    e.picker     = $("ip-picker");
+    e.loading    = $("ip-loading");
+    e.fallback   = $("ip-fallback");
+    e.fbGrid     = $("ip-fb-grid");
+
+    /* Wire ALL section copy from the data file so it is the single source of
+       truth for text (the HTML carries the same strings as a no-JS default). */
+    function setText(sel, value) {
+      var n = section.querySelector(sel);
+      if (n && value != null) n.textContent = value;
+    }
+    function setIconButtonText(node, value) {
+      // buttons/links whose first child is an <svg> icon followed by a text node
+      if (!node || value == null) return;
+      var last = node.lastChild;
+      if (last && last.nodeType === 3) last.nodeValue = " " + value;
+      else node.appendChild(doc.createTextNode(" " + value));
+    }
+    setText(".ip-intro .ip-eyebrow", C.copy.eyebrow);
+    setText("#ip-title", C.copy.openingTitle);
+    setText(".ip-intro p", C.copy.openingDesc);
+    setText(".ip-hint span:last-child", C.copy.scrollHint);
+    setText(".ip-device-tag .n", C.copy.deviceName);
+    setText(".ip-device-tag .t", C.copy.deviceTag);
+    setText(".ip-loading .lt", C.copy.loading);
+    setText(".ip-skip", C.copy.skip);
+    setText(".ip-fallback .ip-eyebrow", C.copy.eyebrow);
+    setText(".ip-final h2", C.copy.finalTitle);
+    setText(".ip-final > p", C.copy.finalDesc);
+    setText(".ip-trust", C.copy.trust);
+    setText(".ip-seo", C.seo);
+    setIconButtonText($("ip-reassemble"), C.copy.reassemble);
+    setIconButtonText($("ip-viewall"), C.copy.viewAll);
+
+    var primary = $("ip-cta-primary");
+    if (primary) {
+      primary.textContent = C.copy.finalPrimary;
+      primary.setAttribute("href", C.diagnosisLink || waLink(C.messages.diagnosis));
+      if (!C.diagnosisLink) { primary.target = "_blank"; primary.rel = "noopener"; }
+    }
+    var wa = $("ip-cta-wa");
+    if (wa) {
+      setIconButtonText(wa, C.copy.finalSecondary);
+      wa.setAttribute("href", waLink(C.messages.general));
+      wa.target = "_blank"; wa.rel = "noopener";
+    }
+
+    /* Keyboard component picker (also usable on desktop). */
+    if (e.picker) {
+      e.picker.appendChild(el("div", "lbl", "Inspect a part"));
+      TOUR.forEach(function (id, i) {
+        var b = el("button", null, esc(CARDS[id].name));
+        b.type = "button";
+        b.setAttribute("data-idx", i);
+        b.addEventListener("click", function () {
+          if (api.onPick) api.onPick(i);
+        });
+        e.picker.appendChild(b);
+      });
+    }
+
+    /* Overview label chips (positioned each frame by the 3D module). */
+    if (e.labels) {
+      TOUR.forEach(function (id, i) {
+        var c = el("div", "chip", esc(CARDS[id].name));
+        c.setAttribute("data-idx", i);
+        e.labels.appendChild(c);
+      });
+    }
+
+    /* Accessible fallback grid (all components as text). */
+    if (e.fbGrid) {
+      TOUR.forEach(function (id, i) {
+        var card = CARDS[id];
+        var c = el("div", "ip-fb-card");
+        c.innerHTML = cardBody(card, i, {});
+        e.fbGrid.appendChild(c);
+      });
+    }
+  }
+
+  /* ---------------------------------------------------------- card control */
+  api.setActive = function (index) {
+    if (!api.els.card) return;
+    if (index === api.activeIndex) return;
+    api.activeIndex = index;
+    var id = TOUR[index];
+    var card = CARDS[id];
+    if (!card) return;
+    api.els.card.innerHTML = cardBody(card, index, { nameId: "ip-card-name" });
+    api.els.card.classList.add("is-active");
+  };
+  api.clearActive = function () {
+    api.activeIndex = -1;
+    if (api.els.card) api.els.card.classList.remove("is-active");
+  };
+
+  /* ------------------------------------------------- static / fallback mode */
+  api.renderFallback = function (reason) {
+    build();
+    var s = api.els.section;
+    if (!s) return;
+    s.classList.add("ip-static");
+    if (api.els.fallback) api.els.fallback.hidden = false;
+    if (api.els.loading) api.els.loading.classList.add("is-hidden");
+    if (reason) s.setAttribute("data-ip-mode", reason);
+  };
+
+  win.PG_INSIDE = api;
+
+  /* Build DOM as soon as it is available (interactive parts stay hidden until
+     the module drives them; fallback grid stays hidden unless .ip-static). */
+  if (doc.readyState === "loading") {
+    doc.addEventListener("DOMContentLoaded", build);
+  } else {
+    build();
+  }
+})(window, document);

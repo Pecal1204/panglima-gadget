@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/inside-phone.css">
 
 <style>
   /* ============ Design tokens ============ */
@@ -409,6 +410,99 @@
       <p>From cracked screens to software faults — every phone and laptop brand handled professionally.</p>
     </div>
     <div class="svc-grid" id="svcGrid"></div>
+  </div>
+</section>
+
+<!-- ===== INSIDE YOUR SMARTPHONE (3D exploded view) ===== -->
+<section id="inside-phone" class="sec" aria-labelledby="ip-title">
+  <a class="ip-skip" href="#ip-after">Skip 3D exploration</a>
+  <div class="ip-grid-bg" aria-hidden="true"></div>
+
+  <div class="ip-scroller" id="ip-scroller">
+    <div class="ip-stage" id="ip-stage">
+      <div class="ip-canvas-wrap" id="ip-canvas-wrap" aria-hidden="true"></div>
+
+      <svg class="ip-lines" id="ip-lines" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="ip-labels" id="ip-labels" aria-hidden="true"></div>
+
+      <div class="ip-intro" id="ip-intro">
+        <div class="ip-eyebrow">Inside Your Smartphone</div>
+        <h2 id="ip-title">Every Part Has a Purpose</h2>
+        <p>Scroll to explore what happens inside your smartphone — and discover the warning signs when an important component begins to fail.</p>
+        <div class="ip-hint"><span class="ip-mouse" aria-hidden="true"></span><span>Scroll to inspect</span></div>
+      </div>
+
+      <div class="ip-device-tag" id="ip-device-tag" aria-hidden="true">
+        <div class="n">Panglima X1</div>
+        <div class="t">Reference teardown model</div>
+      </div>
+
+      <div class="ip-hud" id="ip-hud" aria-hidden="true">
+        <span id="ip-phase">Assembled</span>
+        <span class="ip-bar"><i id="ip-bar"></i></span>
+      </div>
+
+      <div class="ip-controls" id="ip-controls">
+        <button class="ip-btn" id="ip-reassemble" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+          Reassemble Phone
+        </button>
+        <button class="ip-btn" id="ip-viewall" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          View All Components
+        </button>
+      </div>
+
+      <div class="ip-picker" id="ip-picker" role="group" aria-label="Jump to a component"></div>
+
+      <div class="ip-card" id="ip-card" role="region" aria-live="polite" aria-label="Component details"></div>
+
+      <div class="ip-loading" id="ip-loading">
+        <div class="ip-spinner" aria-hidden="true"></div>
+        <div class="lt">Preparing device diagnostics…</div>
+        <div class="lb" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accessible / no-WebGL / reduced-motion fallback -->
+  <div class="ip-fallback" id="ip-fallback" hidden>
+    <div class="ip-fb-head">
+      <div class="ip-eyebrow">Inside Your Smartphone</div>
+      <h2>Every part has a purpose</h2>
+      <p>Explore what happens inside your smartphone and the warning signs when a key component begins to fail. Each part below lists its job, common symptoms and the recommended repair.</p>
+    </div>
+    <div class="ip-fb-diagram" aria-hidden="true">
+      <svg viewBox="0 0 300 220" role="img">
+        <g>
+          <rect class="lyr glass" x="60" y="8"   width="180" height="16" rx="6"/><text x="250" y="20">Front glass &amp; OLED</text>
+          <rect class="lyr"       x="60" y="34"  width="180" height="16" rx="6"/><text x="250" y="46">Mid-frame</text>
+          <rect class="lyr"       x="60" y="60"  width="180" height="16" rx="6"/><text x="250" y="72">Motherboard</text>
+          <rect class="lyr batt"  x="60" y="86"  width="180" height="22" rx="6"/><text x="250" y="100">Battery</text>
+          <rect class="lyr"       x="60" y="118" width="180" height="14" rx="6"/><text x="250" y="129">Cooling layers</text>
+          <rect class="lyr"       x="60" y="142" width="180" height="14" rx="6"/><text x="250" y="153">Wireless / NFC coil</text>
+          <rect class="lyr glass" x="60" y="166" width="180" height="16" rx="6"/><text x="250" y="178">Rear glass</text>
+        </g>
+      </svg>
+    </div>
+    <div class="ip-fb-grid" id="ip-fb-grid"></div>
+  </div>
+
+  <!-- Final scene / call to action -->
+  <span id="ip-after" tabindex="-1"></span>
+  <div class="ip-final">
+    <div class="ip-eyebrow" style="color:var(--ip-blue)">Diagnosis</div>
+    <h2>Not Sure Which Part Is Failing?</h2>
+    <p>Our technicians can diagnose screen, battery, camera, charging, audio and motherboard problems before recommending the right repair.</p>
+    <div class="ip-cta-row">
+      <a class="ip-cta-primary" id="ip-cta-primary">Get a Repair Diagnosis</a>
+      <a class="ip-cta-wa" id="ip-cta-wa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#062b16"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.9 14.1c-.25.7-1.45 1.35-2 1.4-.5.05-.5.4-3.15-.65-2.65-1.05-4.3-3.75-4.45-3.95-.15-.2-1.1-1.45-1.1-2.75s.7-1.95.95-2.2c.25-.25.55-.3.7-.3h.5c.15 0 .4-.05.6.5.25.65.85 2.2.9 2.35.05.15.1.35 0 .55-.1.2-.15.35-.3.5l-.45.5c-.15.15-.3.3-.15.6.15.3.65 1.15 1.45 1.85 1 .9 1.85 1.15 2.15 1.3.3.15.45.1.6-.05.15-.15.7-.8.9-1.1.2-.3.4-.25.65-.15.25.1 1.6.75 1.85.9.25.15.45.2.5.3.05.15.05.65-.2 1.35z"></path></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+    <div class="ip-trust">Professional diagnostics • Quality replacement parts • Transparent repair advice</div>
+    <p class="ip-seo">Panglima Gadget provides professional phone repair in Malaysia with honest smartphone diagnostics — from screen replacement and battery replacement to camera repair, charging-port repair, speaker repair and board-level motherboard repair. We identify the real fault before recommending a fix.</p>
   </div>
 </section>
 
@@ -846,5 +940,37 @@
   });
 })();
 </script>
+
+<!-- ===== INSIDE YOUR SMARTPHONE — scripts ===== -->
+<!-- 1. Editable content/config (plain script, always loads)               -->
+<script src="assets/inside-phone-data.js"></script>
+<!-- 2. Content + accessible fallback builder (plain script)               -->
+<script src="assets/inside-phone-fallback.js"></script>
+<!-- 3. importmap polyfill for older Safari/Firefox (native browsers skip) -->
+<script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js" crossorigin="anonymous"></script>
+<!-- 4. Pinned three.js import map                                          -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<!-- 5. Real-time 3D experience (module). No-module browsers use the fallback below. -->
+<script type="module" src="assets/inside-phone.js" onerror="window.PG_INSIDE&&window.PG_INSIDE.renderFallback('module-fetch-error')"></script>
+<script nomodule>window.addEventListener("DOMContentLoaded",function(){if(window.PG_INSIDE)window.PG_INSIDE.renderFallback("no-module");});</script>
+<!-- Watchdog: if nothing (3D canvas or fallback) is live 12s after load, stop the spinner and show the text fallback. -->
+<script>
+window.addEventListener("load",function(){
+  setTimeout(function(){
+    var s=document.getElementById("inside-phone");
+    if(!s||!window.PG_INSIDE)return;
+    var alive=s.querySelector("#ip-canvas-wrap canvas")||s.classList.contains("ip-static");
+    if(!alive)window.PG_INSIDE.renderFallback("watchdog-timeout");
+  },12000);
+});
+</script>
+
 </body>
 </html>
