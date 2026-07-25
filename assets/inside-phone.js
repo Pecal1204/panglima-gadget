@@ -125,7 +125,8 @@ function run(THREE, RoomEnvironment) {
      Local units: width 1.44 (x ±0.72), height 3.0 (y ±1.5), thin z.
      ==================================================================== */
   const HW = 0.72, HH = 1.5;
-  const seg = LOD ? 5 : 2;                  // curve segments for rounded shapes
+  const seg = LOD ? 9 : 4;                  // curve segments for rounded corners
+  const bevSeg = LOD ? 4 : 2;               // chamfer segments (smooth premium edges)
 
   const TEX = buildTextures(THREE);
   const M = buildMaterials(THREE, COL, LOD, TEX);
@@ -165,18 +166,35 @@ function run(THREE, RoomEnvironment) {
     s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
     return s;
   }
+  /* Every plate is chamfered on both faces, so edges catch a highlight like a
+     machined part instead of reading as cut card. Total thickness stays `d`:
+     a bevelled ExtrudeGeometry spans [-bev, depth+bev], so depth is reduced by
+     2*bev and the re-centring offset must add bev back — otherwise the part
+     sinks by bev and every decal plane anchored to ±d/2 lands inside the solid. */
   function plate(w, h, d, r) {
     const key = "p" + [w, h, d, r].join("_");
     if (!geomCache[key]) {
-      const g = new THREE.ExtrudeGeometry(rrShape(w, h, r), { depth: d, bevelEnabled: false, curveSegments: seg });
-      g.translate(0, 0, -d / 2); g.computeVertexNormals();
+      const bev = Math.min(0.009, d * 0.34, r * 0.5);
+      const g = new THREE.ExtrudeGeometry(rrShape(w, h, r), {
+        depth: d - bev * 2, curveSegments: seg,
+        bevelEnabled: true, bevelThickness: bev, bevelSize: bev,
+        bevelOffset: 0, bevelSegments: bevSeg
+      });
+      g.translate(0, 0, bev - d / 2);   // span [-bev, d-bev] -> exactly ±d/2
       geomCache[key] = g;
     }
     return geomCache[key];
   }
   function mesh(geo, mat) { return new THREE.Mesh(geo, mat); }
-  function box(w, h, d) { const k = "b" + [w, h, d].join("_"); if (!geomCache[k]) geomCache[k] = new THREE.BoxGeometry(w, h, d); return geomCache[k]; }
-  function cyl(r, h, s) { const k = "c" + [r, h, s].join("_"); if (!geomCache[k]) geomCache[k] = new THREE.CylinderGeometry(r, r, h, s); return geomCache[k]; }
+  /* Rounded box: same centred bounds as BoxGeometry, but with softened corners
+     and chamfered faces — every call site upgrades for free. */
+  function box(w, h, d) { return plate(w, h, d, Math.min(w, h) * 0.22); }
+  function cyl(r, h, s) {
+    s = Math.max(s || 12, LOD ? 24 : 12);   // no visible facets on barrels/rings
+    const k = "c" + [r, h, s].join("_");
+    if (!geomCache[k]) geomCache[k] = new THREE.CylinderGeometry(r, r, h, s);
+    return geomCache[k];
+  }
 
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
 
@@ -245,8 +263,13 @@ function run(THREE, RoomEnvironment) {
       const outer = rrShape(HW * 2, HH * 2, 0.28);
       const inner = rrShape(HW * 2 - 0.10, HH * 2 - 0.10, 0.24);
       outer.holes.push(new THREE.Path(inner.getPoints(seg * 4)));
-      const geo = new THREE.ExtrudeGeometry(outer, { depth: 0.17, bevelEnabled: false, curveSegments: seg });
-      geo.translate(0, 0, -0.085); geo.computeVertexNormals();
+      // chamfered rail: the bevel runs on the outer wall and the inner cutout
+      const fb = 0.008;
+      const geo = new THREE.ExtrudeGeometry(outer, {
+        depth: 0.17 - fb * 2, curveSegments: seg,
+        bevelEnabled: true, bevelThickness: fb, bevelSize: fb, bevelOffset: 0, bevelSegments: bevSeg
+      });
+      geo.translate(0, 0, fb - 0.085);   // same re-centring rule as plate()
       g.add(mesh(geo, M.frame));
       // antenna break lines (slightly shallower than the frame: no z-fighting)
       const a1 = mesh(box(HW * 2, 0.045, 0.15), M.plastic); a1.position.y = HH - 0.2; g.add(a1);
@@ -889,8 +912,9 @@ function buildMaterials(THREE, COL, LOD, TEX) {
   const flash = std({ color: c(0xf5efdd), roughness: 0.3, metalness: 0.1, emissive: c(0xfff3d0), emissiveIntensity: 0.5 });
   const filmFlex = std({ color: c(0x14100c), roughness: 0.6, metalness: 0.2 });
   const filmCopper = std({ color: c(0x7a4a20), roughness: 0.55, metalness: 0.8, envMapIntensity: 0.9 });
-  const frame = std({ color: c(0x666c76), roughness: 0.34, metalness: 1.0, envMapIntensity: 1.35 });
-  const shield = std({ color: c(0xb9bfc8), roughness: 0.35, metalness: 1.0, envMapIntensity: 1.2 });
+  // Showpiece metals get a clearcoat so the new chamfers read as polished edges.
+  const frame = phys({ color: c(0x6b7280), roughness: 0.26, metalness: 1.0, envMapIntensity: 1.5, clearcoat: 0.65, clearcoatRoughness: 0.16 });
+  const shield = phys({ color: c(0xb9bfc8), roughness: 0.30, metalness: 1.0, envMapIntensity: 1.3, clearcoat: 0.4, clearcoatRoughness: 0.24 });
   const pcb = std({ color: c(COL.pcb), roughness: 0.55, metalness: 0.3 });
   const soc = std({ color: c(0x0c0d12), roughness: 0.35, metalness: 0.6, emissive: c(0x06131f), emissiveIntensity: 0.4 });
   const memory = std({ color: c(0x1a1c22), roughness: 0.4, metalness: 0.5 });
@@ -899,11 +923,11 @@ function buildMaterials(THREE, COL, LOD, TEX) {
   const silicon = std({ color: c(COL.silicon), roughness: 0.4, metalness: 0.55 });
   const copper = std({ color: c(COL.copper), roughness: 0.32, metalness: 1.0, envMapIntensity: 1.3 });
   const gold = std({ color: c(0xd9b25a), roughness: 0.35, metalness: 1.0, envMapIntensity: 1.2 });
-  const camDeck = std({ color: c(0x0b0c10), roughness: 0.3, metalness: 0.8 });
+  const camDeck = phys({ color: c(0x0b0c10), roughness: 0.22, metalness: 0.85, envMapIntensity: 1.3, clearcoat: 0.8, clearcoatRoughness: 0.1 });
   const lensBarrel = std({ color: c(0x08090c), roughness: 0.35, metalness: 0.9 });
-  const lensRing = std({ color: c(COL.titanium), roughness: 0.25, metalness: 1.0, envMapIntensity: 1.5 });
+  const lensRing = phys({ color: c(COL.titanium), roughness: 0.13, metalness: 1.0, envMapIntensity: 1.7, clearcoat: 1.0, clearcoatRoughness: 0.06 });
   const lensGlass = phys({ color: c(0x0b1830), roughness: 0.02, metalness: 0.0, transparent: true, opacity: 0.7, envMapIntensity: 2.0, clearcoat: 1 });
-  const vapor = std({ color: c(0x9fa6ae), roughness: 0.3, metalness: 1.0, envMapIntensity: 1.2 });
+  const vapor = phys({ color: c(0x9fa6ae), roughness: 0.24, metalness: 1.0, envMapIntensity: 1.35, clearcoat: 0.35, clearcoatRoughness: 0.2 });
   const graphite = std({ color: c(0x111318), roughness: 0.7, metalness: 0.2 });
   const battery = std({ color: c(0x191b21), roughness: 0.5, metalness: 0.3 });
   const batteryLabel = std({ color: c(COL.orange), roughness: 0.45, metalness: 0.2, emissive: c(COL.orange), emissiveIntensity: 0.12 });

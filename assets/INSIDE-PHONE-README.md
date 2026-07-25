@@ -78,6 +78,34 @@ upper-right beside the camera, dual-cell battery mid, sub-board at the bottom.
 During explosion, layers fan out on a diagonal cascade, and the rear glass +
 camera deck turn face-up like parts on a repair bench — all reversible.
 
+## Edge-smoothing pass (2026-07-25)
+
+Every hard edge is chamfered so parts read as machined hardware. `plate()`
+extrudes with a bevel sized `min(0.009, d*0.34, r*0.5)` and reduces `depth` by
+`2*bev` so total thickness stays `d`.
+
+> **Trap for future edits:** a bevelled `ExtrudeGeometry` spans
+> `[-bevelThickness, depth+bevelThickness]`, *not* `[0, depth]`. Its midpoint is
+> `d/2 - bev`, so the re-centring translate must be `bev - d/2` (not `-d/2`).
+> Getting this wrong sinks every part by up to 0.009 while its thickness still
+> measures correctly — which silently buries the decal planes that are anchored
+> to `±d/2` (camera-deck microtext, motherboard rear traces) and makes the SoC
+> die art exactly coplanar with the chip. The mid-frame follows the same rule.
+
+`box()` no longer returns a `BoxGeometry` — it delegates to
+`plate()` with radius `min(w,h)*0.22`, so all ~45 box call sites became rounded,
+chamfered boxes for free. Corner resolution went 5→9 segments (desktop) and
+cylinders are clamped to ≥24 radial segments, so barrels and rings show no
+facets. The mid-frame gained a 0.008 chamfer on both its outer rail and its
+inner cutout. Frame, shield, camera deck, lens rings and vapor chamber moved to
+`MeshPhysicalMaterial` with clearcoat so those new chamfers catch a highlight.
+
+Geometry was verified by rebuilding all 52 call sites headlessly in three.js
+0.160: **1,859 → 37,659 triangles on desktop, 1,139 → 11,219 on mobile**, zero
+degenerate extrusions, no case where the bevel exceeds its corner radius, and a
+worst-case z-centring error of 1.9e-9 (float32 noise). 38k triangles is
+negligible for any GPU that runs WebGL.
+
 ## Measured results (2026-07-24, dev preview)
 
 - Desktop 1280×800 Chrome: **~61 FPS** while continuously scrubbing the timeline.
