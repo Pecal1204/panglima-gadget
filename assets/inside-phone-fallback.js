@@ -41,7 +41,9 @@
     'stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>' +
     '<line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
 
-  /* Build the inner HTML shared by the interactive card and the fallback cards. */
+  /* Build the inner HTML shared by the interactive card and the fallback cards.
+     opts.collapsible tucks causes/repair behind a "More details" expander so
+     the mobile bottom sheet stays compact; safety warnings are never hidden. */
   function cardBody(card, index, opts) {
     opts = opts || {};
     var total = TOUR.length;
@@ -50,16 +52,23 @@
       ? '<div class="ip-warn">' + WARN_ICON + "<span><strong>Safety:</strong> " + esc(card.warning) + "</span></div>"
       : "";
     var nameId = opts.nameId ? ' id="' + opts.nameId + '"' : "";
+    var core = row("Function", card.function) + row("Common problems", card.symptoms);
+    var extra = row("Typical causes", card.causes) + row("Recommended repair", card.repair);
+    var body = opts.collapsible
+      ? "<dl>" + core + "</dl>" +
+        '<details class="ip-more"><summary>More details</summary><dl>' + extra + "</dl></details>"
+      : "<dl>" + core + extra + "</dl>";
+    var toggle = opts.collapsible
+      ? '<button type="button" class="ip-card-toggle" aria-label="Toggle component details" aria-expanded="false">' +
+        '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>' +
+        "</button>"
+      : "";
     return (
+      toggle +
       '<div class="ip-card-index"><span>' + (index != null ? "Component " + idxLabel : "&nbsp;") +
         '</span><span class="tag">' + esc(card.tag) + "</span></div>" +
       "<h3" + nameId + ">" + esc(card.name) + "</h3>" +
-      "<dl>" +
-        row("Function", card.function) +
-        row("Common problems", card.symptoms) +
-        row("Typical causes", card.causes) +
-        row("Recommended repair", card.repair) +
-      "</dl>" +
+      body +
       warn +
       '<a class="ip-card-cta" href="' + partLink(card.name) + '" target="_blank" rel="noopener">' +
         esc(C.copy.cardCta) +
@@ -172,6 +181,17 @@
       });
     }
 
+    /* Peek/expand behaviour for the mobile bottom sheet: one delegated
+       listener on the persistent card element (setActive swaps innerHTML). */
+    if (e.card) {
+      e.card.addEventListener("click", function (ev) {
+        var t = ev.target.closest ? ev.target.closest(".ip-card-toggle") : null;
+        if (t) { ev.stopPropagation(); api.setPeek(!e.card.classList.contains("is-peek")); return; }
+        if (ev.target.closest && ev.target.closest("a,details,summary")) return;
+        if (e.card.classList.contains("is-peek")) api.setPeek(false);
+      });
+    }
+
     /* Accessible fallback grid (all components as text). */
     if (e.fbGrid) {
       TOUR.forEach(function (id, i) {
@@ -184,6 +204,14 @@
   }
 
   /* ---------------------------------------------------------- card control */
+  api.setPeek = function (peek) {
+    var el = api.els.card;
+    if (!el) return;
+    el.classList.toggle("is-peek", !!peek);
+    var t = el.querySelector(".ip-card-toggle");
+    if (t) t.setAttribute("aria-expanded", String(!peek));
+  };
+
   api.setActive = function (index) {
     if (!api.els.card) return;
     if (index === api.activeIndex) return;
@@ -191,8 +219,12 @@
     var id = TOUR[index];
     var card = CARDS[id];
     if (!card) return;
-    api.els.card.innerHTML = cardBody(card, index, { nameId: "ip-card-name" });
+    var compact = win.matchMedia("(max-width: 820px)").matches;
+    api.els.card.innerHTML = cardBody(card, index, { nameId: "ip-card-name", collapsible: compact });
     api.els.card.classList.add("is-active");
+    api.els.card.scrollTop = 0;
+    /* each new component starts as a name-only peek on mobile */
+    api.setPeek(compact);
   };
   api.clearActive = function () {
     api.activeIndex = -1;

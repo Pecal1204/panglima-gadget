@@ -55,10 +55,39 @@ All in `assets/inside-phone-data.js`:
   environment map (no texture downloads, no GLB — the entire experience is
   ~9 KB of JS + the three.js CDN module, cached across the web).
 
+## Realism pass (2026-07-24)
+
+The model uses generated canvas textures (zero downloads): a lit AMOLED lock
+screen (clock, status bar, signal/battery glyphs, notification pills,
+lockscreen shortcuts, dock, black bezel), printed rear-glass wordmark with a
+generic regulatory pictogram row, battery pouch label (specs, safety
+pictograms, barcode), structured PCB routing (bus bundles, via arrays, IC
+footprints with pin rows, gold edge fingers, silkscreen), a laser-marked SoC
+die, brushed/etched EMI shield cans with datamatrix + test points, a stamped
+vapor-chamber with serpentine channels and spot welds, speaker grille dot
+matrices, camera-deck microtext, and a copper coil spiral on its ferrite pad.
+
+Physical detail: display flex ribbon + board-to-board connector, two EMI
+shield cans with five screws, capacitor rows and gold connectors on the board,
+battery pull tabs + foil seams + BMS flex that reaches the board, stepped
+secondary vapor chamber, charging-port gasket + fixing screws + interconnect
+flex, speaker contact springs, haptic flex tail, MEMS mic rubber boots, SIM
+weather seal + eject pinhole, selfie/biometric trim rings, separate volume
+buttons, mmWave window. Interior layout follows a real flagship: board
+upper-right beside the camera, dual-cell battery mid, sub-board at the bottom.
+During explosion, layers fan out on a diagonal cascade, and the rear glass +
+camera deck turn face-up like parts on a repair bench — all reversible.
+
 ## Measured results (2026-07-24, dev preview)
 
-- Desktop 1280×800 Chrome: **~60 FPS** while continuously scrubbing the timeline.
-- Mobile-width 412×622 (DPR 1.5): smooth scrub, bottom-sheet card layout.
+- Desktop 1280×800 Chrome: **~61 FPS** while continuously scrubbing the timeline.
+- After the full detail pass (textures + ~60 extra meshes): **~53 FPS** in the
+  always-animating overview at 800px/DPR 1.5 in a VM — real hardware runs higher.
+- Mobile-width 375–683px (DPR 1.5): smooth scrub. The component card opens as a
+  name-only "peek" strip (~13% of the screen) with an expand arrow; tapping it
+  grows the sheet to ~44% with Function / Common problems / "More details" and
+  the "Check Repair Options" button pinned at the sheet bottom. Each new
+  component resets to the peek strip so the 3D scene stays dominant.
 - Fallback path: 12 cards, safety warning, CTAs — verified by forcing
   `PG_INSIDE.renderFallback()`.
 - Controls verified: Reassemble → p=0, View All → p=0.95, picker → correct card.
