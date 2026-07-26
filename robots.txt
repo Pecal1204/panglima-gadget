@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://panglimagadget.my/sitemap.xml
