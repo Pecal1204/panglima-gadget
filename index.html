@@ -399,6 +399,25 @@
     .cta h2{font-size:32px;}
     .sec-head p{max-width:none;}
   }
+
+  /* Service cards double as links to their own pages */
+  a.svc{text-decoration:none;color:inherit;}
+  .svc-more{margin-top:auto;padding-top:12px;font-size:13.5px;font-weight:600;color:var(--red-light);opacity:0;
+    transform:translateY(4px);transition:opacity .2s ease,transform .2s ease;}
+  a.svc:hover .svc-more{opacity:1;transform:translateY(0);}
+  @media (hover:none){ .svc-more{opacity:1;transform:none;} }
+
+  /* ============ Language toggle ============ */
+  .lang-toggle{display:inline-flex;background:var(--row);border:1px solid var(--b2);
+    border-radius:8px;padding:3px;gap:3px;flex-shrink:0;}
+  .lang-toggle button{background:none;border:none;cursor:pointer;font-family:var(--sans);
+    font-size:12.5px;font-weight:700;letter-spacing:.3px;color:var(--t4);padding:6px 11px;
+    border-radius:6px;transition:background-color .18s ease,color .18s ease;}
+  .lang-toggle button:hover{color:#fff;}
+  .lang-toggle button[aria-pressed="true"]{background:var(--red);color:#fff;}
+  @media (max-width:680px){
+    .nav-links .lang-toggle{margin-top:14px;align-self:flex-start;}
+  }
 </style>
 </head>
 <body>
@@ -420,6 +439,10 @@
       <a href="#reviews">Reviews</a>
       <a href="#location">Location</a>
       <a href="news.html">News</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Bahasa" data-i18n-skip>
+        <button type="button" id="langBm" aria-pressed="true">BM</button>
+        <button type="button" id="langEn" aria-pressed="false">EN</button>
+      </div>
       <a class="pill" data-wa="general" target="_blank" rel="noopener">Get a Quote</a>
     </nav>
   </div>
@@ -943,13 +966,28 @@
 
   /* ============ Render: services ============ */
   var svcGridEl = document.getElementById("svcGrid");
+  /* Each card links to its own service page — internal links are what let
+     those pages get discovered and ranked. */
+  var SERVICE_LINKS = {
+    "Screen Replacement": "/tukar-skrin/",
+    "Battery Replacement": "/ganti-bateri/",
+    "Water Damage": "/kerosakan-air/",
+    "Laptop Service": "/servis-laptop/",
+    "Charging Issues": "/port-pengecas/",
+    "Data & Software": "/data-perisian/"
+  };
+
   SERVICES.forEach(function(s){
-    var card = el("div","svc");
+    var href = SERVICE_LINKS[s.title];
+    var card = el(href ? "a" : "div", "svc");
+    if (href) card.setAttribute("href", href);
     var ico = el("div","svc-ico");
     ico.appendChild(svgEl(s.paths));
     card.appendChild(ico);
     card.appendChild(txt("div","svc-title", s.title));
     card.appendChild(txt("div","svc-desc", s.desc));
+    /* English in the DOM; the i18n layer swaps it to "Ketahui lanjut →". */
+    if (href) card.appendChild(txt("div","svc-more","Learn more →"));
     svcGridEl.appendChild(card);
   });
 
@@ -997,20 +1035,26 @@
 
   function toMin(t){ var p=t.split(":"); return (+p[0])*60 + (+p[1]); }
 
+  /* The badge is assembled from fragments, so a whole-string lookup would never
+     match. Translate each fragment instead. Falls back to English if the
+     dictionary has not loaded. */
+  function tr(s){ return (window.PG_I18N && window.PG_I18N.ready) ? window.PG_I18N.t(s) : s; }
+
   function computeStatus(){
     var now = new Date();
     var day = now.getDay();
     var mins = now.getHours()*60 + now.getMinutes();
     var today = HOURS[day];
-    if (!today || today.closed){ return {open:false, label:"Closed today"}; }
+    if (!today || today.closed){ return {open:false, label:tr("Closed today")}; }
     var o = toMin(today.open), c = toMin(today.close);
     if (mins >= o && mins < c){
       var left = c - mins;
-      var suffix = left <= 60 ? " · closes " + today.close : " · until " + today.close;
-      return {open:true, label:"Open now" + suffix};
+      var suffix = left <= 60 ? " · " + tr("closes") + " " + today.close
+                              : " · " + tr("until")  + " " + today.close;
+      return {open:true, label:tr("Open now") + suffix};
     }
-    if (mins < o){ return {open:false, label:"Closed · opens " + today.open}; }
-    return {open:false, label:"Closed now"};
+    if (mins < o){ return {open:false, label:tr("Closed") + " · " + tr("opens") + " " + today.open}; }
+    return {open:false, label:tr("Closed now")};
   }
 
   function renderStatus(){
@@ -1030,6 +1074,10 @@
   }
   renderStatus();
   setInterval(renderStatus, 30000);
+  /* Rebuild the badge when the visitor switches language, and once the
+     dictionary finishes loading (the first paint may happen before it lands). */
+  document.addEventListener("pg:langchange", renderStatus);
+  document.addEventListener("pg:dictready", renderStatus);
 
   /* ============ Mobile nav toggle ============ */
   var toggle = document.getElementById("navToggle");
@@ -1077,6 +1125,46 @@ window.addEventListener("load",function(){
     if(!alive)window.PG_INSIDE.renderFallback("watchdog-timeout");
   },12000);
 });
+</script>
+
+<!-- ===== Bahasa Malaysia / English ===== -->
+<script src="assets/i18n.js"></script>
+<script>
+(function(){
+  "use strict";
+  var I = window.PG_I18N;
+  if (!I) return;
+
+  var btnBm = document.getElementById("langBm");
+  var btnEn = document.getElementById("langEn");
+
+  /* The <title> and meta description are not body text, so translate them here. */
+  var META = {
+    bm: {
+      title: "Panglima Gadget — Pakar Repair Phone & Laptop, Telok Panglima Garang",
+      desc: "Kedai baiki telefon & laptop di Telok Panglima Garang, Selangor. Tukar skrin, ganti bateri, kerosakan air — diagnosis percuma, harga telus, waranti setiap repair."
+    },
+    en: {
+      title: "Panglima Gadget — Phone & Laptop Repair in Telok Panglima Garang",
+      desc: "Fast, honest phone, laptop & tablet repair in Telok Panglima Garang, Selangor. Free diagnostics, upfront pricing, same-day service & warranty on every repair."
+    }
+  };
+
+  function syncChrome(lang){
+    var m = META[lang] || META.bm;
+    document.title = m.title;
+    var d = document.querySelector('meta[name="description"]');
+    if (d) d.setAttribute("content", m.desc);
+    if (btnBm) btnBm.setAttribute("aria-pressed", lang === "bm" ? "true" : "false");
+    if (btnEn) btnEn.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+  }
+
+  if (btnBm) btnBm.addEventListener("click", function(){ I.setLang("bm"); });
+  if (btnEn) btnEn.addEventListener("click", function(){ I.setLang("en"); });
+  I.onChange(syncChrome);
+
+  I.load("translations-bm.json").then(function(){ syncChrome(I.lang); });
+})();
 </script>
 
 </body>
