@@ -48,23 +48,45 @@ const EXCERPT_LEN = 180;
 
 /* ---------- tiny RSS parsing (regex — feeds here are well-formed) ---------- */
 
-const decode = (s = "") =>
+const decodeEntities = (s) =>
   s
-    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&#8211;|&ndash;/g, "–")
-    .replace(/&#8212;|&mdash;/g, "—")
-    .replace(/&#8216;|&#8217;|&lsquo;|&rsquo;/g, "'")
-    .replace(/&#8220;|&#8221;|&ldquo;|&rdquo;/g, '"')
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))
     .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(+n))
-    .replace(/&amp;/g, "&")
+    .replace(/&ndash;/g, "–")
+    .replace(/&mdash;/g, "—")
+    .replace(/&lsquo;|&rsquo;/g, "'")
+    .replace(/&ldquo;|&rdquo;/g, '"')
+    .replace(/&hellip;/g, "…")
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'")
+    .replace(/&nbsp;/g, " ")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
-    .replace(/&nbsp;/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+    /* &amp; last, so "&amp;lt;" becomes "&lt;" here and is resolved on the
+       next loop pass rather than turning into a "<" prematurely. */
+    .replace(/&amp;/g, "&");
+
+const stripTags = (s) =>
+  s
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]*>/g, " ");
+
+/**
+ * Feeds are inconsistent: some send plain text, some real HTML tags, and some
+ * (GSMArena) send tags HTML-escaped as &lt;img …&gt;. Decoding and stripping
+ * once in a fixed order can't cover all three — escaped tags survive as visible
+ * "<img src=...>" junk. So alternate decode→strip until the text stops changing.
+ */
+const decode = (s = "") => {
+  let out = s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1");
+  for (let i = 0; i < 4; i++) {
+    const before = out;
+    out = stripTags(decodeEntities(out));
+    if (out === before) break;
+  }
+  return out.replace(/\s+/g, " ").trim();
+};
 
 const pick = (block, tag) => {
   const m = block.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, "i"));
