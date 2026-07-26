@@ -385,7 +385,6 @@
       <div class="tabs" id="tabs">
         <button class="tab active" data-device="phone">Phone</button>
         <button class="tab" data-device="laptop">Laptop</button>
-        <button class="tab" data-device="tablet">Tablet</button>
       </div>
       <div class="price-rows" id="priceRows"></div>
       <a class="quote-send" id="quoteSend" target="_blank" rel="noopener">Send on WhatsApp →</a>
@@ -760,19 +759,13 @@
       {name:"Screen replacement (Android)",  price:"RM150+"},
       {name:"Battery replacement (Android)", price:"RM80–RM130"},
       {name:"Charging port (Android)",       price:"RM60–RM120"},
-      {name:"Water damage",        price:"RM100+"}
+      {name:"Water damage",        price:"RM30–RM50"}
     ]},
     laptop: { label:"Laptop", note:"Windows & MacBook", items:[
       {name:"Screen replacement",  price:"RM250+"},
       {name:"Battery replacement", price:"RM180+"},
-      {name:"SSD / RAM upgrade",   price:"RM60+"},
-      {name:"Format & reinstall",  price:"RM50+"}
-    ]},
-    tablet: { label:"Tablet", note:"iPad · Samsung Tab · more", items:[
-      {name:"Screen replacement",  price:"RM150+"},
-      {name:"Battery replacement", price:"RM120+"},
-      {name:"Charging port",       price:"RM90+"},
-      {name:"Software service",    price:"RM50+"}
+      {name:"RAM (DDR4) upgrade",  price:"RM250+"},
+      {name:"Format & reinstall",  price:"RM70+"}
     ]}
   };
 
@@ -854,7 +847,7 @@
   function renderQuote(){
     var data = PRICING[device];
     priceRowsEl.innerHTML = "";
-    var rows = data.items.slice(0,3);
+    var rows = data.items;
     for (var i=0;i<rows.length;i++){
       var row = el("div","price-row");
       row.appendChild(txt("span","name", rows[i].name));
