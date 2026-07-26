@@ -64,7 +64,9 @@
   header.header-hidden{transform:translateY(-100%);}
   .rebrand-banner{height:44px;display:flex;align-items:center;justify-content:center;gap:9px;padding:0 18px;
     background:linear-gradient(90deg,#9f1015,#e02128 50%,#9f1015);color:#fff;font-family:var(--head);
-    font-size:12.5px;font-weight:600;letter-spacing:.15px;text-align:center;}
+    font-size:12.5px;font-weight:600;letter-spacing:.15px;text-align:center;
+    overflow:hidden;transition:height .3s ease,opacity .25s ease,transform .3s ease;}
+  .rebrand-banner.rb-hidden{height:0;opacity:0;transform:translateY(-100%);pointer-events:none;}
   .legacy-logo{display:inline-flex;align-items:center;gap:6px;padding-right:9px;border-right:1px solid rgba(255,255,255,.35);
     white-space:nowrap;}
   .legacy-logo img{height:27px;width:auto;display:block;}
@@ -196,6 +198,12 @@
   .rating-card{background:var(--card);border:1px solid var(--b2);border-radius:14px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,.4);}
   .rating-widget{background:var(--card);border:1px solid var(--b2);border-radius:14px;overflow:hidden;
     box-shadow:0 24px 60px rgba(0,0,0,.4);min-height:220px;}
+  /* Vendor review carousel exposes stable (non-hashed) class names — CarouselItem
+     wraps each card — specifically for this kind of layout override. Cap at 2
+     visible cards on desktop; the widget's own responsive rules keep mobile at 1. */
+  @media (min-width:941px){
+    .rating-widget .CarouselItem{width:50% !important;flex:0 0 50% !important;max-width:50% !important;}
+  }
   .rating-top{display:flex;align-items:center;gap:16px;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--b1);}
   .rating-num{font-family:var(--head);font-size:50px;font-weight:900;line-height:1;}
   .stars{color:var(--gold);font-size:17px;letter-spacing:3px;}
@@ -288,7 +296,10 @@
   }
   @media (max-width:680px){
     .wrap{padding:0 18px;}
-    .hero-grid{padding-top:30px;}
+    /* .hero-grid also carries .wrap, whose shorthand above resets padding-bottom
+       to 0 for this element (later rule, same specificity) — restore it here,
+       with extra room so the quote card doesn't crowd the red stats bar. */
+    .hero-grid{padding-top:30px;padding-bottom:48px;}
     .nav img{width:113.74px;height:35.98px;object-fit:contain;object-position:left center;}
     .quote{font-size:14px;}
     .rebrand-banner{font-size:10.5px;gap:5px;padding:0 8px;}
@@ -551,16 +562,6 @@
         })();
         </script>
       </div>
-      <div class="socials">
-        <a class="social" href="https://www.tiktok.com/@panglima_gadget" target="_blank" rel="noopener">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-1-2.82h-3.13v12.4a2.53 2.53 0 0 1-2.53 2.53 2.53 2.53 0 0 1 0-5.06c.26 0 .51.04.75.11V9.78a5.66 5.66 0 0 0-.75-.05 5.65 5.65 0 1 0 5.66 5.65V9.01a7.35 7.35 0 0 0 4.3 1.38V7.26a4.28 4.28 0 0 1-3.3-1.44z"></path></svg>
-          TikTok
-        </a>
-        <a class="social" href="https://www.facebook.com/share/19vVW3YgXq/" target="_blank" rel="noopener">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12z"></path></svg>
-          Facebook
-        </a>
-      </div>
     </div>
   </div>
 </section>
@@ -696,6 +697,37 @@
     window.addEventListener("scroll", function(){
       if(!ticking){ window.requestAnimationFrame(update); ticking = true; }
     }, {passive:true});
+  })();
+
+  /* ============ Rebrand banner: top-of-page only ============ */
+  /* Visible only near the very top of the page. Hides (slide-up) as soon as
+     the Services section reaches the nav bar, and — unlike the nav header
+     above — does NOT reappear on scroll-up; only scrolling all the way back
+     to the top brings it back. */
+  (function(){
+    var banner = document.querySelector(".rebrand-banner");
+    var navEl = document.querySelector(".nav");
+    var servicesEl = document.getElementById("services");
+    if(!banner || !navEl || !servicesEl) return;
+    var dismissed = false;
+    var ticking = false;
+    function update(){
+      var navHeight = navEl.offsetHeight;
+      var servicesTop = servicesEl.getBoundingClientRect().top;
+      var y = window.pageYOffset || 0;
+      if(!dismissed && servicesTop <= navHeight){
+        dismissed = true;
+      } else if(dismissed && y <= 2){
+        dismissed = false;
+      }
+      banner.classList.toggle("rb-hidden", dismissed);
+      ticking = false;
+    }
+    update(); // correct state immediately for deep links / reloads mid-page
+    window.addEventListener("scroll", function(){
+      if(!ticking){ window.requestAnimationFrame(update); ticking = true; }
+    }, {passive:true});
+    window.addEventListener("resize", update);
   })();
 
   /* ============ Config ============ */
