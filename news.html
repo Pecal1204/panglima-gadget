@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berita Teknologi — Panglima Gadget</title>
+<meta name="description" content="Berita telefon pintar, gajet dan teknologi terkini — dikemas kini setiap hari oleh Panglima Gadget, pakar repair phone &amp; laptop di Telok Panglima Garang.">
+<meta name="theme-color" content="#0b0b0e">
+<link rel="icon" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0b0b0e; --bg-alt:#0e0e12; --card:#141419; --row:#1e1e25; --footer:#08080a;
+    --red:#e02128; --red-light:#ff5a60;
+    --wa:#25d366; --wa-hover:#3ee87a; --wa-ink:#062b16;
+    --green:#4ade80;
+    --t1:#eceef2; --t2:#d3d7de; --t3:#b6bcc7; --t4:#a9afba; --t5:#8b909b; --t6:#7d838f; --t8:#5f646e;
+    --b1:rgba(255,255,255,.08); --b2:rgba(255,255,255,.09);
+    --sans:'Inter',system-ui,sans-serif; --head:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.6;}
+  a{color:inherit;text-decoration:none;transition:color .18s ease,background-color .18s ease,border-color .18s ease,transform .2s ease;}
+  img{display:block;max-width:100%;}
+  ::selection{background:var(--red);color:#fff;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  /* header */
+  header{position:sticky;top:0;z-index:60;background:rgba(11,11,14,.88);backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);}
+  .nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .nav .logo img{height:38px;width:auto;}
+  .nav-links{display:flex;align-items:center;gap:26px;font-size:14.5px;font-weight:500;color:var(--t4);}
+  .nav-links a:hover{color:#fff;}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:var(--wa-ink);
+    padding:10px 18px;border-radius:7px;font-weight:700;}
+  .pill:hover{background:var(--wa-hover);transform:translateY(-1px);}
+  @media (max-width:720px){ .nav-links a:not(.pill){display:none;} }
+
+  /* hero */
+  .head{padding:56px 0 34px;border-bottom:1px solid var(--b1);}
+  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red-light);margin-bottom:14px;}
+  h1{font-family:var(--head);font-size:44px;font-weight:800;letter-spacing:-1px;line-height:1.05;margin:0 0 14px;}
+  .lede{font-size:16.5px;color:var(--t4);max-width:640px;margin:0;}
+  .bar{margin-top:26px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+  .updated{font-size:13px;color:var(--t6);display:flex;align-items:center;gap:8px;}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
+
+  /* language toggle */
+  .toggle{display:inline-flex;background:var(--row);border:1px solid var(--b2);border-radius:9px;padding:4px;gap:4px;}
+  .toggle button{background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:13.5px;font-weight:600;
+    color:var(--t4);padding:8px 16px;border-radius:6px;transition:background-color .18s ease,color .18s ease;}
+  .toggle button:hover{color:#fff;}
+  .toggle button[aria-pressed="true"]{background:var(--red);color:#fff;}
+
+  /* list */
+  main{padding:40px 0 80px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
+  .card{background:var(--card);border:1px solid var(--b2);border-radius:14px;padding:26px;
+    display:flex;flex-direction:column;gap:12px;}
+  .card:hover{border-color:rgba(224,33,40,.5);transform:translateY(-3px);}
+  .meta{display:flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--t6);}
+  .src{color:var(--red-light);font-weight:700;}
+  .card h2{font-family:var(--head);font-size:18px;font-weight:700;line-height:1.35;margin:0;letter-spacing:-.2px;}
+  .card p{font-size:14.5px;color:var(--t5);margin:0;flex:1;}
+  .more{font-size:13.5px;font-weight:600;color:var(--t3);display:inline-flex;align-items:center;gap:6px;}
+  .card:hover .more{color:var(--red-light);}
+
+  .state{padding:60px 0;text-align:center;color:var(--t5);font-size:15px;}
+  .note{margin-top:34px;padding:18px 22px;background:var(--bg-alt);border:1px solid var(--b1);border-radius:11px;
+    font-size:13px;color:var(--t6);line-height:1.6;}
+
+  /* cta */
+  .cta{margin-top:44px;background:var(--card);border:1px solid var(--b2);border-radius:16px;padding:34px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+  .cta h3{font-family:var(--head);font-size:22px;font-weight:800;margin:0 0 6px;}
+  .cta p{margin:0;font-size:14.5px;color:var(--t5);}
+  .btn-wa{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:var(--wa-ink);
+    padding:14px 26px;border-radius:8px;font-weight:700;font-size:15px;font-family:var(--head);white-space:nowrap;}
+  .btn-wa:hover{background:var(--wa-hover);transform:translateY(-2px);}
+
+  footer{background:var(--footer);border-top:1px solid var(--b1);}
+  footer .wrap{padding:30px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+  .copy{font-size:13px;color:var(--t8);}
+  footer a{font-size:13.5px;font-weight:600;color:var(--t4);}
+  footer a:hover{color:var(--red-light);}
+
+  @media (max-width:600px){
+    .wrap{padding:0 18px;}
+    h1{font-size:32px;}
+    .head{padding:38px 0 26px;}
+    .card{padding:22px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html" aria-label="Panglima Gadget"><img src="images/panglima-gadget-header-logo-transparent.png" alt="Panglima Gadget"></a>
+    <nav class="nav-links">
+      <a href="index.html#services" data-i18n="nav_services">Perkhidmatan</a>
+      <a href="index.html#reviews" data-i18n="nav_reviews">Ulasan</a>
+      <a href="index.html#location" data-i18n="nav_location">Lokasi</a>
+      <a class="pill" id="waTop" target="_blank" rel="noopener" data-i18n="nav_quote">Dapatkan Sebut Harga</a>
+    </nav>
+  </div>
+</header>
+
+<div class="head">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="eyebrow">Berita Harian</div>
+    <h1 data-i18n="title">Berita Teknologi &amp; Telefon Pintar</h1>
+    <p class="lede" data-i18n="lede">Berita terkini tentang telefon pintar, bateri, skrin dan gajet — dikemas kini secara automatik setiap hari.</p>
+    <div class="bar">
+      <div class="updated"><span class="dot"></span><span id="updated">—</span></div>
+      <div class="toggle" role="group" aria-label="Language">
+        <button id="btnBm" aria-pressed="true">Bahasa Malaysia</button>
+        <button id="btnEn" aria-pressed="false">English</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <div id="state" class="state" data-i18n="loading">Memuatkan berita…</div>
+    <div id="grid" class="grid" hidden></div>
+
+    <div class="note" id="note" data-i18n="note">
+      Panglima Gadget memaparkan tajuk dan ringkasan pendek sahaja. Hak cipta kekal milik penerbit asal — klik mana-mana berita untuk membaca artikel penuh di laman web mereka.
+    </div>
+
+    <div class="cta">
+      <div>
+        <h3 data-i18n="cta_title">Telefon anda bermasalah?</h3>
+        <p data-i18n="cta_sub">Diagnosis percuma, harga telus, waranti pada setiap pembaikan.</p>
+      </div>
+      <a class="btn-wa" id="waCta" target="_blank" rel="noopener" data-i18n="cta_btn">WhatsApp Kami</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="copy">© 2026 Panglima Gadget · Telok Panglima Garang, Selangor</div>
+    <a href="index.html" data-i18n="back">← Kembali ke laman utama</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var WA = "60105339970";
+  var waLink = function(msg){ return "https://api.whatsapp.com/send?phone=" + WA + "&text=" + encodeURIComponent(msg); };
+
+  var I18N = {
+    bm: {
+      nav_services:"Perkhidmatan", nav_reviews:"Ulasan", nav_location:"Lokasi", nav_quote:"Dapatkan Sebut Harga",
+      eyebrow:"Berita Harian",
+      title:"Berita Teknologi & Telefon Pintar",
+      lede:"Berita terkini tentang telefon pintar, bateri, skrin dan gajet — dikemas kini secara automatik setiap hari.",
+      loading:"Memuatkan berita…",
+      empty:"Tiada berita buat masa ini. Sila cuba sebentar lagi.",
+      error:"Berita tidak dapat dimuatkan sekarang. Sila muat semula halaman ini.",
+      updated:"Dikemas kini",
+      read:"Baca di",
+      note:"Panglima Gadget memaparkan tajuk dan ringkasan pendek sahaja. Hak cipta kekal milik penerbit asal — klik mana-mana berita untuk membaca artikel penuh di laman web mereka.",
+      cta_title:"Telefon anda bermasalah?",
+      cta_sub:"Diagnosis percuma, harga telus, waranti pada setiap pembaikan.",
+      cta_btn:"WhatsApp Kami",
+      back:"← Kembali ke laman utama",
+      wa_msg:"Hi Panglima Gadget, saya ada masalah dengan peranti saya."
+    },
+    en: {
+      nav_services:"Services", nav_reviews:"Reviews", nav_location:"Location", nav_quote:"Get a Quote",
+      eyebrow:"Daily News",
+      title:"Technology & Smartphone News",
+      lede:"The latest on smartphones, batteries, screens and gadgets — updated automatically every day.",
+      loading:"Loading news…",
+      empty:"No news available right now. Please check back shortly.",
+      error:"News could not be loaded right now. Please refresh the page.",
+      updated:"Updated",
+      read:"Read on",
+      note:"Panglima Gadget shows headlines and short summaries only. Copyright remains with the original publishers — click any story to read the full article on their website.",
+      cta_title:"Device giving you trouble?",
+      cta_sub:"Free diagnostics, transparent pricing, warranty on every repair.",
+      cta_btn:"WhatsApp Us",
+      back:"← Back to main site"
+    }
+  };
+  I18N.en.wa_msg = "Hi Panglima Gadget, I'd like to ask about a repair.";
+
+  var lang = "bm";
+  try { var saved = localStorage.getItem("pg_news_lang"); if (saved === "bm" || saved === "en") lang = saved; } catch(e){}
+
+  var data = null;
+  var gridEl = document.getElementById("grid");
+  var stateEl = document.getElementById("state");
+  var updatedEl = document.getElementById("updated");
+  var btnBm = document.getElementById("btnBm");
+  var btnEn = document.getElementById("btnEn");
+
+  function t(key){ return I18N[lang][key]; }
+
+  function formatDate(iso){
+    if (!iso) return "";
+    var d = new Date(iso);
+    if (isNaN(d)) return "";
+    return d.toLocaleDateString(lang === "bm" ? "ms-MY" : "en-MY",
+      { day:"numeric", month:"short", year:"numeric" });
+  }
+
+  function applyStaticText(){
+    document.documentElement.lang = (lang === "bm" ? "ms" : "en");
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var i=0;i<nodes.length;i++){
+      var key = nodes[i].getAttribute("data-i18n");
+      if (I18N[lang][key]) nodes[i].textContent = I18N[lang][key];
+    }
+    var msg = t("wa_msg");
+    document.getElementById("waTop").href = waLink(msg);
+    document.getElementById("waCta").href = waLink(msg);
+    btnBm.setAttribute("aria-pressed", lang === "bm" ? "true" : "false");
+    btnEn.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+  }
+
+  function render(){
+    applyStaticText();
+    if (!data){ return; }
+
+    updatedEl.textContent = t("updated") + " " + formatDate(data.generated);
+
+    var items = (data[lang] || []);
+    gridEl.innerHTML = "";
+
+    if (!items.length){
+      gridEl.hidden = true;
+      stateEl.hidden = false;
+      stateEl.textContent = t("empty");
+      return;
+    }
+
+    for (var i=0;i<items.length;i++){
+      var it = items[i];
+      var a = document.createElement("a");
+      a.className = "card";
+      a.href = it.link;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+
+      var meta = document.createElement("div");
+      meta.className = "meta";
+      var src = document.createElement("span");
+      src.className = "src";
+      src.textContent = it.source;
+      meta.appendChild(src);
+      var dt = formatDate(it.published);
+      if (dt){
+        var sep = document.createElement("span"); sep.textContent = "·"; meta.appendChild(sep);
+        var dEl = document.createElement("span"); dEl.textContent = dt; meta.appendChild(dEl);
+      }
+
+      var h = document.createElement("h2");
+      h.textContent = it.title;
+
+      var p = document.createElement("p");
+      p.textContent = it.excerpt || "";
+
+      var more = document.createElement("span");
+      more.className = "more";
+      more.textContent = t("read") + " " + it.source + " →";
+
+      a.appendChild(meta); a.appendChild(h); a.appendChild(p); a.appendChild(more);
+      gridEl.appendChild(a);
+    }
+
+    stateEl.hidden = true;
+    gridEl.hidden = false;
+  }
+
+  btnBm.addEventListener("click", function(){
+    lang = "bm";
+    try{ localStorage.setItem("pg_news_lang", lang); }catch(e){}
+    render();
+  });
+  btnEn.addEventListener("click", function(){
+    lang = "en";
+    try{ localStorage.setItem("pg_news_lang", lang); }catch(e){}
+    render();
+  });
+
+  applyStaticText();
+
+  fetch("news-data.json?v=" + Date.now())
+    .then(function(r){ if(!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    .then(function(json){ data = json; render(); })
+    .catch(function(){
+      stateEl.hidden = false;
+      gridEl.hidden = true;
+      stateEl.textContent = t("error");
+    });
+})();
+</script>
+</body>
+</html>
