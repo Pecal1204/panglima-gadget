@@ -798,13 +798,19 @@ function run(THREE, RoomEnvironment) {
   });
 
   /* controls */
-  function scrollToP(p) {
+  function scrollToP(p, instant) {
     const rect = els.scroller.getBoundingClientRect();
     const top = window.scrollY + rect.top;
     const max = els.scroller.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: top + p * max, behavior: "smooth" });
+    window.scrollTo({ top: top + p * max, behavior: instant ? "auto" : "smooth" });
   }
-  IP.onPick = i => scrollToP(P.tourStart + (i + 0.5) / tourComps.length * (P.tourEnd - P.tourStart));
+  const tourP = i => P.tourStart + (i + 0.5) / tourComps.length * (P.tourEnd - P.tourStart);
+  IP.onPick = i => scrollToP(tourP(i));
+  /* Prev/next stepper. Jumps instantly rather than smooth-scrolling: the
+     active component is derived from scroll position, so during a smooth
+     scroll the card still shows the old component and a quick second click
+     would recompute the same destination. */
+  IP.goTo = i => scrollToP(tourP(i), true);
   const reassembleBtn = document.getElementById("ip-reassemble");
   const viewAllBtn = document.getElementById("ip-viewall");
   if (reassembleBtn) reassembleBtn.addEventListener("click", () => scrollToP(0));

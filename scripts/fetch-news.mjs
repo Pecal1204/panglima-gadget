@@ -128,27 +128,42 @@ const KEYWORD_RE = new RegExp(
 
 const isRelevant = (item) => KEYWORD_RE.test(`${item.title} ${item.excerpt}`.toLowerCase());
 
-async function fetchFeed(feed) {
-  try {
-    const res = await fetch(feed.url, {
-      headers: { "User-Agent": UA, Accept: "application/rss+xml, application/xml, text/xml, */*" },
-      signal: AbortSignal.timeout(30000),
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const xml = await res.text();
-    const items = parseFeed(xml, feed.source, feed.lang).filter((i) => i.title && i.link);
-    console.log(`  ${feed.source.padEnd(12)} ${items.length} items fetched`);
-    return items;
-  } catch (err) {
-    console.warn(`  ${feed.source.padEnd(12)} FAILED — ${err.message}`);
-    return [];
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/* Retried: the Malaysian sites sit behind Cloudflare and intermittently
+   refuse the GitHub Actions runners even though they answer fine locally. */
+async function fetchFeed(feed, attempts = 3) {
+  let lastErr;
+  for (let i = 1; i <= attempts; i++) {
+    try {
+      const res = await fetch(feed.url, {
+        headers: {
+          "User-Agent": UA,
+          Accept: "application/rss+xml, application/xml, text/xml, */*",
+          "Accept-Language": "ms-MY,ms;q=0.9,en;q=0.8",
+        },
+        signal: AbortSignal.timeout(30000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const xml = await res.text();
+      const items = parseFeed(xml, feed.source, feed.lang).filter((i) => i.title && i.link);
+      console.log(`  ${feed.source.padEnd(12)} ${items.length} items fetched${i > 1 ? ` (attempt ${i})` : ""}`);
+      return items;
+    } catch (err) {
+      lastErr = err;
+      if (i < attempts) await sleep(1500 * i);
+    }
   }
+  console.warn(`  ${feed.source.padEnd(12)} FAILED after ${attempts} attempts — ${lastErr.message}`);
+  return [];
 }
 
 /* ------------------------------- build ------------------------------- */
 
 console.log("Fetching feeds…");
-const all = (await Promise.all(FEEDS.map(fetchFeed))).flat();
+/* Wrapped, not passed directly: map() would supply the array index as the
+   second argument and clobber `attempts`. */
+const all = (await Promise.all(FEEDS.map((f) => fetchFeed(f)))).flat();
 
 if (all.length === 0) {
   // Never publish an empty page — keep whatever was there before.
@@ -182,8 +197,30 @@ const data = {
   en: forLang("en"),
 };
 
-if (data.bm.length === 0 && data.en.length === 0) {
-  console.error("No usable items after filtering. Keeping existing file.");
+/* Per-language safety net. The feeds fail independently — on 2026-07-27 both
+   Malay sources refused the runner while GSMArena answered, and the result
+   was published with an empty `bm`, which blanked the page for the Malay
+   visitors who see it by default. Carry the previous items over for any
+   language that came back empty rather than shipping a blank list. */
+let prev = null;
+if (existsSync(OUT)) {
+  try { prev = JSON.parse(readFileSync(OUT, "utf8")); } catch { /* regenerate from scratch */ }
+}
+
+const reused = [];
+for (const lang of ["bm", "en"]) {
+  if (data[lang].length === 0 && prev && Array.isArray(prev[lang]) && prev[lang].length) {
+    data[lang] = prev[lang];
+    reused.push(lang.toUpperCase());
+  }
+}
+if (reused.length) {
+  console.warn(`\n⚠ No fresh ${reused.join(" & ")} items — kept the previous ones so the page is never blank.`);
+}
+
+if (data.bm.length === 0 || data.en.length === 0) {
+  const empty = [!data.bm.length && "BM", !data.en.length && "EN"].filter(Boolean).join(" & ");
+  console.error(`\n✗ ${empty} is empty and there is nothing to fall back on. Leaving news-data.json untouched.`);
   process.exit(existsSync(OUT) ? 0 : 1);
 }
 

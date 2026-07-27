@@ -301,22 +301,14 @@
   }
   #inside-phone .ip-card h3{font-size:19px;margin-bottom:8px;}
   /* peek state: handle + index + name + arrow only */
-  #inside-phone .ip-card.is-peek{max-height:118px;overflow:hidden;cursor:pointer;}
+  /* peek state: handle + index + name + the component stepper */
+  #inside-phone .ip-card.is-peek{max-height:168px;overflow:hidden;cursor:pointer;}
   #inside-phone .ip-card.is-peek dl,
   #inside-phone .ip-card.is-peek details.ip-more,
   #inside-phone .ip-card.is-peek .ip-warn,
   #inside-phone .ip-card.is-peek .ip-card-cta{display:none;}
-  #inside-phone .ip-card.is-peek h3{margin-bottom:2px;font-size:18px;padding-right:40px;}
-  #inside-phone .ip-card .ip-card-toggle{
-    position:absolute;top:22px;right:14px;z-index:2;
-    display:inline-flex;align-items:center;justify-content:center;
-    width:38px;height:38px;border-radius:50%;
-    background:rgba(58,160,255,.14);border:1px solid rgba(58,160,255,.45);
-    color:var(--ip-blue);cursor:pointer;
-  }
-  #inside-phone .ip-card .ip-card-toggle svg{transition:transform .25s ease;}
-  #inside-phone .ip-card:not(.is-peek) .ip-card-toggle svg{transform:rotate(180deg);}
-  #inside-phone .ip-card .ip-card-toggle:focus-visible{outline:2px solid var(--ip-blue);outline-offset:2px;}
+  #inside-phone .ip-card.is-peek h3{margin-bottom:2px;font-size:18px;}
+  #inside-phone .ip-card.is-peek .ip-cardnav{margin-bottom:2px;padding-bottom:0;border-bottom:none;}
   #inside-phone .ip-card .ip-card-index{margin-bottom:5px;}
   #inside-phone .ip-card .row{padding:7px 0;}
   #inside-phone .ip-card dd{font-size:12.5px;}
@@ -325,6 +317,61 @@
     position:sticky;bottom:-1px;margin-top:12px;
     box-shadow:0 -14px 18px rgba(12,13,19,.9);
   }
+}
+
+/* ---------------------------- component stepper ---------------------------
+   Prev / next navigation through the 12 components. Sits in normal flow, so
+   it never overlaps the component tag the way the old floating chevron did.
+   Stays visible in the mobile peek state so the sheet can be flicked through
+   without expanding it. */
+#inside-phone .ip-card .ip-cardnav{
+  display:flex;align-items:center;gap:8px;margin:0 0 14px;
+  padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08);
+}
+#inside-phone .ip-card .ip-navbtn{
+  flex:1 1 0;min-width:0;min-height:40px;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px 12px;border-radius:9px;cursor:pointer;
+  font-family:var(--ip-head);font-size:12.5px;font-weight:700;letter-spacing:.4px;
+  color:var(--ip-blue);background:rgba(58,160,255,.1);
+  border:1px solid rgba(58,160,255,.34);
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+}
+#inside-phone .ip-card .ip-navbtn svg{flex:none;}
+#inside-phone .ip-card .ip-navbtn:hover:not(:disabled){
+  background:rgba(58,160,255,.2);border-color:rgba(58,160,255,.6);transform:translateY(-1px);
+}
+#inside-phone .ip-card .ip-navbtn:active:not(:disabled){transform:translateY(0);}
+#inside-phone .ip-card .ip-navbtn:disabled{
+  opacity:.34;cursor:default;color:var(--ip-ink-2);
+  background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);
+}
+#inside-phone .ip-card .ip-navbtn:focus-visible{outline:2px solid var(--ip-blue);outline-offset:2px;}
+/* the middle "Details" button is secondary to the arrows */
+#inside-phone .ip-card .ip-navbtn-expand{
+  flex:0 1 auto;color:var(--ip-ink-2);
+  background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);
+}
+#inside-phone .ip-card .ip-navbtn-expand:hover:not(:disabled){
+  background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.26);color:var(--ip-ink);
+}
+#inside-phone .ip-card .ip-navbtn-expand svg{transition:transform .25s ease;}
+#inside-phone .ip-card:not(.is-peek) .ip-navbtn-expand svg{transform:rotate(180deg);}
+
+/* Desktop side panel: the card is always open, so the stepper sits at the
+   bottom of the card as a footer instead of under the title. */
+@media (min-width:821px){
+  #inside-phone .ip-card{display:flex;flex-direction:column;}
+  #inside-phone .ip-card .ip-cardnav{
+    order:9;margin:14px 0 0;padding:14px 0 0;
+    border-bottom:none;border-top:1px solid rgba(255,255,255,.08);
+  }
+  #inside-phone .ip-card .ip-card-cta{order:8;}
+}
+
+@media (max-width:400px){
+  #inside-phone .ip-card .ip-navbtn{padding:9px 8px;font-size:12px;}
+  #inside-phone .ip-card .ip-navbtn-expand .ip-navbtn-label{display:none;}
 }
 
 /* "More details" expander (rendered only in the mobile bottom sheet) */

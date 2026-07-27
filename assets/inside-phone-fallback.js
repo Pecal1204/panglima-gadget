@@ -58,22 +58,57 @@
       ? "<dl>" + core + "</dl>" +
         '<details class="ip-more"><summary>More details</summary><dl>' + extra + "</dl></details>"
       : "<dl>" + core + extra + "</dl>";
-    var toggle = opts.collapsible
-      ? '<button type="button" class="ip-card-toggle" aria-label="Toggle component details" aria-expanded="false">' +
-        '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>' +
-        "</button>"
-      : "";
     return (
-      toggle +
       '<div class="ip-card-index"><span>' + (index != null ? "Component " + idxLabel : "&nbsp;") +
         '</span><span class="tag">' + esc(card.tag) + "</span></div>" +
       "<h3" + nameId + ">" + esc(card.name) + "</h3>" +
+      cardNav(index, total, opts) +
       body +
       warn +
       '<a class="ip-card-cta" href="' + partLink(card.name) + '" target="_blank" rel="noopener">' +
         esc(C.copy.cardCta) +
         ' <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>' +
       "</a>"
+    );
+  }
+
+  /* Step through the teardown one component at a time. Replaces an earlier
+     floating chevron that sat on top of the component tag. On the mobile
+     bottom sheet a middle button expands the sheet; on desktop the card is
+     always open, so only the arrows are shown. */
+  var CHEV_L = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>';
+  var CHEV_R = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
+  var CHEV_U = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>';
+
+  function cardNav(index, total, opts) {
+    if (index == null) return "";
+    var atFirst = index <= 0;
+    var atLast = index >= total - 1;
+    var prevName = atFirst ? "" : (CARDS[TOUR[index - 1]] || {}).name || "";
+    var nextName = atLast ? "" : (CARDS[TOUR[index + 1]] || {}).name || "";
+
+    var expand = opts.collapsible
+      ? '<button type="button" class="ip-navbtn ip-navbtn-expand" data-ip-card-toggle ' +
+        'aria-label="Show component details" aria-expanded="false">' + CHEV_U +
+        '<span class="ip-navbtn-label">Details</span></button>'
+      : "";
+
+    return (
+      '<div class="ip-cardnav" role="group" aria-label="Move between components">' +
+        '<button type="button" class="ip-navbtn" data-ip-nav="-1"' +
+          (atFirst ? " disabled" : "") +
+          ' aria-label="' + (atFirst ? "No previous component" : "Previous component: " + esc(prevName)) + '"' +
+          (prevName ? ' title="' + esc(prevName) + '"' : "") + ">" +
+          CHEV_L + '<span class="ip-navbtn-label">Prev</span>' +
+        "</button>" +
+        expand +
+        '<button type="button" class="ip-navbtn" data-ip-nav="1"' +
+          (atLast ? " disabled" : "") +
+          ' aria-label="' + (atLast ? "No next component" : "Next component: " + esc(nextName)) + '"' +
+          (nextName ? ' title="' + esc(nextName) + '"' : "") + ">" +
+          '<span class="ip-navbtn-label">Next</span>' + CHEV_R +
+        "</button>" +
+      "</div>"
     );
   }
   function row(label, value) {
@@ -185,9 +220,21 @@
        listener on the persistent card element (setActive swaps innerHTML). */
     if (e.card) {
       e.card.addEventListener("click", function (ev) {
-        var t = ev.target.closest ? ev.target.closest(".ip-card-toggle") : null;
+        if (!ev.target.closest) return;
+
+        /* Prev/next: step the tour. Must run before the tap-to-expand rule
+           below, otherwise arrowing on the peek sheet would also open it. */
+        var nav = ev.target.closest("[data-ip-nav]");
+        if (nav) {
+          ev.stopPropagation();
+          if (nav.disabled) return;
+          api.step(parseInt(nav.getAttribute("data-ip-nav"), 10) || 0);
+          return;
+        }
+
+        var t = ev.target.closest("[data-ip-card-toggle]");
         if (t) { ev.stopPropagation(); api.setPeek(!e.card.classList.contains("is-peek")); return; }
-        if (ev.target.closest && ev.target.closest("a,details,summary")) return;
+        if (ev.target.closest("a,details,summary")) return;
         if (e.card.classList.contains("is-peek")) api.setPeek(false);
       });
     }
@@ -208,12 +255,44 @@
     var el = api.els.card;
     if (!el) return;
     el.classList.toggle("is-peek", !!peek);
-    var t = el.querySelector(".ip-card-toggle");
-    if (t) t.setAttribute("aria-expanded", String(!peek));
+    var t = el.querySelector("[data-ip-card-toggle]");
+    if (t) {
+      t.setAttribute("aria-expanded", String(!peek));
+      t.setAttribute("aria-label", peek ? "Show component details" : "Hide component details");
+      var lbl = t.querySelector(".ip-navbtn-label");
+      if (lbl) lbl.textContent = peek ? "Details" : "Close";
+    }
+  };
+
+  /* Move one component along the tour.
+     onPick() smooth-scrolls, and the rendered index only catches up as that
+     animation progresses — so reading the card's current index would make a
+     second click recompute the same target and appear to do nothing. Track the
+     intended destination instead, so repeated clicks queue up correctly. The
+     target is dropped once it arrives, or shortly after the last click, so a
+     manual scroll doesn't leave the stepper anchored to a stale position. */
+  api.navTarget = null;
+  var navTargetTimer = null;
+  api.step = function (dir) {
+    var jump = api.goTo || api.onPick;
+    if (!dir || !jump) return;
+    var base = api.navTarget;
+    if (base == null) {
+      base = parseInt((api.els.card && api.els.card.getAttribute("data-index")) || "", 10);
+      if (isNaN(base)) base = api.activeIndex;
+    }
+    if (base == null || base < 0) return;
+    var next = base + dir;
+    if (next < 0 || next >= TOUR.length) return;
+    api.navTarget = next;
+    if (navTargetTimer) win.clearTimeout(navTargetTimer);
+    navTargetTimer = win.setTimeout(function () { api.navTarget = null; }, 1200);
+    jump(next);
   };
 
   api.setActive = function (index) {
     if (!api.els.card) return;
+    if (index === api.navTarget) api.navTarget = null;   /* arrived */
     if (index === api.activeIndex) return;
     api.activeIndex = index;
     var id = TOUR[index];
@@ -221,6 +300,10 @@
     if (!card) return;
     var compact = win.matchMedia("(max-width: 820px)").matches;
     api.els.card.innerHTML = cardBody(card, index, { nameId: "ip-card-name", collapsible: compact });
+    /* The stepper reads this rather than api.activeIndex: the card keeps
+       showing the last component after the scroll leaves the tour range, at
+       which point activeIndex is already -1 and prev/next would misfire. */
+    api.els.card.setAttribute("data-index", String(index));
     api.els.card.classList.add("is-active");
     api.els.card.scrollTop = 0;
     /* each new component starts as a name-only peek on mobile */
