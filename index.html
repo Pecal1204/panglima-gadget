@@ -27,7 +27,7 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500..900&family=Inter:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/inside-phone.css">
 
 <!-- Local business structured data — powers Google's local/map results -->
@@ -97,7 +97,10 @@
     --wa:#25d366; --wa-hover:#3ee87a; --wa-ink:#062b16;
     --green:#4ade80; --gold:#ffb400;
     --t1:#eceef2; --t2:#d3d7de; --t3:#b6bcc7; --t4:#a9afba;
-    --t5:#8b909b; --t6:#7d838f; --t7:#6a6f7a; --t8:#5f646e;
+    /* --t7 and --t8 intentionally match --t5/--t6: the darker originals
+       (#6a6f7a, #5f646e) measured 3.67:1 on --card, under the 4.5:1 floor.
+       Do not "de-duplicate" them back to distinct darker values. */
+    --t5:#8b909b; --t6:#7d838f; --t7:#8b909b; --t8:#7d838f;
     --b1:rgba(255,255,255,.08); --b2:rgba(255,255,255,.09); --b3:rgba(255,255,255,.1);
     --sans:'Inter',system-ui,sans-serif; --head:'Archivo',system-ui,sans-serif;
   }
@@ -173,7 +176,9 @@
   .btn-wa{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:var(--wa-ink);
     padding:15px 30px;border-radius:8px;font-weight:700;font-size:16px;font-family:var(--head);}
   .btn-wa:hover{background:var(--wa-hover);transform:translateY(-2px);}
-  .call-link{color:#fff;font-weight:600;font-size:15px;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;}
+  /* inline-flex + min-height so the phone number is a 44px touch target */
+  .call-link{display:inline-flex;align-items:center;min-height:44px;color:#fff;font-weight:600;font-size:15px;
+    border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;}
   .call-link:hover{color:var(--red-light);border-color:var(--red-light);}
 
   /* quote widget */
@@ -181,7 +186,7 @@
   .quote-title{font-family:var(--head);font-weight:800;font-size:18px;color:#fff;margin-bottom:4px;}
   .quote-note{font-size:13px;color:var(--t5);margin-bottom:18px;}
   .tabs{display:flex;gap:8px;margin-bottom:14px;}
-  .tab{flex:1;text-align:center;border-radius:8px;padding:11px;font-weight:600;font-size:13.5px;
+  .tab{flex:1;text-align:center;border-radius:8px;min-height:44px;padding:11px;font-weight:600;font-size:13.5px;
     font-family:var(--sans);cursor:pointer;border:none;background:var(--row);color:var(--t3);
     transition:background-color .18s ease,color .18s ease;}
   .tab.active{background:var(--red);color:#fff;}
@@ -192,13 +197,13 @@
   .quote-send{display:block;background:var(--wa);color:var(--wa-ink);text-align:center;border-radius:8px;
     padding:13px;font-weight:700;font-size:15px;}
   .quote-send:hover{background:var(--wa-hover);}
-  .quote-fine{font-size:11.5px;color:var(--t7);text-align:center;margin-top:10px;}
+  .quote-fine{font-size:12.5px;color:var(--t5);text-align:center;margin-top:10px;}
 
   /* ============ Stats bar ============ */
   .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--red);}
   .stat{padding:24px 16px;text-align:center;border-right:1px solid rgba(0,0,0,.12);}
   .stat .v{font-family:var(--head);font-weight:900;font-size:28px;color:#fff;letter-spacing:-.5px;}
-  .stat .k{display:block;font-size:12.5px;color:rgba(255,255,255,.88);margin-top:3px;
+  .stat .k{display:block;font-size:12.5px;color:#fff;margin-top:3px;
     text-decoration:underline;text-decoration-color:rgba(255,255,255,.4);text-underline-offset:3px;}
   .stat .k:hover{color:#fff;text-decoration-color:#fff;}
 
@@ -236,7 +241,7 @@
     background:var(--b1);border:1px solid var(--b1);border-radius:14px;overflow:hidden;}
   .svc{background:var(--bg-svc);padding:34px 30px;display:flex;flex-direction:column;gap:16px;min-height:204px;
     transition:background-color .2s ease;}
-  .svc:hover{background:#16161d;}
+  .svc:hover{background:#16161d;box-shadow:inset 0 0 0 1px rgba(224,33,40,.35);}
   .svc-ico{width:54px;height:54px;border-radius:13px;background:rgba(224,33,40,.12);
     display:flex;align-items:center;justify-content:center;color:var(--red);}
   .svc-title{font-family:var(--head);font-weight:700;font-size:19px;margin-top:2px;}
@@ -296,9 +301,10 @@
   .nav-btn:hover{border-color:rgba(224,33,40,.5);}
   .info-tiles{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .tile{background:var(--card);border:1px solid var(--b2);border-radius:11px;padding:18px 20px;}
-  .tile .lbl{font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t6);margin-bottom:7px;}
+  .tile .lbl{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t6);margin-bottom:7px;}
   .tile .val{font-weight:600;font-size:15px;}
-  .tile a.val{color:var(--red-light);}
+  /* the tile number is a tel/WhatsApp link — give it a real touch target */
+  .tile a.val{display:inline-flex;align-items:center;min-height:44px;color:var(--red-light);}
   .tile a.val:hover{color:#ff8a8f;}
   .storefront{position:relative;width:100%;height:380px;border-radius:12px;overflow:hidden;background:var(--card);}
   .storefront img{width:100%;height:100%;object-fit:cover;}
@@ -319,7 +325,7 @@
   .cta .wrap{padding-top:100px;padding-bottom:100px;text-align:center;position:relative;}
   .cta h2{font-family:var(--head);font-size:56px;font-weight:900;letter-spacing:-1.5px;
     margin:0 0 16px;line-height:.96;text-wrap:balance;}
-  .cta p{font-size:18px;color:rgba(255,255,255,.9);margin:0 0 36px;}
+  .cta p{font-size:18px;color:#fff;margin:0 0 36px;}
   .btn-dark{display:inline-flex;align-items:center;gap:11px;background:var(--bg);color:#fff;
     padding:17px 38px;border-radius:8px;font-weight:700;font-size:17px;font-family:var(--head);}
   .btn-dark:hover{background:#000;transform:translateY(-2px);}
@@ -334,7 +340,9 @@
   .foot-about em{font-style:italic;color:var(--t4);}
   .foot-h{font-family:var(--head);font-weight:700;font-size:13px;letter-spacing:1.5px;
     text-transform:uppercase;color:var(--t1);margin-bottom:16px;}
-  .foot-col{display:flex;flex-direction:column;gap:11px;font-size:14.5px;color:var(--t5);}
+  .foot-col{display:flex;flex-direction:column;font-size:14.5px;color:var(--t5);}
+  /* 22px rows were under the touch minimum; padding does the spacing that gap did */
+  .foot-col a{display:flex;align-items:center;min-height:44px;}
   .foot-col a:hover{color:var(--red-light);}
   .copyright{padding-top:26px;font-size:13px;color:var(--t8);}
 
@@ -356,9 +364,12 @@
     .hero-grid{padding-top:30px;padding-bottom:48px;}
     .nav img{width:113.74px;height:35.98px;object-fit:contain;object-position:left center;}
     .quote{font-size:14px;}
-    .rebrand-banner{font-size:10.5px;gap:5px;padding:0 8px;}
+    /* Header chrome was 109px — 13.4% of an iPhone-height viewport — and the
+       banner text sat at 10.5px. Shorter bar, legible type. */
+    .rebrand-banner{height:34px;font-size:12px;gap:5px;padding:0 8px;}
+    .nav{height:56px;}
     .legacy-logo{gap:0;padding-right:6px;}
-    .legacy-logo img{height:22px;max-width:62px;object-fit:contain;}
+    .legacy-logo img{height:20px;max-width:56px;object-fit:contain;}
     .legacy-label{display:none;}
     .rebrand-arrow{font-size:12px;}
     .rebrand-desktop{display:none;}
@@ -375,12 +386,26 @@
       transition-delay:0s;}
     .nav-links a:not(.pill){padding:14px 4px;border-bottom:1px solid var(--b1);}
     .nav-links .pill{margin-top:14px;justify-content:center;}
+    /* 44x44 tap target: 24px of bars + 20px horizontal, 16px of bars + 28px vertical */
     .nav-toggle{display:inline-flex;flex-direction:column;gap:5px;background:none;border:none;
-      cursor:pointer;padding:8px;}
+      cursor:pointer;padding:14px 10px;}
     .nav-toggle span{width:24px;height:2px;background:#fff;border-radius:2px;transition:.2s;}
     .hero h1{font-size:44px;}
     .stats{grid-template-columns:1fr 1fr;}
     .stat:nth-child(2){border-right:none;}
+    /* The four captions link to the clauses on terms.html that qualify
+       "Same-day", "Free" and "Warranty", so they must be reachable: 19px tall
+       -> 44px. Underline stays so they still read as links. */
+    .stat{padding:18px 12px 10px;}
+    .stat .k{display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 8px;
+      text-decoration-color:rgba(255,255,255,.45);text-decoration-thickness:1px;}
+    /* One-line scroller instead of a 756px wrapped block */
+    .brands .wrap{padding-top:22px;padding-bottom:22px;gap:12px;}
+    .brands-list{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:0 26px;font-size:15px;
+      margin:0 -18px;padding:0 18px;scroll-snap-type:x proximity;scrollbar-width:none;
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 24px),transparent);}
+    .brands-list::-webkit-scrollbar{display:none;}
+    .brands-list span{flex:0 0 auto;scroll-snap-align:start;}
     .price-cards,.steps,.svc-grid,.net-grid,.socials,.info-tiles{grid-template-columns:1fr;}
     .foot-grid{grid-template-columns:1fr;gap:28px;}
     .h2{font-size:30px;}
@@ -390,10 +415,37 @@
 
   /* Service cards double as links to their own pages */
   a.svc{text-decoration:none;color:inherit;}
-  .svc-more{margin-top:auto;padding-top:12px;font-size:13.5px;font-weight:600;color:var(--red-light);opacity:0;
-    transform:translateY(4px);transition:opacity .2s ease,transform .2s ease;}
-  a.svc:hover .svc-more{opacity:1;transform:translateY(0);}
-  @media (hover:none){ .svc-more{opacity:1;transform:none;} }
+  /* Always visible: these six cards are the only internal route to the Malay
+     landing pages, so the affordance can't depend on hover. */
+  .svc-more{margin-top:auto;padding-top:12px;font-size:13.5px;font-weight:600;
+    color:var(--t6);transition:color .2s ease;}
+  a.svc:hover .svc-more{color:var(--red-light);}
+
+  /* ============ Focus, anchors, reduced motion ============ */
+  /* Nothing in this file previously styled :focus, so keyboard users had only
+     the UA default — invisible against the dark theme in several places. */
+  :where(a,button,.tab,.net-card):focus-visible{
+    outline:2px solid var(--red-light);outline-offset:3px;border-radius:4px;}
+  /* Inset on service cards: .svc-grid draws its dividers with gap:1px over a
+     background, so an outset ring would sit in the hairline and look broken. */
+  .svc:focus-visible{outline:2px solid var(--red-light);outline-offset:-3px;}
+  .pill:focus-visible,.btn-wa:focus-visible,.quote-send:focus-visible,
+  .btn-dark:focus-visible,.stat .k:focus-visible{outline-color:#fff;}
+  .tab:not(.active):hover{background:#2a2a33;color:var(--t1);}
+
+  /* Sticky header would otherwise cover the target of every in-page anchor. */
+  html{scroll-padding-top:120px;}
+  #top,#services,#process,#reviews,#location,#inside-phone,#ip-after{scroll-margin-top:120px;}
+
+  @media (prefers-reduced-motion:reduce){
+    /* Deliberately not blanket-disabling transform: .nav-links, .ip-card and
+       the gallery lightbox use it for positioning, not decoration. */
+    *,*::before,*::after{
+      animation-duration:.01ms !important;animation-iteration-count:1 !important;
+      transition-duration:.01ms !important;scroll-behavior:auto !important;}
+    .status-chip .dot{animation:none;opacity:1;}
+    header{transition:none;}
+  }
 
 </style>
 </head>
@@ -402,14 +454,14 @@
 <!-- ===== NAV ===== -->
 <header>
   <div class="rebrand-banner" role="status" aria-label="Panglima Gadget rebrand announcement">
-    <span class="legacy-logo"><span class="legacy-label">Former logo</span><img src="logo.png" alt="Previous Panglima Gadget logo"></span>
+    <span class="legacy-logo"><span class="legacy-label">Former logo</span><img src="logo.png" alt="Previous Panglima Gadget logo" width="326" height="160" decoding="async"></span>
     <span class="rebrand-arrow" aria-hidden="true">→</span>
     <span class="rebrand-badge">NEW LOOK</span>
     <span class="rebrand-desktop">Panglima Gadget has evolved — the same trusted repair team, with a renewed identity.</span>
     <span class="rebrand-mobile">Same shop. New identity.</span>
   </div>
   <div class="wrap nav">
-    <a href="#top" aria-label="Panglima Gadget home"><img src="images/panglima-gadget-header-logo-transparent.png" alt="Panglima Gadget"></a>
+    <a href="#top" aria-label="Panglima Gadget home"><img src="images/panglima-gadget-header-logo-transparent.png" alt="Panglima Gadget" width="362" height="120" decoding="async"></a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false" id="navToggle"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="navLinks">
       <a href="#services">Services</a>
@@ -641,7 +693,7 @@
       </div>
     </div>
     <div class="storefront">
-      <img src="images/storefront.jpg" alt="Panglima Gadget storefront" loading="lazy">
+      <img src="images/storefront.jpg" alt="Panglima Gadget storefront" width="1000" height="750" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -683,7 +735,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <img src="images/panglima-gadget-logo-transparent.png" alt="Panglima Gadget — Phone &amp; Laptop Repair Specialist">
+        <img src="images/panglima-gadget-logo-transparent.png" alt="Panglima Gadget — Phone &amp; Laptop Repair Specialist" width="297" height="264" loading="lazy" decoding="async">
         <p class="foot-about">Expert phone and laptop repair in Telok Panglima Garang. <em>"Relive your second life."</em></p>
       </div>
       <div>
