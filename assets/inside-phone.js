@@ -198,323 +198,426 @@ function run(THREE, RoomEnvironment) {
 
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
 
-  /* ---------- 1. FRONT GLASS ---------- */
-  addComponent({
-    id: "frontGlass", name: "Front Glass", cardId: null, index: null,
-    home: V(0, 0, 0.082), exp: V(-0.24, 0.10, 1.82), t0: 0.32, t1: 0.39,
-    build: g => { g.add(mesh(plate(HW * 2, HH * 2, 0.014, 0.28), M.glass)); }
-  });
+  /* =====================================================================
+     PANGLIMA X1 — internal layout
+     ---------------------------------------------------------------------
+     Proportions follow a 2019-flagship-class architecture: one rectangular
+     pouch cell, a stacked two-deck mainboard on one side rail, a square rear
+     camera mesa with two lenses on the diagonal, and a notch. Scale is
+     52 mm per scene unit in x/y; z is exaggerated 1.25x uniformly (41.5 mm
+     per unit) so the 8.3 mm body reads as z -0.100 .. +0.100.
 
-  /* ---------- 2. OLED DISPLAY + DIGITIZER (lit screen, backplate, flex) ---------- */
+     The z bands below are exclusive: no two parts share both an xy footprint
+     and a z range, so nothing intersects at rest. The rear mesa is the one
+     deliberate exception — it projects past the back face, which is what
+     gives the silhouette its shape.
+     ===================================================================== */
+
+  /* ---------- 1. FRONT COVER GLASS (printed mask + notch cutout) ---------- */
   addComponent({
-    id: "display", name: "OLED Display & Touch Digitizer", cardId: "display", index: TOUR.indexOf("display"),
-    home: V(0, 0, 0.060), exp: V(-0.12, 0.06, 1.34), t0: 0.30, t1: 0.37,
+    id: "frontglass", name: "Front Cover Glass", cardId: null, index: null,
+    home: V(0, 0, 0.0925), exp: V(0, 0, 2.05), t0: 0.37, t1: 0.44,
     build: g => {
-      // full-bleed panel body so no internals peek around the edges
-      g.add(mesh(plate(HW * 2 - 0.02, HH * 2 - 0.02, 0.02, 0.26), M.display));
-      // lit AMOLED face (texture carries its own black bezel margin)
-      const screen = new THREE.Mesh(new THREE.PlaneGeometry(HW * 2 - 0.05, HH * 2 - 0.05), M.screen);
-      screen.position.z = 0.012; g.add(screen);
-      // stamped metal mid-plate on the back of the display module
-      const mid = mesh(plate(HW * 2 - 0.10, HH * 2 - 0.10, 0.006, 0.24), M.shield);
-      mid.position.z = -0.015; g.add(mid);
-      // folded display flex ribbon + board-to-board connector (teardown staple)
-      const flex = mesh(box(0.52, 0.10, 0.005), M.filmCopper); flex.position.set(0, -1.34, -0.020); g.add(flex);
-      const b2b = mesh(box(0.16, 0.05, 0.014), M.gold); b2b.position.set(0.10, -1.28, -0.024); g.add(b2b);
+      g.add(mesh(plate(1.38, 2.94, 0.015, 0.27), M.glass));
+      /* printed black border mask; the notch is a downward tab in the mask */
+      const mask = new THREE.Mesh(new THREE.PlaneGeometry(1.38, 2.94), M.rearArt);
+      mask.position.z = -0.0085; mask.material = M.rearArt; g.add(mask);
+      const notch = mesh(plate(0.68, 0.10, 0.004, 0.045), M.silicon);
+      notch.position.set(0, 1.342, -0.006); g.add(notch);
     }
   });
 
-  /* ---------- 3. FRONT SENSORS: earpiece / proximity / selfie ---------- */
+  /* ---------- 2. OLED PANEL (bonded module: glass, touch, emissive) ---------- */
+  addComponent({
+    id: "display", name: "OLED Display Panel", cardId: "display", index: TOUR.indexOf("display"),
+    home: V(0, 0, 0.074), exp: V(0, 0, 1.45), t0: 0.35, t1: 0.42,
+    build: g => {
+      g.add(mesh(plate(1.36, 2.92, 0.022, 0.26), M.display));
+      /* lit active area, inset by the inactive border */
+      const screen = new THREE.Mesh(new THREE.PlaneGeometry(1.224, 2.784), M.screen);
+      screen.position.z = 0.012; g.add(screen);
+      /* notch is cut out of the lit area, so mask it back to black */
+      const notch = mesh(plate(0.68, 0.10, 0.006, 0.045), M.silicon);
+      notch.position.set(0, 1.342, 0.013); g.add(notch);
+      /* foam + graphite backing foils on the rear face */
+      const foil = mesh(plate(1.30, 2.86, 0.004, 0.24), M.graphite);
+      foil.position.z = -0.013; g.add(foil);
+      /* driver flex folding off the bottom edge toward the board */
+      const flex = mesh(box(0.34, 0.16, 0.004), M.filmCopper);
+      flex.position.set(0.10, -1.36, -0.016); g.add(flex);
+    }
+  });
+
+  /* ---------- 3. FRONT SENSOR CLUSTER (display-side notch group) ---------- */
+  addComponent({
+    id: "frontsensors", name: "Front Sensor Cluster", cardId: "proximity", index: TOUR.indexOf("proximity"),
+    home: V(-0.17, 1.342, 0.0355), exp: V(-0.45, 2.15, 1.05), t0: 0.33, t1: 0.40,
+    build: g => {
+      /* flood emitter + proximity as one bonded module, then ambient light */
+      const modA = mesh(box(0.062, 0.052, 0.03), M.silicon); modA.position.x = -0.026; g.add(modA);
+      const win = mesh(cyl(0.017, 0.008, LOD ? 16 : 8), M.sensorBlue);
+      win.rotation.x = Math.PI / 2; win.position.set(-0.026, 0, 0.019); g.add(win);
+      const als = mesh(box(0.028, 0.028, 0.024), M.plastic); als.position.x = 0.034; g.add(als);
+      /* shared ribbon bonded to the back of the panel */
+      const rib = mesh(box(0.115, 0.022, 0.003), M.filmCopper);
+      rib.position.set(0, -0.03, -0.024); g.add(rib);
+    }
+  });
+
+  /* ---------- 4. SHIELDING CANS & BRACKETS (over the board stack) ---------- */
+  addComponent({
+    id: "emishields", name: "Shielding Cans & Connector Brackets", cardId: null, index: null,
+    home: V(0.434, 0.3, 0.034), exp: V(2.15, 0.8, 0.5), t0: 0.24, t1: 0.31,
+    build: g => {
+      const can = (w, h, x, y) => {
+        const c = mesh(box(w, h, 0.019), M.shield); c.position.set(x, y, 0); g.add(c);
+        const lid = new THREE.Mesh(new THREE.PlaneGeometry(w * 0.86, h * 0.86), M.shieldArt);
+        lid.position.set(x, y, 0.0102); g.add(lid);
+      };
+      can(0.30, 0.23, 0, 0.30);
+      can(0.26, 0.19, 0, -0.02);
+      if (LOD) { can(0.15, 0.11, -0.05, -0.28); can(0.12, 0.09, 0.09, -0.30); }
+      /* graphite patches adhered to the can tops */
+      const gp = mesh(plate(0.22, 0.14, 0.002, 0.03), M.graphite);
+      gp.position.set(0, 0.30, 0.011); g.add(gp);
+      /* stamped steel bracket strip screwed over the ribbon sockets */
+      const br = mesh(plate(0.32, 0.16, 0.006, 0.03), M.frame);
+      br.position.set(0, -0.40, 0.004); g.add(br);
+      if (LOD) for (const x of [-0.11, 0.11]) {
+        const sc = mesh(cyl(0.018, 0.012, 10), M.screw);
+        sc.rotation.x = Math.PI / 2; sc.position.set(x, -0.40, 0.011); g.add(sc);
+      }
+    }
+  });
+
+  /* ---------- 5. EARPIECE (glued to the panel, lifts with the screen) ---------- */
   addComponent({
     id: "earpiece", name: "Earpiece Speaker", cardId: "earpiece", index: TOUR.indexOf("earpiece"),
-    home: V(0, 1.40, 0.052), exp: V(-0.34, 1.48, 1.06), t0: 0.28, t1: 0.40,
+    home: V(0, 1.342, 0.026), exp: V(0.15, 2.15, 1.05), t0: 0.33, t1: 0.40,
     build: g => {
-      g.add(mesh(box(0.30, 0.035, 0.045), M.mesh));
-      // fine grille face
-      const face = new THREE.Mesh(new THREE.PlaneGeometry(0.28, 0.028), M.grille);
-      face.position.z = 0.024; g.add(face);
-    }
-  });
-  addComponent({
-    id: "proximity", name: "Proximity Sensor", cardId: "proximity", index: TOUR.indexOf("proximity"),
-    home: V(0.26, 1.36, 0.05), exp: V(0.40, 1.46, 1.06), t0: 0.28, t1: 0.40,
-    build: g => {
-      g.add(mesh(box(0.07, 0.07, 0.04), M.plastic));
-      const led = mesh(box(0.03, 0.03, 0.045), M.sensorBlue); led.position.z = 0.005; g.add(led);
-      // IR emitter window beside the sensor die
-      if (LOD) { const ir = mesh(box(0.018, 0.018, 0.044), M.lensBarrel); ir.position.set(0.024, -0.018, 0.004); g.add(ir); }
-    }
-  });
-  addComponent({
-    id: "selfie", name: "Front Selfie Camera", cardId: null, index: null,
-    home: V(0, 1.16, 0.05), exp: V(0.05, 1.26, 1.06), t0: 0.28, t1: 0.40,
-    build: g => {
-      const b = mesh(cyl(0.05, 0.06, LOD ? 20 : 10), M.lensBarrel); b.rotation.x = Math.PI / 2; g.add(b);
-      const ring = mesh(cyl(0.036, 0.012, LOD ? 20 : 10), M.lensRing); ring.rotation.x = Math.PI / 2; ring.position.z = 0.028; g.add(ring);
-      const l = mesh(cyl(0.030, 0.02, LOD ? 20 : 10), M.lensGlass); l.rotation.x = Math.PI / 2; l.position.z = 0.032; g.add(l);
+      g.add(mesh(box(0.2, 0.1, 0.072), M.frame));
+      const face = new THREE.Mesh(new THREE.PlaneGeometry(0.17, 0.028), M.grille);
+      face.position.z = 0.037; g.add(face);
+      const tail = mesh(box(0.07, 0.03, 0.003), M.filmCopper);
+      tail.position.set(0.12, -0.02, 0.02); g.add(tail);
     }
   });
 
-  /* ---------- 4. MID-FRAME (slim titanium ring + buttons/ports/windows) ---------- */
+  /* ---------- 6. MAINBOARD — UPPER (compute) DECK ---------- */
   addComponent({
-    id: "frame", name: "Titanium Mid-Frame", cardId: null, index: null,
-    home: V(0, 0, 0), exp: V(0, 0, 0.72), t0: 0.26, t1: 0.33,
+    id: "boardupper", name: "Mainboard (Upper Deck)", cardId: "motherboard", index: TOUR.indexOf("motherboard"),
+    home: V(0.434, 0.194, 0.014), exp: V(1.65, 0.78, 0.5), t0: 0.22, t1: 0.29,
     build: g => {
-      const outer = rrShape(HW * 2, HH * 2, 0.28);
-      const inner = rrShape(HW * 2 - 0.10, HH * 2 - 0.10, 0.24);
-      outer.holes.push(new THREE.Path(inner.getPoints(seg * 4)));
-      // chamfered rail: the bevel runs on the outer wall and the inner cutout
-      const fb = 0.008;
-      const geo = new THREE.ExtrudeGeometry(outer, {
-        depth: 0.17 - fb * 2, curveSegments: seg,
-        bevelEnabled: true, bevelThickness: fb, bevelSize: fb, bevelOffset: 0, bevelSegments: bevSeg
-      });
-      geo.translate(0, 0, fb - 0.085);   // same re-centring rule as plate()
-      g.add(mesh(geo, M.frame));
-      // antenna break lines (slightly shallower than the frame: no z-fighting)
-      const a1 = mesh(box(HW * 2, 0.045, 0.15), M.plastic); a1.position.y = HH - 0.2; g.add(a1);
-      const a2 = mesh(box(HW * 2, 0.045, 0.15), M.plastic); a2.position.y = -HH + 0.2; g.add(a2);
-      // right edge: power button + two separate volume buttons
-      const power = mesh(box(0.022, 0.24, 0.05), M.frame); power.position.set(HW + 0.008, 0.34, 0); g.add(power);
-      const volUp = mesh(box(0.022, 0.17, 0.05), M.frame); volUp.position.set(HW + 0.008, 0.97, 0); g.add(volUp);
-      const volDn = mesh(box(0.022, 0.17, 0.05), M.frame); volDn.position.set(HW + 0.008, 0.75, 0); g.add(volDn);
-      // left edge: SIM tray seam + mmWave antenna window
-      const sim = mesh(box(0.014, 0.22, 0.045), M.silicon); sim.position.set(-HW - 0.004, -0.35, 0); g.add(sim);
-      const mmw = mesh(box(0.016, 0.30, 0.10), M.plastic); mmw.position.set(-HW - 0.002, 0.80, 0); g.add(mmw);
-      // bottom edge: USB-C slot + speaker/mic drill holes
-      const usb = mesh(box(0.18, 0.035, 0.06), M.silicon); usb.position.set(0, -HH - 0.002, 0); g.add(usb);
+      g.add(mesh(plate(0.38, 1.15, 0.016, 0.04), M.pcb));
+      const art = new THREE.Mesh(new THREE.PlaneGeometry(0.35, 1.11), M.pcbArt);
+      art.position.z = 0.009; g.add(art);
+      /* the perimeter via ring is what visually marks the sandwich */
       if (LOD) {
-        for (let i = 0; i < 5; i++) {
-          const d = mesh(cyl(0.011, 0.03, 8), M.silicon); d.position.set(0.17 + i * 0.065, -HH - 0.002, 0); g.add(d);
-        }
-        for (let i = 0; i < 2; i++) {
-          const d = mesh(cyl(0.011, 0.03, 8), M.silicon); d.position.set(-0.17 - i * 0.065, -HH - 0.002, 0); g.add(d);
-        }
+        const ring = (n, x0, y0, dx, dy) => {
+          for (let i = 0; i < n; i++) {
+            const v = mesh(cyl(0.005, 0.018, 6), M.gold);
+            v.rotation.x = Math.PI / 2; v.position.set(x0 + dx * i, y0 + dy * i, 0);
+            g.add(v);
+          }
+        };
+        ring(16, -0.175, -0.55, 0, 0.0733);
+        ring(16, 0.175, -0.55, 0, 0.0733);
+      }
+      /* application processor + stacked memory, then support ICs */
+      const soc = mesh(box(0.17, 0.17, 0.022), M.soc); soc.position.set(0, 0.30, 0.018); g.add(soc);
+      const die = new THREE.Mesh(new THREE.PlaneGeometry(0.145, 0.145), M.socTop);
+      die.position.set(0, 0.30, 0.030); g.add(die);
+      const mem = mesh(box(0.11, 0.11, 0.014), M.memory); mem.position.set(0, -0.02, 0.016); g.add(mem);
+      const sto = mesh(box(0.13, 0.10, 0.014), M.storage); sto.position.set(0, -0.26, 0.016); g.add(sto);
+      const pmic = mesh(box(0.10, 0.08, 0.013), M.pmic); pmic.position.set(0, -0.44, 0.015); g.add(pmic);
+      /* press-fit ribbon sockets, all on the display-facing face */
+      for (const y of [0.52, -0.56]) {
+        const s = mesh(box(0.15, 0.045, 0.012), M.gold); s.position.set(0, y, 0.014); g.add(s);
       }
     }
   });
 
-  /* ---------- 5. ANTENNA FLEX (+ gold contact fingers) ---------- */
+  /* ---------- 7. 3D FACE-SCANNING ASSEMBLY (chassis-side notch hardware) ---------- */
   addComponent({
-    id: "antennas", name: "Cellular, Wi-Fi & Bluetooth Antennas", cardId: null, index: null,
-    home: V(0, -HH + 0.12, -0.01), exp: V(0.05, -HH - 0.06, 0.46), t0: 0.26, t1: 0.38,
+    id: "facescancam", name: "3D Face-Scanning Assembly", cardId: "proximity", index: TOUR.indexOf("proximity"),
+    home: V(0, 1.3315, 0.014), exp: V(0.75, 2.15, 1.05), t0: 0.31, t1: 0.38,
     build: g => {
-      g.add(mesh(plate(HW * 2 - 0.2, 0.16, 0.006, 0.03), M.filmCopper));
-      if (LOD) for (let i = 0; i < 3; i++) {
-        const f = mesh(box(0.05, 0.03, 0.010), M.gold); f.position.set(-0.35 + i * 0.35, 0.045, 0.004); g.add(f);
+      /* receiver at the far -x end; the wide baseline to the emitter is what
+         makes depth sensing work, so the two are never modelled together */
+      const rx = mesh(box(0.075, 0.09, 0.055), M.silicon); rx.position.set(-0.2825, 0, 0); g.add(rx);
+      const rxw = mesh(cyl(0.022, 0.01, LOD ? 16 : 8), M.sensorBlue);
+      rxw.rotation.x = Math.PI / 2; rxw.position.set(-0.2825, 0, 0.031); g.add(rxw);
+      /* front camera + dot emitter block at the +x end */
+      const cam = mesh(box(0.081, 0.081, 0.062), M.silicon); cam.position.set(0.1505, 0, 0); g.add(cam);
+      const lens = mesh(cyl(0.026, 0.012, LOD ? 18 : 9), M.lensGlass);
+      lens.rotation.x = Math.PI / 2; lens.position.set(0.1505, 0, 0.034); g.add(lens);
+      const dot = mesh(box(0.077, 0.077, 0.058), M.silicon); dot.position.set(0.2755, 0, 0); g.add(dot);
+      const dotw = mesh(cyl(0.02, 0.01, LOD ? 16 : 8), M.sensorBlue);
+      dotw.rotation.x = Math.PI / 2; dotw.position.set(0.2755, 0, 0.032); g.add(dotw);
+      /* ribbon linking them, routed just below the notch mouth */
+      const rib = mesh(box(0.60, 0.018, 0.003), M.filmCopper);
+      rib.position.set(0, -0.052, 0.005); g.add(rib);
+    }
+  });
+
+  /* ---------- 8. MICROPHONE ARRAY ---------- */
+  addComponent({
+    id: "microphones", name: "Microphone Array", cardId: "microphones", index: TOUR.indexOf("microphones"),
+    home: V(-0.2, -1.44, -0.012), exp: V(-0.5, -2.15, 0.5), t0: 0.30, t1: 0.37,
+    build: g => {
+      const m = mesh(box(0.05, 0.045, 0.028), M.plastic); g.add(m);
+      if (LOD) {
+        const bt = mesh(cyl(0.026, 0.01, 10), M.boot);
+        bt.rotation.x = Math.PI / 2; bt.position.z = 0.019; g.add(bt);
       }
+      /* the other two ports are markers on their host parts */
+      const p2 = mesh(cyl(0.012, 0.006, 8), M.silicon);
+      p2.rotation.x = Math.PI / 2; p2.position.set(0.06, 0.02, 0.016); g.add(p2);
     }
   });
 
-  /* ---------- 6. EMI SHIELD CANS (two cans, brushed + laser-etched) ---------- */
-  addComponent({
-    id: "shield", name: "Protective Shields & Brackets", cardId: null, index: null,
-    home: V(0.06, 0.95, -0.018), exp: V(-0.14, 1.10, 0.42), t0: 0.23, t1: 0.29,
-    build: g => {
-      const can1 = mesh(plate(0.62, 0.80, 0.012, 0.05), M.shield); can1.position.x = -0.16; g.add(can1);
-      const can2 = mesh(plate(0.34, 0.55, 0.012, 0.05), M.shield); can2.position.set(0.30, 0.06, 0); g.add(can2);
-      // brushed/etched faces
-      const e1 = new THREE.Mesh(new THREE.PlaneGeometry(0.58, 0.76), M.shieldArt); e1.position.set(-0.16, 0, 0.008); g.add(e1);
-      const e2 = new THREE.Mesh(new THREE.PlaneGeometry(0.30, 0.51), M.shieldArt); e2.position.set(0.30, 0.06, 0.008); g.add(e2);
-      for (const [x, y] of [[-0.42, 0.34], [0.10, 0.34], [-0.42, -0.34], [0.10, -0.34], [0.30, -0.26]]) {
-        const sc = mesh(cyl(0.024, 0.02, LOD ? 12 : 6), M.screw); sc.rotation.x = Math.PI / 2; sc.position.set(x, y, 0.01); g.add(sc);
-      }
-    }
-  });
-
-  /* ---------- 7. MOTHERBOARD (upper-right column: SoC/PoP, storage, PMIC) ---------- */
-  addComponent({
-    id: "motherboard", name: "Main Motherboard", cardId: "motherboard", index: TOUR.indexOf("motherboard"),
-    home: V(0.06, 0.95, -0.034), exp: V(0.18, 1.10, 0.12), t0: 0.21, t1: 0.28,
-    build: g => {
-      g.add(mesh(plate(1.0, 0.78, 0.028, 0.06), M.pcb));
-      // etched trace artwork on both faces
-      const artF = new THREE.Mesh(new THREE.PlaneGeometry(0.94, 0.72), M.pcbArt);
-      artF.position.z = 0.016; g.add(artF);
-      const artB = new THREE.Mesh(new THREE.PlaneGeometry(0.94, 0.72), M.pcbArt);
-      artB.rotation.y = Math.PI; artB.position.z = -0.016; g.add(artB);
-      // low-profile packages
-      const chip = (w, h, x, y, mat, d) => { const c = mesh(box(w, h, d || 0.024), mat); c.position.set(x, y, -0.022); g.add(c); return c; };
-      chip(0.30, 0.30, -0.12, 0.08, M.soc, 0.03);       // processor package (SoC)
-      const die = new THREE.Mesh(new THREE.PlaneGeometry(0.27, 0.27), M.socTop);
-      die.rotation.y = Math.PI; die.position.set(-0.12, 0.08, -0.046); g.add(die);
-      const soCap = mesh(box(0.18, 0.18, 0.012), M.memory); soCap.position.set(-0.12, 0.08, -0.049); g.add(soCap); // stacked memory under die art
-      chip(0.22, 0.16, 0.28, 0.16, M.storage);          // storage chip
-      chip(0.14, 0.14, 0.30, -0.14, M.pmic);            // power-management chip
-      chip(0.12, 0.10, -0.26, -0.20, M.silicon);        // misc IC
-      // passive component rows + board-to-board connectors
-      if (LOD) for (let i = 0; i < 8; i++) {
-        const cap = mesh(box(0.028, 0.016, 0.012), M.silicon); cap.position.set(-0.30 + i * 0.075, -0.31, -0.020); g.add(cap);
-      }
-      for (const [x, y] of [[-0.38, 0.30], [0.40, -0.30], [0.02, -0.34]]) { const t = mesh(box(0.06, 0.04, 0.02), M.gold); t.position.set(x, y, -0.02); g.add(t); }
-    }
-  });
-
-  /* ---------- 8. REAR CAMERA SYSTEM (nested deck, stepped rings, flash) ---------- */
-  addComponent({
-    id: "camera", name: "Main Camera System", cardId: "camera", index: TOUR.indexOf("camera"),
-    home: V(-0.34, 1.02, -0.07), exp: V(-0.60, 1.22, -0.30), t0: 0.24, t1: 0.31, spin: Math.PI,
-    build: g => {
-      const deck = mesh(plate(0.60, 0.88, 0.05, 0.18), M.camDeck); g.add(deck);
-      // laser microtext on the deck rear face
-      const decal = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.78), M.deckArt);
-      decal.rotation.y = Math.PI; decal.position.set(0, 0, -0.028); g.add(decal);
-      const lens = (x, y, r) => {
-        const barrel = mesh(cyl(r + 0.025, 0.12, LOD ? 24 : 12), M.lensBarrel); barrel.rotation.x = Math.PI / 2; barrel.position.set(x, y, -0.07); g.add(barrel);
-        const step = mesh(cyl(r + 0.012, 0.02, LOD ? 24 : 12), M.lensBarrel); step.rotation.x = Math.PI / 2; step.position.set(x, y, -0.128); g.add(step);
-        const ring = mesh(cyl(r + 0.035, 0.025, LOD ? 24 : 12), M.lensRing); ring.rotation.x = Math.PI / 2; ring.position.set(x, y, -0.135); g.add(ring);
-        const glass = mesh(cyl(r, 0.02, LOD ? 24 : 12), M.lensGlass); glass.rotation.x = Math.PI / 2; glass.position.set(x, y, -0.14); g.add(glass);
-        const pupil = mesh(cyl(r * 0.42, 0.024, LOD ? 16 : 8), M.silicon); pupil.rotation.x = Math.PI / 2; pupil.position.set(x, y, -0.145); g.add(pupil);
-      };
-      lens(-0.06, 0.27, 0.10);    // main wide
-      lens(-0.06, 0.00, 0.095);   // ultra-wide
-      lens(-0.06, -0.27, 0.085);  // telephoto
-      // LED flash + diffuser ring, OIS block
-      const flash = mesh(cyl(0.035, 0.02, LOD ? 16 : 8), M.flash); flash.rotation.x = Math.PI / 2; flash.position.set(0.18, 0.27, -0.06); g.add(flash);
-      const dif = mesh(cyl(0.047, 0.012, LOD ? 16 : 8), M.lensRing); dif.rotation.x = Math.PI / 2; dif.position.set(0.18, 0.27, -0.055); g.add(dif);
-      const ois = mesh(box(0.16, 0.16, 0.04), M.silicon); ois.position.set(0.14, -0.05, 0.0); g.add(ois);
-    }
-  });
-
-  /* ---------- 9. VAPOR CHAMBER + GRAPHITE COOLING (etched channels) ---------- */
-  addComponent({
-    id: "cooling", name: "Vapor Chamber & Graphite Cooling", cardId: "cooling", index: TOUR.indexOf("cooling"),
-    home: V(0, 0.15, -0.062), exp: V(-0.26, 0.15, -0.06), t0: 0.17, t1: 0.23,
-    build: g => {
-      const vapor = mesh(plate(HW * 1.3, HH * 1.05, 0.008, 0.1), M.vapor); g.add(vapor);
-      // stepped secondary chamber over the SoC area
-      const step = mesh(plate(0.55, 0.55, 0.008, 0.08), M.vapor); step.position.set(0.12, 0.72, -0.004); g.add(step);
-      // stamped channel + spot-weld pattern
-      const chan = new THREE.Mesh(new THREE.PlaneGeometry(HW * 1.24, HH * 1.0), M.vaporArt);
-      chan.rotation.y = Math.PI; chan.position.z = -0.010; g.add(chan);
-      const graph = mesh(plate(HW * 1.4, HH * 1.1, 0.004, 0.12), M.graphite); graph.position.z = -0.014; g.add(graph);
-    }
-  });
-
-  /* ---------- 10. DUAL-CELL BATTERY (pouch cells, label, pull tabs) ---------- */
+  /* ---------- 9. BATTERY — one rectangular pouch cell ---------- */
   addComponent({
     id: "battery", name: "Battery", cardId: "battery", index: TOUR.indexOf("battery"),
-    home: V(0, -0.24, -0.03), exp: V(0.26, -0.30, -0.46), t0: 0.19, t1: 0.26,
+    home: V(-0.23, -0.115, -0.018), exp: V(-1.75, 0.35, 0.5), t0: 0.20, t1: 0.27,
     build: g => {
-      const cellA = mesh(plate(HW * 1.5, 0.76, 0.055, 0.10), M.battery); cellA.position.y = 0.40; g.add(cellA);
-      const cellB = mesh(plate(HW * 1.5, 0.76, 0.055, 0.10), M.battery); cellB.position.y = -0.40; g.add(cellB);
-      // printed label wrap, facing the viewer as in real teardown shots
-      const label = new THREE.Mesh(new THREE.PlaneGeometry(HW * 1.44, 1.44), M.battLabel);
-      label.position.z = 0.0295; g.add(label);
-      // foil seam strips along the pouch tops
-      if (LOD) for (const y of [0.76, -0.04]) {
-        const seam = mesh(box(HW * 1.44, 0.022, 0.004), M.vapor); seam.position.set(0, y, 0.028); g.add(seam);
+      g.add(mesh(plate(0.86, 1.87, 0.096, 0.06), M.battery));
+      const label = new THREE.Mesh(new THREE.PlaneGeometry(0.80, 1.60), M.battLabel);
+      label.position.z = 0.049; g.add(label);
+      /* six stretch-release pull tabs: three at each end */
+      if (LOD) for (const y of [0.86, -0.86]) for (const x of [-0.26, 0, 0.26]) {
+        const tab = mesh(box(0.13, 0.09, 0.004), M.tab);
+        tab.position.set(x, y, -0.050); g.add(tab);
       }
-      // blue adhesive pull tabs (the classic teardown detail)
-      const tabA = mesh(box(0.10, 0.15, 0.004), M.tab); tabA.rotation.z = 0.12; tabA.position.set(-0.26, 0.82, 0.026); g.add(tabA);
-      const tabB = mesh(box(0.10, 0.15, 0.004), M.tab); tabB.rotation.z = -0.10; tabB.position.set(0.24, 0.82, 0.026); g.add(tabB);
-      // protection board + connector tab reaching the motherboard
-      const bms = mesh(box(0.34, 0.08, 0.03), M.pcb); bms.position.set(0, 0.82, 0.0); g.add(bms);
-      const conn = mesh(box(0.1, 0.05, 0.03), M.copper); conn.position.set(0.14, 0.86, 0.01); g.add(conn);
+      /* protection circuit + single ribbon tail to one board connector */
+      const bms = mesh(box(0.26, 0.06, 0.02), M.pcb); bms.position.set(0.24, 0.96, 0.02); g.add(bms);
+      const tail = mesh(box(0.07, 0.14, 0.003), M.filmCopper); tail.position.set(0.36, 1.02, 0.02); g.add(tail);
     }
   });
 
-  /* ---------- 11. WIRELESS-CHARGING + NFC COIL (film spiral on ferrite) ---------- */
+  /* ---------- 10. SIM TRAY & READER ---------- */
   addComponent({
-    id: "wireless", name: "Wireless Charging & NFC Coil", cardId: "wireless", index: TOUR.indexOf("wireless"),
-    home: V(0, -0.05, -0.065), exp: V(-0.34, 0.0, -1.28), t0: 0.13, t1: 0.20,
+    id: "simtray", name: "SIM Tray & Reader", cardId: null, index: null,
+    home: V(0.565, -0.6, -0.02), exp: V(2.15, 0.05, 0.5), t0: 0.29, t1: 0.36,
     build: g => {
-      const coil = new THREE.Mesh(new THREE.PlaneGeometry(0.92, 0.92), M.coilArt); g.add(coil);
-      const nfc = mesh(plate(HW * 1.4, HH * 1.1, 0.004, 0.12), M.filmCopper); nfc.position.z = -0.006; g.add(nfc);
-    }
-  });
-
-  /* ---------- 12. BOTTOM SUB-BOARD: charging port, daughterboard, mics ---------- */
-  addComponent({
-    id: "chargingport", name: "Charging Port", cardId: "chargingport", index: TOUR.indexOf("chargingport"),
-    home: V(0, -1.28, -0.02), exp: V(0.10, -1.50, -0.78), t0: 0.28, t1: 0.36,
-    build: g => {
-      const daughter = mesh(plate(HW * 1.5, 0.34, 0.022, 0.05), M.pcb); g.add(daughter);
-      // interconnect flex running up toward the motherboard
-      const flex = mesh(box(0.09, 0.26, 0.004), M.filmCopper); flex.position.set(-0.34, 0.28, -0.004); g.add(flex);
-      const shell = mesh(box(0.2, 0.09, 0.12), M.frame); shell.position.set(0, -0.12, 0.02); g.add(shell);
-      const hole = mesh(box(0.15, 0.05, 0.13), M.silicon); hole.position.set(0, -0.12, 0.03); g.add(hole);
-      // waterproofing gasket around the port mouth + fixing screws
+      g.add(mesh(box(0.23, 0.3, 0.058), M.frame));
+      const card = mesh(box(0.16, 0.20, 0.012), M.gold); card.position.z = 0.026; g.add(card);
       if (LOD) {
-        const gasket = new THREE.Mesh(new THREE.TorusGeometry(0.105, 0.011, 8, 24), M.boot);
-        gasket.position.set(0, -0.12, 0.085); gasket.scale.y = 0.55; g.add(gasket);
-        for (const x of [-0.16, 0.16]) {
-          const sc = mesh(cyl(0.022, 0.018, 10), M.screw); sc.rotation.x = Math.PI / 2; sc.position.set(x, -0.12, 0.012); g.add(sc);
+        const seal = mesh(box(0.012, 0.26, 0.05), M.boot); seal.position.x = 0.112; g.add(seal);
+        const pin = mesh(cyl(0.007, 0.016, 8), M.silicon);
+        pin.rotation.z = Math.PI / 2; pin.position.set(0.118, 0, 0); g.add(pin);
+      }
+    }
+  });
+
+  /* ---------- 11. REAR DUAL CAMERA (one bracket, two lenses, diagonal) ---------- */
+  addComponent({
+    id: "camera", name: "Rear Dual Camera Module", cardId: "camera", index: TOUR.indexOf("camera"),
+    home: V(0.27, 1.055, -0.025), exp: V(1.15, 1.85, 0.5), t0: 0.25, t1: 0.32, spin: Math.PI,
+    build: g => {
+      g.add(mesh(plate(0.5, 0.44, 0.05, 0.09), M.camDeck));
+      const decal = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.36), M.deckArt);
+      decal.rotation.y = Math.PI; decal.position.z = -0.027; g.add(decal);
+      /* barrels project toward the back; ring sizes differ per the spec */
+      const lens = (x, y, r, stab) => {
+        const barrel = mesh(cyl(r * 0.78, 0.055, LOD ? 24 : 12), M.lensBarrel);
+        barrel.rotation.x = Math.PI / 2; barrel.position.set(x, y, -0.05); g.add(barrel);
+        const ring = mesh(cyl(r, 0.014, LOD ? 24 : 12), M.lensRing);
+        ring.rotation.x = Math.PI / 2; ring.position.set(x, y, -0.082); g.add(ring);
+        const glass = mesh(cyl(r * 0.66, 0.012, LOD ? 24 : 12), M.lensGlass);
+        glass.rotation.x = Math.PI / 2; glass.position.set(x, y, -0.089); g.add(glass);
+        const pupil = mesh(cyl(r * 0.3, 0.014, LOD ? 16 : 8), M.silicon);
+        pupil.rotation.x = Math.PI / 2; pupil.position.set(x, y, -0.093); g.add(pupil);
+        /* the stabilised lens carries a visibly larger suspension block */
+        if (stab) {
+          const ois = mesh(box(r * 1.7, r * 1.7, 0.022), M.silicon);
+          ois.position.set(x, y, -0.012); g.add(ois);
+        }
+      };
+      lens(0.15, 0.15, 0.115, true);    // stabilised main
+      lens(-0.15, -0.15, 0.105, false); // wide view
+      /* two independent ribbon tails to separate board sockets */
+      for (const x of [-0.06, 0.06]) {
+        const t = mesh(box(0.05, 0.10, 0.003), M.filmCopper);
+        t.position.set(x, -0.25, 0.01); g.add(t);
+      }
+    }
+  });
+
+  /* ---------- 12. BOTTOM LOUDSPEAKER (sealed chamber, deepest part) ---------- */
+  addComponent({
+    id: "loudspeaker", name: "Bottom Loudspeaker", cardId: "loudspeaker", index: TOUR.indexOf("loudspeaker"),
+    home: V(0.455, -1.21, -0.0295), exp: V(-1.8, -1.35, 0.5), t0: 0.27, t1: 0.34,
+    build: g => {
+      g.add(mesh(box(0.46, 0.35, 0.111), M.plastic));
+      const face = new THREE.Mesh(new THREE.PlaneGeometry(0.30, 0.20), M.grille);
+      face.position.z = 0.057; g.add(face);
+      if (LOD) {
+        const gasket = mesh(plate(0.42, 0.31, 0.006, 0.04), M.boot);
+        gasket.position.z = -0.057; g.add(gasket);
+        for (const x of [-0.14, 0.14]) {
+          const nub = mesh(box(0.026, 0.02, 0.01), M.gold);
+          nub.position.set(x, 0.15, 0.05); g.add(nub);
         }
       }
     }
   });
+
+  /* ---------- 13. LINEAR VIBRATION MOTOR (flat block, long axis across) ---------- */
   addComponent({
-    id: "loudspeaker", name: "Bottom Loudspeaker / Buzzer", cardId: "loudspeaker", index: TOUR.indexOf("loudspeaker"),
-    home: V(0.34, -1.18, -0.03), exp: V(0.62, -1.28, -0.90), t0: 0.28, t1: 0.39,
+    id: "haptic", name: "Linear Vibration Motor", cardId: "haptic", index: TOUR.indexOf("haptic"),
+    home: V(-0.4, -1.19, -0.044), exp: V(-1.8, -1.9, 0.5), t0: 0.27, t1: 0.34,
     build: g => {
-      const body = mesh(box(0.34, 0.22, 0.1), M.plastic); g.add(body);
-      const face = new THREE.Mesh(new THREE.PlaneGeometry(0.28, 0.16), M.grille);
-      face.position.z = 0.051; g.add(face);
-      // spring contact pads
-      if (LOD) for (const x of [-0.10, 0.10]) {
-        const nub = mesh(box(0.028, 0.02, 0.012), M.gold); nub.position.set(x, -0.085, 0.05); g.add(nub);
-      }
+      g.add(mesh(box(0.52, 0.21, 0.082), M.frame));
+      const lid = new THREE.Mesh(new THREE.PlaneGeometry(0.44, 0.15), M.shieldArt);
+      lid.position.z = 0.042; g.add(lid);
+      /* the moving mass slides along the long axis */
+      const mass = mesh(box(0.22, 0.11, 0.03), M.copper); mass.position.z = 0.01; g.add(mass);
+      const tail = mesh(box(0.10, 0.05, 0.003), M.filmCopper);
+      tail.position.set(0.30, 0.02, 0.02); g.add(tail);
     }
   });
+
+  /* ---------- 14. MAINBOARD — LOWER (radio) DECK ---------- */
   addComponent({
-    id: "haptic", name: "Haptic / Vibration Motor", cardId: "haptic", index: TOUR.indexOf("haptic"),
-    home: V(-0.3, -1.16, -0.03), exp: V(-0.62, -1.28, -0.90), t0: 0.28, t1: 0.39,
+    id: "boardlower", name: "Mainboard (Lower Deck)", cardId: null, index: null,
+    home: V(0.434, 0.194, -0.054), exp: V(1.65, -0.62, 0.5), t0: 0.18, t1: 0.25,
     build: g => {
-      const body = mesh(box(0.3, 0.18, 0.09), M.frame); g.add(body);
-      const coilM = mesh(cyl(0.06, 0.05, LOD ? 18 : 9), M.copper); coilM.rotation.z = Math.PI / 2; coilM.position.z = 0.02; g.add(coilM);
-      // supply flex tail
-      const tail = mesh(box(0.12, 0.045, 0.004), M.filmCopper); tail.position.set(0.20, 0.02, 0.03); g.add(tail);
-    }
-  });
-  addComponent({
-    id: "microphones", name: "Microphones", cardId: "microphones", index: TOUR.indexOf("microphones"),
-    home: V(0, -1.47, -0.01), exp: V(-0.18, -1.56, -0.90), t0: 0.29, t1: 0.40,
-    build: g => {
-      for (const x of [-0.2, 0.2]) {
-        const m = mesh(box(0.05, 0.05, 0.04), M.plastic); m.position.x = x; g.add(m);
-        // rubber acoustic boot sealing each MEMS mic to its drill hole
-        if (LOD) { const bt = mesh(cyl(0.032, 0.012, 10), M.boot); bt.rotation.x = Math.PI / 2; bt.position.set(x, 0, 0.024); g.add(bt); }
+      g.add(mesh(plate(0.38, 1.15, 0.016, 0.04), M.pcb));
+      const art = new THREE.Mesh(new THREE.PlaneGeometry(0.35, 1.11), M.pcbArt);
+      art.rotation.y = Math.PI; art.position.z = -0.009; g.add(art);
+      const modem = mesh(box(0.14, 0.14, 0.016), M.soc); modem.position.set(0, 0.34, -0.016); g.add(modem);
+      const rf = mesh(box(0.11, 0.09, 0.013), M.silicon); rf.position.set(0, 0.02, -0.015); g.add(rf);
+      const pa = mesh(box(0.09, 0.07, 0.012), M.pmic); pa.position.set(0, -0.28, -0.014); g.add(pa);
+      /* antenna feed clips along the outboard edge */
+      if (LOD) for (const y of [0.46, -0.10, -0.50]) {
+        const clip = mesh(box(0.03, 0.05, 0.012), M.gold); clip.position.set(0.17, y, -0.014); g.add(clip);
       }
     }
   });
 
-  /* ---------- 13. SIM / eSIM MODULE ---------- */
+  /* ---------- 15. CHARGING PORT ASSEMBLY (one wide bottom flex) ---------- */
   addComponent({
-    id: "sim", name: "SIM / eSIM Module", cardId: null, index: null,
-    home: V(-0.66, -0.2, 0), exp: V(-1.02, -0.2, 0.42), t0: 0.27, t1: 0.38,
+    id: "chargingport", name: "Charging Port Assembly", cardId: "chargingport", index: TOUR.indexOf("chargingport"),
+    home: V(0, -1.43, -0.055), exp: V(-1.15, -2.15, 0.5), t0: 0.29, t1: 0.36,
     build: g => {
-      const tray = mesh(box(0.06, 0.34, 0.09), M.frame); g.add(tray);
-      const chip = mesh(box(0.05, 0.12, 0.02), M.gold); chip.position.z = 0.05; g.add(chip);
-      // rubber weather seal + eject pinhole on the outer face
+      g.add(mesh(plate(1.3, 0.08, 0.008, 0.02), M.filmCopper));
+      /* connector receptacle centred on the bottom edge */
+      const shell = mesh(box(0.20, 0.075, 0.048), M.frame); shell.position.z = 0.012; g.add(shell);
+      const mouth = mesh(box(0.155, 0.04, 0.05), M.silicon); mouth.position.z = 0.02; g.add(mouth);
       if (LOD) {
-        const seal = mesh(box(0.012, 0.30, 0.075), M.boot); seal.position.x = -0.012; g.add(seal);
-        const pin = mesh(cyl(0.008, 0.02, 8), M.silicon); pin.rotation.z = Math.PI / 2; pin.position.set(-0.034, -0.12, 0); g.add(pin);
+        const gasket = new THREE.Mesh(new THREE.TorusGeometry(0.095, 0.009, 8, 22), M.boot);
+        gasket.position.z = 0.03; gasket.scale.y = 0.42; g.add(gasket);
+        /* screw eyelets grounding the flex to the frame */
+        for (const x of [-0.44, 0.44]) {
+          const sc = mesh(cyl(0.018, 0.01, 10), M.screw);
+          sc.rotation.x = Math.PI / 2; sc.position.set(x, 0, 0.008); g.add(sc);
+        }
+        /* antenna contact tabs */
+        for (const x of [-0.30, 0.30]) {
+          const tb = mesh(box(0.05, 0.04, 0.008), M.gold); tb.position.set(x, 0, 0.008); g.add(tb);
+        }
       }
+      /* interconnect run up the side rail to the board */
+      const run = mesh(box(0.07, 0.30, 0.003), M.filmCopper);
+      run.position.set(0.42, 0.20, -0.002); g.add(run);
     }
   });
 
-  /* ---------- 14. BIOMETRIC SENSOR (under-display, glow ring) ---------- */
+  /* ---------- 16. GRAPHITE THERMAL LAYER (films only — no vapour chamber) ---------- */
   addComponent({
-    id: "biometric", name: "Under-display Biometric Sensor", cardId: null, index: null,
-    home: V(0, -0.7, 0.03), exp: V(0.22, -0.78, 1.06), t0: 0.29, t1: 0.40,
+    id: "cooling", name: "Graphite Thermal Layer", cardId: "cooling", index: TOUR.indexOf("cooling"),
+    home: V(0.434, 0.194, -0.0655), exp: V(2.15, -0.78, 0.5), t0: 0.16, t1: 0.23,
     build: g => {
-      const s = mesh(cyl(0.13, 0.02, LOD ? 24 : 10), M.sensorBlue); s.rotation.x = Math.PI / 2; g.add(s);
-      const ringG = mesh(cyl(0.15, 0.008, LOD ? 24 : 10), M.lensRing); ringG.rotation.x = Math.PI / 2; ringG.position.z = -0.004; g.add(ringG);
+      g.add(mesh(plate(0.4, 1.18, 0.007, 0.05), M.graphite));
+      /* Laminated sheets read as slightly offset layers. No stamped-channel
+         overlay here: channels would depict a vapour chamber, which this class
+         of device does not use — the cooling is graphite film only. */
+      const l2 = mesh(plate(0.36, 1.10, 0.003, 0.04), M.graphite);
+      l2.position.set(0.008, 0.01, -0.005); g.add(l2);
+      const l3 = mesh(plate(0.32, 1.02, 0.002, 0.03), M.graphite);
+      l3.position.set(-0.006, -0.01, -0.008); g.add(l3);
     }
   });
 
-  /* ---------- 15. REAR GLASS (printed wordmark + camera bump) ---------- */
+  /* ---------- 17. WIRELESS CHARGING COIL (spiral + ferrite shield) ---------- */
   addComponent({
-    id: "rearGlass", name: "Rear Glass", cardId: null, index: null,
-    home: V(0, 0, -0.082), exp: V(0.42, -0.10, -1.78), t0: 0.10, t1: 0.17, spin: Math.PI,
+    id: "wireless", name: "Wireless Charging Coil", cardId: "wireless", index: TOUR.indexOf("wireless"),
+    home: V(0, -0.1, -0.08), exp: V(1.5, -1.9, 0.5), t0: 0.13, t1: 0.20,
     build: g => {
-      const back = mesh(plate(HW * 2, HH * 2, 0.02, 0.28), M.rearGlass); g.add(back);
-      // printed underside artwork, visible through the tinted glass
-      const art = new THREE.Mesh(new THREE.PlaneGeometry(HW * 2 - 0.04, HH * 2 - 0.04), M.rearArt);
-      art.rotation.y = Math.PI; art.position.z = -0.012; g.add(art);
-      // vertical camera bump matching the camera deck footprint
-      const bump = mesh(plate(0.56, 0.94, 0.03, 0.18), M.rearGlass); bump.position.set(-0.34, 1.02, -0.022); g.add(bump);
+      const coil = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.85), M.coilArt);
+      coil.rotation.y = Math.PI; g.add(coil);
+      /* ferrite sheet behind the winding keeps the field off the cell */
+      const ferrite = mesh(plate(0.88, 0.88, 0.004, 0.08), M.graphite);
+      ferrite.position.z = -0.005; g.add(ferrite);
+      const tail = mesh(box(0.06, 0.22, 0.003), M.filmCopper);
+      tail.position.set(0.40, 0.42, -0.002); g.add(tail);
+    }
+  });
+
+  /* ---------- 18. REAR GLASS ---------- */
+  addComponent({
+    id: "rearglass", name: "Rear Glass Panel", cardId: null, index: null,
+    home: V(0, 0, -0.0925), exp: V(0, 0, -0.85), t0: 0.10, t1: 0.17, spin: Math.PI,
+    build: g => {
+      g.add(mesh(plate(1.38, 2.94, 0.015, 0.27), M.rearGlass));
+      const art = new THREE.Mesh(new THREE.PlaneGeometry(1.34, 2.90), M.rearArt);
+      art.rotation.y = Math.PI; art.position.z = -0.009; g.add(art);
+    }
+  });
+
+  /* ---------- 19. REAR CAMERA MESA (formed in the rear glass, proud of it) ---------- */
+  addComponent({
+    id: "camerabump", name: "Rear Camera Mesa", cardId: null, index: null,
+    home: V(0.27, 1.055, -0.1245), exp: V(0.27, 1.055, -1.0), t0: 0.10, t1: 0.17,
+    build: g => {
+      /* plateau */
+      g.add(mesh(plate(0.58, 0.58, 0.034, 0.12), M.rearGlass));
+      /* trim rings step a further stage proud, matching the lens centres */
+      const ring = (x, y, r) => {
+        const rg = mesh(cyl(r, 0.015, LOD ? 24 : 12), M.lensRing);
+        rg.rotation.x = Math.PI / 2; rg.position.set(x, y, -0.024); g.add(rg);
+      };
+      ring(0.15, 0.15, 0.115);
+      ring(-0.15, -0.15, 0.105);
+      /* flash disc and the rear microphone pinhole complete the square */
+      const flash = mesh(cyl(0.0435, 0.012, LOD ? 18 : 9), M.flash);
+      flash.rotation.x = Math.PI / 2; flash.position.set(-0.15, 0.15, -0.022); g.add(flash);
+      const pin = mesh(cyl(0.01, 0.01, 8), M.silicon);
+      pin.rotation.x = Math.PI / 2; pin.position.set(0.15, -0.15, -0.021); g.add(pin);
+    }
+  });
+
+  /* ---------- 20. MID-FRAME CHASSIS (the structural spine) ---------- */
+  addComponent({
+    id: "midframe", name: "Mid-Frame Chassis", cardId: null, index: null,
+    home: V(0, 0, 0), exp: V(0, 0, 0), t0: 0.05, t1: 0.12,
+    build: g => {
+      const outer = rrShape(1.42, 2.98, 0.27);
+      const inner = rrShape(1.38, 2.94, 0.25);
+      outer.holes.push(new THREE.Path(inner.getPoints(seg * 4)));
+      const geo = new THREE.ExtrudeGeometry(outer, {
+        depth: 0.2, curveSegments: seg, bevelEnabled: true,
+        bevelThickness: 0.006, bevelSize: 0.006, bevelOffset: 0, bevelSegments: bevSeg
+      });
+      geo.translate(0, 0, -0.1);
+      g.add(mesh(geo, M.frame));
+    }
+  });
+
+  /* ---------- 21. ANTENNA BANDS (splits in the metal rail) ---------- */
+  addComponent({
+    id: "antennabands", name: "Antenna Bands", cardId: null, index: null,
+    home: V(0, 0, 0), exp: V(0, 0, -0.3), t0: 0.05, t1: 0.12,
+    build: g => {
+      /* hairline non-conductive fills breaking the rail's continuity */
+      const band = (w, h, x, y) => {
+        const b = mesh(box(w, h, 0.2), M.plastic); b.position.set(x, y, 0); g.add(b);
+      };
+      band(0.34, 0.016, -0.30, 1.49);
+      band(0.34, 0.016, 0.30, -1.49);
+      band(0.016, 0.30, 0.71, 0.90);
+      band(0.016, 0.30, -0.71, -0.90);
     }
   });
 
@@ -1062,8 +1165,10 @@ function buildTextures(THREE) {
     ctx.font = "700 30px Archivo, Inter, sans-serif";
     ctx.fillText("PANGLIMA X1 BATTERY", 48, 56);
     ctx.font = "500 20px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.6)";
-    ctx.fillText("Dual-cell Li-ion · 5200 mAh (typ)", 48, 110);
-    ctx.fillText("3.87 V  ·  20.12 Wh  ·  Model PGX1-B1", 48, 142);
+    /* Single rectangular cell, and deliberately no capacity/energy figure —
+       the X1 is an illustrative model, not a spec sheet for a real device. */
+    ctx.fillText("Single-cell Li-ion polymer", 48, 110);
+    ctx.fillText("Rechargeable  ·  Model PGX1-B1", 48, 142);
     ctx.strokeStyle = "rgba(255,180,64,.8)"; ctx.lineWidth = 3;
     for (let i = 0; i < 3; i++) {
       const x = 52 + i * 64;
@@ -1173,7 +1278,9 @@ function buildTextures(THREE) {
     }
   });
 
-  /* Vapor chamber: stamped serpentine channels + spot welds + laser text */
+  /* LEGACY — no longer applied to any part. The X1 cools with graphite film,
+     not a vapour chamber, so these stamped channels would misrepresent it.
+     Kept only so the texture/material tables keep their shape. */
   const vapor = make(256, 512, (ctx, w, h) => {
     ctx.fillStyle = "#a8aeb6"; ctx.fillRect(0, 0, w, h);
     // brushed vertical grain

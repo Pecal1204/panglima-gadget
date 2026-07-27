@@ -62,6 +62,7 @@
       '<div class="ip-card-index"><span>' + (index != null ? "Component " + idxLabel : "&nbsp;") +
         '</span><span class="tag">' + esc(card.tag) + "</span></div>" +
       "<h3" + nameId + ">" + esc(card.name) + "</h3>" +
+      (card.spec ? '<p class="ip-card-spec">' + esc(card.spec) + "</p>" : "") +
       cardNav(index, total, opts) +
       body +
       warn +
