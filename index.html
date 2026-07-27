@@ -290,14 +290,6 @@
   .social:hover{border-color:rgba(224,33,40,.5);}
   .social svg{color:#fff;}
 
-  /* ============ Gallery ============ */
-  .gallery .wrap{padding-top:92px;padding-bottom:92px;}
-  .gallery .h2{margin-bottom:44px;}
-  .gal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;gap:14px;}
-  .gal-item{position:relative;border-radius:12px;overflow:hidden;background:var(--card);}
-  .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
-  .gal-item:hover img{transform:scale(1.05);}
-
   /* ============ Location ============ */
   .location{background:var(--bg);}
   .location .wrap{padding-top:92px;padding-bottom:92px;display:grid;
@@ -392,7 +384,6 @@
     .stats{grid-template-columns:1fr 1fr;}
     .stat:nth-child(2){border-right:none;}
     .price-cards,.steps,.svc-grid,.net-grid,.socials,.info-tiles{grid-template-columns:1fr;}
-    .gal-grid{grid-template-columns:1fr 1fr;grid-auto-rows:160px;}
     .foot-grid{grid-template-columns:1fr;gap:28px;}
     .h2{font-size:30px;}
     .cta h2{font-size:32px;}
@@ -426,6 +417,7 @@
       <a href="#services">Services</a>
       <a href="#reviews">Reviews</a>
       <a href="#location">Location</a>
+      <a href="gallery.html">Gallery</a>
       <a href="news.html">News</a>
       <a class="pill" data-wa="general" target="_blank" rel="noopener">Get a Quote</a>
     </nav>
@@ -676,15 +668,6 @@
   </div>
 </section>
 
-<!-- ===== GALLERY ===== -->
-<section id="gallery" class="sec gallery">
-  <div class="wrap">
-    <div class="eyebrow red">Gallery</div>
-    <h2 class="h2">Behind our counter</h2>
-    <div class="gal-grid" id="galGrid"></div>
-  </div>
-</section>
-
 <!-- ===== NETWORK ===== -->
 <section class="sec network">
   <div class="wrap">
@@ -731,6 +714,7 @@
           <a href="#services">Services</a>
           <a href="#reviews">Reviews</a>
           <a href="#location">Location</a>
+          <a href="gallery.html">Gallery</a>
           <a href="news.html">News</a>
         </div>
       </div>
@@ -897,23 +881,6 @@
       paths:[P("M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z"),{tag:"polyline",attrs:{points:"9 12 11 14 15 10"}}]}
   ];
 
-  /* Self-hosted in images/ — do NOT hotlink lh3.googleusercontent.com,
-     Google throttles bulk requests and the photos fail to load. */
-  var GALLERY = [
-    "images/gallery-1.jpg",
-    "images/gallery-2.jpg",
-    "images/gallery-3.jpg",
-    "images/gallery-4.jpg",
-    "images/gallery-5.jpg",
-    "images/gallery-6.jpg",
-    "images/gallery-7.jpg",
-    "images/gallery-8.jpg"
-  ];
-  var GAL_SPANS = [
-    {col:"span 2",row:"span 2"},{col:"span 2",row:"span 1"},{col:"span 1",row:"span 1"},{col:"span 1",row:"span 1"},
-    {col:"span 1",row:"span 1"},{col:"span 1",row:"span 1"},{col:"span 2",row:"span 1"},{col:"span 2",row:"span 1"}
-  ];
-
   /* ============ Helpers ============ */
   function el(tag, cls){ var e=document.createElement(tag); if(cls) e.className=cls; return e; }
   function txt(tag, cls, text){ var e=el(tag,cls); e.textContent=text; return e; }
@@ -996,19 +963,6 @@
     body.appendChild(txt("div","d", r.desc));
     row.appendChild(body);
     reasonsEl.appendChild(row);
-  });
-
-  /* ============ Render: gallery ============ */
-  var galGridEl = document.getElementById("galGrid");
-  GALLERY.forEach(function(src, i){
-    var item = el("div","gal-item");
-    var span = GAL_SPANS[i] || {col:"span 1",row:"span 1"};
-    item.style.gridColumn = span.col;
-    item.style.gridRow = span.row;
-    var img = el("img");
-    img.src = src; img.alt = "Panglima Gadget shop photo"; img.loading = "lazy";
-    item.appendChild(img);
-    galGridEl.appendChild(item);
   });
 
   /* ============ Live Open/Closed badge ============ */

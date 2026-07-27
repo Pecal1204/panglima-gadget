@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery — Inside Panglima Gadget, Telok Panglima Garang</title>
+<meta name="description" content="Photos from inside Panglima Gadget in Telok Panglima Garang — our repair bench, service counter, technicians at work and the accessories we stock.">
+<meta name="theme-color" content="#0b0b0e">
+<link rel="canonical" href="https://panglimagadget.my/gallery.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Panglima Gadget">
+<meta property="og:locale" content="en_MY">
+<meta property="og:url" content="https://panglimagadget.my/gallery.html">
+<meta property="og:title" content="Inside Panglima Gadget — Gallery">
+<meta property="og:description" content="A look behind our counter: the repair bench, our technicians and the shop in Telok Panglima Garang.">
+<meta property="og:image" content="https://panglimagadget.my/images/gallery-1.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Inside Panglima Gadget — Gallery">
+<meta name="twitter:description" content="A look behind our counter in Telok Panglima Garang.">
+<meta name="twitter:image" content="https://panglimagadget.my/images/gallery-1.jpg">
+
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "name": "Inside Panglima Gadget",
+  "description": "Photos from inside the Panglima Gadget phone and laptop repair shop in Telok Panglima Garang, Selangor.",
+  "url": "https://panglimagadget.my/gallery.html",
+  "about": { "@id": "https://panglimagadget.my/#business" }
+}
+</script>
+
+<style>
+  :root{
+    --bg:#0b0b0e; --bg-alt:#0e0e12; --card:#141419; --row:#1e1e25; --footer:#08080a;
+    --red:#e02128; --red-light:#ff5a60;
+    --wa:#25d366; --wa-hover:#3ee87a; --wa-ink:#062b16;
+    --t1:#eceef2; --t2:#d3d7de; --t3:#b6bcc7; --t4:#a9afba; --t5:#8b909b; --t6:#7d838f; --t8:#5f646e;
+    --b1:rgba(255,255,255,.08); --b2:rgba(255,255,255,.09);
+    --sans:'Inter',system-ui,sans-serif; --head:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.6;}
+  a{color:inherit;text-decoration:none;transition:color .18s ease,background-color .18s ease,border-color .18s ease,transform .2s ease;}
+  img{display:block;max-width:100%;}
+  ::selection{background:var(--red);color:#fff;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- header ---------- */
+  header{position:sticky;top:0;z-index:60;background:rgba(11,11,14,.85);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);}
+  .nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .nav img{height:36px;width:auto;}
+  .nav-links{display:flex;align-items:center;gap:28px;font-size:14.5px;font-weight:500;color:var(--t4);}
+  .nav-links a:not(.pill):hover{color:#fff;}
+  .nav-links a[aria-current="page"]{color:#fff;}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:var(--wa-ink);
+    padding:11px 20px;border-radius:7px;font-weight:700;letter-spacing:.2px;}
+  .pill:hover{background:var(--wa-hover);transform:translateY(-1px);}
+  .nav-toggle{display:none;}
+
+  /* ---------- page head ---------- */
+  .head{padding:64px 0 40px;}
+  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red-light);margin-bottom:14px;}
+  h1{font-family:var(--head);font-size:44px;font-weight:800;letter-spacing:-1px;line-height:1.05;margin:0 0 16px;}
+  .head p{font-size:16.5px;color:var(--t4);margin:0;max-width:620px;}
+
+  /* ---------- grid ---------- */
+  .gal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;gap:14px;padding-bottom:76px;}
+  .gal-item{position:relative;border-radius:12px;overflow:hidden;background:var(--card);
+    border:none;padding:0;cursor:zoom-in;}
+  .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+  .gal-item:hover img{transform:scale(1.05);}
+  .gal-item:focus-visible{outline:2px solid var(--red);outline-offset:3px;}
+
+  /* ---------- lightbox ---------- */
+  .lb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;
+    background:rgba(6,6,9,.94);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:24px;}
+  .lb.is-open{display:flex;}
+  .lb img{max-width:min(1100px,92vw);max-height:86vh;width:auto;height:auto;border-radius:12px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);}
+  .lb-btn{position:absolute;display:inline-flex;align-items:center;justify-content:center;
+    width:46px;height:46px;border-radius:50%;cursor:pointer;color:#fff;
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);}
+  .lb-btn:hover{background:rgba(255,255,255,.2);}
+  .lb-btn:focus-visible{outline:2px solid var(--red);outline-offset:2px;}
+  .lb-close{top:20px;right:20px;}
+  .lb-prev{left:18px;top:50%;transform:translateY(-50%);}
+  .lb-next{right:18px;top:50%;transform:translateY(-50%);}
+  .lb-count{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+    font-family:var(--head);font-size:12.5px;font-weight:700;letter-spacing:1.6px;color:var(--t4);}
+
+  /* ---------- cta ---------- */
+  .cta{background:var(--card);border:1px solid var(--b2);border-radius:16px;padding:34px;
+    display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;margin-bottom:76px;}
+  .cta h2{font-family:var(--head);font-size:22px;font-weight:800;margin:0 0 6px;}
+  .cta p{margin:0;font-size:14.5px;color:var(--t5);}
+  .btn-wa{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:var(--wa-ink);
+    padding:15px 28px;border-radius:8px;font-weight:700;font-size:15px;font-family:var(--head);white-space:nowrap;}
+  .btn-wa:hover{background:var(--wa-hover);transform:translateY(-2px);}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--footer);border-top:1px solid var(--b1);}
+  footer .wrap{padding:30px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+  .copy{font-size:12.5px;color:var(--t8);}
+  footer a{font-size:13.5px;font-weight:600;color:var(--t4);}
+  footer a:hover{color:var(--red-light);}
+
+  @media (max-width:940px){
+    h1{font-size:34px;}
+    .gal-grid{grid-auto-rows:190px;}
+  }
+  @media (max-width:680px){
+    .wrap{padding:0 18px;}
+    .nav-links{position:fixed;inset:74px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;
+      background:rgba(11,11,14,.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);
+      padding:8px 18px 18px;transform:translateY(-120%);transition:transform .28s ease;z-index:59;}
+    .nav-links.open{transform:translateY(0);}
+    .nav-links a:not(.pill){padding:14px 4px;border-bottom:1px solid var(--b1);}
+    .nav-links .pill{margin-top:14px;justify-content:center;}
+    .nav-toggle{display:inline-flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+    .nav-toggle span{width:24px;height:2px;background:#fff;border-radius:2px;}
+    .head{padding:44px 0 30px;}
+    h1{font-size:28px;}
+    .gal-grid{grid-template-columns:1fr 1fr;grid-auto-rows:150px;gap:10px;}
+    .lb-prev{left:8px;} .lb-next{right:8px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" aria-label="Panglima Gadget home"><img src="images/panglima-gadget-header-logo-transparent.png" alt="Panglima Gadget"></a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false" id="navToggle"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#location">Location</a>
+      <a href="news.html">News</a>
+      <a href="gallery.html" aria-current="page">Gallery</a>
+      <a class="pill" id="waTop" target="_blank" rel="noopener">Get a Quote</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap head">
+    <div class="eyebrow">Gallery</div>
+    <h1>Behind our counter</h1>
+    <p>A look inside our shop in Telok Panglima Garang — the repair bench, our service counter and the technicians who handle your device.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="gal-grid" id="galGrid"></div>
+
+    <div class="cta">
+      <div>
+        <h2>Need a repair?</h2>
+        <p>Send us a photo of the problem on WhatsApp — diagnostics are free.</p>
+      </div>
+      <a class="btn-wa" id="waCta" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#062b16"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.9 14.1c-.25.7-1.45 1.35-2 1.4-.5.05-.5.4-3.15-.65-2.65-1.05-4.3-3.75-4.45-3.95-.15-.2-1.1-1.45-1.1-2.75s.7-1.95.95-2.2c.25-.25.55-.3.7-.3h.5c.15 0 .4-.05.6.5.25.65.85 2.2.9 2.35.05.15.1.35 0 .55-.1.2-.15.35-.3.5l-.45.5c-.15.15-.3.3-.15.6.15.3.65 1.15 1.45 1.85 1 .9 1.85 1.15 2.15 1.3.3.15.45.1.6-.05.15-.15.7-.8.9-1.1.2-.3.4-.25.65-.15.25.1 1.6.75 1.85.9.25.15.45.2.5.3.05.15.05.65-.2 1.35z"></path></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- Lightbox -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="Close">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Previous photo">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next photo">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="copy">© 2026 Panglima Gadget · Telok Panglima Garang, Selangor</div>
+    <a href="index.html">← Back to home</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var WHATSAPP_NUMBER = "60105339970";
+  function wa(msg){ return "https://api.whatsapp.com/send?phone=" + WHATSAPP_NUMBER + "&text=" + encodeURIComponent(msg); }
+  var waHref = wa("Hi Panglima Gadget, I'd like to ask about a repair.");
+  document.getElementById("waTop").href = waHref;
+  document.getElementById("waCta").href = waHref;
+
+  /* Self-hosted in images/ — do NOT hotlink lh3.googleusercontent.com,
+     Google throttles bulk requests and the photos fail to load. */
+  var GALLERY = [
+    { src:"images/gallery-1.jpg", alt:"Display counter stocked with phone cases, cables and screen protectors" },
+    { src:"images/gallery-2.jpg", alt:"Technician at his workstation checking a phone against parts listings on screen" },
+    { src:"images/gallery-3.jpg", alt:"Phone dismantled on the blue repair mat with precision tools" },
+    { src:"images/gallery-4.jpg", alt:"Two technicians at the service counter beneath the Panglima Gadget sign" },
+    { src:"images/gallery-5.jpg", alt:"Microscope repair station with certificates on the wall" },
+    { src:"images/gallery-6.jpg", alt:"Phone opened up showing the battery, camera module and charging port" },
+    { src:"images/gallery-7.jpg", alt:"Inside the Panglima Gadget shop in Telok Panglima Garang" },
+    { src:"images/gallery-8.jpg", alt:"Customer seating area and service counter inside the shop" }
+  ];
+  var GAL_SPANS = [
+    {col:"span 2",row:"span 2"},{col:"span 2",row:"span 1"},{col:"span 1",row:"span 1"},{col:"span 1",row:"span 1"},
+    {col:"span 1",row:"span 1"},{col:"span 1",row:"span 1"},{col:"span 2",row:"span 1"},{col:"span 2",row:"span 1"}
+  ];
+
+  var grid = document.getElementById("galGrid");
+  GALLERY.forEach(function(g, i){
+    /* a <button>, not a <div>: the tile opens a viewer, so it must be
+       reachable and operable from the keyboard */
+    var item = document.createElement("button");
+    item.type = "button";
+    item.className = "gal-item";
+    item.setAttribute("data-i", i);
+    item.setAttribute("aria-label", "View photo " + (i + 1) + " of " + GALLERY.length);
+    var span = GAL_SPANS[i] || {col:"span 1",row:"span 1"};
+    item.style.gridColumn = span.col;
+    item.style.gridRow = span.row;
+    var img = document.createElement("img");
+    img.src = g.src; img.alt = g.alt; img.loading = i < 4 ? "eager" : "lazy";
+    item.appendChild(img);
+    grid.appendChild(item);
+  });
+
+  /* ---------------- lightbox ---------------- */
+  var lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg"),
+      lbCount = document.getElementById("lbCount"), current = 0, lastFocus = null;
+
+  function show(i){
+    current = (i + GALLERY.length) % GALLERY.length;
+    lbImg.src = GALLERY[current].src;
+    lbImg.alt = GALLERY[current].alt;
+    lbCount.textContent = (current + 1) + " / " + GALLERY.length;
+  }
+  function open(i){
+    lastFocus = document.activeElement;
+    show(i);
+    lb.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    document.getElementById("lbClose").focus();
+  }
+  function close(){
+    lb.classList.remove("is-open");
+    document.body.style.overflow = "";
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  grid.addEventListener("click", function(e){
+    var t = e.target.closest(".gal-item");
+    if (t) open(+t.getAttribute("data-i"));
+  });
+  document.getElementById("lbClose").addEventListener("click", close);
+  document.getElementById("lbPrev").addEventListener("click", function(){ show(current - 1); });
+  document.getElementById("lbNext").addEventListener("click", function(){ show(current + 1); });
+  lb.addEventListener("click", function(e){ if (e.target === lb) close(); });
+  document.addEventListener("keydown", function(e){
+    if (!lb.classList.contains("is-open")) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft") show(current - 1);
+    else if (e.key === "ArrowRight") show(current + 1);
+  });
+
+  /* ---------------- mobile menu ---------------- */
+  var toggle = document.getElementById("navToggle"), links = document.getElementById("navLinks");
+  toggle.addEventListener("click", function(){
+    var open = links.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(open));
+  });
+  links.addEventListener("click", function(e){
+    if (e.target.tagName === "A"){ links.classList.remove("open"); toggle.setAttribute("aria-expanded","false"); }
+  });
+})();
+</script>
+</body>
+</html>
