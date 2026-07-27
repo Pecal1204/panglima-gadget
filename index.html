@@ -266,12 +266,6 @@
   .rating-card{background:var(--card);border:1px solid var(--b2);border-radius:14px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,.4);}
   .rating-widget{background:var(--card);border:1px solid var(--b2);border-radius:14px;overflow:hidden;
     box-shadow:0 24px 60px rgba(0,0,0,.4);min-height:220px;}
-  /* Vendor review carousel exposes stable (non-hashed) class names — CarouselItem
-     wraps each card — specifically for this kind of layout override. Cap at 2
-     visible cards on desktop; the widget's own responsive rules keep mobile at 1. */
-  @media (min-width:941px){
-    .rating-widget .CarouselItem{width:50% !important;flex:0 0 50% !important;max-width:50% !important;}
-  }
   .rating-top{display:flex;align-items:center;gap:16px;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--b1);}
   .rating-num{font-family:var(--head);font-size:50px;font-weight:900;line-height:1;}
   .stars{color:var(--gold);font-size:17px;letter-spacing:3px;}
@@ -607,29 +601,8 @@
     </div>
     <div class="rev-col">
       <div class="rating-widget">
-        <div id="wid_1785044321829"></div>
-        <script>
-        (function(){
-          var sc = document.createElement("script");
-          sc.setAttribute("defer", true);
-          sc.setAttribute("src", "https://dbwx2z9xa7qt9.cloudfront.net/bundle.js?cachebust=1785044321830");
-          sc.setAttribute("theme", "dark");
-          sc.setAttribute("footer", "true");
-          sc.setAttribute("widget-type", "carousel");
-          sc.setAttribute("token", "697234a8e8a4cab8e944047a");
-          sc.setAttribute("apiurl", "https://server.onlinereviews.tech/api/v0.0.9");
-          sc.setAttribute("stats", "true");
-          sc.setAttribute("addReview", "true");
-          sc.setAttribute("profile-pic", "true");
-          sc.setAttribute("review-name", "true");
-          sc.setAttribute("positive-stars", "false");
-          sc.setAttribute("wl", "true");
-          sc.setAttribute("wlndig", "https://go.hifivestar.com/panglima-gadget");
-          sc.setAttribute("lang", "us");
-          sc.setAttribute("brandStyle", "%7B%22sidebar_background%22%3A%22%23000033%22%2C%22sidebar_text%22%3A%22white%22%2C%22brand_button_text_color%22%3A%22%23FFCC00%22%2C%22brand_main_color%22%3A%22%23242526%22%2C%22brand_button_border_radius%22%3A%2210px%22%2C%22brand_sidebar_text_color_opacity%22%3A%22%23ffffff1a%22%2C%22brand_button_hover%22%3A%22rgb(41%2C%2043%2C%2044)%22%2C%22brand_button_active%22%3A%22rgb(31%2C%2031%2C%2032)%22%2C%22brand_main_color_opacity%22%3A%22%232425261a%22%2C%22brand_font%22%3A%22Nunito%22%2C%22star_color%22%3A%22%23FFCC00%22%2C%22brand_main_background%22%3A%22%23fafbfb%22%2C%22brand_card_background%22%3A%22white%22%2C%22poweredByLink%22%3A%22https%3A%2F%2Fhifivestar.com%22%2C%22poweredicon%22%3A%22https%3A%2F%2Frecensioni-io-static-folder.s3.eu-central-1.amazonaws.com%2Fpublic_onlinereviews%2Fapp.hifivestar.com%2Fpowered.png%22%7D");
-          document.getElementById("wid_1785044321829").appendChild(sc);
-        })();
-        </script>
+        <div class="sk-ww-google-reviews" data-embed-id="25700457"></div>
+        <script src="https://widgets.sociablekit.com/google-reviews/widget.js" defer></script>
       </div>
     </div>
   </div>
