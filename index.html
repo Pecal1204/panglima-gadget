@@ -363,7 +363,11 @@
     .rebrand-arrow{font-size:12px;}
     .rebrand-desktop{display:none;}
     .rebrand-mobile{display:inline;white-space:nowrap;}
-    .nav-links{position:fixed;inset:108px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;
+    /* Anchored to the header's own bottom edge, not a fixed pixel offset. The
+       rebrand banner collapses to height 0 once you scroll past Services, so
+       the header is 108px tall at the top of the page and 64px after that —
+       a hardcoded top left the open menu floating 44px below the header. */
+    .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
       background:rgba(11,11,14,.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);
       padding:8px 18px 18px;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-12px);
       transition:opacity .2s ease,transform .28s ease,visibility 0s linear .28s;z-index:59;}
