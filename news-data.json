@@ -1,11 +1,27 @@
 {
-  "generated": "2026-07-27T08:47:42.650Z",
+  "generated": "2026-07-28T00:53:44.653Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Open Secure AI Alliance Ditubuhkan NVIDIA, Hugging Face, Dell dan Pemain Industri Untuk Keselamatan AI",
+      "link": "https://cms.amanz.my/2026574577/",
+      "excerpt": "NVIDIA menubuhkan Open Secure AI Alliance bersama Adobe, CrowdStrike, Hugging Face, Dell dan pelbagai lain pemain industri bagi membangunkan serta berkongsi alat keselamatan…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-07-27T13:22:34.000Z"
+    },
+    {
+      "title": "Infinix Plasma High Speed Hair Dryer Ditawarkan Di Malaysia Pada Harga RM269",
+      "link": "https://cms.amanz.my/2026574569/",
+      "excerpt": "Infinix Plasma High Speed Hair Dryer kini dilancarkan secara rasmi di Malaysia dengan rekaan minimalis serta moden yang memperlihatkan gaya ringkas. Direka khusus untuk memenuhi…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-07-27T10:32:07.000Z"
+    },
     {
       "title": "Samsung Galaxy Z TriFold Baharu Sedang Dibangunkan dan Akan Ditawarkan Ke Lebih Banyak Pasaran",
       "link": "https://cms.amanz.my/2026574542/",
@@ -85,25 +101,97 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-07-26T04:38:33.000Z"
-    },
-    {
-      "title": "Temubual – Flex Titanium Dan Bateri Silikon Karbon Menjadi Inovasi Terkini Siri Samsung Galaxy Z Fold8",
-      "link": "https://cms.amanz.my/2026574406/",
-      "excerpt": "Pengenalan siri Samsung Galaxy Z Fold8 menandakan satu langkah penting dalam dunia telefon pintar boleh lipat. Peranti ini hadir dengan skrin lebih nipis hasil inovasi…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-07-25T23:52:53.000Z"
-    },
-    {
-      "title": "Temubual – Samsung, Galaxy AI Dan Evolusi Telefon Pintar Boleh Lipat",
-      "link": "https://cms.amanz.my/2026574383/",
-      "excerpt": "Pasaran teknologi terus berkembang pesat seiring dengan kemajuan ekonomi digital. Dalam arus perubahan ini, Samsung muncul sebagai peneraju dengan visi menjadikan kecerdasan…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-07-25T20:15:46.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Samsung Galaxy S27 Pro and S27 Ultra battery capacities leak",
+      "link": "https://www.gsmarena.com/samsung_galaxy_s27_pro_and_s27_ultra_battery_capacities_leak-news-73896.php",
+      "excerpt": "A few days ago we heard some new details about the Galaxy S27 family's cameras, and now the same source is back with information about the devices' batteries. It's good news, by…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-07-27T23:31:02.000Z"
+    },
+    {
+      "title": "Apple releases iOS 26.6 and iPadOS 26.6 with tons of security fixes",
+      "link": "https://www.gsmarena.com/apple_releases_ios_266_and_ipados_266_with_tons_of_security_fixes-news-73897.php",
+      "excerpt": "Today Apple has released iOS 26.6 and iPadOS 26.6. Both of these come with a whopping 78 security fixes, so it's definitely recommended that you install them as soon as possible.…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-07-27T21:33:02.000Z"
+    },
+    {
+      "title": "Google will let your Pixel phone unlock your Pixel Watch",
+      "link": "https://www.gsmarena.com/google_will_let_your_pixel_phone_unlock_your_pixel_watch-news-73894.php",
+      "excerpt": "Google already lets you unlock your phone using a Pixel Watch through the Watch Unlock feature, but now it seems like the company is working on letting you do it the other way…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-07-27T20:01:02.000Z"
+    },
+    {
+      "title": "ChargEV rolls out Autocharge and more with new app: Early birds get RM10 launch reward",
+      "link": "https://soyacincau.com/2026/07/28/chargev-new-app-autocharge-rm10-voucher/",
+      "excerpt": "Yinson Greentech (YGT) has officially launched the latest iteration of the ChargEV mobile app. The Charge Point Operator (CPO) is rolling out the new version to Android and iOS…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-07-27T18:46:38.000Z"
+    },
+    {
+      "title": "Nothing denies plans to exit 12 global markets, says it's \"fake news\"",
+      "link": "https://www.gsmarena.com/nothing_denies_plans_to_exit_12_global_markets_says_its_fake_news-news-73895.php",
+      "excerpt": "Last week a report surfaced claiming that Nothing would be exiting \"12 or more\" global markets, following in the footsteps of OnePlus, the previous brand Nothing co-founder Carl…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-07-27T18:31:02.000Z"
+    },
+    {
+      "title": "Samsung’s 2027 flagship lineup to boast 8 members",
+      "link": "https://www.gsmarena.com/samsungs_2027_flagship_lineup_to_boast_8_members-news-73886.php",
+      "excerpt": "With the Galaxy Z8 series launch now in the rear-view mirror, rumors about the next generation of Samsung foldables are starting to creep in. And it seems next year’s lineup will…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-07-27T15:41:02.000Z"
+    },
+    {
+      "title": "Global pricing for the Redmi Note 17 series leaks",
+      "link": "https://www.gsmarena.com/global_pricing_for_the_redmi_note_17_series_leaks-news-73892.php",
+      "excerpt": "The Redmi Note 17 and Redmi Note 17 Pro were launched in China earlier this month, and we recently heard the former would land in India on August 6. But of course the range is…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-07-27T12:01:02.000Z"
+    },
+    {
+      "title": "Oppo officially confirms the A7 Pro Max with its largest battery ever",
+      "link": "https://www.gsmarena.com/oppo_officially_confirms_the_a7_pro_max_with_its_largest_battery_ever-news-73889.php",
+      "excerpt": "Last week a leak revealed that Oppo was working on the A7 Pro Max, a device that would have a massive 10,000 mAh battery. Then the phone seemingly ran Geekbench, revealing its…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-07-27T10:46:02.000Z"
+    },
+    {
+      "title": "Samsung Malaysia announces price hike for Galaxy A07 and A17",
+      "link": "https://soyacincau.com/2026/07/27/samsung-malaysia-announces-price-hike-for-galaxy-a07-and-a17/",
+      "excerpt": "Samsung Malaysia has announced a price revision which affects the pricing of its budget smartphones. If you’re thinking of getting the Galaxy A07 or the A17, be prepared to fork…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-07-27T10:24:27.000Z"
+    },
+    {
+      "title": "Poco M8 Power to debut next week with an 8,000mAh battery",
+      "link": "https://www.gsmarena.com/poco_m8_power_to_debut_next_week_with_an_8000mah_battery-news-73888.php",
+      "excerpt": "Recently, references to the Poco M8 Power were discovered in the latest HyperOS firmware, hinting at an imminent launch. Now, Poco India has officially revealed that the…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-07-27T09:47:02.000Z"
+    },
+    {
+      "title": "Tecno Pova 8 5G arrives in Malaysia with 8,000mAh battery, 144Hz display and Alive Matrix Display",
+      "link": "https://soyacincau.com/2026/07/27/tecno-pova-8-5g-malaysia-launch-price-brand-sale/",
+      "excerpt": "Tecno has officially launched the Pova 8 5G in Malaysia, a gaming-centric smartphone in an industrial design which looks heavily inspired by Nothing Phone. Among its key…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-07-27T09:05:56.000Z"
+    },
     {
       "title": "Honor Robot Phone to launch on August 12, unboxing video leaks",
       "link": "https://www.gsmarena.com/honor_robot_phone_to_launch_on_august_12_unboxing_video_leaks-news-73885.php",
@@ -111,94 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-07-27T07:16:02.000Z"
-    },
-    {
-      "title": "Huawei Pura 90s Pro Max review",
-      "link": "https://www.gsmarena.com/huawei_pura_90s_pro_max-review-2983.php",
-      "excerpt": "",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-27T06:05:51.000Z"
-    },
-    {
-      "title": "vivo X300 E is official with Zeiss-backed triple-rear cameras, Snapdragon 8 Gen 5 SoC",
-      "link": "https://www.gsmarena.com/vivo_x300_e_is_official_with_zeissbacked_triplerear_camera_snapdragon_8_gen_5_soc-news-73884.php",
-      "excerpt": "vivo’s latest X300 series phone has gone official in China. The vivo X300 E comes with a Snapdragon 8 Gen 5 chipset and features a Zeiss-backed triple-rear camera setup. It sports…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-27T05:41:02.000Z"
-    },
-    {
-      "title": "Flexi Parking deploys first EV chargers at Fraser’s Hill",
-      "link": "https://soyacincau.com/2026/07/27/flexiparking-silverpark-resort-ev-charger-frasers-hill/",
-      "excerpt": "There’s no petrol station at Fraser’s Hill but there’s now an EV charging station at the hill resort. Flexi Parking has deployed not one, not two but a total of 6x EV Charge…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-07-27T04:38:59.000Z"
-    },
-    {
-      "title": "Samsung One UI 9 can permanently lock your phone after 13 wrong PIN attempts",
-      "link": "https://soyacincau.com/2026/07/27/samsung-one-ui-9-permanently-lock-phone-factory-reset-after-13-wrong-pin-attempts/",
-      "excerpt": "Samsung is introducing a much stricter lock screen security policy with its latest One UI 9 that ships out of the box with the latest Galaxy Z Fold 8, Z Fold 8 Ultra and Z Flip 8.…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-07-27T02:41:43.000Z"
-    },
-    {
-      "title": "Xiaomi Smart Band 10 Pro review",
-      "link": "https://www.gsmarena.com/xiaomi_smart_band_10_pro_review-news-73491.php",
-      "excerpt": "Introduction, unboxing This is the new Xiaomi Smart Band 10 Pro, which launched globally at the end of May. You can look at it as a successor to the Smart Band 9 Pro (review…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-27T01:41:02.000Z"
-    },
-    {
-      "title": "Apple wants to save money on the iPhone 18 Pro Max's screen",
-      "link": "https://www.gsmarena.com/apple_wants_to_save_money_on_the_iphone_18_pro_maxs_screen-news-73877.php",
-      "excerpt": "According to a new rumor out of Korea, Apple is trying to offset some of the higher costs of memory and storage for its upcoming iPhone 18 Pro Max by getting cheaper displays. In…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-26T21:59:02.000Z"
-    },
-    {
-      "title": "Samsung Galaxy S25 series could get One UI 9 beta soon",
-      "link": "https://www.gsmarena.com/samsung_galaxy_s25_series_one_ui_9_beta_release_soon-news-73883.php",
-      "excerpt": "Samsung is internally testing Android 17-based One UI 9 for several Galaxy devices, including the Galaxy S25 series; however, the Korean company has released One UI 9 beta only…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-26T18:51:02.000Z"
-    },
-    {
-      "title": "Samsung Galaxy Z Fold8 and Z Fold8 Ultra launch, Week 30 in review",
-      "link": "https://www.gsmarena.com/samsung_galaxy_z_fold8_and_z_fold8_ultra_launch_week_30_in_review-news-73882.php",
-      "excerpt": "Samsung unveiled its 2026 foldable lineup and the book-style family now features two distinct models - the shorter and wider (4:3) Galaxy Z Fold8, aimed at media consumption and…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-26T15:37:02.000Z"
-    },
-    {
-      "title": "Deals: pre-orders for the Galaxy Z Fold8, Z Fold8 Ultra and Z Flip8 are a go",
-      "link": "https://www.gsmarena.com/deals_preorders_for_the_galaxy_z_fold8_z_fold8_ultra_and_z_flip8_are_a_go-news-73866.php",
-      "excerpt": "This week, Samsung unveiled its next generation foldables, which included the first wide foldable in Europe (the Huawei Pura X Max never did launch on the Old Continent). The…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-26T12:22:02.000Z"
-    },
-    {
-      "title": "Weekly poll: Will you buy a Galaxy Z Fold8, Z Fold8 Ultra or a Z Flip8?",
-      "link": "https://www.gsmarena.com/weekly_poll_will_you_buy_a_galaxy_z_fold8_z_fold8_ultra_or_a_z_flip8-news-73847.php",
-      "excerpt": "Samsung believes that foldables are the future – and, perhaps, that wide models like the new Galaxy Z Fold8 are the future of foldables. What do you think? Starting with the…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-26T09:09:02.000Z"
-    },
-    {
-      "title": "vivo X300 E appears in an official trailer ahead of launch, processor confirmed",
-      "link": "https://www.gsmarena.com/vivo_x300_e_processor_confirmed-news-73881.php",
-      "excerpt": "vivo will unveil the X300 E as the newest member of the X300 series in China on July 27. vivo already revealed the X300 E's design, and now it has posted a video trailer, showing…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-26T05:57:02.000Z"
     }
   ]
 }
