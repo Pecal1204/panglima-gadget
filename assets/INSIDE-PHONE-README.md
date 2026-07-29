@@ -54,14 +54,18 @@ All in `assets/inside-phone-data.js`:
   memory, or at most 2 reported CPU cores also use the fallback. The static
   teardown contains the same 12 component cards and CTAs.
 - **Performance**: Three.js and the 4.5 MB exterior GLB begin loading only when
-  the section is within 1200 px of the viewport. Rendering pauses off-screen,
-  pixel ratio is capped, and capable phones retain the interactive experience
-  with mobile-specific antialiasing and geometry detail.
+  the section is within 1200 px of the viewport. Rendering pauses off-screen.
+  Mobile pixel density, texture size, and anisotropy are capped to reduce GPU
+  memory pressure while capable phones retain antialiasing and geometry detail.
 - **Mobile scrolling**: touch gestures always remain native page
   scroll/pinch-zoom gestures; 3D drag rotation is limited to mouse and pen.
-  The mobile sticky sequence uses stable small-viewport sizing so browser
-  toolbar changes do not jump the timeline, and the component sheet allows
-  scroll chaining.
+  The stage fills the dynamic visible viewport, while the timeline is measured
+  against a stable small-viewport baseline. Android browser toolbar changes no
+  longer move the progress calculation, and the component sheet allows scroll
+  chaining.
+- **Android resilience**: mobile overlays use opaque, non-blurred surfaces to
+  avoid backdrop-filter flicker. A lost WebGL context stops rendering and shows
+  the static fallback instead of leaving a frozen or black canvas.
 ## Outer-to-inner iPhone 11 polish (2026-07-28)
 
 The chapter no longer dissolves the supplied phone into an unrelated generic

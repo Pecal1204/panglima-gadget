@@ -160,13 +160,30 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
   canvas.className = "ip-canvas";
   els.canvasWrap.appendChild(canvas);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !isMobile || mobileHighQuality, alpha: true, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2));
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: !isMobile || mobileHighQuality,
+    alpha: !isMobile,
+    powerPreference: isMobile ? "default" : "high-performance"
+  });
+  const pixelRatioCap = isMobile ? (mobileHighQuality ? 1.35 : 1.15) : 2;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, pixelRatioCap));
+  renderer.setClearColor(0x090a0d, isMobile ? 1 : 0);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.12;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.shadowMap.enabled = !isMobile;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  let contextLostHandled = false;
+  canvas.addEventListener("webglcontextlost", event => {
+    event.preventDefault();
+    if (contextLostHandled) return;
+    contextLostHandled = true;
+    console.warn("[inside-phone] WebGL context lost - switching to the static fallback.");
+    stop();
+    showFallback("context-lost");
+  }, false);
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
@@ -241,6 +258,32 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
     if (els.loading) els.loading.classList.add("is-hidden");
   }
 
+
+  const constrainedReferenceTextures = new Set();
+  function constrainReferenceTexture(texture) {
+    if (!isMobile || !texture || constrainedReferenceTextures.has(texture)) return;
+    constrainedReferenceTextures.add(texture);
+    const image = texture.image;
+    const width = image && (image.naturalWidth || image.videoWidth || image.width);
+    const height = image && (image.naturalHeight || image.videoHeight || image.height);
+    const maxSide = 1024;
+    if (!width || !height || Math.max(width, height) <= maxSide) return;
+    const scale = maxSide / Math.max(width, height);
+    const reduced = document.createElement("canvas");
+    reduced.width = Math.max(1, Math.round(width * scale));
+    reduced.height = Math.max(1, Math.round(height * scale));
+    const context = reduced.getContext("2d");
+    if (!context) return;
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = "high";
+    try {
+      context.drawImage(image, 0, 0, reduced.width, reduced.height);
+      texture.image = reduced;
+      texture.needsUpdate = true;
+    } catch (error) {
+      console.warn("[inside-phone] Could not reduce a reference texture.", error);
+    }
+  }
   function prepareReferenceMaterial(material, bucket) {
     const mat = material.clone();
     const opaque = !(mat.transparent && mat.opacity < 0.98);
@@ -323,7 +366,10 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
       const mats = Array.isArray(o.material) ? o.material : [o.material];
       mats.forEach(mat => {
         for (const key of ["map", "normalMap", "roughnessMap", "metalnessMap", "emissiveMap", "alphaMap", "aoMap"]) {
-          if (mat[key]) mat[key].anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+          if (mat[key]) {
+            constrainReferenceTexture(mat[key]);
+            mat[key].anisotropy = Math.min(isMobile ? 4 : 8, renderer.capabilities.getMaxAnisotropy());
+          }
         }
       });
       const opaque = mats.every(mat => !(mat.transparent && mat.opacity < 0.98));
@@ -1030,9 +1076,11 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
   if (siteHeader && controlsEl) {
     const syncHeader = () => {
       const visible = !siteHeader.classList.contains("header-hidden");
-      controlsEl.classList.toggle("shifted", visible);
+      controlsEl.classList.toggle("shifted", mq.matches || visible);
     };
     new MutationObserver(syncHeader).observe(siteHeader, { attributes: true, attributeFilter: ["class"] });
+    if (mq.addEventListener) mq.addEventListener("change", syncHeader);
+    else if (mq.addListener) mq.addListener(syncHeader);
     syncHeader();
   }
 
