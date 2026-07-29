@@ -59,7 +59,10 @@
   position:sticky;top:0;height:100vh;height:100svh;
   overflow:hidden;display:flex;align-items:center;justify-content:center;
 }
-#inside-phone .ip-canvas-wrap{position:absolute;inset:0;z-index:1;}
+#inside-phone .ip-canvas-wrap{
+  position:absolute;inset:0;z-index:1;
+  touch-action:pan-y pinch-zoom;
+}
 #inside-phone .ip-canvas-wrap::after{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(ellipse at 50% 47%,transparent 40%,rgba(4,5,8,.18) 74%,rgba(4,5,8,.42) 100%);
@@ -305,7 +308,8 @@
      "More details" — the 3D scene keeps most of the screen. */
   #inside-phone .ip-card{
     top:auto;bottom:0;right:0;left:0;width:100%;transform:translateY(20px);
-    border-radius:16px 16px 0 0;max-height:44vh;overflow:auto;overscroll-behavior:contain;
+    border-radius:16px 16px 0 0;max-height:44vh;overflow:auto;
+    overscroll-behavior-y:auto;-webkit-overflow-scrolling:touch;
     padding:10px 18px 12px;
     transition:opacity .35s ease,transform .35s ease,max-height .3s ease;
   }
@@ -412,7 +416,10 @@
   #inside-phone .ip-picker{display:none;}
   #inside-phone .ip-device-tag{bottom:auto;top:auto;left:14px;bottom:12px;}
   #inside-phone .ip-hud{display:none;}
-  #inside-phone .ip-scroller{height:660vh;}
+  /* Keep the mobile story concise and base its length on the stable small
+     viewport. Plain vh changes as the browser toolbar opens/closes, which can
+     move the sticky scene and make progress jump mid-swipe. */
+  #inside-phone .ip-scroller{height:520vh;height:520svh;}
   /* The header is ~91px on mobile after the banner/nav shrink; keep the
      floating controls clear of it. Scoped here so the desktop offset, which
      answers to a 108px header, is untouched. */

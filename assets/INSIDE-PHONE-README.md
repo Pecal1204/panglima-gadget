@@ -57,6 +57,11 @@ All in `assets/inside-phone-data.js`:
   the section is within 1200 px of the viewport. Rendering pauses off-screen,
   pixel ratio is capped, and capable phones retain the interactive experience
   with mobile-specific antialiasing and geometry detail.
+- **Mobile scrolling**: touch gestures always remain native page
+  scroll/pinch-zoom gestures; 3D drag rotation is limited to mouse and pen.
+  The mobile sticky sequence uses stable small-viewport sizing so browser
+  toolbar changes do not jump the timeline, and the component sheet allows
+  scroll chaining.
 ## Outer-to-inner iPhone 11 polish (2026-07-28)
 
 The chapter no longer dissolves the supplied phone into an unrelated generic

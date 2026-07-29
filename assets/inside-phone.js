@@ -817,7 +817,8 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
 
   function computeProgress() {
     const r = els.scroller.getBoundingClientRect();
-    const denom = els.scroller.offsetHeight - window.innerHeight;
+    const viewportH = els.stage.clientHeight || window.innerHeight;
+    const denom = els.scroller.offsetHeight - viewportH;
     if (denom <= 0) return 0;
     return clamp(-r.top / denom, 0, 1);
   }
@@ -1038,9 +1039,9 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
   /* ======================================================================
      INTERACTION
      ==================================================================== */
-  /* drag rotation (enabled once the phone starts opening).
-     touch-action: pan-y pinch-zoom arbitrates scroll/zoom; a gesture the browser
-     hands to us is ours for its whole duration (pointercancel ends the others). */
+  /* Drag rotation is for precise mouse/pen input. Touch remains dedicated to
+     native page scrolling and pinch zoom: pointer capture on a full-screen
+     sticky canvas can otherwise make a vertical swipe feel trapped on mobile. */
   let dragging = false, lastX = 0, lastY = 0, dragPointer = null, dragDist = 0;
   function canDrag() { return progress >= P.handoffEnd; }
 
@@ -1048,7 +1049,7 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
     dragDist = 0;
     if (dragging) { endDrag({ pointerId: dragPointer }); return; } // second finger = pinch, not drag
     if (!canDrag()) return;
-    if (e.pointerType === "touch" && progress < P.explodeEnd) return; // keep vertical scrolling until fully open
+    if (e.pointerType === "touch") return;
     dragging = true; dragPointer = e.pointerId; lastX = e.clientX; lastY = e.clientY; dragDist = 0;
     els.canvasWrap.classList.add("ip-grabbing");
     try { els.canvasWrap.setPointerCapture(e.pointerId); } catch (_) {}
@@ -1106,7 +1107,8 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
   function scrollToP(p, instant) {
     const rect = els.scroller.getBoundingClientRect();
     const top = window.scrollY + rect.top;
-    const max = els.scroller.offsetHeight - window.innerHeight;
+    const viewportH = els.stage.clientHeight || window.innerHeight;
+    const max = els.scroller.offsetHeight - viewportH;
     window.scrollTo({ top: top + p * max, behavior: instant ? "auto" : "smooth" });
   }
   const tourP = i => P.tourStart + (i + 0.5) / tourComps.length * (P.tourEnd - P.tourStart);
@@ -1156,9 +1158,12 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
   function isInView() { const r = els.section.getBoundingClientRect(); return r.bottom > 0 && r.top < window.innerHeight; }
 
   /* ---- resize ---- */
+  let lastResizeW = 0, lastResizeH = 0;
   function resize() {
     const w = els.stage.clientWidth || els.section.clientWidth;
     const h = els.stage.clientHeight || window.innerHeight;
+    if (w === lastResizeW && h === lastResizeH) return;
+    lastResizeW = w; lastResizeH = h;
     stageW = w; stageH = h;
     renderer.setSize(w, h, false);
     camera.aspect = w / h; camera.updateProjectionMatrix();
