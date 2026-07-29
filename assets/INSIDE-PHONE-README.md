@@ -48,16 +48,15 @@ All in `assets/inside-phone-data.js`:
   once fully exploded so page scrolling is never hijacked), hover highlight,
   click/tap a part → jumps to its card, side picker list (desktop), *Reassemble*
   and *All Components* buttons.
-- **States**: loader ("Loading iPhone 11 model…"), error → fallback,
-  `prefers-reduced-motion` → fallback, no WebGL → fallback, no ES modules →
-  fallback. The fallback is a static exploded schematic + all 12 cards with the
-  same symptoms/causes/repair content and CTAs. The 3D canvas is `aria-hidden`;
-  all information is always available as text.
-- **Performance**: the 4.5 MB exterior GLB is loaded once and remains the
-  authoritative shell; its display and body visibility are staged during the
-  handoff. Rendering pauses off-screen, pixel ratio is capped, and mobile uses
-  capability-based antialiasing and geometry detail.
-
+- **States**: loader ("Loading iPhone 11 model…"), errors, reduced motion,
+  unavailable WebGL, and old browsers use the accessible fallback. Mobile
+  devices using Data Saver, a 2G-class connection, at most 2 GB reported
+  memory, or at most 2 reported CPU cores also use the fallback. The static
+  teardown contains the same 12 component cards and CTAs.
+- **Performance**: Three.js and the 4.5 MB exterior GLB begin loading only when
+  the section is within 1200 px of the viewport. Rendering pauses off-screen,
+  pixel ratio is capped, and capable phones retain the interactive experience
+  with mobile-specific antialiasing and geometry detail.
 ## Outer-to-inner iPhone 11 polish (2026-07-28)
 
 The chapter no longer dissolves the supplied phone into an unrelated generic
@@ -92,12 +91,13 @@ it does not claim manufacturer tolerances or replace a service manual.
 The exterior GLB is preserved byte-for-byte and receives only scene-level
 material, light and visibility treatment at runtime. Procedural parts use
 chamfered geometry and deterministic generated canvas materials, so there are no
-additional teardown image downloads. Higher-capability mobile devices retain
-antialiasing and fuller detail; constrained devices use reduced curve segments
-and a lower pixel-ratio cap. Desktop adds real-time shadows while all layouts
-retain a lightweight contact shadow. All 12 guided-tour card IDs are checked
-against exactly one matching 3D assembly.
-
+additional teardown image downloads. The heavy Three.js imports and exterior
+GLB stay deferred until the section is near the viewport. Higher-capability
+mobile devices retain antialiasing and fuller detail; constrained devices use
+reduced geometry and pixel ratio. Data Saver, 2G-class, and explicitly
+low-capability mobile devices receive the accessible static teardown instead.
+Desktop adds real-time shadows while every layout retains a lightweight contact
+shadow. All 12 guided-tour card IDs are checked against one matching 3D assembly.
 ## Browser notes
 - Chrome/Edge (Blink): native importmap, tested above.
 - Firefox 108+/Safari 16.4+: native importmap support; older versions use the

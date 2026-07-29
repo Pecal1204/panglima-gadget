@@ -14,6 +14,19 @@
 
 const IP = window.PG_INSIDE;
 const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const MOBILE = window.matchMedia("(max-width: 820px)").matches;
+const CONNECTION = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+const REPORTED_CORES = Number(navigator.hardwareConcurrency);
+const REPORTED_MEMORY = Number(navigator.deviceMemory);
+const SAVE_DATA = !!(CONNECTION && CONNECTION.saveData);
+const SLOW_CONNECTION = !!(CONNECTION && /^(slow-)?2g$/.test(CONNECTION.effectiveType || ""));
+const LOW_CAPABILITY_MOBILE = MOBILE && (
+  (Number.isFinite(REPORTED_MEMORY) && REPORTED_MEMORY <= 2) ||
+  (Number.isFinite(REPORTED_CORES) && REPORTED_CORES <= 2)
+);
+let bootStarted = false;
+let bootCancelled = false;
+let loadObserver = null;
 
 /* ---- 0. Capability gate ------------------------------------------------- */
 function hasWebGL() {
@@ -24,32 +37,94 @@ function hasWebGL() {
   } catch (e) { return false; }
 }
 
+function setLoadState(state) {
+  const section = document.getElementById("inside-phone");
+  if (section) section.setAttribute("data-ip-load-state", state);
+}
+
+function showFallback(reason) {
+  bootCancelled = true;
+  if (loadObserver) loadObserver.disconnect();
+  setLoadState("fallback");
+  IP.renderFallback(reason);
+}
+
+function scheduleBoot() {
+  if (IP.build) IP.build();
+  const section = document.getElementById("inside-phone");
+  if (!section) {
+    showFallback("no-shell");
+    return;
+  }
+
+  setLoadState("waiting");
+  if (!("IntersectionObserver" in window)) {
+    boot();
+    return;
+  }
+
+  /* Start roughly two mobile screens before the section. This preserves the
+     seamless entrance while keeping Three.js and the 4.5 MB GLB off the
+     critical path for visitors who never reach the teardown. */
+  loadObserver = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    loadObserver.disconnect();
+    boot();
+  }, { rootMargin: "1200px 0px" });
+  loadObserver.observe(section);
+}
+
 if (!IP) {
   /* data/content script failed — nothing we can do */
-} else if (REDUCED || !hasWebGL()) {
-  IP.renderFallback(REDUCED ? "reduced-motion" : "no-webgl");
+} else if (REDUCED) {
+  showFallback("reduced-motion");
+} else if (SAVE_DATA) {
+  showFallback("save-data");
+} else if (SLOW_CONNECTION) {
+  showFallback("slow-connection");
+} else if (LOW_CAPABILITY_MOBILE) {
+  showFallback("low-capability");
+} else if (!hasWebGL()) {
+  showFallback("no-webgl");
 } else {
-  boot();
+  scheduleBoot();
 }
 
 async function boot() {
+  if (bootStarted || bootCancelled) return;
+  bootStarted = true;
+  if (loadObserver) loadObserver.disconnect();
+  setLoadState("loading");
+
+  const loadTimeout = window.setTimeout(() => {
+    if (!bootCancelled) showFallback("load-timeout");
+  }, 30000);
+
   let THREE, RoomEnvironment, GLTFLoader;
   try {
     THREE = await import("three");
     ({ RoomEnvironment } = await import("three/addons/environments/RoomEnvironment.js"));
-    ({ GLTFLoader } = await import("three/addons/loaders/GLTFLoader.js"));  } catch (err) {
+    ({ GLTFLoader } = await import("three/addons/loaders/GLTFLoader.js"));
+  } catch (err) {
     console.warn("[inside-phone] three.js failed to load — showing fallback.", err);
-    IP.renderFallback("load-error");
+    window.clearTimeout(loadTimeout);
+    showFallback("load-error");
+    return;
+  }
+  if (bootCancelled) {
+    window.clearTimeout(loadTimeout);
     return;
   }
   try {
     run(THREE, RoomEnvironment, GLTFLoader);
+    setLoadState("ready");
   } catch (err) {
     console.error("[inside-phone] init error — showing fallback.", err);
-    IP.renderFallback("init-error");
+    showFallback("init-error");
+  } finally {
+    window.clearTimeout(loadTimeout);
   }
 }
-
 /* ========================================================================= */
 function run(THREE, RoomEnvironment, GLTFLoader) {
   if (IP.build) IP.build();            // ensure DOM refs exist (module runs before DOMContentLoaded)
