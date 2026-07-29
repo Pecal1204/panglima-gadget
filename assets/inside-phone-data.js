@@ -52,14 +52,13 @@
       openingTitle: "Every Part Has a Purpose",
       openingDesc:  "Scroll to explore what happens inside your smartphone — and discover the warning signs when an important component begins to fail.",
       scrollHint:   "Scroll to inspect",
-      loading:      "Preparing device diagnostics…",
-      deviceName:   "Panglima X1",
-      deviceTag:    "Reference teardown model",
-      /* Shown under the section heading. The X1 is our own illustrative model:
-         it follows the layout common to 2019-era flagships so the guide applies
-         broadly, but it is not a diagram of any particular manufacturer's phone
-         and no real model is implied. */
-      deviceNote:   "The Panglima X1 is an illustrative model built for this guide. Layouts vary between manufacturers and models — bring your device in and we will check the actual hardware.",
+      loading:      "Loading iPhone 11 model…",
+      deviceName:   "iPhone 11 Reference",
+      deviceTag:    "iPhone 11 component teardown",
+      /* Shown under the section heading. Exterior proportions use the supplied
+         iPhone 11 GLB; the teardown is an original component reconstruction
+         aligned to the supplied exploded-view reference. */
+      deviceNote:   "The assembled exterior uses the supplied iPhone 11 3D model. Its teardown follows an iPhone 11 component layout rebuilt from the supplied reference for repair education — it is not an official Apple service diagram.",
 
       finalTitle:   "Not Sure Which Part Is Failing?",
       finalDesc:    "Our technicians can diagnose screen, battery, camera, charging, audio and motherboard problems before recommending the right repair.",
@@ -69,8 +68,8 @@
 
       cardCta:      "Check Repair Options",
       skip:         "Skip 3D exploration",
-      reassemble:   "Reassemble Phone",
-      viewAll:      "View All Components"
+      reassemble:   "Reassemble",
+      viewAll:      "All Components"
     },
 
     /* SEO supporting paragraph — written naturally, not keyword-stuffed. */
@@ -85,9 +84,9 @@
      ------------------------------------------------------------------------- */
   var CARDS = {
     display: {
-      name: "OLED Display Panel",
+      name: "Liquid Retina LCD Assembly",
       tag: "Screen replacement",
-      spec: "One sealed screen unit: the glass, the touch layer and the picture layer are bonded into a single part.",
+      spec: "A 6.1-inch backlit LCD assembly: cover glass, touch layer and Liquid Retina display are bonded into one service part.",
       function: "Shows everything you look at and picks up every tap, swipe and long press.",
       symptoms: "Cracked or shattered glass, black or white patches, coloured lines down the screen, flickering, areas that no longer respond to touch, the screen tapping or typing by itself, or a screen that stays completely dark while the phone still rings and vibrates.",
       causes: "Drops and knocks, pressure while the phone is in a pocket or bag, liquid seeping under the panel, or a connector that has worked loose after an earlier repair.",
@@ -96,16 +95,16 @@
     camera: {
       name: "Rear Dual Camera Module",
       tag: "Camera repair",
-      spec: "Two rear cameras on one shared bracket — a steadied main camera and a wide-view camera.",
+      spec: "Two rear cameras in a vertical stack — a stabilised wide camera and an ultra-wide camera on one shared bracket.",
       function: "Takes your photos and videos: one camera for everyday shots and a second that fits much more of the scene into the frame.",
       symptoms: "Blurry or hazy photos, a rattle you can hear when the phone moves, focus that hunts back and forth, a black preview from one of the two cameras, or spots and flare in every shot.",
       causes: "Drops that knock the steadying mechanism out of alignment — this is usually what the rattle is — scratched or cracked lens covers, dust and moisture inside the barrels, or a ribbon cable that has slipped out of its socket.",
       repair: "Cleaning and lens-cover replacement where the trouble is on the outside of the glass; otherwise the pair is replaced as one unit, since both cameras share a bracket and cannot be separated."
     },
     battery: {
-      name: "Battery",
+      name: "3110 mAh Battery",
       tag: "Battery replacement",
-      spec: "A single rechargeable pouch cell, about 4 mm thick, held down by adhesive strips.",
+      spec: "A 3110 mAh single-cell rechargeable lithium-ion pouch, held to the rear housing by stretch-release adhesive strips.",
       function: "Stores and supplies the energy that runs the whole phone between charges.",
       symptoms: "Charge dropping far faster than it used to, shutdowns while the meter still shows power left, warmth when the phone is doing nothing, slow charging, or a screen or back panel that has begun to lift.",
       causes: "Normal ageing across hundreds of charge cycles, long spells in heat such as a parked car, poor-quality chargers and cables, or a knock that has damaged the cell.",
@@ -122,7 +121,7 @@
       repair: "Fault tracing down to individual components and microsoldering — repair under a microscope — by a board-repair technician. The two stacked boards are only separated when the fault sits on the hidden inner face."
     },
     chargingport: {
-      name: "Charging Port Assembly",
+      name: "Charging Port & Lower Flex",
       tag: "Charging-port repair",
       spec: "One wide ribbon cable that runs the full width of the phone's bottom edge.",
       function: "Carries power in when you plug a cable in, moves files to and from a computer, and holds the microphone you speak into on calls.",

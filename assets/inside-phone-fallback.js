@@ -167,7 +167,7 @@
     }
     setText(".ip-intro .ip-eyebrow", C.copy.eyebrow);
     setText("#ip-title", C.copy.openingTitle);
-    setText(".ip-intro p", C.copy.openingDesc);
+
     setText(".ip-hint span:last-child", C.copy.scrollHint);
     setText(".ip-device-tag .n", C.copy.deviceName);
     setText(".ip-device-tag .t", C.copy.deviceTag);

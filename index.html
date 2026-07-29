@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500..900&family=Inter:wght@400..600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/inside-phone.css">
+<link rel="stylesheet" href="assets/inside-phone.css?v=20260728-outer-inner-r2">
 
 <!-- Local business structured data — powers Google's local/map results -->
 <script type="application/ld+json">
@@ -138,6 +138,7 @@
     font-size:12.5px;font-weight:600;letter-spacing:.15px;text-align:center;
     overflow:hidden;transition:height .3s ease,opacity .25s ease,transform .3s ease;}
   .rebrand-banner.rb-hidden{height:0;opacity:0;transform:translateY(-100%);pointer-events:none;}
+  .rebrand-banner[hidden],html.rebrand-seen .rebrand-banner{display:none!important;}
   .legacy-logo{display:inline-flex;align-items:center;gap:6px;padding-right:9px;border-right:1px solid rgba(255,255,255,.35);
     white-space:nowrap;}
   .legacy-logo img{height:27px;width:auto;display:block;}
@@ -448,6 +449,18 @@
   }
 
 </style>
+<script>
+  /* Version this key when a genuinely new shop announcement should be shown. */
+  (function(){
+    try {
+      if(window.localStorage.getItem("pg-rebrand-2026-v1") === "seen"){
+        document.documentElement.classList.add("rebrand-seen");
+      }
+    } catch(_error) {
+      /* Storage can be unavailable in strict private browsing; show once per load. */
+    }
+  })();
+</script>
 </head>
 <body>
 
@@ -560,13 +573,13 @@
         <div class="ip-eyebrow">Inside Your Smartphone</div>
         <h2 id="ip-title">Every Part Has a Purpose</h2>
         <p>Scroll to explore what happens inside your smartphone — and discover the warning signs when an important component begins to fail.</p>
-        <p class="ip-note">The Panglima X1 is an illustrative model built for this guide. Layouts vary between manufacturers and models — bring your device in and we will check the actual hardware.</p>
+        <p class="ip-note">The assembled exterior uses the supplied iPhone 11 3D model. Its teardown follows an iPhone 11 component layout rebuilt from the supplied reference for repair education — it is not an official Apple service diagram.</p>
         <div class="ip-hint"><span class="ip-mouse" aria-hidden="true"></span><span>Scroll to inspect</span></div>
       </div>
 
       <div class="ip-device-tag" id="ip-device-tag" aria-hidden="true">
-        <div class="n">Panglima X1</div>
-        <div class="t">Reference teardown model</div>
+        <div class="n">iPhone 11 Reference</div>
+        <div class="t">iPhone 11 component teardown</div>
       </div>
 
       <div class="ip-hud" id="ip-hud" aria-hidden="true">
@@ -577,11 +590,11 @@
       <div class="ip-controls" id="ip-controls">
         <button class="ip-btn" id="ip-reassemble" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-          Reassemble Phone
+          Reassemble
         </button>
         <button class="ip-btn" id="ip-viewall" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          View All Components
+          All Components
         </button>
       </div>
 
@@ -591,7 +604,7 @@
 
       <div class="ip-loading" id="ip-loading">
         <div class="ip-spinner" aria-hidden="true"></div>
-        <div class="lt">Preparing device diagnostics…</div>
+        <div class="lt">Loading iPhone 11 model…</div>
         <div class="lb" aria-hidden="true"><i></i></div>
       </div>
     </div>
@@ -607,7 +620,7 @@
     <div class="ip-fb-diagram" aria-hidden="true">
       <svg viewBox="0 0 300 220" role="img">
         <g>
-          <rect class="lyr glass" x="60" y="8"   width="180" height="16" rx="6"/><text x="250" y="20">Front glass &amp; OLED</text>
+          <rect class="lyr glass" x="60" y="8"   width="180" height="16" rx="6"/><text x="250" y="20">Front glass &amp; LCD</text>
           <rect class="lyr"       x="60" y="34"  width="180" height="16" rx="6"/><text x="250" y="46">Mid-frame</text>
           <rect class="lyr"       x="60" y="60"  width="180" height="16" rx="6"/><text x="250" y="72">Motherboard</text>
           <rect class="lyr batt"  x="60" y="86"  width="180" height="22" rx="6"/><text x="250" y="100">Battery</text>
@@ -635,6 +648,7 @@
     </div>
     <div class="ip-trust">Professional diagnostics • Quality replacement parts • Transparent repair advice</div>
     <p class="ip-seo">Panglima Gadget provides professional phone repair in Malaysia with honest smartphone diagnostics — from screen replacement and battery replacement to camera repair, charging-port repair, speaker repair and board-level motherboard repair. We identify the real fault before recommending a fix.</p>
+    <p class="ip-model-credit">3D exterior: <a href="https://sketchfab.com/3d-models/iphone-11-558b8e99bbd4483b9bb2182d8dc72de2" target="_blank" rel="noopener">“Iphone 11” by atomle</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener">CC BY 4.0</a></p>
   </div>
 </section>
 
@@ -790,37 +804,63 @@
     }, {passive:true});
   })();
 
-  /* ============ Rebrand banner: top-of-page only ============ */
-  /* Visible only near the very top of the page. Hides (slide-up) as soon as
-     the Services section reaches the nav bar, and — unlike the nav header
-     above — does NOT reappear on scroll-up; only scrolling all the way back
-     to the top brings it back. */
+  /* ============ Rebrand banner: one-time announcement ============ */
+  /* The notice is a first-impression message. After 120px of cumulative scroll
+     it collapses completely, is marked as seen, and never returns on scroll-up.
+     Change the versioned key for a genuinely new future announcement. */
   (function(){
     var banner = document.querySelector(".rebrand-banner");
-    var navEl = document.querySelector(".nav");
-    var servicesEl = document.getElementById("services");
-    if(!banner || !navEl || !servicesEl) return;
+    if(!banner) return;
+
+    var storageKey = "pg-rebrand-2026-v1";
+    var dismissDistance = 120;
+    var startY = window.pageYOffset || 0;
+    var lastY = startY;
+    var travelled = 0;
     var dismissed = false;
     var ticking = false;
-    function update(){
-      var navHeight = navEl.offsetHeight;
-      var servicesTop = servicesEl.getBoundingClientRect().top;
-      var y = window.pageYOffset || 0;
-      if(!dismissed && servicesTop <= navHeight){
-        dismissed = true;
-      } else if(dismissed && y <= 2){
-        dismissed = false;
+
+    try {
+      if(window.localStorage.getItem(storageKey) === "seen"){
+        banner.hidden = true;
+        document.documentElement.classList.add("rebrand-seen");
+        return;
       }
-      banner.classList.toggle("rb-hidden", dismissed);
+    } catch(_error) {
+      /* Keep the same in-page behaviour when persistent storage is unavailable. */
+    }
+
+    function dismiss(){
+      if(dismissed) return;
+      dismissed = true;
+      banner.classList.add("rb-hidden");
+      banner.setAttribute("aria-hidden", "true");
+      try { window.localStorage.setItem(storageKey, "seen"); } catch(_error) {}
+      window.setTimeout(function(){
+        banner.hidden = true;
+        document.documentElement.classList.add("rebrand-seen");
+      }, 340);
+    }
+
+    function update(){
+      var y = window.pageYOffset || 0;
+      travelled += Math.abs(y - lastY);
+      lastY = y;
+      if(y >= dismissDistance || travelled >= dismissDistance) dismiss();
       ticking = false;
     }
-    update(); // correct state immediately for deep links / reloads mid-page
-    window.addEventListener("scroll", function(){
-      if(!ticking){ window.requestAnimationFrame(update); ticking = true; }
-    }, {passive:true});
-    window.addEventListener("resize", update);
-  })();
 
+    if(startY >= dismissDistance){
+      dismiss();
+    } else {
+      window.addEventListener("scroll", function(){
+        if(!ticking && !dismissed){
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, {passive:true});
+    }
+  })();
   /* ============ Config ============ */
   var WHATSAPP_NUMBER = "60105339970";
 
@@ -1055,11 +1095,11 @@
 
 <!-- ===== INSIDE YOUR SMARTPHONE — scripts ===== -->
 <!-- 1. Editable content/config (plain script, always loads)               -->
-<script src="assets/inside-phone-data.js"></script>
+<script src="assets/inside-phone-data.js?v=20260728-outer-inner-r2"></script>
 <!-- 2. Content + accessible fallback builder (plain script)               -->
-<script src="assets/inside-phone-fallback.js"></script>
+<script src="assets/inside-phone-fallback.js?v=20260728-outer-inner-r2"></script>
 <!-- 3. importmap polyfill for older Safari/Firefox (native browsers skip) -->
-<script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js" crossorigin="anonymous"></script>
 <!-- 4. Pinned three.js import map                                          -->
 <script type="importmap">
 {
@@ -1070,7 +1110,7 @@
 }
 </script>
 <!-- 5. Real-time 3D experience (module). No-module browsers use the fallback below. -->
-<script type="module" src="assets/inside-phone.js" onerror="window.PG_INSIDE&&window.PG_INSIDE.renderFallback('module-fetch-error')"></script>
+<script type="module" src="assets/inside-phone.js?v=20260728-outer-inner-r2" onerror="window.PG_INSIDE&&window.PG_INSIDE.renderFallback('module-fetch-error')"></script>
 <script nomodule>window.addEventListener("DOMContentLoaded",function(){if(window.PG_INSIDE)window.PG_INSIDE.renderFallback("no-module");});</script>
 <!-- Watchdog: if nothing (3D canvas or fallback) is live 12s after load, stop the spinner and show the text fallback. -->
 <script>

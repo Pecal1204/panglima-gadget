@@ -1,9 +1,14 @@
 # "Inside Your Smartphone" — 3D exploded-view section
 
-A scroll-driven 3D teardown of the fictional **Panglima X1** flagship, embedded
-in `index.html` between **Services** and **Process**. Original, brand-neutral
-industrial design — no manufacturer's product or internal layout is copied.
+A scroll-driven 3D teardown embedded in `index.html` between **Services** and
+**Process**. The assembled chapter renders the exact supplied 4.5 MB iPhone 11 GLB. Its real
+display assembly opens first while the exact frame remains visible, then a
+high-detail iPhone 11 component reconstruction takes over in the same registered
+space. It is aligned to the supplied teardown references, intended for repair
+education, and is not official Apple service data.
 
+Model provenance: **“Iphone 11” by atomle** ([Sketchfab source](https://sketchfab.com/3d-models/iphone-11-558b8e99bbd4483b9bb2182d8dc72de2)),
+licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 ## Files
 
 | File | Purpose |
@@ -11,8 +16,9 @@ industrial design — no manufacturer's product or internal layout is copied.
 | `assets/inside-phone-data.js` | **The only file you need to edit.** All text, WhatsApp number, message templates, colours. |
 | `assets/inside-phone-fallback.js` | Builds every card/label/picker from the data file; renders the accessible non-WebGL fallback. |
 | `assets/inside-phone.js` | The real-time 3D experience (ES module, Three.js 0.160 pinned via importmap). |
+| `assets/models/iphone-11-reference.glb` | Exact supplied textured exterior shown during the assembled chapter (4.5 MB, CC BY 4.0). |
 | `assets/inside-phone.css` | All styles, scoped under `#inside-phone` — cannot leak into the rest of the site. |
-| `index.html` | Section markup (`<section id="inside-phone">`), one `<link>` in the head, five `<script>` tags before `</body>`. |
+| `index.html` | Section markup (`<section id="inside-phone">`), its stylesheet link, and the ordered fallback/import-map/module/watchdog script stack. |
 
 No build step. Edit → save → deploy (Cloudflare Pages), same as the rest of the site.
 
@@ -35,92 +41,64 @@ All in `assets/inside-phone-data.js`:
 ## Behaviour
 
 - **Scroll timeline** (fully reversible — scrolling up reassembles):
-  `0–10%` reveal rotation → `10–50%` staged explosion (rear glass → coil →
-  battery/board/cameras → display forward → sensors/speakers/frame) →
-  `52–90%` guided tour of 12 components (card + animated diagnostic line, others
-  dimmed) → `90–100%` full exploded overview with labels and slow spin.
+  `0–10%` exact exterior reveal → `10–23%` display opening and visual handoff →
+  `19–49%` staged teardown → `51–92%` guided tour of 12 repairable systems →
+  `92–100%` full overview.
 - **Interaction**: drag to rotate (desktop any time after opening; touch only
   once fully exploded so page scrolling is never hijacked), hover highlight,
-  click/tap a part → jumps to its card, side picker list (desktop), *Reassemble
-  Phone* and *View All Components* buttons.
-- **States**: elegant loader ("Preparing device diagnostics…"), error → fallback,
+  click/tap a part → jumps to its card, side picker list (desktop), *Reassemble*
+  and *All Components* buttons.
+- **States**: loader ("Loading iPhone 11 model…"), error → fallback,
   `prefers-reduced-motion` → fallback, no WebGL → fallback, no ES modules →
   fallback. The fallback is a static exploded schematic + all 12 cards with the
   same symptoms/causes/repair content and CTAs. The 3D canvas is `aria-hidden`;
   all information is always available as text.
-- **Performance**: rendering pauses when the section is off-screen or the tab is
-  hidden; renders only on scroll/drag/idle-animation frames; pixel ratio capped
-  (1.5 mobile / 2 desktop); antialias off + lower-poly curves on mobile
-  (LOD 0); materials are lightweight standard/physical PBR with a generated
-  environment map (no texture downloads, no GLB — the entire experience is
-  ~9 KB of JS + the three.js CDN module, cached across the web).
+- **Performance**: the 4.5 MB exterior GLB is loaded once and remains the
+  authoritative shell; its display and body visibility are staged during the
+  handoff. Rendering pauses off-screen, pixel ratio is capped, and mobile uses
+  capability-based antialiasing and geometry detail.
 
-## Realism pass (2026-07-24)
+## Outer-to-inner iPhone 11 polish (2026-07-28)
 
-The model uses generated canvas textures (zero downloads): a lit AMOLED lock
-screen (clock, status bar, signal/battery glyphs, notification pills,
-lockscreen shortcuts, dock, black bezel), printed rear-glass wordmark with a
-generic regulatory pictogram row, battery pouch label (specs, safety
-pictograms, barcode), structured PCB routing (bus bundles, via arrays, IC
-footprints with pin rows, gold edge fingers, silkscreen), a laser-marked SoC
-die, brushed/etched EMI shield cans with datamatrix + test points, a stamped
-vapor-chamber with serpentine channels and spot welds, speaker grille dot
-matrices, camera-deck microtext, and a copper coil spiral on its ferrite pad.
+The chapter no longer dissolves the supplied phone into an unrelated generic
+interior. The real GLB display group lifts first; the real frame stays in place
+until the reconstructed assembly is mechanically registered underneath it. Its
+18 component assemblies then follow the supplied references from front to back:
 
-Physical detail: display flex ribbon + board-to-board connector, two EMI
-shield cans with five screws, capacitor rows and gold connectors on the board,
-battery pull tabs + foil seams + BMS flex that reaches the board, stepped
-secondary vapor chamber, charging-port gasket + fixing screws + interconnect
-flex, speaker contact springs, haptic flex tail, MEMS mic rubber boots, SIM
-weather seal + eject pinhole, selfie/biometric trim rings, separate volume
-buttons, mmWave window. Interior layout follows a real flagship: board
-upper-right beside the camera, dual-cell battery mid, sub-board at the bottom.
-During explosion, layers fan out on a diagonal cascade, and the rear glass +
-camera deck turn face-up like parts on a repair bench — all reversible.
+1. bonded Liquid Retina LCD, touch layer, glass, rear shield and display flexes;
+2. earpiece speaker, front camera/TrueDepth flex and service brackets;
+3. vertical wide/ultra-wide rear camera module and its shared flex;
+4. one long stacked logic board with EMI shields and graphite thermal film;
+5. SIM tray/reader, Taptic Engine, bottom loudspeaker and 3110 mAh battery;
+6. full-width Lightning/lower flex and three-microphone array;
+7. rear interior plate, wireless/NFC coil, aluminium rail, camera plateau,
+   buttons, SIM seam, port openings and antenna breaks.
 
-## Edge-smoothing pass (2026-07-25)
+Parts remain mechanically registered while assembled. During teardown they
+first lift away from their mounting plane, then travel into separate desktop and
+mobile exploded layouts. Small lateral offsets keep brackets and flex cables
+readable. The stamped display back, graphite films, flex tails, stepped logic
+board, BMS, foil seams, dual-camera barrels, OIS cradle, SIM apertures, Taptic
+label, speaker vents, coil, fasteners, housing wells and metal shielding are
+individually modelled with differentiated glass, metal, gasket, foam, PCB and
+flex materials.
 
-Every hard edge is chamfered so parts read as machined hardware. `plate()`
-extrudes with a bevel sized `min(0.009, d*0.34, r*0.5)` and reduces `depth` by
-`2*bev` so total thickness stays `d`.
+The supplied exploded JPG was used only as a visual reference and is not
+bundled with the deployed site. The geometry is original code-native artwork;
+it does not claim manufacturer tolerances or replace a service manual.
 
-> **Trap for future edits:** a bevelled `ExtrudeGeometry` spans
-> `[-bevelThickness, depth+bevelThickness]`, *not* `[0, depth]`. Its midpoint is
-> `d/2 - bev`, so the re-centring translate must be `bev - d/2` (not `-d/2`).
-> Getting this wrong sinks every part by up to 0.009 while its thickness still
-> measures correctly — which silently buries the decal planes that are anchored
-> to `±d/2` (camera-deck microtext, motherboard rear traces) and makes the SoC
-> die art exactly coplanar with the chip. The mid-frame follows the same rule.
+## Performance and validation
 
-`box()` no longer returns a `BoxGeometry` — it delegates to
-`plate()` with radius `min(w,h)*0.22`, so all ~45 box call sites became rounded,
-chamfered boxes for free. Corner resolution went 5→9 segments (desktop) and
-cylinders are clamped to ≥24 radial segments, so barrels and rings show no
-facets. The mid-frame gained a 0.008 chamfer on both its outer rail and its
-inner cutout. Frame, shield, camera deck, lens rings and vapor chamber moved to
-`MeshPhysicalMaterial` with clearcoat so those new chamfers catch a highlight.
+The exterior GLB is preserved byte-for-byte and receives only scene-level
+material, light and visibility treatment at runtime. Procedural parts use
+chamfered geometry and deterministic generated canvas materials, so there are no
+additional teardown image downloads. Higher-capability mobile devices retain
+antialiasing and fuller detail; constrained devices use reduced curve segments
+and a lower pixel-ratio cap. Desktop adds real-time shadows while all layouts
+retain a lightweight contact shadow. All 12 guided-tour card IDs are checked
+against exactly one matching 3D assembly.
 
-Geometry was verified by rebuilding all 52 call sites headlessly in three.js
-0.160: **1,859 → 37,659 triangles on desktop, 1,139 → 11,219 on mobile**, zero
-degenerate extrusions, no case where the bevel exceeds its corner radius, and a
-worst-case z-centring error of 1.9e-9 (float32 noise). 38k triangles is
-negligible for any GPU that runs WebGL.
-
-## Measured results (2026-07-24, dev preview)
-
-- Desktop 1280×800 Chrome: **~61 FPS** while continuously scrubbing the timeline.
-- After the full detail pass (textures + ~60 extra meshes): **~53 FPS** in the
-  always-animating overview at 800px/DPR 1.5 in a VM — real hardware runs higher.
-- Mobile-width 375–683px (DPR 1.5): smooth scrub. The component card opens as a
-  name-only "peek" strip (~13% of the screen) with an expand arrow; tapping it
-  grows the sheet to ~44% with Function / Common problems / "More details" and
-  the "Check Repair Options" button pinned at the sheet bottom. Each new
-  component resets to the peek strip so the 3D scene stays dominant.
-- Fallback path: 12 cards, safety warning, CTAs — verified by forcing
-  `PG_INSIDE.renderFallback()`.
-- Controls verified: Reassemble → p=0, View All → p=0.95, picker → correct card.
-
-Browser notes:
+## Browser notes
 - Chrome/Edge (Blink): native importmap, tested above.
 - Firefox 108+/Safari 16.4+: native importmap support; older versions use the
   `es-module-shims` polyfill that is loaded before the importmap.
@@ -131,7 +109,6 @@ Browser notes:
 
 ## Removing or moving the section
 
-Delete the `<section id="inside-phone">` block, the `<link rel="stylesheet"
-href="assets/inside-phone.css">` line, and the five script tags after the main
-site IIFE (`inside-phone-data.js` … the `nomodule` line). Nothing else in the
-site references these files.
+Delete the `<section id="inside-phone">` block, the matching stylesheet link,
+and every script block under the `INSIDE YOUR SMARTPHONE — scripts` comment
+after the main site IIFE. Nothing else in the site references these files.

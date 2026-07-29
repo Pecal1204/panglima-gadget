@@ -4,7 +4,7 @@
    Vanilla Three.js (React-Three-Fiber is only a wrapper around this API) so the
    experience drops into the existing static site with no build step.
 
-   • Procedural PBR geometry — real meshes, not a flat image, zero binary assets.
+   • The supplied textured iPhone 11 GLB is the assembled exterior; original procedural PBR geometry powers the exploded internals.
    • Scroll-scrubbed timeline: reveal → staged explosion → guided component tour
      → exploded overview. Scrolling up reverses it (everything is a pure function
      of scroll progress `p`).
@@ -33,17 +33,17 @@ if (!IP) {
 }
 
 async function boot() {
-  let THREE, RoomEnvironment;
+  let THREE, RoomEnvironment, GLTFLoader;
   try {
     THREE = await import("three");
     ({ RoomEnvironment } = await import("three/addons/environments/RoomEnvironment.js"));
-  } catch (err) {
+    ({ GLTFLoader } = await import("three/addons/loaders/GLTFLoader.js"));  } catch (err) {
     console.warn("[inside-phone] three.js failed to load — showing fallback.", err);
     IP.renderFallback("load-error");
     return;
   }
   try {
-    run(THREE, RoomEnvironment);
+    run(THREE, RoomEnvironment, GLTFLoader);
   } catch (err) {
     console.error("[inside-phone] init error — showing fallback.", err);
     IP.renderFallback("init-error");
@@ -51,7 +51,7 @@ async function boot() {
 }
 
 /* ========================================================================= */
-function run(THREE, RoomEnvironment) {
+function run(THREE, RoomEnvironment, GLTFLoader) {
   if (IP.build) IP.build();            // ensure DOM refs exist (module runs before DOMContentLoaded)
   const els = IP.els;
   if (!els.section || !els.scroller || !els.canvasWrap) { IP.renderFallback("no-shell"); return; }
@@ -66,7 +66,12 @@ function run(THREE, RoomEnvironment) {
   // model shift) track the CSS 820px breakpoint live via `mq`.
   const mq = matchMedia("(max-width: 820px)");
   const isMobile = mq.matches;
-  const LOD = isMobile ? 0 : 1;                 // 0 = light, 1 = full
+  const reportedCores = Number(navigator.hardwareConcurrency);
+  const reportedMemory = Number(navigator.deviceMemory);
+  const mobileHighQuality = isMobile &&
+    Number.isFinite(reportedCores) && reportedCores >= 6 &&
+    Number.isFinite(reportedMemory) && reportedMemory >= 4;
+  const LOD = (!isMobile || mobileHighQuality) ? 1 : 0;
   const COL = CFG.colors;
 
   /* ---- math helpers ---- */
@@ -80,15 +85,18 @@ function run(THREE, RoomEnvironment) {
   canvas.className = "ip-canvas";
   els.canvasWrap.appendChild(canvas);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !isMobile, alpha: true, powerPreference: "high-performance" });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !isMobile || mobileHighQuality, alpha: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 1.12;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled = !isMobile;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-  camera.position.set(0, 0, 7.6); // refined per-aspect in resize()
+  const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
+  let cameraBaseZ = 7.6;
+  camera.position.set(0, 0, cameraBaseZ); // refined per-aspect in resize()
 
   /* Studio reflections via generated room environment (no HDR asset).
      The generator and room scene are one-shot — free them once baked. */
@@ -101,30 +109,191 @@ function run(THREE, RoomEnvironment) {
     if (o.isMesh) { o.geometry.dispose(); if (o.material && o.material.dispose) o.material.dispose(); }
   });
 
-  /* Cinematic key/rim lights: cool blue key, warm orange rim. */
-  const key = new THREE.DirectionalLight(0xbcd8ff, 2.3); key.position.set(-4, 6, 6); scene.add(key);
-  const rim = new THREE.DirectionalLight(new THREE.Color(COL.orange), 1.5); rim.position.set(5, -3, -4); scene.add(rim);
-  const fill = new THREE.DirectionalLight(0x8fb4ff, 0.85); fill.position.set(3, 1, 5); scene.add(fill);
-  const bounce = new THREE.DirectionalLight(0x40507a, 0.6); bounce.position.set(-2, -5, 3); scene.add(bounce);
-  scene.add(new THREE.AmbientLight(0x323a4c, 0.8));
+  /* Neutral studio light preserves silver, glass and black material separation.
+     The restrained red rim ties the technical scene back to Panglima branding. */
+  const key = new THREE.DirectionalLight(0xfffbf5, 3.1);
+  key.position.set(-4.5, 6.5, 7); key.castShadow = !isMobile;
+  if (key.castShadow) {
+    key.shadow.mapSize.set(1024, 1024);
+    key.shadow.camera.left = key.shadow.camera.bottom = -4;
+    key.shadow.camera.right = key.shadow.camera.top = 4;
+    key.shadow.bias = -0.00035;
+    key.shadow.normalBias = 0.025;
+  }
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0xff3145, 1.65); rim.position.set(5, -2.5, -4); scene.add(rim);
+  const fill = new THREE.DirectionalLight(0x9fbcff, 0.75); fill.position.set(3, 1.5, 5); scene.add(fill);
+  const bounce = new THREE.DirectionalLight(0x536079, 0.32); bounce.position.set(-2, -5, 3); scene.add(bounce);
+  scene.add(new THREE.AmbientLight(0x29303c, 0.34));
 
-  /* Soft grounding glow behind the device. */
+  /* Restrained edge glow plus a soft contact shadow keep the model grounded. */
   const glowTex = radialTexture(THREE, COL.blue);
-  const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: 0xffffff, transparent: true, opacity: 0.5, depthWrite: false, blending: THREE.AdditiveBlending }));
-  glow.scale.set(9, 9, 1); glow.position.set(0, 0, -3);
+  const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: 0xffffff, transparent: true, opacity: 0.20, depthWrite: false, blending: THREE.AdditiveBlending }));
+  glow.scale.set(7.2, 7.2, 1); glow.position.set(-0.2, 0.1, -3);
   scene.add(glow);
+  const contactTex = radialTexture(THREE, 0x000000);
+  const contactShadow = new THREE.Sprite(new THREE.SpriteMaterial({ map: contactTex, color: 0x000000, transparent: true, opacity: 0.42, depthWrite: false }));
+  contactShadow.scale.set(3.2, 5.0, 1); contactShadow.position.set(0.18, -0.18, -1.35);
+  scene.add(contactShadow);
 
   /* ---- root groups ---- */
   const root = new THREE.Group();          // holds rotation/scale/position
   scene.add(root);
-  const phone = new THREE.Group();         // holds the components
+  const phone = new THREE.Group();         // holds the exploded components
   root.add(phone);
 
+  /* Exact supplied exterior. Its real display group detaches first while the
+     real frame stays visible, so the teardown feels like one model opening
+     rather than a photoreal asset dissolving into a separate diagram. */
+  const referenceShell = new THREE.Group();
+  referenceShell.name = "Supplied iPhone 11 exterior";
+  referenceShell.visible = false;
+  root.add(referenceShell);
+  const referenceDisplayMaterials = [];
+  const referenceBodyMaterials = [];
+  let referenceDisplayNode = null;
+  let referenceDisplayPivot = null;
+  const referenceDisplayBasePos = new THREE.Vector3();
+  const referenceDisplayBaseQuat = new THREE.Quaternion();
+  const referenceDetachEuler = new THREE.Euler();
+  const referenceDetachQuat = new THREE.Quaternion();
+  let referenceReady = false;
+  let referenceAbandoned = false;
+  let loadingSettled = false;
+
+  function hideLoading() {
+    loadingSettled = true;
+    if (els.loading) els.loading.classList.add("is-hidden");
+  }
+
+  function prepareReferenceMaterial(material, bucket) {
+    const mat = material.clone();
+    const opaque = !(mat.transparent && mat.opacity < 0.98);
+    if (opaque && Number.isFinite(mat.roughness)) {
+      const floor = (mat.metalness || 0) > 0.25 ? 0.12 : 0.18;
+      mat.roughness = clamp(mat.roughness, floor, 0.88);
+    }
+    if ("envMapIntensity" in mat) {
+      mat.envMapIntensity = Math.max((mat.metalness || 0) > 0.35 ? 1.35 : 1.05, mat.envMapIntensity || 0);
+    }
+    bucket.push({
+      mat,
+      opacity: mat.opacity,
+      transparent: mat.transparent,
+      depthWrite: mat.depthWrite
+    });
+    return mat;
+  }
+
+  function setMaterialAlpha(states, alpha) {
+    for (const state of states) {
+      const transparent = state.transparent || alpha < 0.999;
+      if (state.mat.transparent !== transparent) {
+        state.mat.transparent = transparent;
+        state.mat.needsUpdate = true;
+      }
+      state.mat.opacity = state.opacity * alpha;
+      state.mat.depthWrite = alpha > 0.98 ? state.depthWrite : false;
+    }
+  }
+
+  function setReferenceAlpha(bodyAlpha, displayAlpha) {
+    if (!referenceReady) return;
+    displayAlpha = displayAlpha == null ? bodyAlpha : displayAlpha;
+    referenceShell.visible = Math.max(bodyAlpha, displayAlpha) > 0.002;
+    if (!referenceShell.visible) return;
+    setMaterialAlpha(referenceBodyMaterials, bodyAlpha);
+    setMaterialAlpha(referenceDisplayMaterials, displayAlpha);
+  }
+
+  function updateReferenceDisplay(t) {
+    if (!referenceDisplayPivot) return;
+    referenceDisplayPivot.position.copy(referenceDisplayBasePos);
+    const invScale = 1 / Math.max(referenceShell.scale.x, 0.0001);
+    /* The authored GLB faces -z before the wrapper rotation. The pivot sits
+       directly under referenceShell, so this movement is now in scene units
+       instead of being crushed by anonymous scales deeper in the GLB. */
+    referenceDisplayPivot.position.z -= 0.24 * invScale * t;
+    referenceDetachEuler.set(-0.06 * t, 0.10 * t, -0.055 * t);
+    referenceDetachQuat.setFromEuler(referenceDetachEuler);
+    referenceDisplayPivot.quaternion.copy(referenceDisplayBaseQuat).multiply(referenceDetachQuat);
+  }
+
+  const referenceLoader = new GLTFLoader();
+  const referenceUrl = new URL("./models/iphone-11-reference.glb?v=20260728-outer-inner-r2", import.meta.url).href;
+  referenceLoader.load(referenceUrl, gltf => {
+    if (referenceAbandoned) return;
+    const model = gltf.scene;
+    const bounds = new THREE.Box3().setFromObject(model);
+    const size = bounds.getSize(new THREE.Vector3());
+    const center = bounds.getCenter(new THREE.Vector3());
+    model.position.copy(center).multiplyScalar(-1);
+
+    /* This group is the GLB's complete front assembly: screen, bezel, notch
+       and front sensors. The supplied file has anonymous Sketchfab names, so
+       this verified node id is intentionally isolated here. */
+    referenceDisplayNode = model.getObjectByName("aERJJYZUtXikHla") || null;
+    const displayNodes = new Set();
+    if (referenceDisplayNode) {
+      referenceDisplayNode.traverse(o => displayNodes.add(o));
+    }
+
+    model.traverse(o => {
+      if (!o.isMesh || !o.material) return;
+      o.frustumCulled = true;
+      if (!o.geometry.getAttribute("normal")) o.geometry.computeVertexNormals();
+      const bucket = displayNodes.has(o) ? referenceDisplayMaterials : referenceBodyMaterials;
+      if (Array.isArray(o.material)) o.material = o.material.map(mat => prepareReferenceMaterial(mat, bucket));
+      else o.material = prepareReferenceMaterial(o.material, bucket);
+      const mats = Array.isArray(o.material) ? o.material : [o.material];
+      mats.forEach(mat => {
+        for (const key of ["map", "normalMap", "roughnessMap", "metalnessMap", "emissiveMap", "alphaMap", "aoMap"]) {
+          if (mat[key]) mat[key].anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+        }
+      });
+      const opaque = mats.every(mat => !(mat.transparent && mat.opacity < 0.98));
+      o.castShadow = !isMobile && opaque;
+      o.receiveShadow = !isMobile && opaque;
+    });
+
+    referenceShell.add(model);
+    referenceShell.scale.setScalar(3 / size.y);
+    /* The GLB stores its front toward -z; rotate it into this scene's +z front. */
+    referenceShell.rotation.y = Math.PI;
+    if (referenceDisplayNode) {
+      referenceDisplayPivot = new THREE.Group();
+      referenceDisplayPivot.name = "iPhone 11 exact display pivot";
+      referenceShell.add(referenceDisplayPivot);
+      referenceShell.updateMatrixWorld(true);
+      referenceDisplayPivot.attach(referenceDisplayNode);
+      referenceDisplayBasePos.copy(referenceDisplayPivot.position);
+      referenceDisplayBaseQuat.copy(referenceDisplayPivot.quaternion);
+    } else {
+      console.warn("[inside-phone] exact display node was not found; using a shell crossfade without the display lift.");
+    }
+    referenceReady = true;
+    referenceShell.visible = true;
+    phone.visible = true;
+    hideLoading();
+    requestRender();
+  }, event => {
+    if (!els.loading || !event.total) return;
+    const label = els.loading.querySelector(".lt");
+    if (label) label.textContent = "Loading iPhone 11 model · " + Math.round(event.loaded / event.total * 100) + "%";
+  }, err => {
+    if (referenceAbandoned) return;
+    console.warn("[inside-phone] supplied iPhone 11 GLB failed to load; using procedural exterior.", err);
+    referenceReady = false;
+    phone.visible = true;
+    setPhoneAlpha(1);
+    hideLoading();
+    requestRender();
+  });
   /* ======================================================================
      PHONE GEOMETRY  — mechanically layered stack (front +z … back -z)
-     Local units: width 1.44 (x ±0.72), height 3.0 (y ±1.5), thin z.
+     iPhone 11 reference proportions: 150.9 x 75.7 x 8.3 mm. Local units: width 1.505 (x ±0.7525), height 3.0 (y ±1.5), with z exaggerated slightly so the rail and individual layers remain legible.
      ==================================================================== */
-  const HW = 0.72, HH = 1.5;
+  const HW = 0.7525, HH = 1.5;
   const seg = LOD ? 9 : 4;                  // curve segments for rounded corners
   const bevSeg = LOD ? 4 : 2;               // chamfer segments (smooth premium edges)
 
@@ -140,19 +309,70 @@ function run(THREE, RoomEnvironment) {
     g.position.copy(def.home);
     def.build(g);
     phone.add(g);
-    // Clone each mesh's material so dim/highlight is isolated per component
-    // (the M.* library materials are shared across many components).
+    // Clone each mesh's material so dim/highlight/fade is isolated per part.
     const base = [];
     g.traverse(o => {
       if (o.isMesh && o.material && o.material.color) {
         o.material = o.material.clone();
-        base.push({ mat: o.material, color: o.material.color.clone(), emi: (o.material.emissive ? o.material.emissive.clone() : null), env: o.material.envMapIntensity != null ? o.material.envMapIntensity : 1 });
+        o.castShadow = !isMobile && !(o.material.transparent && o.material.opacity < 0.98);
+        o.receiveShadow = !isMobile && !(o.material.transparent && o.material.opacity < 0.98);
+        base.push({
+          mesh: o,
+          castShadow: o.castShadow,
+          receiveShadow: o.receiveShadow,
+          mat: o.material,
+          color: o.material.color.clone(),
+          emi: (o.material.emissive ? o.material.emissive.clone() : null),
+          env: o.material.envMapIntensity != null ? o.material.envMapIntensity : 1,
+          opacity: o.material.opacity,
+          transparent: o.material.transparent,
+          depthWrite: o.material.depthWrite
+        });
         if (def.cardId) { o.userData.cardId = def.cardId; o.userData.cIndex = def.index; clickable.push(o); }
       }
     });
-    components.push({ id: def.id, group: g, cardId: def.cardId, index: def.index, name: def.name, home: def.home.clone(), exp: def.exp.clone(), t0: def.t0, t1: def.t1, spin: def.spin || 0, base });
+    const dz = def.exp.z - def.home.z;
+    const lift = def.lift ? def.lift.clone() : new THREE.Vector3(0, 0, Math.sign(dz || 1) * Math.min(0.24, Math.abs(dz) * 0.18));
+    components.push({
+      id: def.id, group: g, cardId: def.cardId, index: def.index, name: def.name,
+      home: def.home.clone(), exp: def.exp.clone(), expMobile: (def.expMobile || def.exp).clone(), lift,
+      t0: def.t0, t1: def.t1, rotX: def.rotX || 0, spin: def.spin || 0, rotZ: def.rotZ || 0, base
+    });
   }
   const clickable = [];
+
+  const proceduralBodyIds = new Set(["rearhousing", "midframe", "camerabump", "exteriordetails"]);
+
+  function setComponentAlpha(component, alpha) {
+    for (const state of component.base) {
+      const transparent = state.transparent || alpha < 0.999;
+      if (state.mat.transparent !== transparent) {
+        state.mat.transparent = transparent;
+        state.mat.needsUpdate = true;
+      }
+      state.mat.opacity = state.opacity * alpha;
+      state.mat.depthWrite = alpha > 0.98 ? state.depthWrite : false;
+      state.mesh.castShadow = alpha > 0.45 && state.castShadow;
+      state.mesh.receiveShadow = alpha > 0.45 && state.receiveShadow;
+    }
+  }
+
+  function setPhoneAlpha(alpha) {
+    phone.visible = alpha > 0.002;
+    if (!phone.visible) return;
+    for (const component of components) setComponentAlpha(component, alpha);
+  }
+
+  function setPhoneLayerAlphas(internalAlpha, displayAlpha, bodyAlpha) {
+    phone.visible = Math.max(internalAlpha, displayAlpha, bodyAlpha) > 0.002;
+    if (!phone.visible) return;
+    for (const component of components) {
+      const alpha = component.id === "display"
+        ? displayAlpha
+        : proceduralBodyIds.has(component.id) ? bodyAlpha : internalAlpha;
+      setComponentAlpha(component, alpha);
+    }
+  }
 
   /* rounded-rect shape + extruded plate */
   function rrShape(w, h, r) {
@@ -195,17 +415,59 @@ function run(THREE, RoomEnvironment) {
     if (!geomCache[k]) geomCache[k] = new THREE.CylinderGeometry(r, r, h, s);
     return geomCache[k];
   }
+  function torus(r, tube, radial, tubular) {
+    const k = "t" + [r, tube, radial, tubular].join("_");
+    if (!geomCache[k]) geomCache[k] = new THREE.TorusGeometry(r, tube, radial || 8, tubular || (LOD ? 28 : 16));
+    return geomCache[k];
+  }
+  function polyPlate(points, d, holes) {
+    const flat = points.flat();
+    const key = "poly" + flat.join("_") + "_" + d + "_" + JSON.stringify(holes || []);
+    if (!geomCache[key]) {
+      const shape = new THREE.Shape();
+      points.forEach((p, i) => i ? shape.lineTo(p[0], p[1]) : shape.moveTo(p[0], p[1]));
+      shape.closePath();
+      for (const hole of (holes || [])) {
+        const hp = new THREE.Path(); hp.absarc(hole[0], hole[1], hole[2], 0, Math.PI * 2, true); shape.holes.push(hp);
+      }
+      const bev = Math.min(0.006, d * 0.28);
+      const geo = new THREE.ExtrudeGeometry(shape, {
+        depth: Math.max(0.0005, d - bev * 2), curveSegments: seg,
+        bevelEnabled: true, bevelThickness: bev, bevelSize: bev,
+        bevelOffset: 0, bevelSegments: bevSeg
+      });
+      geo.translate(0, 0, bev - d / 2);
+      geomCache[key] = geo;
+    }
+    return geomCache[key];
+  }
+  function framePlate(ow, oh, iw, ih, d, ro, ri) {
+    const key = "frame" + [ow, oh, iw, ih, d, ro, ri].join("_");
+    if (!geomCache[key]) {
+      const outer = rrShape(ow, oh, ro), inner = rrShape(iw, ih, ri);
+      outer.holes.push(new THREE.Path(inner.getPoints(seg * 4)));
+      const bev = Math.min(0.005, d * 0.28);
+      const geo = new THREE.ExtrudeGeometry(outer, {
+        depth: Math.max(0.0005, d - bev * 2), curveSegments: seg,
+        bevelEnabled: true, bevelThickness: bev, bevelSize: bev,
+        bevelOffset: 0, bevelSegments: bevSeg
+      });
+      geo.translate(0, 0, bev - d / 2);
+      geomCache[key] = geo;
+    }
+    return geomCache[key];
+  }
 
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
 
   /* =====================================================================
-     PANGLIMA X1 — internal layout
+     IPHONE 11 REFERENCE — internal layout
      ---------------------------------------------------------------------
-     Proportions follow a 2019-flagship-class architecture: one rectangular
-     pouch cell, a stacked two-deck mainboard on one side rail, a square rear
-     camera mesa with two lenses on the diagonal, and a notch. Scale is
-     52 mm per scene unit in x/y; z is exaggerated 1.25x uniformly (41.5 mm
-     per unit) so the 8.3 mm body reads as z -0.100 .. +0.100.
+     The outer silhouette follows the supplied iPhone 11 reference: 150.9 mm
+     tall, 75.7 mm wide, 8.3 mm deep, a 6.1-inch display with a wide notch,
+     and a top-left square camera mesa with two lenses in a vertical stack.
+     Internal parts remain an educational reconstruction rather than service
+     documentation. Z is exaggerated slightly so the layers remain readable.
 
      The z bands below are exclusive: no two parts share both an xy footprint
      and a z range, so nothing intersects at rest. The rear mesa is the one
@@ -213,414 +475,241 @@ function run(THREE, RoomEnvironment) {
      gives the silhouette its shape.
      ===================================================================== */
 
-  /* ---------- 1. FRONT COVER GLASS (printed mask + notch cutout) ---------- */
-  addComponent({
-    id: "frontglass", name: "Front Cover Glass", cardId: null, index: null,
-    home: V(0, 0, 0.0925), exp: V(0, 0, 2.05), t0: 0.37, t1: 0.44,
-    build: g => {
-      g.add(mesh(plate(1.38, 2.94, 0.015, 0.27), M.glass));
-      /* printed black border mask; the notch is a downward tab in the mask */
-      const mask = new THREE.Mesh(new THREE.PlaneGeometry(1.38, 2.94), M.rearArt);
-      mask.position.z = -0.0085; mask.material = M.rearArt; g.add(mask);
-      const notch = mesh(plate(0.68, 0.10, 0.004, 0.045), M.silicon);
-      notch.position.set(0, 1.342, -0.006); g.add(notch);
+  /* =====================================================================
+     IPHONE 11-SPECIFIC TEARDOWN — polished from the supplied close-ups
+     Assemblies share the exact exterior scale and detach in service order.
+     ===================================================================== */
+  const addScrew = (g, x, y, z = 0, r = .015) => {
+    const head = mesh(cyl(r, .010, LOD ? 18 : 12), M.screw);
+    head.rotation.x = Math.PI / 2; head.position.set(x, y, z); g.add(head);
+    if (LOD) {
+      const slot = mesh(box(r * 1.25, .0035, .0025), M.metalDark);
+      slot.position.set(x, y, z + .006); g.add(slot);
     }
-  });
-
-  /* ---------- 2. OLED PANEL (bonded module: glass, touch, emissive) ---------- */
-  addComponent({
-    id: "display", name: "OLED Display Panel", cardId: "display", index: TOUR.indexOf("display"),
-    home: V(0, 0, 0.074), exp: V(0, 0, 1.45), t0: 0.35, t1: 0.42,
-    build: g => {
-      g.add(mesh(plate(1.36, 2.92, 0.022, 0.26), M.display));
-      /* lit active area, inset by the inactive border */
-      const screen = new THREE.Mesh(new THREE.PlaneGeometry(1.224, 2.784), M.screen);
-      screen.position.z = 0.012; g.add(screen);
-      /* notch is cut out of the lit area, so mask it back to black */
-      const notch = mesh(plate(0.68, 0.10, 0.006, 0.045), M.silicon);
-      notch.position.set(0, 1.342, 0.013); g.add(notch);
-      /* foam + graphite backing foils on the rear face */
-      const foil = mesh(plate(1.30, 2.86, 0.004, 0.24), M.graphite);
-      foil.position.z = -0.013; g.add(foil);
-      /* driver flex folding off the bottom edge toward the board */
-      const flex = mesh(box(0.34, 0.16, 0.004), M.filmCopper);
-      flex.position.set(0.10, -1.36, -0.016); g.add(flex);
+  };
+  const addMountEar = (g, x, y, z = 0, mat = M.shield, r = .037) => {
+    const ear = mesh(torus(r, .010, 8, LOD ? 28 : 18), mat);
+    ear.position.set(x, y, z); g.add(ear);
+  };
+  const addPinRow = (g, x, y, z, count, dx = .018, rotation = 0) => {
+    const pins = new THREE.Group(); pins.position.set(x, y, z); pins.rotation.z = rotation;
+    for (let i = 0; i < count; i++) {
+      const pin = mesh(box(.009, .025, .008), M.gold);
+      pin.position.x = (i - (count - 1) / 2) * dx; pins.add(pin);
     }
-  });
-
-  /* ---------- 3. FRONT SENSOR CLUSTER (display-side notch group) ---------- */
-  addComponent({
-    id: "frontsensors", name: "Front Sensor Cluster", cardId: "proximity", index: TOUR.indexOf("proximity"),
-    home: V(-0.17, 1.342, 0.0355), exp: V(-0.45, 2.15, 1.05), t0: 0.33, t1: 0.40,
-    build: g => {
-      /* flood emitter + proximity as one bonded module, then ambient light */
-      const modA = mesh(box(0.062, 0.052, 0.03), M.silicon); modA.position.x = -0.026; g.add(modA);
-      const win = mesh(cyl(0.017, 0.008, LOD ? 16 : 8), M.sensorBlue);
-      win.rotation.x = Math.PI / 2; win.position.set(-0.026, 0, 0.019); g.add(win);
-      const als = mesh(box(0.028, 0.028, 0.024), M.plastic); als.position.x = 0.034; g.add(als);
-      /* shared ribbon bonded to the back of the panel */
-      const rib = mesh(box(0.115, 0.022, 0.003), M.filmCopper);
-      rib.position.set(0, -0.03, -0.024); g.add(rib);
+    g.add(pins);
+  };
+  const addShieldCan = (g, w, h, x, y, z = .04) => {
+    const can = mesh(plate(w, h, .025, Math.min(w, h) * .12), M.shield);
+    can.position.set(x, y, z); g.add(can);
+    const seam = mesh(framePlate(w * .92, h * .90, w * .80, h * .76, .006, Math.min(w, h) * .10, Math.min(w, h) * .07), M.metalDark);
+    seam.position.set(x, y, z + .016); g.add(seam);
+    if (LOD) {
+      const art = new THREE.Mesh(new THREE.PlaneGeometry(w * .74, h * .66), M.shieldArt);
+      art.position.set(x, y, z + .0185); g.add(art);
     }
-  });
-
-  /* ---------- 4. SHIELDING CANS & BRACKETS (over the board stack) ---------- */
-  addComponent({
-    id: "emishields", name: "Shielding Cans & Connector Brackets", cardId: null, index: null,
-    home: V(0.434, 0.3, 0.034), exp: V(2.15, 0.8, 0.5), t0: 0.24, t1: 0.31,
-    build: g => {
-      const can = (w, h, x, y) => {
-        const c = mesh(box(w, h, 0.019), M.shield); c.position.set(x, y, 0); g.add(c);
-        const lid = new THREE.Mesh(new THREE.PlaneGeometry(w * 0.86, h * 0.86), M.shieldArt);
-        lid.position.set(x, y, 0.0102); g.add(lid);
-      };
-      can(0.30, 0.23, 0, 0.30);
-      can(0.26, 0.19, 0, -0.02);
-      if (LOD) { can(0.15, 0.11, -0.05, -0.28); can(0.12, 0.09, 0.09, -0.30); }
-      /* graphite patches adhered to the can tops */
-      const gp = mesh(plate(0.22, 0.14, 0.002, 0.03), M.graphite);
-      gp.position.set(0, 0.30, 0.011); g.add(gp);
-      /* stamped steel bracket strip screwed over the ribbon sockets */
-      const br = mesh(plate(0.32, 0.16, 0.006, 0.03), M.frame);
-      br.position.set(0, -0.40, 0.004); g.add(br);
-      if (LOD) for (const x of [-0.11, 0.11]) {
-        const sc = mesh(cyl(0.018, 0.012, 10), M.screw);
-        sc.rotation.x = Math.PI / 2; sc.position.set(x, -0.40, 0.011); g.add(sc);
-      }
+  };
+  const addLens = (g, x, y, r, z, ois) => {
+    const carrier = mesh(box(r * 1.78, r * 1.78, .074), M.metalDark); carrier.position.set(x, y, z - .030); g.add(carrier);
+    if (ois) {
+      const cradle = mesh(framePlate(r * 1.68, r * 1.68, r * 1.28, r * 1.28, .018, r * .18, r * .12), M.gold);
+      cradle.position.set(x, y, z + .010); g.add(cradle);
     }
-  });
+    const barrel = mesh(cyl(r * .90, .058, LOD ? 30 : 18), M.lensBarrel); barrel.rotation.x = Math.PI / 2; barrel.position.set(x, y, z + .020); g.add(barrel);
+    const ring = mesh(cyl(r, .018, LOD ? 36 : 20), M.lensRing); ring.rotation.x = Math.PI / 2; ring.position.set(x, y, z + .054); g.add(ring);
+    const glass = mesh(cyl(r * .70, .012, LOD ? 36 : 20), M.lensGlass); glass.rotation.x = Math.PI / 2; glass.position.set(x, y, z + .066); g.add(glass);
+    const inner = mesh(torus(r * .48, r * .055, 8, LOD ? 32 : 18), M.sensorBlue); inner.position.set(x, y, z + .074); g.add(inner);
+  };
 
-  /* ---------- 5. EARPIECE (glued to the panel, lifts with the screen) ---------- */
-  addComponent({
-    id: "earpiece", name: "Earpiece Speaker", cardId: "earpiece", index: TOUR.indexOf("earpiece"),
-    home: V(0, 1.342, 0.026), exp: V(0.15, 2.15, 1.05), t0: 0.33, t1: 0.40,
-    build: g => {
-      g.add(mesh(box(0.2, 0.1, 0.072), M.frame));
-      const face = new THREE.Mesh(new THREE.PlaneGeometry(0.17, 0.028), M.grille);
-      face.position.z = 0.037; g.add(face);
-      const tail = mesh(box(0.07, 0.03, 0.003), M.filmCopper);
-      tail.position.set(0.12, -0.02, 0.02); g.add(tail);
-    }
-  });
+  /* 1 — bonded Liquid Retina display with stamped rear shield and flex tails */
+  addComponent({id:"display",name:"Liquid Retina LCD Assembly",cardId:"display",index:TOUR.indexOf("display"),home:V(0,0,.080),exp:V(.62,1.00,2.38),expMobile:V(.10,.62,2.24),t0:.19,t1:.30,spin:-.14,rotX:-.07,rotZ:-.08,build:g=>{
+    g.add(mesh(plate(1.465,2.94,.018,.255),M.glass));
+    const adhesive=mesh(framePlate(1.445,2.915,1.375,2.845,.010,.245,.220),M.foam);adhesive.position.z=-.015;g.add(adhesive);
+    const lcd=mesh(plate(1.425,2.90,.022,.235),M.display);lcd.position.z=-.028;g.add(lcd);
+    const screen=new THREE.Mesh(new THREE.PlaneGeometry(1.305,2.765),M.screen);screen.position.z=.011;g.add(screen);
+    const notch=mesh(plate(.70,.115,.006,.052),M.silicon);notch.position.set(0,1.342,.014);g.add(notch);
+    const shield=mesh(plate(1.405,2.875,.022,.225),M.shield);shield.position.z=-.052;g.add(shield);
+    const graphite=mesh(plate(1.28,2.32,.008,.17),M.graphite);graphite.position.set(0,-.12,-.069);g.add(graphite);
+    const topShelf=mesh(polyPlate([[-.58,-.13],[.58,-.13],[.58,.10],[.34,.10],[.29,.17],[-.29,.17],[-.34,.10],[-.58,.10]],.016),M.metalDark);topShelf.position.set(0,1.20,-.075);g.add(topShelf);
+    const driver=mesh(plate(.56,.25,.022,.035),M.silicon);driver.position.set(.30,-1.19,-.080);g.add(driver);
+    const flexA=mesh(polyPlate([[-.08,.28],[.07,.28],[.07,.03],[.16,.03],[.16,-.28],[-.02,-.28],[-.02,-.02],[-.08,-.02]],.007),M.filmFlex);flexA.position.set(.28,-1.04,-.094);g.add(flexA);
+    const flexB=mesh(polyPlate([[-.06,.22],[.06,.22],[.06,.02],[.13,.02],[.13,-.22],[-.03,-.22],[-.03,-.01],[-.06,-.01]],.007),M.filmFlex);flexB.position.set(.48,-1.12,-.096);g.add(flexB);
+    addPinRow(g,.36,-1.30,-.089,10,.014);addPinRow(g,.54,-1.31,-.091,8,.014);
+    for(const p of [[-.61,1.13],[.61,1.13],[-.61,-1.16],[.61,-1.16]])addScrew(g,p[0],p[1],-.068,.012);
+    for(const y of [-.82,-.28,.30,.84]){const clip=mesh(box(.035,.16,.018),M.frame);clip.position.set(-.695,y,-.055);g.add(clip);}
+  }});
 
-  /* ---------- 6. MAINBOARD — UPPER (compute) DECK ---------- */
-  addComponent({
-    id: "boardupper", name: "Mainboard (Upper Deck)", cardId: "motherboard", index: TOUR.indexOf("motherboard"),
-    home: V(0.434, 0.194, 0.014), exp: V(1.65, 0.78, 0.5), t0: 0.22, t1: 0.29,
-    build: g => {
-      g.add(mesh(plate(0.38, 1.15, 0.016, 0.04), M.pcb));
-      const art = new THREE.Mesh(new THREE.PlaneGeometry(0.35, 1.11), M.pcbArt);
-      art.position.z = 0.009; g.add(art);
-      /* the perimeter via ring is what visually marks the sandwich */
-      if (LOD) {
-        const ring = (n, x0, y0, dx, dy) => {
-          for (let i = 0; i < n; i++) {
-            const v = mesh(cyl(0.005, 0.018, 6), M.gold);
-            v.rotation.x = Math.PI / 2; v.position.set(x0 + dx * i, y0 + dy * i, 0);
-            g.add(v);
-          }
-        };
-        ring(16, -0.175, -0.55, 0, 0.0733);
-        ring(16, 0.175, -0.55, 0, 0.0733);
-      }
-      /* application processor + stacked memory, then support ICs */
-      const soc = mesh(box(0.17, 0.17, 0.022), M.soc); soc.position.set(0, 0.30, 0.018); g.add(soc);
-      const die = new THREE.Mesh(new THREE.PlaneGeometry(0.145, 0.145), M.socTop);
-      die.position.set(0, 0.30, 0.030); g.add(die);
-      const mem = mesh(box(0.11, 0.11, 0.014), M.memory); mem.position.set(0, -0.02, 0.016); g.add(mem);
-      const sto = mesh(box(0.13, 0.10, 0.014), M.storage); sto.position.set(0, -0.26, 0.016); g.add(sto);
-      const pmic = mesh(box(0.10, 0.08, 0.013), M.pmic); pmic.position.set(0, -0.44, 0.015); g.add(pmic);
-      /* press-fit ribbon sockets, all on the display-facing face */
-      for (const y of [0.52, -0.56]) {
-        const s = mesh(box(0.15, 0.045, 0.012), M.gold); s.position.set(0, y, 0.014); g.add(s);
-      }
-    }
-  });
+  /* 2 — earpiece speaker with mounting tabs and grille */
+  addComponent({id:"earpiece",name:"Earpiece Speaker",cardId:"earpiece",index:TOUR.indexOf("earpiece"),home:V(0,1.325,.025),exp:V(-.88,1.18,1.82),expMobile:V(-.42,.88,1.72),t0:.21,t1:.31,rotZ:-.16,build:g=>{
+    const body=mesh(polyPlate([[-.19,-.10],[.17,-.10],[.22,-.05],[.22,.07],[.14,.11],[-.18,.11],[-.22,.05],[-.22,-.05]],.074),M.plastic);g.add(body);
+    const cap=mesh(plate(.28,.13,.016,.025),M.shield);cap.position.z=.045;g.add(cap);
+    const face=new THREE.Mesh(new THREE.PlaneGeometry(.21,.040),M.grille);face.position.z=.055;g.add(face);
+    addMountEar(g,-.22,.06,.012,M.shield,.025);addMountEar(g,.22,-.05,.012,M.shield,.025);
+    const tail=mesh(polyPlate([[-.04,.04],[.12,.04],[.12,-.01],[.22,-.01],[.22,-.07],[-.04,-.07]],.007),M.filmFlex);tail.position.set(.12,-.05,.020);g.add(tail);addPinRow(g,.31,-.09,.025,5,.013);
+  }});
 
-  /* ---------- 7. 3D FACE-SCANNING ASSEMBLY (chassis-side notch hardware) ---------- */
-  addComponent({
-    id: "facescancam", name: "3D Face-Scanning Assembly", cardId: "proximity", index: TOUR.indexOf("proximity"),
-    home: V(0, 1.3315, 0.014), exp: V(0.75, 2.15, 1.05), t0: 0.31, t1: 0.38,
-    build: g => {
-      /* receiver at the far -x end; the wide baseline to the emitter is what
-         makes depth sensing work, so the two are never modelled together */
-      const rx = mesh(box(0.075, 0.09, 0.055), M.silicon); rx.position.set(-0.2825, 0, 0); g.add(rx);
-      const rxw = mesh(cyl(0.022, 0.01, LOD ? 16 : 8), M.sensorBlue);
-      rxw.rotation.x = Math.PI / 2; rxw.position.set(-0.2825, 0, 0.031); g.add(rxw);
-      /* front camera + dot emitter block at the +x end */
-      const cam = mesh(box(0.081, 0.081, 0.062), M.silicon); cam.position.set(0.1505, 0, 0); g.add(cam);
-      const lens = mesh(cyl(0.026, 0.012, LOD ? 18 : 9), M.lensGlass);
-      lens.rotation.x = Math.PI / 2; lens.position.set(0.1505, 0, 0.034); g.add(lens);
-      const dot = mesh(box(0.077, 0.077, 0.058), M.silicon); dot.position.set(0.2755, 0, 0); g.add(dot);
-      const dotw = mesh(cyl(0.02, 0.01, LOD ? 16 : 8), M.sensorBlue);
-      dotw.rotation.x = Math.PI / 2; dotw.position.set(0.2755, 0, 0.032); g.add(dotw);
-      /* ribbon linking them, routed just below the notch mouth */
-      const rib = mesh(box(0.60, 0.018, 0.003), M.filmCopper);
-      rib.position.set(0, -0.052, 0.005); g.add(rib);
-    }
-  });
+  /* 3 — front camera / TrueDepth flex with three optical windows */
+  addComponent({id:"facescancam",name:"Front Camera & TrueDepth Flex",cardId:"proximity",index:TOUR.indexOf("proximity"),home:V(.15,1.31,.005),exp:V(.78,.95,1.68),expMobile:V(.40,.70,1.60),t0:.22,t1:.32,rotZ:-.30,build:g=>{
+    const flex=mesh(polyPlate([[-.40,-.05],[.24,-.05],[.24,-.14],[.38,-.14],[.38,.13],[.18,.13],[.18,.05],[-.40,.05]],.008),M.filmFlex);g.add(flex);
+    addLens(g,-.23,0,.049,.010,false);addLens(g,.01,0,.046,.010,false);
+    const dot=mesh(box(.082,.072,.055),M.silicon);dot.position.set(.23,0,.026);g.add(dot);
+    const win=mesh(cyl(.026,.012,LOD?22:14),M.sensorBlue);win.rotation.x=Math.PI/2;win.position.set(.23,0,.059);g.add(win);
+    addPinRow(g,.31,-.11,.018,7,.012);
+  }});
 
-  /* ---------- 8. MICROPHONE ARRAY ---------- */
-  addComponent({
-    id: "microphones", name: "Microphone Array", cardId: "microphones", index: TOUR.indexOf("microphones"),
-    home: V(-0.2, -1.44, -0.012), exp: V(-0.5, -2.15, 0.5), t0: 0.30, t1: 0.37,
-    build: g => {
-      const m = mesh(box(0.05, 0.045, 0.028), M.plastic); g.add(m);
-      if (LOD) {
-        const bt = mesh(cyl(0.026, 0.01, 10), M.boot);
-        bt.rotation.x = Math.PI / 2; bt.position.z = 0.019; g.add(bt);
-      }
-      /* the other two ports are markers on their host parts */
-      const p2 = mesh(cyl(0.012, 0.006, 8), M.silicon);
-      p2.rotation.x = Math.PI / 2; p2.position.set(0.06, 0.02, 0.016); g.add(p2);
-    }
-  });
+  /* 4 — independent stamped brackets and camera/connector shields */
+  addComponent({id:"brackets",name:"Display & Connector Brackets",cardId:null,index:null,home:V(.30,.16,.018),exp:V(-.10,.58,1.46),expMobile:V(0,.48,1.42),t0:.23,t1:.35,rotZ:-.18,build:g=>{
+    const parts=[
+      {pts:[[-.28,-.08],[.20,-.08],[.20,.02],[.28,.02],[.28,.11],[-.05,.11],[-.05,.17],[-.28,.17]],p:[-.20,.34],m:M.shield},
+      {pts:[[-.18,-.06],[.18,-.06],[.18,.06],[.04,.06],[.04,.13],[-.18,.13]],p:[.26,.29],m:M.frame},
+      {pts:[[-.10,-.22],[.10,-.22],[.10,.04],[.22,.04],[.22,.16],[-.02,.16],[-.02,.22],[-.10,.22]],p:[.37,-.10],m:M.shield},
+      {pts:[[-.24,-.07],[.20,-.07],[.20,.07],[.05,.07],[.05,.15],[-.24,.15]],p:[-.10,-.30],m:M.frame},
+      {pts:[[-.14,-.05],[.14,-.05],[.14,.05],[.04,.05],[.04,.13],[-.14,.13]],p:[.35,.27],m:M.metalDark}
+    ];
+    parts.forEach((d,i)=>{const part=mesh(polyPlate(d.pts,.018),d.m);part.position.set(d.p[0],d.p[1],i*.016);g.add(part);addMountEar(g,d.p[0]+d.pts[0][0],d.p[1]+d.pts[0][1],i*.016+.004,d.m,.025);});
+    const cameraShield=mesh(polyPlate([[-.25,-.23],[.19,-.23],[.19,-.05],[.28,-.05],[.28,.20],[.10,.20],[.10,.26],[-.25,.26]],.024,[[.20,.12,.025]]),M.shield);cameraShield.position.set(-.45,-.02,.045);g.add(cameraShield);
+  }});
 
-  /* ---------- 9. BATTERY — one rectangular pouch cell ---------- */
-  addComponent({
-    id: "battery", name: "Battery", cardId: "battery", index: TOUR.indexOf("battery"),
-    home: V(-0.23, -0.115, -0.018), exp: V(-1.75, 0.35, 0.5), t0: 0.20, t1: 0.27,
-    build: g => {
-      g.add(mesh(plate(0.86, 1.87, 0.096, 0.06), M.battery));
-      const label = new THREE.Mesh(new THREE.PlaneGeometry(0.80, 1.60), M.battLabel);
-      label.position.z = 0.049; g.add(label);
-      /* six stretch-release pull tabs: three at each end */
-      if (LOD) for (const y of [0.86, -0.86]) for (const x of [-0.26, 0, 0.26]) {
-        const tab = mesh(box(0.13, 0.09, 0.004), M.tab);
-        tab.position.set(x, y, -0.050); g.add(tab);
-      }
-      /* protection circuit + single ribbon tail to one board connector */
-      const bms = mesh(box(0.26, 0.06, 0.02), M.pcb); bms.position.set(0.24, 0.96, 0.02); g.add(bms);
-      const tail = mesh(box(0.07, 0.14, 0.003), M.filmCopper); tail.position.set(0.36, 1.02, 0.02); g.add(tail);
-    }
-  });
+  /* 5 — dual camera carrier, OIS cradle and two long flex tails */
+  addComponent({id:"camera",name:"Rear Dual Camera Module",cardId:"camera",index:TOUR.indexOf("camera"),home:V(.44,1.05,-.028),exp:V(.90,.48,1.22),expMobile:V(.42,.38,1.20),t0:.25,t1:.37,rotZ:-1.05,spin:.18,build:g=>{
+    const deck=mesh(polyPlate([[-.21,-.28],[.19,-.28],[.24,-.20],[.24,.22],[.18,.28],[-.20,.28],[-.25,.20],[-.25,-.20]],.064),M.camDeck);g.add(deck);
+    const deckMark=new THREE.Mesh(new THREE.PlaneGeometry(.34,.44),M.deckArt);deckMark.position.z=.033;g.add(deckMark);
+    const foam=mesh(framePlate(.43,.55,.34,.46,.010,.075,.055),M.foam);foam.position.z=.036;g.add(foam);
+    addLens(g,.04,.145,.110,-.050,true);addLens(g,.04,-.145,.106,-.050,false);
+    const flex1=mesh(polyPlate([[-.07,.24],[.07,.24],[.07,.04],[.21,.04],[.21,-.08],[.32,-.08],[.32,-.19],[.12,-.19],[.12,-.08],[-.07,-.08]],.008),M.filmFlex);flex1.position.set(-.28,.02,-.008);g.add(flex1);
+    const flex2=mesh(polyPlate([[-.06,.19],[.06,.19],[.06,.02],[.18,.02],[.18,-.13],[-.02,-.13],[-.02,-.03],[-.06,-.03]],.008),M.filmFlex);flex2.position.set(-.42,-.13,-.010);g.add(flex2);
+    addPinRow(g,-.14,-.17,.002,10,.012);addPinRow(g,-.30,-.27,0,10,.012);
+    addMountEar(g,-.24,.26,-.018,M.frame,.026);addMountEar(g,.23,-.25,-.018,M.frame,.026);
+  }});
 
-  /* ---------- 10. SIM TRAY & READER ---------- */
-  addComponent({
-    id: "simtray", name: "SIM Tray & Reader", cardId: null, index: null,
-    home: V(0.565, -0.6, -0.02), exp: V(2.15, 0.05, 0.5), t0: 0.29, t1: 0.36,
-    build: g => {
-      g.add(mesh(box(0.23, 0.3, 0.058), M.frame));
-      const card = mesh(box(0.16, 0.20, 0.012), M.gold); card.position.z = 0.026; g.add(card);
-      if (LOD) {
-        const seal = mesh(box(0.012, 0.26, 0.05), M.boot); seal.position.x = 0.112; g.add(seal);
-        const pin = mesh(cyl(0.007, 0.016, 8), M.silicon);
-        pin.rotation.z = Math.PI / 2; pin.position.set(0.118, 0, 0); g.add(pin);
-      }
-    }
-  });
+  /* 6 — stepped double-decker logic board with shields, chips and sockets */
+  addComponent({id:"motherboard",name:"Stacked Logic Board",cardId:"motherboard",index:TOUR.indexOf("motherboard"),home:V(.43,.22,-.01),exp:V(.12,.12,1.01),expMobile:V(.08,.10,1.00),t0:.25,t1:.38,rotZ:-1.08,build:g=>{
+    const boardPts=[[-.22,-.62],[.18,-.62],[.18,-.47],[.25,-.47],[.25,.28],[.16,.28],[.16,.55],[.02,.62],[-.28,.62],[-.28,.19],[-.22,.19]];
+    const goldBase=mesh(polyPlate(boardPts,.035),M.gold);goldBase.position.z=-.020;g.add(goldBase);
+    const innerPts=boardPts.map(p=>[p[0]*.94,p[1]*.975]);const board=mesh(polyPlate(innerPts,.043),M.pcb);g.add(board);
+    if(LOD){const art=new THREE.Mesh(new THREE.PlaneGeometry(.36,1.08),M.pcbArt);art.position.set(-.015,-.02,.024);g.add(art);}
+    addShieldCan(g,.24,.28,-.06,.39,.045);addShieldCan(g,.25,.24,-.02,.05,.045);addShieldCan(g,.20,.18,-.05,-.28,.045);
+    const soc=mesh(box(.16,.16,.026),M.soc);soc.position.set(-.03,.39,.069);g.add(soc);
+    if(LOD){const socMark=new THREE.Mesh(new THREE.PlaneGeometry(.145,.145),M.socTop);socMark.position.set(-.03,.39,.083);g.add(socMark);}
+    const chipDefs=[[-.13,-.47,.10,.13,M.memory],[.11,-.18,.11,.09,M.storage],[.10,.24,.08,.10,M.pmic]];
+    chipDefs.forEach(([x,y,w,h,mat])=>{const chip=mesh(box(w,h,.018),mat);chip.position.set(x,y,.061);g.add(chip);});
+    for(const y of [-.54,-.39,.56]){const socket=mesh(box(.19,.045,.022),M.metalDark);socket.position.set(.04,y,.046);g.add(socket);addPinRow(g,.04,y,.060,9,.016);}
+    for(const p of [[-.24,-.54],[-.24,.52],[.17,-.43],[.14,.28]]){addMountEar(g,p[0],p[1],.003,M.gold,.022);addScrew(g,p[0],p[1],.012,.010);}
+  }});
 
-  /* ---------- 11. REAR DUAL CAMERA (one bracket, two lenses, diagonal) ---------- */
-  addComponent({
-    id: "camera", name: "Rear Dual Camera Module", cardId: "camera", index: TOUR.indexOf("camera"),
-    home: V(0.27, 1.055, -0.025), exp: V(1.15, 1.85, 0.5), t0: 0.25, t1: 0.32, spin: Math.PI,
-    build: g => {
-      g.add(mesh(plate(0.5, 0.44, 0.05, 0.09), M.camDeck));
-      const decal = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.36), M.deckArt);
-      decal.rotation.y = Math.PI; decal.position.z = -0.027; g.add(decal);
-      /* barrels project toward the back; ring sizes differ per the spec */
-      const lens = (x, y, r, stab) => {
-        const barrel = mesh(cyl(r * 0.78, 0.055, LOD ? 24 : 12), M.lensBarrel);
-        barrel.rotation.x = Math.PI / 2; barrel.position.set(x, y, -0.05); g.add(barrel);
-        const ring = mesh(cyl(r, 0.014, LOD ? 24 : 12), M.lensRing);
-        ring.rotation.x = Math.PI / 2; ring.position.set(x, y, -0.082); g.add(ring);
-        const glass = mesh(cyl(r * 0.66, 0.012, LOD ? 24 : 12), M.lensGlass);
-        glass.rotation.x = Math.PI / 2; glass.position.set(x, y, -0.089); g.add(glass);
-        const pupil = mesh(cyl(r * 0.3, 0.014, LOD ? 16 : 8), M.silicon);
-        pupil.rotation.x = Math.PI / 2; pupil.position.set(x, y, -0.093); g.add(pupil);
-        /* the stabilised lens carries a visibly larger suspension block */
-        if (stab) {
-          const ois = mesh(box(r * 1.7, r * 1.7, 0.022), M.silicon);
-          ois.position.set(x, y, -0.012); g.add(ois);
-        }
-      };
-      lens(0.15, 0.15, 0.115, true);    // stabilised main
-      lens(-0.15, -0.15, 0.105, false); // wide view
-      /* two independent ribbon tails to separate board sockets */
-      for (const x of [-0.06, 0.06]) {
-        const t = mesh(box(0.05, 0.10, 0.003), M.filmCopper);
-        t.position.set(x, -0.25, 0.01); g.add(t);
-      }
-    }
-  });
+  /* 7 — independent EMI and graphite cover matching the board contour */
+  addComponent({id:"cooling",name:"Graphite & EMI Shield Set",cardId:"cooling",index:TOUR.indexOf("cooling"),home:V(.43,.22,.026),exp:V(-.42,.50,1.30),expMobile:V(-.32,.42,1.27),t0:.26,t1:.39,rotZ:-.78,build:g=>{
+    const cover=mesh(polyPlate([[-.25,-.31],[.18,-.31],[.18,-.13],[.28,-.13],[.28,.26],[.10,.26],[.10,.33],[-.25,.33]],.020,[[.20,.19,.023],[-.19,-.23,.020]]),M.shield);g.add(cover);
+    const grain=new THREE.Mesh(new THREE.PlaneGeometry(.38,.48),M.shieldArt);grain.position.set(-.02,0,.012);g.add(grain);
+    const graphite=mesh(polyPlate([[-.18,-.23],[.14,-.23],[.14,-.06],[.22,-.06],[.22,.20],[-.18,.20]],.006),M.graphite);graphite.position.z=.017;g.add(graphite);
+    addMountEar(g,-.24,-.27,.004,M.shield,.025);addMountEar(g,.25,.22,.004,M.shield,.025);
+  }});
 
-  /* ---------- 12. BOTTOM LOUDSPEAKER (sealed chamber, deepest part) ---------- */
-  addComponent({
-    id: "loudspeaker", name: "Bottom Loudspeaker", cardId: "loudspeaker", index: TOUR.indexOf("loudspeaker"),
-    home: V(0.455, -1.21, -0.0295), exp: V(-1.8, -1.35, 0.5), t0: 0.27, t1: 0.34,
-    build: g => {
-      g.add(mesh(box(0.46, 0.35, 0.111), M.plastic));
-      const face = new THREE.Mesh(new THREE.PlaneGeometry(0.30, 0.20), M.grille);
-      face.position.z = 0.057; g.add(face);
-      if (LOD) {
-        const gasket = mesh(plate(0.42, 0.31, 0.006, 0.04), M.boot);
-        gasket.position.z = -0.057; g.add(gasket);
-        for (const x of [-0.14, 0.14]) {
-          const nub = mesh(box(0.026, 0.02, 0.01), M.gold);
-          nub.position.set(x, 0.15, 0.05); g.add(nub);
-        }
-      }
-    }
-  });
+  /* 8 — stamped SIM reader with six apertures and separate gasketed tray */
+  addComponent({id:"simtray",name:"SIM Tray & Reader",cardId:null,index:null,home:V(.57,-.58,-.02),exp:V(-.82,-.02,.90),expMobile:V(-.42,.02,.88),t0:.27,t1:.40,rotZ:.14,build:g=>{
+    const reader=mesh(polyPlate([[-.20,-.22],[.18,-.22],[.23,-.16],[.23,.18],[.16,.23],[-.18,.23],[-.23,.17],[-.23,-.16]],.072),M.metalDark);reader.position.x=.19;g.add(reader);
+    const lid=mesh(plate(.38,.39,.018,.045),M.shield);lid.position.set(.19,0,.045);g.add(lid);
+    for(const y of [-.10,.10])for(const x of [.07,.19,.31]){const slot=mesh(plate(.045,.075,.010,.022),M.foam);slot.position.set(x,y,.057);g.add(slot);}
+    addMountEar(g,-.04,-.17,.012,M.shield,.028);addMountEar(g,.42,.17,.012,M.shield,.028);
+    const tray=mesh(framePlate(.31,.40,.20,.29,.024,.045,.030),M.housing);tray.position.set(-.31,0,.005);g.add(tray);
+    const gasket=mesh(framePlate(.285,.375,.225,.315,.010,.040,.028),M.boot);gasket.position.set(-.31,0,.020);g.add(gasket);
+    addMountEar(g,-.31,.23,.007,M.housing,.020);
+  }});
 
-  /* ---------- 13. LINEAR VIBRATION MOTOR (flat block, long axis across) ---------- */
-  addComponent({
-    id: "haptic", name: "Linear Vibration Motor", cardId: "haptic", index: TOUR.indexOf("haptic"),
-    home: V(-0.4, -1.19, -0.044), exp: V(-1.8, -1.9, 0.5), t0: 0.27, t1: 0.34,
-    build: g => {
-      g.add(mesh(box(0.52, 0.21, 0.082), M.frame));
-      const lid = new THREE.Mesh(new THREE.PlaneGeometry(0.44, 0.15), M.shieldArt);
-      lid.position.z = 0.042; g.add(lid);
-      /* the moving mass slides along the long axis */
-      const mass = mesh(box(0.22, 0.11, 0.03), M.copper); mass.position.z = 0.01; g.add(mass);
-      const tail = mesh(box(0.10, 0.05, 0.003), M.filmCopper);
-      tail.position.set(0.30, 0.02, 0.02); g.add(tail);
-    }
-  });
+  /* 9 — layered Taptic Engine with mount ears, top label and folded flex */
+  addComponent({id:"haptic",name:"Taptic Engine",cardId:"haptic",index:TOUR.indexOf("haptic"),home:V(-.40,-1.18,-.025),exp:V(-.82,-.68,.93),expMobile:V(-.40,-.50,.91),t0:.29,t1:.42,rotZ:-.14,build:g=>{
+    const base=mesh(polyPlate([[-.34,-.18],[.31,-.18],[.36,-.10],[.36,.12],[.29,.18],[-.31,.18],[-.36,.11],[-.36,-.10]],.096),M.metalDark);g.add(base);
+    const rim=mesh(framePlate(.62,.30,.53,.22,.016,.055,.040),M.frame);rim.position.z=.056;g.add(rim);
+    const label=new THREE.Mesh(new THREE.PlaneGeometry(.50,.20),M.tapticLabel);label.position.z=.066;g.add(label);
+    addMountEar(g,-.37,-.12,.018,M.frame,.032);addMountEar(g,.37,.12,.018,M.frame,.032);
+    const rail=mesh(box(.42,.045,.038),M.housing);rail.position.set(.02,-.17,.030);g.add(rail);
+    const flex=mesh(polyPlate([[-.05,.06],[.18,.06],[.18,.01],[.33,.01],[.33,-.07],[.10,-.07],[.10,-.02],[-.05,-.02]],.008),M.filmFlex);flex.position.set(.32,.02,.010);g.add(flex);addPinRow(g,.62,-.03,.018,8,.012);
+  }});
 
-  /* ---------- 14. MAINBOARD — LOWER (radio) DECK ---------- */
-  addComponent({
-    id: "boardlower", name: "Mainboard (Lower Deck)", cardId: null, index: null,
-    home: V(0.434, 0.194, -0.054), exp: V(1.65, -0.62, 0.5), t0: 0.18, t1: 0.25,
-    build: g => {
-      g.add(mesh(plate(0.38, 1.15, 0.016, 0.04), M.pcb));
-      const art = new THREE.Mesh(new THREE.PlaneGeometry(0.35, 1.11), M.pcbArt);
-      art.rotation.y = Math.PI; art.position.z = -0.009; g.add(art);
-      const modem = mesh(box(0.14, 0.14, 0.016), M.soc); modem.position.set(0, 0.34, -0.016); g.add(modem);
-      const rf = mesh(box(0.11, 0.09, 0.013), M.silicon); rf.position.set(0, 0.02, -0.015); g.add(rf);
-      const pa = mesh(box(0.09, 0.07, 0.012), M.pmic); pa.position.set(0, -0.28, -0.014); g.add(pa);
-      /* antenna feed clips along the outboard edge */
-      if (LOD) for (const y of [0.46, -0.10, -0.50]) {
-        const clip = mesh(box(0.03, 0.05, 0.012), M.gold); clip.position.set(0.17, y, -0.014); g.add(clip);
-      }
-    }
-  });
+  /* 10 — irregular acoustic chamber, perforated cap and white gasket */
+  addComponent({id:"loudspeaker",name:"Bottom Loudspeaker",cardId:"loudspeaker",index:TOUR.indexOf("loudspeaker"),home:V(.46,-1.18,-.02),exp:V(.80,-.68,.90),expMobile:V(.40,-.50,.87),t0:.29,t1:.42,rotZ:.10,build:g=>{
+    const bodyPts=[[-.28,-.20],[.20,-.20],[.29,-.10],[.29,.12],[.17,.20],[-.08,.20],[-.08,.14],[-.28,.14]];
+    const body=mesh(polyPlate(bodyPts,.110),M.plastic);g.add(body);
+    const cap=mesh(polyPlate([[-.23,-.15],[.18,-.15],[.23,-.08],[.23,.10],[.14,.15],[-.23,.15]],.020),M.shield);cap.position.z=.064;g.add(cap);
+    for(const y of [-.07,.05])for(const x of [-.15,-.03,.09]){const vent=mesh(plate(.052,.075,.009,.025),M.foam);vent.position.set(x,y,.077);g.add(vent);}
+    const gasket=mesh(framePlate(.39,.30,.29,.20,.012,.050,.035),M.gasketWhite);gasket.position.set(.34,.01,.018);g.add(gasket);
+    addMountEar(g,-.28,.18,.015,M.frame,.030);addMountEar(g,.28,-.15,.015,M.frame,.030);
+    const contacts=mesh(plate(.12,.055,.014,.018),M.gold);contacts.position.set(.19,.17,.066);g.add(contacts);addPinRow(g,.19,.17,.075,4,.020);
+  }});
 
-  /* ---------- 15. CHARGING PORT ASSEMBLY (one wide bottom flex) ---------- */
-  addComponent({
-    id: "chargingport", name: "Charging Port Assembly", cardId: "chargingport", index: TOUR.indexOf("chargingport"),
-    home: V(0, -1.43, -0.055), exp: V(-1.15, -2.15, 0.5), t0: 0.29, t1: 0.36,
-    build: g => {
-      g.add(mesh(plate(1.3, 0.08, 0.008, 0.02), M.filmCopper));
-      /* connector receptacle centred on the bottom edge */
-      const shell = mesh(box(0.20, 0.075, 0.048), M.frame); shell.position.z = 0.012; g.add(shell);
-      const mouth = mesh(box(0.155, 0.04, 0.05), M.silicon); mouth.position.z = 0.02; g.add(mouth);
-      if (LOD) {
-        const gasket = new THREE.Mesh(new THREE.TorusGeometry(0.095, 0.009, 8, 22), M.boot);
-        gasket.position.z = 0.03; gasket.scale.y = 0.42; g.add(gasket);
-        /* screw eyelets grounding the flex to the frame */
-        for (const x of [-0.44, 0.44]) {
-          const sc = mesh(cyl(0.018, 0.01, 10), M.screw);
-          sc.rotation.x = Math.PI / 2; sc.position.set(x, 0, 0.008); g.add(sc);
-        }
-        /* antenna contact tabs */
-        for (const x of [-0.30, 0.30]) {
-          const tb = mesh(box(0.05, 0.04, 0.008), M.gold); tb.position.set(x, 0, 0.008); g.add(tb);
-        }
-      }
-      /* interconnect run up the side rail to the board */
-      const run = mesh(box(0.07, 0.30, 0.003), M.filmCopper);
-      run.position.set(0.42, 0.20, -0.002); g.add(run);
-    }
-  });
+  /* 11 — single-cell foil pouch with seams, BMS cap and folded connector */
+  addComponent({id:"battery",name:"3110 mAh Battery",cardId:"battery",index:TOUR.indexOf("battery"),home:V(-.19,-.10,-.04),exp:V(-.14,-.20,.52),expMobile:V(-.08,-.18,.52),t0:.30,t1:.43,rotZ:-.06,build:g=>{
+    const seam=mesh(plate(.91,1.99,.090,.070),M.metalDark);seam.position.z=-.010;g.add(seam);
+    const pouch=mesh(plate(.87,1.94,.112,.062),M.battery);g.add(pouch);
+    const label=new THREE.Mesh(new THREE.PlaneGeometry(.79,1.70),M.battLabel);label.position.z=.057;g.add(label);
+    const topCap=mesh(plate(.82,.105,.026,.022),M.plastic);topCap.position.set(0,.94,.042);g.add(topCap);
+    const bms=mesh(plate(.34,.082,.024,.018),M.pcb);bms.position.set(.22,.98,.050);g.add(bms);
+    const tail=mesh(polyPlate([[-.055,.16],[.055,.16],[.055,.03],[.13,.03],[.13,-.16],[-.02,-.16],[-.02,-.02],[-.055,-.02]],.008),M.filmFlex);tail.position.set(.34,1.05,.052);g.add(tail);addPinRow(g,.46,.91,.060,8,.012);
+    for(const x of [-.27,0,.27]){const tab=mesh(polyPlate([[-.06,.08],[.06,.08],[.05,-.08],[-.05,-.08]],.006),M.tab);tab.position.set(x,-.95,-.061);g.add(tab);}
+  }});
 
-  /* ---------- 16. GRAPHITE THERMAL LAYER (films only — no vapour chamber) ---------- */
-  addComponent({
-    id: "cooling", name: "Graphite Thermal Layer", cardId: "cooling", index: TOUR.indexOf("cooling"),
-    home: V(0.434, 0.194, -0.0655), exp: V(2.15, -0.78, 0.5), t0: 0.16, t1: 0.23,
-    build: g => {
-      g.add(mesh(plate(0.4, 1.18, 0.007, 0.05), M.graphite));
-      /* Laminated sheets read as slightly offset layers. No stamped-channel
-         overlay here: channels would depict a vapour chamber, which this class
-         of device does not use — the cooling is graphite film only. */
-      const l2 = mesh(plate(0.36, 1.10, 0.003, 0.04), M.graphite);
-      l2.position.set(0.008, 0.01, -0.005); g.add(l2);
-      const l3 = mesh(plate(0.32, 1.02, 0.002, 0.03), M.graphite);
-      l3.position.set(-0.006, -0.01, -0.008); g.add(l3);
-    }
-  });
+  /* 12 — routed Lightning/lower flex with metal port and contact blocks */
+  addComponent({id:"chargingport",name:"Charging Port & Lower Flex",cardId:"chargingport",index:TOUR.indexOf("chargingport"),home:V(0,-1.38,-.06),exp:V(0,-1.08,.25),expMobile:V(0,-.88,.30),t0:.31,t1:.44,rotZ:-.22,build:g=>{
+    const flex=mesh(polyPlate([[-.62,-.06],[-.17,-.06],[-.17,.18],[-.08,.18],[-.08,-.01],[.25,-.01],[.25,.32],[.36,.32],[.36,-.06],[.62,-.06],[.62,.05],[.44,.05],[.44,.47],[.19,.47],[.19,.10],[-.01,.10],[-.01,.34],[-.27,.34],[-.27,.05],[-.62,.05]],.009),M.filmFlex);g.add(flex);
+    const portBody=mesh(plate(.25,.085,.072,.025),M.frame);portBody.position.z=.036;g.add(portBody);
+    const mouth=mesh(plate(.18,.044,.075,.018),M.foam);mouth.position.set(0,-.005,.040);g.add(mouth);
+    addScrew(g,-.43,0,.016,.013);addScrew(g,.43,0,.016,.013);
+    for(const p of [[-.50,.16],[.31,.42]]){const socket=mesh(plate(.15,.065,.020,.018),M.metalDark);socket.position.set(p[0],p[1],.020);g.add(socket);addPinRow(g,p[0],p[1],.032,8,.013);}
+  }});
 
-  /* ---------- 17. WIRELESS CHARGING COIL (spiral + ferrite shield) ---------- */
-  addComponent({
-    id: "wireless", name: "Wireless Charging Coil", cardId: "wireless", index: TOUR.indexOf("wireless"),
-    home: V(0, -0.1, -0.08), exp: V(1.5, -1.9, 0.5), t0: 0.13, t1: 0.20,
-    build: g => {
-      const coil = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.85), M.coilArt);
-      coil.rotation.y = Math.PI; g.add(coil);
-      /* ferrite sheet behind the winding keeps the field off the cell */
-      const ferrite = mesh(plate(0.88, 0.88, 0.004, 0.08), M.graphite);
-      ferrite.position.z = -0.005; g.add(ferrite);
-      const tail = mesh(box(0.06, 0.22, 0.003), M.filmCopper);
-      tail.position.set(0.40, 0.42, -0.002); g.add(tail);
-    }
-  });
+  /* 13 — three MEMS microphones with rubber acoustic boots */
+  addComponent({id:"microphones",name:"Microphone Array",cardId:"microphones",index:TOUR.indexOf("microphones"),home:V(-.20,-1.42,-.018),exp:V(-.40,-.86,.58),expMobile:V(-.28,-.68,.62),t0:.32,t1:.45,rotZ:-.24,build:g=>{
+    const rail=mesh(plate(.28,.09,.008,.025),M.filmFlex);g.add(rail);
+    for(const x of [-.085,0,.085]){const mic=mesh(box(.050,.046,.038),M.metalDark);mic.position.x=x;g.add(mic);const boot=mesh(torus(.022,.007,8,16),M.boot);boot.position.set(x,0,.024);g.add(boot);}
+    addPinRow(g,.18,0,.015,5,.013);
+  }});
 
-  /* ---------- 18. REAR GLASS ---------- */
-  addComponent({
-    id: "rearglass", name: "Rear Glass Panel", cardId: null, index: null,
-    home: V(0, 0, -0.0925), exp: V(0, 0, -0.85), t0: 0.10, t1: 0.17, spin: Math.PI,
-    build: g => {
-      g.add(mesh(plate(1.38, 2.94, 0.015, 0.27), M.rearGlass));
-      const art = new THREE.Mesh(new THREE.PlaneGeometry(1.34, 2.90), M.rearArt);
-      art.rotation.y = Math.PI; art.position.z = -0.009; g.add(art);
-    }
-  });
+  /* 14 — machined silver rear housing with cavities, pads and camera wells */
+  addComponent({id:"rearhousing",name:"Rear Housing & Interior Backplate",cardId:null,index:null,home:V(0,0,-.095),exp:V(0,-.02,-.58),expMobile:V(0,-.02,-.54),t0:.34,t1:.48,build:g=>{
+    const shell=mesh(plate(1.465,2.94,.055,.255),M.housing);g.add(shell);
+    const inset=mesh(plate(1.355,2.79,.020,.21),M.metalDark);inset.position.z=.039;g.add(inset);
+    const graphite=mesh(polyPlate([[-.57,-1.20],[.57,-1.20],[.57,.56],[.30,.56],[.30,1.14],[-.18,1.14],[-.18,.78],[-.57,.78]],.009),M.graphite);graphite.position.z=.052;g.add(graphite);
+    const coilRecess=mesh(cyl(.48,.012,LOD?42:24),M.foam);coilRecess.rotation.x=Math.PI/2;coilRecess.position.set(0,-.20,.057);g.add(coilRecess);
+    for(const y of [1.19,.91]){const well=mesh(torus(.116,.018,10,LOD?34:20),M.foam);well.position.set(.45,y,.065);g.add(well);}
+    const cameraShelf=mesh(polyPlate([[.18,.77],[.62,.77],[.62,1.34],[.12,1.34],[.12,1.08],[.18,1.08]],.020),M.plastic);cameraShelf.position.z=.058;g.add(cameraShelf);
+    const lowerPocket=mesh(polyPlate([[-.62,-1.34],[.62,-1.34],[.62,-.96],[.28,-.96],[.28,-1.08],[-.12,-1.08],[-.12,-.96],[-.62,-.96]],.018),M.plastic);lowerPocket.position.z=.058;g.add(lowerPocket);
+    for(const p of [[-.60,1.18],[-.60,.80],[-.59,-1.08],[.58,-1.12],[.62,.45]])addScrew(g,p[0],p[1],.072,.012);
+    for(const p of [[-.53,-.75],[-.53,-.63],[.54,.42],[.54,.54]]){const pad=mesh(box(.055,.035,.012),M.gold);pad.position.set(p[0],p[1],.071);g.add(pad);}
+    for(const y of [-.65,-.25,.20,.62]){const foam=mesh(box(.045,.24,.012),M.foam);foam.position.set(-.64,y,.066);g.add(foam);}
+  }});
 
-  /* ---------- 19. REAR CAMERA MESA (formed in the rear glass, proud of it) ---------- */
-  addComponent({
-    id: "camerabump", name: "Rear Camera Mesa", cardId: null, index: null,
-    home: V(0.27, 1.055, -0.1245), exp: V(0.27, 1.055, -1.0), t0: 0.10, t1: 0.17,
-    build: g => {
-      /* plateau */
-      g.add(mesh(plate(0.58, 0.58, 0.034, 0.12), M.rearGlass));
-      /* trim rings step a further stage proud, matching the lens centres */
-      const ring = (x, y, r) => {
-        const rg = mesh(cyl(r, 0.015, LOD ? 24 : 12), M.lensRing);
-        rg.rotation.x = Math.PI / 2; rg.position.set(x, y, -0.024); g.add(rg);
-      };
-      ring(0.15, 0.15, 0.115);
-      ring(-0.15, -0.15, 0.105);
-      /* flash disc and the rear microphone pinhole complete the square */
-      const flash = mesh(cyl(0.0435, 0.012, LOD ? 18 : 9), M.flash);
-      flash.rotation.x = Math.PI / 2; flash.position.set(-0.15, 0.15, -0.022); g.add(flash);
-      const pin = mesh(cyl(0.01, 0.01, 8), M.silicon);
-      pin.rotation.x = Math.PI / 2; pin.position.set(0.15, -0.15, -0.021); g.add(pin);
-    }
-  });
+  /* 15 — bonded wireless charging and NFC assembly */
+  addComponent({id:"wireless",name:"Wireless Charging & NFC Coil",cardId:"wireless",index:TOUR.indexOf("wireless"),home:V(0,-.10,-.060),exp:V(0,-.08,-.48),expMobile:V(0,-.08,-.45),t0:.34,t1:.48,build:g=>{
+    g.add(mesh(plate(.99,1.08,.010,.11),M.graphite));
+    const art=new THREE.Mesh(new THREE.PlaneGeometry(.93,.93),M.coilArt);art.position.z=.008;g.add(art);
+    const coil=new THREE.Mesh(new THREE.TorusGeometry(.44,.022,10,LOD?60:32),M.copper);coil.position.z=.014;g.add(coil);
+    const flex=mesh(polyPlate([[-.045,.26],[.045,.26],[.045,.05],[.12,.05],[.12,-.26],[-.02,-.26],[-.02,-.03],[-.045,-.03]],.007),M.filmFlex);flex.position.set(.35,.58,.014);g.add(flex);addPinRow(g,.45,.36,.022,6,.012);
+  }});
 
-  /* ---------- 20. MID-FRAME CHASSIS (the structural spine) ---------- */
-  addComponent({
-    id: "midframe", name: "Mid-Frame Chassis", cardId: null, index: null,
-    home: V(0, 0, 0), exp: V(0, 0, 0), t0: 0.05, t1: 0.12,
-    build: g => {
-      const outer = rrShape(1.42, 2.98, 0.27);
-      const inner = rrShape(1.38, 2.94, 0.25);
-      outer.holes.push(new THREE.Path(inner.getPoints(seg * 4)));
-      const geo = new THREE.ExtrudeGeometry(outer, {
-        depth: 0.2, curveSegments: seg, bevelEnabled: true,
-        bevelThickness: 0.006, bevelSize: 0.006, bevelOffset: 0, bevelSegments: bevSeg
-      });
-      geo.translate(0, 0, -0.1);
-      g.add(mesh(geo, M.frame));
-    }
-  });
+  /* 16 — aluminium chassis rail */
+  addComponent({id:"midframe",name:"Aluminium Housing Rail",cardId:null,index:null,home:V(0,0,0),exp:V(0,0,-.42),expMobile:V(0,0,-.40),t0:.35,t1:.48,build:g=>{
+    const outer=rrShape(1.505,3,.255),inner=rrShape(1.445,2.91,.225);outer.holes.push(new THREE.Path(inner.getPoints(seg*4)));
+    const geo=new THREE.ExtrudeGeometry(outer,{depth:.20,curveSegments:seg,bevelEnabled:true,bevelThickness:.006,bevelSize:.006,bevelOffset:0,bevelSegments:bevSeg});geo.translate(0,0,-.10);g.add(mesh(geo,M.housing));
+  }});
 
-  /* ---------- 21. ANTENNA BANDS (splits in the metal rail) ---------- */
-  addComponent({
-    id: "antennabands", name: "Antenna Bands", cardId: null, index: null,
-    home: V(0, 0, 0), exp: V(0, 0, -0.3), t0: 0.05, t1: 0.12,
-    build: g => {
-      /* hairline non-conductive fills breaking the rail's continuity */
-      const band = (w, h, x, y) => {
-        const b = mesh(box(w, h, 0.2), M.plastic); b.position.set(x, y, 0); g.add(b);
-      };
-      band(0.34, 0.016, -0.30, 1.49);
-      band(0.34, 0.016, 0.30, -1.49);
-      band(0.016, 0.30, 0.71, 0.90);
-      band(0.016, 0.30, -0.71, -0.90);
-    }
-  });
+  /* 17 — rear camera plateau, flash and microphone stay with housing */
+  addComponent({id:"camerabump",name:"Rear Camera Plateau",cardId:null,index:null,home:V(.44,1.05,-.125),exp:V(.44,1.05,-.62),expMobile:V(.44,1.05,-.56),t0:.35,t1:.48,build:g=>{
+    g.add(mesh(plate(.50,.56,.038,.105),M.rearGlass));
+    for(const y of [1.19,.91]){const bezel=mesh(torus(.118,.020,10,LOD?36:22),M.lensRing);bezel.position.set(0,y-1.05,-.031);g.add(bezel);}
+    const flash=mesh(cyl(.044,.014,LOD?22:14),M.flash);flash.rotation.x=Math.PI/2;flash.position.set(-.115,.145,-.028);g.add(flash);
+    const mic=mesh(cyl(.010,.011,10),M.foam);mic.rotation.x=Math.PI/2;mic.position.set(-.115,-.145,-.028);g.add(mic);
+  }});
 
+  /* 18 — buttons, SIM seam, port openings and antenna breaks */
+  addComponent({id:"exteriordetails",name:"Exterior Controls",cardId:null,index:null,home:V(0,0,0),exp:V(0,0,-.42),expMobile:V(0,0,-.40),t0:.35,t1:.48,build:g=>{
+    const key=(x,y,h,mat=M.housing)=>{const button=mesh(box(.022,h,.09),mat);button.position.set(x,y,0);g.add(button);};
+    key(-.758,.89,.115,M.metalDark);key(-.758,.53,.245);key(-.758,.19,.245);key(.758,.47,.385);
+    const traySeam=mesh(box(.010,.31,.128),M.foam);traySeam.position.set(.754,-.52,0);g.add(traySeam);
+    const port=mesh(plate(.19,.026,.072,.012),M.foam);port.rotation.x=Math.PI/2;port.position.set(0,-1.505,0);g.add(port);
+    for(const x of [-.54,-.46,-.38,.32,.40,.48,.56,.64]){const hole=mesh(cyl(.012,.022,10),M.mesh);hole.position.set(x,-1.505,0);g.add(hole);}
+    const band=(w,h,x,y)=>{const b=mesh(box(w,h,.20),M.gasketWhite);b.position.set(x,y,0);g.add(b);};
+    band(.34,.016,-.30,1.49);band(.34,.016,.30,-1.49);band(.016,.30,.748,.90);band(.016,.30,-.748,-.90);
+  }});
   /* ======================================================================
      ANCHORS for connector lines / labels (world space, computed per frame)
      ==================================================================== */
@@ -631,11 +720,15 @@ function run(THREE, RoomEnvironment) {
   /* ======================================================================
      SCROLL TIMELINE
      ==================================================================== */
-  /* Rebalanced: shorter reveal/explosion, longer tour dwell per component. */
+  /* The exact GLB opens first, then gives way to the registered service stack. */
   const P = {
-    revealEnd: 0.08,
-    explodeStart: 0.08, explodeEnd: 0.42,
-    tourStart: 0.46, tourEnd: 0.92,
+    revealEnd: 0.10,
+    handoffStart: 0.10, handoffEnd: 0.19,
+    displayReleaseEnd: 0.23,
+    displayFadeStart: 0.19, displayFadeEnd: 0.23,
+    bodyFadeStart: 0.31, bodyFadeEnd: 0.42,
+    explodeStart: 0.19, explodeEnd: 0.49,
+    tourStart: 0.51, tourEnd: 0.92,
     overviewStart: 0.92
   };
 
@@ -644,6 +737,7 @@ function run(THREE, RoomEnvironment) {
   let idleYaw = 0;
   let stageW = 1, stageH = 1;       // cached in resize(); no layout reads per frame
   const tmpV = new THREE.Vector3();
+  const tmpV2 = new THREE.Vector3();
   const controlsEl = document.getElementById("ip-controls");
 
   function computeProgress() {
@@ -654,7 +748,8 @@ function run(THREE, RoomEnvironment) {
   }
 
   function phaseLabel(p) {
-    if (p < P.revealEnd) return "Assembled";
+    if (p < P.handoffStart) return "Assembled";
+    if (p < P.handoffEnd) return "Opening display";
     if (p < P.explodeEnd) return "Disassembling";
     if (p < P.tourStart) return "Exploded view";
     if (p < P.overviewStart) return "Component " + (activeIdx + 1 || 1) + " / " + tourComps.length;
@@ -665,32 +760,64 @@ function run(THREE, RoomEnvironment) {
 
   function apply(p, time, dt) {
     dt = dt || 0;
-    /* --- base pose: reveal turn → settle to 3/4 --- */
-    const a = smooth(0, 0.04, p);
-    const b = smooth(0.04, 0.10, p);
-    let yaw = lerp(0, -1.30, a);
-    yaw = lerp(yaw, -0.72, b);
-    const pitch = lerp(0, -0.36, smooth(0.02, 0.12, p));
+    /* --- restrained product pose → top-down service inspection --- */
+    const reveal = smooth(0, P.revealEnd, p);
+    const open = smooth(P.explodeStart, P.explodeEnd, p);
+    let yaw = lerp(-0.28, -0.52, reveal);
+    yaw = lerp(yaw, -0.76, open);
+    const pitch = lerp(-0.10, -0.40, open);
 
-    /* explode scale so the tall stack stays framed */
-    const e = smooth(P.explodeStart, P.explodeEnd, p);
-    let sc = lerp(1.0, 0.60, e);
+    /* Keep the object physically consistent; the camera dollies back instead
+       of shrinking the phone into a miniature during the explosion. */
+    let sc = lerp(1.0, mq.matches ? 0.82 : 0.78, open);
+    camera.position.z = cameraBaseZ + open * (mq.matches ? 1.75 : 1.30);
+    camera.position.y = lerp(0, -0.08, open);
+    camera.lookAt(0, lerp(0, 0.06, open), 0);
 
-    /* idle life before scrolling; gentle sway (not endless spin) in the
-       overview so the composition and labels stay stable */
-    const sway = p > P.overviewStart ? Math.sin(time * 0.35) * 0.05 : 0;
-    idleYaw = (p < 0.02 ? Math.sin(time * 0.6) * 0.04 : 0) + sway;
-
+    /* Idle motion is deliberately subtle so reflections move but the
+       mechanical alignment remains easy to read. */
+    const sway = p > P.overviewStart ? Math.sin(time * 0.30) * 0.035 : 0;
+    idleYaw = (p < 0.02 ? Math.sin(time * 0.52) * 0.026 : 0) + sway;
     root.rotation.set(pitch + userPitch, yaw + userYaw + idleYaw, 0);
 
-    /* --- per-component explosion (some parts turn face-up as they detach) --- */
-    for (const c of components) {
-      const t = easeIO(smooth(c.t0, c.t1, p));
-      tmpV.copy(c.home).lerp(c.exp, t);
-      c.group.position.copy(tmpV);
-      if (c.spin) c.group.rotation.y = t * c.spin;
+    /* Open the exact GLB display, retain its exact frame, then reveal the
+       detailed registered internals underneath. */
+    const handoff = smooth(P.handoffStart, P.handoffEnd, p);
+    if (referenceReady) {
+      const displayLift = easeIO(smooth(P.handoffStart, P.displayReleaseEnd, p));
+      updateReferenceDisplay(displayLift);
+      setReferenceAlpha(
+        1 - smooth(P.bodyFadeStart, P.bodyFadeEnd, p),
+        1 - smooth(P.displayFadeStart, P.displayFadeEnd, p)
+      );
+      setPhoneLayerAlphas(
+        handoff,
+        smooth(P.displayFadeStart, P.displayFadeEnd, p),
+        smooth(P.bodyFadeStart, P.bodyFadeEnd, p)
+      );
+    } else {
+      phone.visible = true;
+      setPhoneAlpha(1);
     }
 
+    /* Two-step detach path: lift cleanly off the mounting plane, then travel
+       into the exploded layout. Desktop spreads wide like the supplied render;
+       mobile uses a narrower vertical composition. */
+    for (const c of components) {
+      const detachEnd = lerp(c.t0, c.t1, 0.42);
+      const liftT = easeIO(smooth(c.t0, detachEnd, p));
+      const spreadT = easeIO(smooth(detachEnd, c.t1, p));
+      tmpV2.copy(c.home).add(c.lift);
+      tmpV.copy(c.home).lerp(tmpV2, liftT);
+      tmpV.lerp(mq.matches ? c.expMobile : c.exp, spreadT);
+      c.group.position.copy(tmpV);
+      const turn = easeIO(smooth(c.t0, c.t1, p));
+      c.group.rotation.set(turn * c.rotX, turn * c.spin, turn * c.rotZ);
+    }
+
+    glow.material.opacity = lerp(0.20, 0.09, open);
+    contactShadow.material.opacity = lerp(0.42, 0.16, open);
+    contactShadow.scale.set(lerp(3.2, 4.2, open), lerp(5.0, 3.4, open), 1);
     /* --- focus tour: dim others, highlight active, card + line --- */
     let inTour = p >= P.tourStart && p < P.overviewStart;
     let idx = -1;
@@ -749,7 +876,7 @@ function run(THREE, RoomEnvironment) {
     if (els.intro) els.intro.style.opacity = introFade;
     if (els.intro) els.intro.style.pointerEvents = introFade < 0.05 ? "none" : "";
     const hudFade = smooth(0.02, 0.1, p);
-    if (els.deviceTag) els.deviceTag.style.opacity = hudFade;
+    if (els.deviceTag) els.deviceTag.style.opacity = hudFade * (1 - smooth(P.tourStart - 0.02, P.tourStart + 0.02, p));
     if (els.hud) els.hud.style.opacity = hudFade;
     if (controlsEl) controlsEl.classList.toggle("on", hudFade > 0.5);
 
@@ -840,13 +967,13 @@ function run(THREE, RoomEnvironment) {
      touch-action: pan-y pinch-zoom arbitrates scroll/zoom; a gesture the browser
      hands to us is ours for its whole duration (pointercancel ends the others). */
   let dragging = false, lastX = 0, lastY = 0, dragPointer = null, dragDist = 0;
-  function canDrag() { return progress >= 0.16; }
+  function canDrag() { return progress >= P.handoffEnd; }
 
   els.canvasWrap.addEventListener("pointerdown", e => {
     dragDist = 0;
     if (dragging) { endDrag({ pointerId: dragPointer }); return; } // second finger = pinch, not drag
     if (!canDrag()) return;
-    if (e.pointerType === "touch" && !(progress >= P.explodeEnd)) return; // don't hijack scroll before fully open
+    if (e.pointerType === "touch" && progress < P.explodeEnd) return; // keep vertical scrolling until fully open
     dragging = true; dragPointer = e.pointerId; lastX = e.clientX; lastY = e.clientY; dragDist = 0;
     els.canvasWrap.classList.add("ip-grabbing");
     try { els.canvasWrap.setPointerCapture(e.pointerId); } catch (_) {}
@@ -965,7 +1092,8 @@ function run(THREE, RoomEnvironment) {
     const halfV = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
     const distH = (HH + 0.62) / halfV;                     // fit height
     const distW = (HW + 0.55) / (halfV * camera.aspect);   // fit width
-    camera.position.z = Math.max(distH, distW);
+    cameraBaseZ = Math.max(distH, distW);
+    camera.position.z = cameraBaseZ;
     els.lines.setAttribute("viewBox", "0 0 " + w + " " + h);
     els.lines.setAttribute("width", w); els.lines.setAttribute("height", h);
     requestRender();
@@ -973,15 +1101,23 @@ function run(THREE, RoomEnvironment) {
   window.addEventListener("resize", resize);
   resize();
 
-  /* ---- reveal: hide loading, first paint ---- */
+  /* ---- reveal: first paint; loader stays until the exact GLB settles ---- */
   progress = computeProgress();
   apply(progress, 0);
   renderer.render(scene, camera);
-  // Hide the loader after first paint; the timeout covers hidden/background
-  // tabs where rAF is throttled to zero.
-  const hideLoading = () => { if (els.loading) els.loading.classList.add("is-hidden"); };
-  requestAnimationFrame(hideLoading);
-  setTimeout(hideLoading, 600);
+  /* A slow or blocked model request must not trap visitors behind the loader;
+     retain the procedural exterior as a graceful timeout fallback. */
+  setTimeout(() => {
+    if (loadingSettled) return;
+    console.warn("[inside-phone] iPhone 11 GLB timed out; using procedural exterior.");
+    referenceAbandoned = true;
+    referenceReady = false;
+    referenceShell.visible = false;
+    phone.visible = true;
+    setPhoneAlpha(1);
+    hideLoading();
+    requestRender();
+  }, 12000);
   if (isInView()) start();
 }
 
@@ -1004,26 +1140,28 @@ function buildMaterials(THREE, COL, LOD, TEX) {
     transparent: true, opacity: 0.5, envMapIntensity: 1.5, clearcoat: 1, clearcoatRoughness: 0.08
   });
   const display = std({ color: c(0x04060c), roughness: 0.22, metalness: 0.1, emissive: c(0x0a1a38), emissiveIntensity: 0.8, envMapIntensity: 1.2 });
-  /* generated-texture materials (screen, rear artwork, battery label, PCB
-     traces, coil spiral) — white base so the map's own colours show */
+  /* Generated textures add readable markings to the screen, battery, board,
+     shields, camera carrier, Taptic Engine and wireless coil. */
   const screen = std({ color: c(0xffffff), roughness: 0.35, metalness: 0.0, map: TEX.screen, emissive: c(0xffffff), emissiveMap: TEX.screen, emissiveIntensity: 0.9 });
-  const rearArt = std({ color: c(0xffffff), roughness: 0.3, metalness: 0.35, map: TEX.rear, envMapIntensity: 1.2 });
   const battLabel = std({ color: c(0xffffff), roughness: 0.55, metalness: 0.05, map: TEX.battery });
+  const tapticLabel = std({ color: c(0xffffff), roughness: 0.32, metalness: 0.45, map: TEX.taptic, envMapIntensity: 1.1 });
   const pcbArt = std({ color: c(0xffffff), roughness: 0.5, metalness: 0.4, map: TEX.pcb });
   const coilArt = std({ color: c(0xffffff), roughness: 0.4, metalness: 0.85, map: TEX.coil, transparent: true, alphaTest: 0.15, side: THREE.DoubleSide, envMapIntensity: 1.2 });
   const socTop = std({ color: c(0xffffff), roughness: 0.32, metalness: 0.55, map: TEX.soc, envMapIntensity: 1.1 });
   const shieldArt = std({ color: c(0xffffff), roughness: 0.34, metalness: 0.9, map: TEX.shield, envMapIntensity: 1.15 });
-  const vaporArt = std({ color: c(0xffffff), roughness: 0.3, metalness: 0.9, map: TEX.vapor, envMapIntensity: 1.15 });
   const grille = std({ color: c(0xffffff), roughness: 0.75, metalness: 0.15, map: TEX.grille });
   const deckArt = std({ color: c(0xffffff), roughness: 0.4, metalness: 0.3, map: TEX.deck, transparent: true });
   const tab = std({ color: c(0x2f6fd6), roughness: 0.5, metalness: 0.05 });
   const boot = std({ color: c(0x1a1b1f), roughness: 0.9, metalness: 0.0 });
   const flash = std({ color: c(0xf5efdd), roughness: 0.3, metalness: 0.1, emissive: c(0xfff3d0), emissiveIntensity: 0.5 });
-  const filmFlex = std({ color: c(0x14100c), roughness: 0.6, metalness: 0.2 });
-  const filmCopper = std({ color: c(0x7a4a20), roughness: 0.55, metalness: 0.8, envMapIntensity: 0.9 });
+  const filmFlex = std({ color: c(0x17171b), roughness: 0.72, metalness: 0.16, envMapIntensity: 0.75 });
   // Showpiece metals get a clearcoat so the new chamfers read as polished edges.
-  const frame = phys({ color: c(0x6b7280), roughness: 0.26, metalness: 1.0, envMapIntensity: 1.5, clearcoat: 0.65, clearcoatRoughness: 0.16 });
+  const frame = phys({ color: c(0xa9adb4), roughness: 0.19, metalness: 1.0, envMapIntensity: 1.7, clearcoat: 0.8, clearcoatRoughness: 0.10 });
+  const housing = phys({ color: c(0xd4d6d9), roughness: 0.27, metalness: 1.0, envMapIntensity: 1.65, clearcoat: 0.55, clearcoatRoughness: 0.16 });
+  const metalDark = phys({ color: c(0x4a4e55), roughness: 0.31, metalness: 0.92, envMapIntensity: 1.35, clearcoat: 0.25, clearcoatRoughness: 0.24 });
   const shield = phys({ color: c(0xb9bfc8), roughness: 0.30, metalness: 1.0, envMapIntensity: 1.3, clearcoat: 0.4, clearcoatRoughness: 0.24 });
+  const gasketWhite = std({ color: c(0xe8e8e5), roughness: 0.68, metalness: 0.02 });
+  const foam = std({ color: c(0x050609), roughness: 0.94, metalness: 0.0 });
   const pcb = std({ color: c(COL.pcb), roughness: 0.55, metalness: 0.3 });
   const soc = std({ color: c(0x0c0d12), roughness: 0.35, metalness: 0.6, emissive: c(0x06131f), emissiveIntensity: 0.4 });
   const memory = std({ color: c(0x1a1c22), roughness: 0.4, metalness: 0.5 });
@@ -1035,17 +1173,15 @@ function buildMaterials(THREE, COL, LOD, TEX) {
   const camDeck = phys({ color: c(0x0b0c10), roughness: 0.22, metalness: 0.85, envMapIntensity: 1.3, clearcoat: 0.8, clearcoatRoughness: 0.1 });
   const lensBarrel = std({ color: c(0x08090c), roughness: 0.35, metalness: 0.9 });
   const lensRing = phys({ color: c(COL.titanium), roughness: 0.13, metalness: 1.0, envMapIntensity: 1.7, clearcoat: 1.0, clearcoatRoughness: 0.06 });
-  const lensGlass = phys({ color: c(0x0b1830), roughness: 0.02, metalness: 0.0, transparent: true, opacity: 0.7, envMapIntensity: 2.0, clearcoat: 1 });
-  const vapor = phys({ color: c(0x9fa6ae), roughness: 0.24, metalness: 1.0, envMapIntensity: 1.35, clearcoat: 0.35, clearcoatRoughness: 0.2 });
+  const lensGlass = phys({ color: c(0x17113a), roughness: 0.025, metalness: 0.0, transparent: true, opacity: 0.82, envMapIntensity: 2.2, clearcoat: 1, clearcoatRoughness: 0.025, ior: 1.52, thickness: LOD ? 0.035 : 0 });
   const graphite = std({ color: c(0x111318), roughness: 0.7, metalness: 0.2 });
   const battery = std({ color: c(0x191b21), roughness: 0.5, metalness: 0.3 });
-  const batteryLabel = std({ color: c(COL.orange), roughness: 0.45, metalness: 0.2, emissive: c(COL.orange), emissiveIntensity: 0.12 });
   const plastic = std({ color: c(0x15161c), roughness: 0.6, metalness: 0.1 });
   const mesh = std({ color: c(0x0b0c10), roughness: 0.8, metalness: 0.1 });
   const screw = std({ color: c(0x9aa0aa), roughness: 0.3, metalness: 1.0 });
   const sensorBlue = std({ color: c(0x0a1730), roughness: 0.2, metalness: 0.4, emissive: c(0x123a7a), emissiveIntensity: 0.5 });
 
-  return { glass, rearGlass, display, screen, rearArt, battLabel, pcbArt, coilArt, socTop, shieldArt, vaporArt, grille, deckArt, tab, boot, flash, filmFlex, filmCopper, frame, shield, pcb, soc, memory, storage, pmic, silicon, copper, gold, camDeck, lensBarrel, lensRing, lensGlass, vapor, graphite, battery, batteryLabel, plastic, mesh, screw, sensorBlue };
+  return { glass, rearGlass, display, screen, battLabel, tapticLabel, pcbArt, coilArt, socTop, shieldArt, grille, deckArt, tab, boot, flash, filmFlex, frame, housing, metalDark, shield, gasketWhite, foam, pcb, soc, memory, storage, pmic, silicon, copper, gold, camDeck, lensBarrel, lensRing, lensGlass, graphite, battery, plastic, mesh, screw, sensorBlue };
 }
 
 /* =============================================================================
@@ -1066,8 +1202,15 @@ function buildTextures(THREE) {
     if (ctx.roundRect) ctx.roundRect(x, y, w, h, r);
     else ctx.rect(x, y, w, h);
   }
+  /* Deterministic grain keeps the same board, foil and shield details on every
+     load, which avoids visible texture changes between visits. */
+  let randomSeed = 0x11a13;
+  function rnd() {
+    randomSeed = (Math.imul(randomSeed, 1664525) + 1013904223) >>> 0;
+    return randomSeed / 4294967296;
+  }
 
-  /* Lit AMOLED face: black bezel margin, wallpaper glow, status bar, clock,
+  /* Lit LCD-style face: black bezel margin, wallpaper glow, status bar, clock,
      notification pills, lockscreen shortcuts, dock */
   const screen = make(512, 1088, (ctx, w, h) => {
     ctx.fillStyle = "#000"; ctx.fillRect(0, 0, w, h);
@@ -1100,7 +1243,7 @@ function buildTextures(THREE) {
     ctx.font = "500 26px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.55)";
     ctx.fillText("Thursday, 24 July", w / 2, h * 0.13 + 122);
     // notification pills
-    const pills = [["Panglima Gadget", "Your repair is ready for pickup 🎉"], ["Messages", "Boss: nice, the X1 looks great"]];
+    const pills = [["Panglima Gadget", "Your repair is ready for pickup"], ["Diagnostics", "iPhone 11 inspection complete"]];
     pills.forEach((p, i) => {
       const py = h * 0.34 + i * 86;
       ctx.fillStyle = "rgba(16,22,38,.72)"; rrPath(ctx, 44, py, w - 88, 72, 20); ctx.fill();
@@ -1127,48 +1270,18 @@ function buildTextures(THREE) {
     ctx.restore();
   });
 
-  /* Rear glass underside print: gradient, sheen, wordmark, regulatory row */
-  const rear = make(512, 1056, (ctx, w, h) => {
-    const g = ctx.createLinearGradient(0, 0, w * 0.7, h);
-    g.addColorStop(0, "#14161d"); g.addColorStop(0.55, "#0b0c11"); g.addColorStop(1, "#0f1017");
-    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
-    const s = ctx.createLinearGradient(0, 0, w, h * 0.45);
-    s.addColorStop(0, "rgba(255,255,255,.06)"); s.addColorStop(0.6, "rgba(255,255,255,0)");
-    ctx.fillStyle = s; ctx.fillRect(0, 0, w, h);
-    ctx.textAlign = "center";
-    ctx.font = "700 40px Archivo, Inter, sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,.42)";
-    ctx.fillText("P A N G L I M A", w / 2, h * 0.60);
-    ctx.font = "600 24px Inter, sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,.28)";
-    ctx.fillText("X 1", w / 2, h * 0.60 + 40);
-    // generic regulatory pictogram row (brand-neutral)
-    const ry = h * 0.905; ctx.strokeStyle = "rgba(255,255,255,.3)"; ctx.lineWidth = 2;
-    // recycle triangle
-    ctx.beginPath(); ctx.moveTo(w / 2 - 96, ry + 18); ctx.lineTo(w / 2 - 78, ry - 12); ctx.lineTo(w / 2 - 60, ry + 18); ctx.closePath(); ctx.stroke();
-    // crossed-out bin
-    ctx.strokeRect(w / 2 - 26, ry - 8, 22, 26); ctx.beginPath(); ctx.moveTo(w / 2 - 32, ry + 24); ctx.lineTo(w / 2 + 2, ry - 14); ctx.stroke();
-    // cert box
-    ctx.strokeRect(w / 2 + 30, ry - 8, 34, 26);
-    ctx.font = "600 15px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.3)";
-    ctx.fillText("X1", w / 2 + 47, ry - 2);
-    ctx.font = "400 13px Inter, sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,.2)";
-    ctx.fillText("Designed for Panglima Gadget · Model PGX1-2026", w / 2, h * 0.955);
-  });
-
   /* Battery pouch label: title, specs, safety row, barcode */
   const battery = make(512, 512, (ctx, w, h) => {
     ctx.fillStyle = "#191b21"; ctx.fillRect(0, 0, w, h);
     ctx.fillStyle = "#22252d"; rrPath(ctx, 26, 30, w - 52, h - 60, 18); ctx.fill();
     ctx.fillStyle = "rgba(255,255,255,.88)"; ctx.textAlign = "left"; ctx.textBaseline = "top";
     ctx.font = "700 30px Archivo, Inter, sans-serif";
-    ctx.fillText("PANGLIMA X1 BATTERY", 48, 56);
+    ctx.fillText("iPhone 11 BATTERY", 48, 56);
     ctx.font = "500 20px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.6)";
     /* Single rectangular cell, and deliberately no capacity/energy figure —
-       the X1 is an illustrative model, not a spec sheet for a real device. */
-    ctx.fillText("Single-cell Li-ion polymer", 48, 110);
-    ctx.fillText("Rechargeable  ·  Model PGX1-B1", 48, 142);
+       this remains an educational reconstruction, not an official spec sheet. */
+    ctx.fillText("3110 mAh  ·  3.83 V", 48, 110);
+    ctx.fillText("11.91 Wh  ·  Li-ion polymer", 48, 142);
     ctx.strokeStyle = "rgba(255,180,64,.8)"; ctx.lineWidth = 3;
     for (let i = 0; i < 3; i++) {
       const x = 52 + i * 64;
@@ -1180,13 +1293,13 @@ function buildTextures(THREE) {
     ctx.fillText("Replace only with a compatible battery.", 48, 280);
     let x = 48;
     while (x < w - 100) {
-      const bw = 2 + Math.random() * 6;
-      ctx.fillStyle = "rgba(235,238,244," + (Math.random() > 0.4 ? 0.85 : 0) + ")";
+      const bw = 2 + rnd() * 6;
+      ctx.fillStyle = "rgba(235,238,244," + (rnd() > 0.4 ? 0.85 : 0) + ")";
       ctx.fillRect(x, h - 150, bw, 74);
       x += bw + 2;
     }
     ctx.font = "400 15px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.5)";
-    ctx.fillText("S/N PGX1 2026 07 24 0001", 48, h - 64);
+    ctx.fillText("S/N IP11 2019 3110 REF", 48, h - 64);
   });
 
   /* PCB: solder-mask green with structured routing — bus bundles, via arrays,
@@ -1197,7 +1310,7 @@ function buildTextures(THREE) {
     for (let b = 0; b < 5; b++) {
       const y0 = 40 + b * 95, n = 5;
       for (let i = 0; i < n; i++) {
-        ctx.strokeStyle = "rgba(202,165,87," + (0.35 + 0.3 * Math.random()) + ")";
+        ctx.strokeStyle = "rgba(202,165,87," + (0.35 + 0.3 * rnd()) + ")";
         ctx.lineWidth = 2.2;
         ctx.beginPath();
         const y = y0 + i * 6;
@@ -1210,7 +1323,7 @@ function buildTextures(THREE) {
     }
     // via arrays
     for (let c = 0; c < 8; c++) {
-      const cx = 30 + Math.random() * (w - 60), cy = 30 + Math.random() * (h - 60);
+      const cx = 30 + rnd() * (w - 60), cy = 30 + rnd() * (h - 60);
       for (let i = 0; i < 9; i++) {
         ctx.fillStyle = "rgba(202,165,87,.8)";
         ctx.beginPath(); ctx.arc(cx + (i % 3) * 9, cy + ((i / 3) | 0) * 9, 2.4, 0, 7); ctx.fill();
@@ -1220,7 +1333,7 @@ function buildTextures(THREE) {
     }
     // IC footprints with pin rows
     for (let f = 0; f < 4; f++) {
-      const fx = 40 + Math.random() * (w - 160), fy = 40 + Math.random() * (h - 140), fw = 60 + Math.random() * 50, fh = 40 + Math.random() * 40;
+      const fx = 40 + rnd() * (w - 160), fy = 40 + rnd() * (h - 140), fw = 60 + rnd() * 50, fh = 40 + rnd() * 40;
       ctx.strokeStyle = "rgba(255,255,255,.45)"; ctx.lineWidth = 1.6;
       ctx.strokeRect(fx, fy, fw, fh);
       ctx.fillStyle = "rgba(202,165,87,.85)";
@@ -1231,7 +1344,7 @@ function buildTextures(THREE) {
       ctx.fillStyle = "rgba(217,178,90,.9)"; ctx.fillRect(px, h - 12, 9, 10);
     }
     ctx.font = "600 16px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.5)";
-    ctx.fillText("PGX1-MB REV 2.1", 26, h - 34);
+    ctx.fillText("IP11-MLB 820-01523 REF", 26, h - 34);
     ctx.fillText("◉", w - 40, 22);
   });
 
@@ -1244,9 +1357,9 @@ function buildTextures(THREE) {
     ctx.strokeRect(10, 10, w - 20, h - 20);
     ctx.textAlign = "center"; ctx.textBaseline = "top";
     ctx.font = "700 17px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.7)";
-    ctx.fillText("PANGLIMA", w / 2, 30);
+    ctx.fillText("A13 SYSTEM", w / 2, 30);
     ctx.font = "600 15px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.55)";
-    ctx.fillText("PX1 · 4 nm", w / 2, 54);
+    ctx.fillText("REFERENCE · 7 nm", w / 2, 54);
     ctx.font = "400 11px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.4)";
     ctx.fillText("A2607 2ND26", w / 2, 78);
     // corner polarity dot
@@ -1257,17 +1370,17 @@ function buildTextures(THREE) {
   const shield = make(256, 256, (ctx, w, h) => {
     ctx.fillStyle = "#b9bfc8"; ctx.fillRect(0, 0, w, h);
     for (let y = 0; y < h; y += 2) {
-      ctx.fillStyle = "rgba(255,255,255," + (Math.random() * 0.09) + ")"; ctx.fillRect(0, y, w, 1);
-      ctx.fillStyle = "rgba(70,76,88," + (Math.random() * 0.10) + ")"; ctx.fillRect(0, y + 1, w, 1);
+      ctx.fillStyle = "rgba(255,255,255," + (rnd() * 0.09) + ")"; ctx.fillRect(0, y, w, 1);
+      ctx.fillStyle = "rgba(70,76,88," + (rnd() * 0.10) + ")"; ctx.fillRect(0, y + 1, w, 1);
     }
     ctx.textAlign = "left"; ctx.textBaseline = "top";
     ctx.font = "600 15px Inter, sans-serif"; ctx.fillStyle = "rgba(60,66,78,.75)";
-    ctx.fillText("PGX1-EMI-01", 18, 18);
+    ctx.fillText("IP11-EMI-01", 18, 18);
     ctx.font = "400 12px Inter, sans-serif"; ctx.fillStyle = "rgba(60,66,78,.6)";
     ctx.fillText("SPTE 0.15", 18, 40);
     // datamatrix square
     for (let i = 0; i < 100; i++) {
-      if (Math.random() > 0.5) continue;
+      if (rnd() > 0.5) continue;
       ctx.fillStyle = "rgba(50,56,68,.8)";
       ctx.fillRect(w - 66 + (i % 10) * 4.4, 18 + ((i / 10) | 0) * 4.4, 3.6, 3.6);
     }
@@ -1276,39 +1389,6 @@ function buildTextures(THREE) {
       ctx.fillStyle = "rgba(217,178,90,.9)"; ctx.beginPath(); ctx.arc(tx, ty, 7, 0, 7); ctx.fill();
       ctx.fillStyle = "rgba(120,96,40,.9)"; ctx.beginPath(); ctx.arc(tx, ty, 2.6, 0, 7); ctx.fill();
     }
-  });
-
-  /* LEGACY — no longer applied to any part. The X1 cools with graphite film,
-     not a vapour chamber, so these stamped channels would misrepresent it.
-     Kept only so the texture/material tables keep their shape. */
-  const vapor = make(256, 512, (ctx, w, h) => {
-    ctx.fillStyle = "#a8aeb6"; ctx.fillRect(0, 0, w, h);
-    // brushed vertical grain
-    for (let x = 0; x < w; x += 2) {
-      ctx.fillStyle = "rgba(255,255,255," + (Math.random() * 0.07) + ")"; ctx.fillRect(x, 0, 1, h);
-      ctx.fillStyle = "rgba(90,96,106," + (Math.random() * 0.08) + ")"; ctx.fillRect(x + 1, 0, 1, h);
-    }
-    // serpentine channel (stamped depression)
-    ctx.strokeStyle = "rgba(96,102,112,.55)"; ctx.lineWidth = 10; ctx.lineCap = "round";
-    ctx.beginPath();
-    let dir = 1;
-    for (let y = 46; y < h - 40; y += 56) {
-      if (dir > 0) { ctx.moveTo(34, y); ctx.lineTo(w - 34, y); ctx.arc(w - 34, y + 28, 28, -Math.PI / 2, Math.PI / 2); }
-      else { ctx.lineTo(34, y); ctx.arc(34, y + 28, 28, -Math.PI / 2, Math.PI / 2, true); }
-      dir = -dir;
-    }
-    ctx.stroke();
-    ctx.strokeStyle = "rgba(230,234,240,.5)"; ctx.lineWidth = 3;
-    ctx.stroke();
-    // spot-weld dot grid
-    for (let gy = 40; gy < h - 30; gy += 34) for (let gx = 28; gx < w - 20; gx += 34) {
-      ctx.fillStyle = "rgba(120,126,136,.5)";
-      ctx.beginPath(); ctx.arc(gx, gy, 3.4, 0, 7); ctx.fill();
-      ctx.fillStyle = "rgba(235,238,244,.4)";
-      ctx.beginPath(); ctx.arc(gx - 1, gy - 1, 1.2, 0, 7); ctx.fill();
-    }
-    ctx.font = "600 13px Inter, sans-serif"; ctx.fillStyle = "rgba(80,86,96,.8)";
-    ctx.textAlign = "left"; ctx.fillText("VC-PGX1 CU 0.35", 18, h - 24);
   });
 
   /* Speaker grille dot matrix (transparent backing) */
@@ -1327,10 +1407,26 @@ function buildTextures(THREE) {
     ctx.clearRect(0, 0, w, h);
     ctx.textAlign = "center";
     ctx.font = "600 15px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.4)";
-    ctx.fillText("PANGLIMA OPTICS", w / 2, 40);
+    ctx.fillText("DUAL CAMERA MODULE", w / 2, 40);
     ctx.font = "400 12px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.3)";
-    ctx.fillText("50 MP · OIS · f/1.7", w / 2, 62);
-    ctx.fillText("ULTRA 0.6× · TELE 3×", w / 2, h - 30);
+    ctx.fillText("WIDE · OIS · f/1.8", w / 2, 62);
+    ctx.fillText("ULTRA WIDE · 0.5×", w / 2, h - 30);
+  });
+
+  /* Taptic Engine top plate: dark anodised label with fine edge sheen. */
+  const taptic = make(512, 256, (ctx, w, h) => {
+    const g = ctx.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0, "#30343c"); g.addColorStop(.52, "#20242b"); g.addColorStop(1, "#343840");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+    for (let y = 0; y < h; y += 3) {
+      ctx.fillStyle = "rgba(255,255,255," + (0.015 + rnd() * 0.025) + ")"; ctx.fillRect(0, y, w, 1);
+    }
+    ctx.strokeStyle = "rgba(255,255,255,.22)"; ctx.lineWidth = 2; ctx.strokeRect(8, 8, w - 16, h - 16);
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.font = "700 42px Archivo, Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.90)";
+    ctx.fillText("TAPTIC ENGINE", w / 2, h / 2 - 8);
+    ctx.font = "500 18px Inter, sans-serif"; ctx.fillStyle = "rgba(255,255,255,.45)";
+    ctx.fillText("IPHONE 11 REFERENCE ASSEMBLY", w / 2, h / 2 + 38);
   });
 
   /* Wireless coil: copper spiral + NFC loop on a ferrite pad */
@@ -1355,7 +1451,7 @@ function buildTextures(THREE) {
     ctx.fillStyle = "#d9b25a"; ctx.fillRect(cx - 14, h - 24, 12, 14); ctx.fillRect(cx + 2, h - 24, 12, 14);
   });
 
-  return { screen, rear, battery, pcb, soc, shield, vapor, grille, deck, coil };
+  return { screen, battery, pcb, soc, shield, grille, deck, taptic, coil };
 }
 
 function radialTexture(THREE, color) {
