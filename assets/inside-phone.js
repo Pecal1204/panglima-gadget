@@ -831,6 +831,71 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
     const band=(w,h,x,y)=>{const b=mesh(box(w,h,.20),M.gasketWhite);b.position.set(x,y,0);g.add(b);};
     band(.34,.016,-.30,1.49);band(.34,.016,.30,-1.49);band(.016,.30,.748,.90);band(.016,.30,-.748,-.90);
   }});
+
+  /* Final exploded pose: a top-down service-bench flat lay inspired by the
+     supplied teardown photograph. Large assemblies bookend the composition,
+     while every removable part receives its own readable position. Housing
+     details remain registered on the rear shell, as they do in real service. */
+  const flatPart = (x, y, z = .10, rz = 0, rx = 0, ry = 0) => ({
+    position: V(x, y, z),
+    rotation: V(rx, ry, rz)
+  });
+  const flatLayWide = {
+    display: flatPart(-3.10, 0, .10),
+    earpiece: flatPart(-1.58, 1.22, .12, -.08),
+    facescancam: flatPart(-.95, 1.25, .12, -.12),
+    brackets: flatPart(-1.55, .35, .10, .03),
+    camera: flatPart(-.25, 1.15, .13),
+    motherboard: flatPart(-.15, -.10, .11),
+    cooling: flatPart(-.72, .78, .12, -.04),
+    simtray: flatPart(3.78, -.45, .10, .05),
+    haptic: flatPart(-.92, -1.03, .12, -.04),
+    loudspeaker: flatPart(-.18, -1.23, .12, .03),
+    battery: flatPart(1.12, -.05, .11),
+    chargingport: flatPart(2.85, -1.75, .12),
+    microphones: flatPart(.55, -1.42, .13),
+    rearhousing: flatPart(2.85, 0, .02),
+    wireless: flatPart(2.85, -.15, .09),
+    midframe: flatPart(2.85, 0, .06),
+    camerabump: flatPart(3.29, 1.05, .14),
+    exteriordetails: flatPart(2.85, 0, .16)
+  };
+  const flatLayCompact = {
+    display: flatPart(-1.20, 0, .10),
+    earpiece: flatPart(-1.15, 1.78, .14, -.08),
+    facescancam: flatPart(-.65, 2.35, .14, -.10),
+    brackets: flatPart(-.55, 2.82, .12),
+    camera: flatPart(.45, 2.28, .15),
+    motherboard: flatPart(0, 1.35, .13),
+    cooling: flatPart(.60, 1.75, .14),
+    simtray: flatPart(1.82, -.52, .12, .05),
+    haptic: flatPart(-.65, -1.82, .14, -.04),
+    loudspeaker: flatPart(.60, -1.82, .14, .03),
+    battery: flatPart(0, -.25, .13),
+    chargingport: flatPart(0, -2.38, .14),
+    microphones: flatPart(0, -2.62, .15),
+    rearhousing: flatPart(1.20, 0, .02),
+    wireless: flatPart(1.20, -.12, .09),
+    midframe: flatPart(1.20, 0, .06),
+    camerabump: flatPart(1.64, 1.05, .14),
+    exteriordetails: flatPart(1.20, 0, .16)
+  };
+  for (const component of components) {
+    const wide = flatLayWide[component.id];
+    const compact = flatLayCompact[component.id];
+    if (!wide || !compact) {
+      console.warn("[inside-phone] Missing flat-lay target for", component.id);
+      continue;
+    }
+    component.exp.copy(wide.position);
+    component.expMobile.copy(compact.position);
+    component.rotX = wide.rotation.x;
+    component.spin = wide.rotation.y;
+    component.rotZ = wide.rotation.z;
+    component.rotXMobile = compact.rotation.x;
+    component.spinMobile = compact.rotation.y;
+    component.rotZMobile = compact.rotation.z;
+  }
   /* ======================================================================
      ANCHORS for connector lines / labels (world space, computed per frame)
      ==================================================================== */
@@ -885,16 +950,17 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
     /* --- restrained product pose → top-down service inspection --- */
     const reveal = smooth(0, P.revealEnd, p);
     const open = smooth(P.explodeStart, P.explodeEnd, p);
+    const compactFlatLay = mq.matches || stageW / Math.max(stageH, 1) < 1.25;
     let yaw = lerp(-0.28, -0.52, reveal);
-    yaw = lerp(yaw, -0.76, open);
-    const pitch = lerp(-0.10, -0.40, open);
+    yaw = lerp(yaw, -0.03, open);
+    const pitch = lerp(-0.10, -0.035, open);
 
     /* Keep the object physically consistent; the camera dollies back instead
        of shrinking the phone into a miniature during the explosion. */
-    let sc = lerp(1.0, mq.matches ? 0.82 : 0.78, open);
-    camera.position.z = cameraBaseZ + open * (mq.matches ? 1.75 : 1.30);
-    camera.position.y = lerp(0, -0.08, open);
-    camera.lookAt(0, lerp(0, 0.06, open), 0);
+    let sc = lerp(1.0, compactFlatLay ? 0.70 : 0.72, open);
+    camera.position.z = cameraBaseZ + open * (compactFlatLay ? 2.20 : 1.55);
+    camera.position.y = lerp(0, -0.12, open);
+    camera.lookAt(0, lerp(0, -0.12, open), 0);
 
     /* Idle motion is deliberately subtle so reflections move but the
        mechanical alignment remains easy to read. */
@@ -922,24 +988,34 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
       setPhoneAlpha(1);
     }
 
-    /* Two-step detach path: lift cleanly off the mounting plane, then travel
-       into the exploded layout. Desktop spreads wide like the supplied render;
-       mobile uses a narrower vertical composition. */
+    /* Two-step detach path: lift cleanly off the mounting plane, then settle
+       face-up into a service-bench flat lay. Narrow/tall screens use the compact
+       composition so all 18 assemblies remain visible without clipping. */
     for (const c of components) {
       const detachEnd = lerp(c.t0, c.t1, 0.42);
       const liftT = easeIO(smooth(c.t0, detachEnd, p));
       const spreadT = easeIO(smooth(detachEnd, c.t1, p));
       tmpV2.copy(c.home).add(c.lift);
       tmpV.copy(c.home).lerp(tmpV2, liftT);
-      tmpV.lerp(mq.matches ? c.expMobile : c.exp, spreadT);
+      const target = compactFlatLay ? c.expMobile : c.exp;
+      tmpV.lerp(target, spreadT);
       c.group.position.copy(tmpV);
       const turn = easeIO(smooth(c.t0, c.t1, p));
-      c.group.rotation.set(turn * c.rotX, turn * c.spin, turn * c.rotZ);
+      const rotX = compactFlatLay ? c.rotXMobile : c.rotX;
+      const rotY = compactFlatLay ? c.spinMobile : c.spin;
+      const rotZ = compactFlatLay ? c.rotZMobile : c.rotZ;
+      c.group.rotation.set(turn * rotX, turn * rotY, turn * rotZ);
     }
 
     glow.material.opacity = lerp(0.20, 0.09, open);
     contactShadow.material.opacity = lerp(0.42, 0.16, open);
-    contactShadow.scale.set(lerp(3.2, 4.2, open), lerp(5.0, 3.4, open), 1);
+    if (compactFlatLay) {
+      glow.scale.set(lerp(7.2, 5.0, open), lerp(7.2, 7.0, open), 1);
+      contactShadow.scale.set(lerp(3.2, 4.6, open), lerp(5.0, 6.2, open), 1);
+    } else {
+      glow.scale.set(lerp(7.2, 9.0, open), lerp(7.2, 5.0, open), 1);
+      contactShadow.scale.set(lerp(3.2, 8.6, open), lerp(5.0, 4.4, open), 1);
+    }
     /* --- focus tour: dim others, highlight active, card + line --- */
     let inTour = p >= P.tourStart && p < P.overviewStart;
     let idx = -1;
@@ -1076,7 +1152,9 @@ function run(THREE, RoomEnvironment, GLTFLoader) {
   if (siteHeader && controlsEl) {
     const syncHeader = () => {
       const visible = !siteHeader.classList.contains("header-hidden");
-      controlsEl.classList.toggle("shifted", mq.matches || visible);
+      const headerHeight = Math.max(0, Math.round(siteHeader.getBoundingClientRect().height));
+      controlsEl.style.setProperty("--ip-header-offset", headerHeight + "px");
+      controlsEl.classList.toggle("shifted", visible);
     };
     new MutationObserver(syncHeader).observe(siteHeader, { attributes: true, attributeFilter: ["class"] });
     if (mq.addEventListener) mq.addEventListener("change", syncHeader);
