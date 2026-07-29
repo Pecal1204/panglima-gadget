@@ -401,13 +401,16 @@
     .stat{padding:18px 12px 10px;}
     .stat .k{display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 8px;
       text-decoration-color:rgba(255,255,255,.45);text-decoration-thickness:1px;}
-    /* One-line scroller instead of a 756px wrapped block */
-    .brands .wrap{padding-top:22px;padding-bottom:22px;gap:12px;}
-    .brands-list{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:0 26px;font-size:15px;
-      margin:0 -18px;padding:0 18px;scroll-snap-type:x proximity;scrollbar-width:none;
-      -webkit-mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 24px),transparent);}
-    .brands-list::-webkit-scrollbar{display:none;}
-    .brands-list span{flex:0 0 auto;scroll-snap-align:start;}
+    /* Keep every brand inside the mobile content box. The previous forced
+       single row inherited max-content sizing from the centered flex parent,
+       and its negative margins made the entire page wider than the viewport. */
+    .brands{overflow-x:clip;}
+    .brands .wrap{width:100%;max-width:100%;padding-top:22px;padding-bottom:22px;gap:12px;align-items:stretch;}
+    .brands-label{text-align:center;}
+    .brands-list{width:100%;max-width:100%;min-width:0;flex-wrap:wrap;overflow:visible;
+      justify-content:center;gap:10px 24px;font-size:15px;margin:0;padding:0;
+      scroll-snap-type:none;-webkit-mask-image:none;mask-image:none;}
+    .brands-list span{flex:0 0 auto;text-align:center;}
     .price-cards,.steps,.svc-grid,.net-grid,.socials,.info-tiles{grid-template-columns:1fr;}
     .foot-grid{grid-template-columns:1fr;gap:28px;}
     .h2{font-size:30px;}
