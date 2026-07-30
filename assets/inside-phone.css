@@ -321,7 +321,7 @@
     content:"";display:block;width:42px;height:4px;border-radius:2px;
     background:rgba(255,255,255,.18);margin:0 auto 10px;
   }
-  #inside-phone .ip-card h3{font-size:19px;margin-bottom:8px;}
+  #inside-phone .ip-card h3{font-size:17px;line-height:1.18;margin-bottom:6px;}
   /* peek state: handle + index + name + arrow only */
   /* peek state: handle + index + name + the component stepper */
   #inside-phone .ip-card.is-peek{max-height:168px;overflow:hidden;cursor:pointer;}
@@ -329,11 +329,13 @@
   #inside-phone .ip-card.is-peek details.ip-more,
   #inside-phone .ip-card.is-peek .ip-warn,
   #inside-phone .ip-card.is-peek .ip-card-cta{display:none;}
-  #inside-phone .ip-card.is-peek h3{margin-bottom:2px;font-size:18px;}
+  #inside-phone .ip-card.is-peek h3{margin-bottom:2px;font-size:16.5px;}
   #inside-phone .ip-card.is-peek .ip-cardnav{margin-bottom:2px;padding-bottom:0;border-bottom:none;}
-  #inside-phone .ip-card .ip-card-index{margin-bottom:5px;}
+  #inside-phone .ip-card .ip-card-index{font-size:10px;letter-spacing:1.35px;margin-bottom:4px;}
+  #inside-phone .ip-card .ip-card-spec{font-size:12px;line-height:1.45;margin:-3px 0 10px;}
   #inside-phone .ip-card .row{padding:7px 0;}
-  #inside-phone .ip-card dd{font-size:12.5px;}
+  #inside-phone .ip-card dt{font-size:10px;}
+  #inside-phone .ip-card dd{font-size:12px;}
   /* keep the CTA reachable without scrolling inside the sheet */
   #inside-phone .ip-card .ip-card-cta{
     position:sticky;bottom:-1px;margin-top:12px;
@@ -412,7 +414,7 @@
 @media (max-width:820px){
   #inside-phone .ip-card.is-active{transform:translateY(0);}
   #inside-phone .ip-controls{
-    right:10px;top:10px;flex-direction:row;gap:4px;padding:4px;
+    right:10px;top:calc(8px + env(safe-area-inset-top,0px));flex-direction:row;gap:4px;padding:4px;
     max-width:calc(100vw - 20px);border:1px solid rgba(255,255,255,.10);
     border-radius:12px;background:rgba(9,11,16,.96);backdrop-filter:none;-webkit-backdrop-filter:none;
   }
@@ -427,7 +429,9 @@
   /* The header is ~91px on mobile after the banner/nav shrink; keep the
      floating controls clear of it. Scoped here so the desktop offset, which
      answers to a 108px header, is untouched. */
-  #inside-phone .ip-controls.shifted{top:calc(78px + env(safe-area-inset-top,0px));}
+  #inside-phone .ip-controls.shifted{
+    top:calc(var(--ip-header-offset,56px) + 8px + env(safe-area-inset-top,0px));
+  }
   /* Component label chips were 10.5px */
   #inside-phone .ip-labels .chip{font-size:12px;padding:5px 11px;}
 }
