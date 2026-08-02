@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-01T01:00:08.291Z",
+  "generated": "2026-08-02T01:03:38.095Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
@@ -79,31 +79,87 @@
       "published": "2026-07-30T06:20:34.000Z"
     },
     {
+      "title": "Apple Akan Perkenal Langganan Berbayar Untuk Akses Tambahan Siri AI",
+      "link": "https://cms.amanz.my/2026575436/",
+      "excerpt": "Apple kini dalam perancangan untuk memperkenalkan Siri generasi baharu yang hadir bersama-sama integrasi kecerdasan buatan. Siri AI ini dijangka diperkenalkan secara rasminya…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-08-01T07:54:52.000Z"
+    },
+    {
+      "title": "Amazon Melengkapkan Pelaburan $50 Bilion Pada OpenAI – Mempunyai Pegangan Sekitar 5%",
+      "link": "https://cms.amanz.my/2026575433/",
+      "excerpt": "Amazon kini dilaporkan telah melengkapkan pelaburan berjumlah $50 bilion pada OpenAI, sekaligus mendapatkan pegangan sebanyak 5% pada syarikat kecerdasan buatan popular berkenaan…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-08-01T07:15:52.000Z"
+    },
+    {
       "title": "Ciri Janaan Nano Banana Di Google Earth Dimatikan Beberapa Jam Selepas Dilancarkan",
       "link": "https://cms.amanz.my/2026575388/",
       "excerpt": "Selamat pagi dan kita mulakan hujung minggu ini dengan Google Earth mematikan ciri menjana imej menggunakan Nano Banana yang diumumkan semalam. Ciri ini dimatikan beberapa jam…",
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-07-31T23:47:10.000Z"
-    },
-    {
-      "title": "OpenAI Mengumumkan Kini Model AI Mereka Digunakan Lebih 1 Bilion Pengguna Aktif",
-      "link": "https://cms.amanz.my/2026575389/",
-      "excerpt": "OpenAI, syarikat induk sebalik ChatGPT, hari ini mengumumkan model kecerdasan buatan janaan mereka kini mempunyai lebih 1 bilion pengguna aktif, dan turut digunakan oleh lebih 2…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-07-31T23:34:42.000Z"
-    },
-    {
-      "title": "Google Earth Kini Menyertakan Penjana Imej Nano Banana",
-      "link": "https://cms.amanz.my/2026575337/",
-      "excerpt": "Google kini membuat sesuatu yang luar biasa, dan menambah sokongan penjanaan gambar Nano Banana terus pada Google Earth. Dengannya, kini pengguna boleh terus menjana gambaran…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-07-31T10:16:31.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Google Pixel 11 and Pixel 11 Pro Fold official renders leak ahead of launch",
+      "link": "https://soyacincau.com/2026/08/02/google-pixel-11-and-pixel-11-pro-fold-render-leak-evleaks/",
+      "excerpt": "After dropping clear promo images of the Galaxy Fold 8 lineup ahead of launch, Evan Blass (aka @evleaks) is back with more juicy details of Google’s upcoming smartphones. The…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-08-02T00:25:36.000Z"
+    },
+    {
+      "title": "Deals: Samsung Galaxy S26 Ultra discounted, Galaxy Z Fold8 series up for pre-order",
+      "link": "https://www.gsmarena.com/deals_samsung_galaxy_s26_ultra_discounted_galaxy_z_fold8_series_up_for_preorder-news-73964.php",
+      "excerpt": "Samsung will begin shipping its recently unveiled Galaxy Z Fold8, Galaxy Z Fold8 Ultra, and Galaxy Z Flip8 on August 7. The same applies for the Galaxy Watch9 and Galaxy Watch…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-01T18:33:02.000Z"
+    },
+    {
+      "title": "Starlink to trial Direct-to-Cell in Malaysia: Works with normal 4G phones, no satellite phone required",
+      "link": "https://soyacincau.com/2026/08/01/starlink-malaysia-satellite-d2d-direct-to-cell-telco-rural-connectivity/",
+      "excerpt": "Malaysia may soon conduct trials of Starlink’s Direct-to-Cell (D2C) satellite technology, which aims to extend mobile coverage to areas without existing telco towers.…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-08-01T14:07:36.000Z"
+    },
+    {
+      "title": "CMF Clip Pro Bluetooth earphones are coming next week",
+      "link": "https://www.gsmarena.com/nothing_cmf_clip_pro_launch_date-news-73972.php",
+      "excerpt": "Nothing's CMF teased new wireless earphones a couple of days ago, which we now know are the CMF Clip Pro OWS earphones. CMF dropped a short video clip on X, announcing the August…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-01T12:35:02.000Z"
+    },
+    {
+      "title": "iPhone Air 2's upgrades detailed in a new research note",
+      "link": "https://www.gsmarena.com/iphone_air_2s_upgrades_detailed_in_a_new_research_note-news-73969.php",
+      "excerpt": "Investment analyst Jeff Pu has shared a new research note with GF Securities today, and it's all about the upcoming iPhone Air 2. The device is expected to be launched in the…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-01T09:33:02.000Z"
+    },
+    {
+      "title": "Motorola Watch Ultra renders leak",
+      "link": "https://www.gsmarena.com/motorola_watch_ultra_renders_leak-news-73970.php",
+      "excerpt": "It seems like Motorola is now getting ready to enter the Ultra smartwatch fray, competing directly with the likes of Apple and Samsung. Today some renders showing what's purported…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-01T06:47:01.000Z"
+    },
+    {
+      "title": "Samsung Galaxy S26 FE's camera specs surface",
+      "link": "https://www.gsmarena.com/samsung_galaxy_s26_fe_camera_specs_surface-news-73959.php",
+      "excerpt": "A Samsung executive recently confirmed the existence of the Galaxy S26 FE, with a company representative hinting the phone will launch this year. While we await more details about…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-01T04:06:02.000Z"
+    },
     {
       "title": "Samsung may be preparing a surprise device for next year",
       "link": "https://www.gsmarena.com/samsung_may_be_preparing_a_surprise_device_for_next_year-news-73965.php",
@@ -143,62 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-07-31T15:44:10.000Z"
-    },
-    {
-      "title": "Gentari offers 15% off-peak EV charging discount, stackable with existing subscriptions",
-      "link": "https://soyacincau.com/2026/07/31/gentari-off-peak-charging-15-pct-discount-dc-charger/",
-      "excerpt": "After running a one-month trial earlier this year, Gentari has officially made its 15% off-peak EV charging discount a permanent feature at selected DC charging locations across…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-07-31T15:42:56.000Z"
-    },
-    {
-      "title": "Xiaomi Pad 8S Pro is on the way with Xiaomi's next self-developed chipset at the helm",
-      "link": "https://www.gsmarena.com/xiaomi_pad_8s_pro_is_on_the_way_with_xiaomis_next_chipset_at_the_helm-news-73958.php",
-      "excerpt": "The Xiaomi Pad 8 Pro made its debut in September of last year, and now the company is apparently working on a new model called the Xiaomi Pad 8S Pro. The leaked image below shows…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-31T14:49:01.000Z"
-    },
-    {
-      "title": "Samsung Galaxy F70 Pro to launch next week, key features and pricing revealed",
-      "link": "https://www.gsmarena.com/samsung_galaxy_f70_pro_to_launch_next_week_key_features_and_pricing_revealed-news-73953.php",
-      "excerpt": "Yesterday, an online retailer in India teased the arrival of the Samsung Galaxy F70 Pro. Now, Samsung has revealed the handset's launch date and confirmed some of its key…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-31T13:36:02.000Z"
-    },
-    {
-      "title": "Motorola Moto Pad 70 Groove arrives with a 12.1\" display, a 9-unit JBL Pro Speaker System, and a 10,200 mAh battery",
-      "link": "https://www.gsmarena.com/motorola_moto_pad_70_groove_features_price_sale_date-news-73955.php",
-      "excerpt": "Motorola introduced the Moto Pad 70 Pro last month, and today, it unveiled the Moto Pad 70 Groove, advertised as the \"ultimate entertainment tablet designed for consumers who…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-31T12:17:02.000Z"
-    },
-    {
-      "title": "Strong iPhone demand and services revenue propelled Apple’s Q3 earnings",
-      "link": "https://www.gsmarena.com/strong_iphone_demand_and_services_revenue_propelled_apples_q3_earnings-news-73954.php",
-      "excerpt": "It was another record-breaking quarter for Apple as strong iPhone demand and revenue from its services were enough to overcome the global memory chip supply constraints that are…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-31T11:01:02.000Z"
-    },
-    {
-      "title": "OnePlus N6x debuts with a Dimensity 6360 Apex chipset, a 7,000mAh battery",
-      "link": "https://www.gsmarena.com/oneplus_n6x_debuts_with_a_dimensity_6360_apex_chipset_a_7000mah_battery-news-73950.php",
-      "excerpt": "After several teasers, OnePlus has officially launched the N6x in India. The new handset is a more affordable version of the OnePlus N6, which debuted late last month. The OnePlus…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-07-31T09:41:02.000Z"
-    },
-    {
-      "title": "Epson EcoTank 2026 Malaysia: Up to 7,500-page yield and 5-year warranty",
-      "link": "https://soyacincau.com/2026/07/31/epson-ecotank-2026-malaysia-up-to-7500-page-yield-and-5-year-warranty/",
-      "excerpt": "Epson Malaysia has expanded its EcoTank line-up with a new range of compact printers aimed at home users and small-to-medium enterprises. These catridge-free inkjet printers…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-07-31T09:02:45.000Z"
     }
   ]
 }
