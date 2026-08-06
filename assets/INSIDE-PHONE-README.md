@@ -83,9 +83,11 @@ until the reconstructed assembly is mechanically registered underneath it. Its
    buttons, SIM seam, port openings and antenna breaks.
 
 Parts remain mechanically registered while assembled. During teardown they
-first lift away from their mounting plane, then travel into separate desktop and
-mobile exploded layouts. Small lateral offsets keep brackets and flex cables
-readable. The stamped display back, graphite films, flex tails, stepped logic
+first lift away from their mounting plane, then settle face-up into a complete
+service-bench flat lay modelled after the supplied repair photograph. Wide
+screens place the display, small internals, battery and housing from left to
+right; narrow screens use a compact layout that keeps all 18 assemblies visible.
+The stamped display back, graphite films, flex tails, stepped logic
 board, BMS, foil seams, dual-camera barrels, OIS cradle, SIM apertures, Taptic
 label, speaker vents, coil, fasteners, housing wells and metal shielding are
 individually modelled with differentiated glass, metal, gasket, foam, PCB and

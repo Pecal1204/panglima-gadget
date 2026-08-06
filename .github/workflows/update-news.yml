@@ -1,7 +1,8 @@
 name: Update tech news
 
 # Refreshes news-data.json from public RSS feeds and commits it.
-# Cloudflare then auto-deploys the updated news page.
+# It must never rewrite the homepage or any other site file.
+# Cloudflare then auto-deploys main with the updated news data.
 
 on:
   schedule:
@@ -19,9 +20,15 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          # Always update the production branch, even when a manual run is
+          # started while viewing another branch in the Actions tab.
+          ref: main
+          fetch-depth: 0
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -31,8 +38,23 @@ jobs:
       - name: Fetch latest headlines
         run: node scripts/fetch-news.mjs
 
-      - name: Commit if the news changed
+      - name: Guard the current site version
+        shell: bash
         run: |
+          mapfile -t changed < <(git diff --name-only)
+
+          for file in "${changed[@]}"; do
+            if [[ "$file" != "news-data.json" ]]; then
+              echo "::error::News updater unexpectedly changed $file"
+              echo "Stopping before commit so the current site cannot be rolled back."
+              exit 1
+            fi
+          done
+
+      - name: Commit if the news changed
+        shell: bash
+        run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
@@ -41,6 +63,11 @@ jobs:
             exit 0
           fi
 
-          git add news-data.json
+          git add -- news-data.json
           git commit -m "Update tech news ($(date -u '+%Y-%m-%d'))"
-          git push
+          # A site update may land while the feeds are being fetched. Rebase
+          # the news-only commit onto the newest main instead of publishing the
+          # older checkout or using a force push.
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
