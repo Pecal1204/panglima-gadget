@@ -1,11 +1,19 @@
 {
-  "generated": "2026-08-14T23:44:22.919Z",
+  "generated": "2026-08-15T23:41:37.119Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Siri Samsung Galaxy Z Fold8 Sudah Boleh Dibeli Di Malaysia – Promosi Eksklusif Dengan Rebat Sehingga RM800",
+      "link": "https://cms.amanz.my/2026577342/",
+      "excerpt": "Samsung Malaysia kini membuka jualan rasmi untuk barisan peranti baharu termasuk Galaxy Z Fold8, Z Fold8 Ultra, Z Flip8, Galaxy Watch9 dan Galaxy Watch Ultra2. Pelancaran ini…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-08-15T02:39:36.000Z"
+    },
     {
       "title": "Pandang Pertama Google Pixel 11 Pro Fold – Baru Dilancarkan Sudah Ketinggalan",
       "link": "https://cms.amanz.my/2026577221/",
@@ -93,17 +101,65 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-08-13T10:22:46.000Z"
-    },
-    {
-      "title": "Qualcomm Memperlihatkan Butiran Lanjut Tentang Cip Snapdragon C",
-      "link": "https://cms.amanz.my/2026577139/",
-      "excerpt": "Qualcomm telah memperkenalkan siri cip pemprosesan mampu-milik untuk komputer riba dan tablet mereka, iaitu Qualcomm Snapdragon C pada pertengahan tahun ini sebagai cara untuk…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-08-13T09:03:23.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Deals: Pixel 11 series goes on pre-order, Galaxy Z8 foldables and S26 models drop prices",
+      "link": "https://www.gsmarena.com/deals_pixel_11_series_goes_on_preorder_galaxy_z8_foldables_and_s26_models_drop_prices-news-74175.php",
+      "excerpt": "Google launched its new Pixel 11 series earlier this week – there is a new vanilla, two new Pro and one new foldable model. All that’s missing now is an affordable a-phone. The…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-15T21:41:02.000Z"
+    },
+    {
+      "title": "Google is adding tons of new customization options to Android 17",
+      "link": "https://www.gsmarena.com/google_is_adding_tons_of_new_customization_options_to_android_17-news-74193.php",
+      "excerpt": "Google just dropped the Android 17 QPR2 Beta 3 update to eligible Pixel devices, and in addition to squashing a few bugs, the new software introduces some cool new features as…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-15T14:47:03.000Z"
+    },
+    {
+      "title": "Deals: Google Pixel 11 series pre-orders start",
+      "link": "https://www.gsmarena.com/deals_google_pixel_11_series_preorders_start-news-74183.php",
+      "excerpt": "Google launched its new Pixel 11 series earlier this week – there is a new vanilla, two new Pro and one new foldable model. All that’s missing now is an affordable a-phone. The…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-15T13:17:02.000Z"
+    },
+    {
+      "title": "iQOO Neo11 Ultra full specs sheet leaks, launch is imminent",
+      "link": "https://www.gsmarena.com/iqoo_neo11_ultra_full_specs_sheet_leaks_launch_is_imminent-news-74190.php",
+      "excerpt": "The iQOO Neo11 Ultra is expected to launch in a few days and shortly after the company teased the phone, confirming the Dimensity 9500M chipset, the popular Weibo tipster Digital…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-15T10:37:03.000Z"
+    },
+    {
+      "title": "Poco starts teasing the M8x 5G, shows us a glimpse of its back",
+      "link": "https://www.gsmarena.com/poco_starts_teasing_the_m8x_5g_shows_us_a_glimpse_of_its_back-news-74187.php",
+      "excerpt": "Poco launched the M8 and M8 Pro in January, the M8s in April, and the M8 Power earlier this month, but now it turns out that there's a fifth member of the family on the way too.…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-15T05:02:02.000Z"
+    },
+    {
+      "title": "Honor Robot Phone hands-on review",
+      "link": "https://www.gsmarena.com/honor_robot_phone_handson_review-news-74184.php",
+      "excerpt": "In the somewhat stale smartphone market, Honor decided to shake things up a bit and finally launched the much-anticipated Honor Robot Phone. As the name implies, it's no ordinary…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-15T02:04:02.000Z"
+    },
+    {
+      "title": "Here's when Huawei's non-folding wide-screen phone is launching",
+      "link": "https://www.gsmarena.com/heres_when_huaweis_nonfolding_widescreen_phone_is_launching-news-74186.php",
+      "excerpt": "Following up on the success of the Pura X, Huawei has, for quite some time now, been working on a new non-folding smartphone with a similar 16:10 screen aspect ratio. This device…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-15T00:03:02.000Z"
+    },
     {
       "title": "Here's our first look at Samsung's upcoming One UI 9.5",
       "link": "https://www.gsmarena.com/heres_our_first_look_at_samsungs_upcoming_one_ui_95-news-74185.php",
@@ -143,62 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-08-14T13:33:02.000Z"
-    },
-    {
-      "title": "TNB Electron 120kW DC Charger at McDonald’s Seri Austin, Johor Bahru",
-      "link": "https://soyacincau.com/2026/08/14/tnb-electron-120kw-dc-charger-at-mcdonalds-seri-austin-johor-bahru/",
-      "excerpt": "Besides its largest EV charging site located in Penang, TNB Electron has also turned on another new EV charger located in Johor. The charge point operator has turned on a 120kW DC…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-08-14T12:20:43.000Z"
-    },
-    {
-      "title": "TNB Electron turns on 480kW DC Charger with 8 bays at Seberang Jaya, Perai",
-      "link": "https://soyacincau.com/2026/08/14/tnb-electron-480kw-dc-charger-seberang-jaya-perai-penang/",
-      "excerpt": "TNB Electron has just turned on its largest EV charging site yet, located in Seberang Jaya, Perai. Deployed at Wisma TNB Seberang Jaya, the new location has a total power capacity…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-08-14T11:34:21.000Z"
-    },
-    {
-      "title": "Samsung Galaxy Watch9 review",
-      "link": "https://www.gsmarena.com/samsung_galaxy_watch9-review-2988.php",
-      "excerpt": "",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-14T11:28:35.000Z"
-    },
-    {
-      "title": "Google's Tensor G6 inside the Pixel 11 series isn't a 2nm chip",
-      "link": "https://www.gsmarena.com/google_tensor_g6_3nm_chip-news-74169.php",
-      "excerpt": "Google unveiled the Pixel 11 series smartphones a couple of days ago, with the Tensor G6 inside. While Google didn't explicitly mention it anywhere, the Tensor G6 was widely…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-14T08:42:02.000Z"
-    },
-    {
-      "title": "iPhone Ultra now said to be confined to one market at launch",
-      "link": "https://www.gsmarena.com/iphone_ultra_now_said_to_be_confined_to_one_market_at_launch-news-74164.php",
-      "excerpt": "A new report from Australia of all places today claims that while Apple will unveil the foldable iPhone Ultra at its September 8 event, the device will not be released at the same…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-14T07:37:02.000Z"
-    },
-    {
-      "title": "iQOO Neo11 Ultra, Z11s chipset details revealed ahead of launch",
-      "link": "https://www.gsmarena.com/iqoo_neo11_ultra_z11s_chipset_details_revealed_ahead_of_launch-news-74168.php",
-      "excerpt": "Ahead of their August 18 launch in China, iQOO has revealed the chipsets powering the Neo11 Ultra and Z11s. The company had previously shared the design and battery specifications…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-14T06:32:02.000Z"
-    },
-    {
-      "title": "iPhone X joins Apple's obsolete product list",
-      "link": "https://www.gsmarena.com/iphone_x_joins_apples_obsolete_product_list_alongside_2018_macbook_pro-news-74167.php",
-      "excerpt": "Apple's 10th anniversary iPhone, the iPhone X, has finally been added to the company's obsolete products list, nearly nine years after its launch. The company has also added the…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-14T05:22:02.000Z"
     }
   ]
 }
