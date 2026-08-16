@@ -1,11 +1,19 @@
 {
-  "generated": "2026-08-15T23:41:37.119Z",
+  "generated": "2026-08-16T23:41:03.059Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Gemini Kini Membolehkan Pengguna Sembunyikan Tera-Air Pada Gambar Janaan",
+      "link": "https://cms.amanz.my/2026577365/",
+      "excerpt": "Google kini memperkenalkan kemaskini kecil pada Gemini, sekaligus membolehkan para pengguna untuk sembunyikan paparan gambar tera-air di atas gambar janaan AI. Dengan langkah ini,…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-08-16T01:43:42.000Z"
+    },
     {
       "title": "Siri Samsung Galaxy Z Fold8 Sudah Boleh Dibeli Di Malaysia – Promosi Eksklusif Dengan Rebat Sehingga RM800",
       "link": "https://cms.amanz.my/2026577342/",
@@ -93,17 +101,65 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-08-14T04:00:42.000Z"
-    },
-    {
-      "title": "Kad Debit-i Visa Bank MBSB Kini Disokong Pada Samsung Wallet",
-      "link": "https://cms.amanz.my/2026577157/",
-      "excerpt": "Samsung Malaysia dan Bank MBSB hari ini telah mengumumkan bahawa kad debit-i Visa MBSB kini boleh ditambatkan pada dompet digital Samsung Wallet bermula hari ini, 13 Ogos 2026.…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-08-13T10:22:46.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Samsung Galaxy Tab S12 series tablets now appear in Google Play Console's supported devices list",
+      "link": "https://www.gsmarena.com/samsung_galaxy_tab_s12_series_google_play_console_listing-news-74194.php",
+      "excerpt": "The Samsung Galaxy Tab S12 series tablets were recently spotted on Bluetooth SIG's website, as they were Bluetooth-certified. Now those same tablets have appeared in Google Play…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-16T23:11:02.000Z"
+    },
+    {
+      "title": "Pixel 11 series, Honor Robot Phone, Redmi 17 official, Week 33 in review",
+      "link": "https://www.gsmarena.com/pixel_11_series_honor_robot_phone_redmi_17_official_week_33_in_review-news-74177.php",
+      "excerpt": "Tech news started picking up a bit, especially in the past week. Google unveiled its Pixel 11 series alongside the Pixel Watch 5. The Pixel 11, 11 Pro, 11 Pro XL, and 11 Pro Fold…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-16T19:31:02.000Z"
+    },
+    {
+      "title": "Weekly poll: which Google Pixel 11 model would you buy?",
+      "link": "https://www.gsmarena.com/weekly_poll_which_google_pixel_11_model_would_you_buy-news-74157.php",
+      "excerpt": "Google announced the new Pixel 11, Pixel 11 Pro, 11 Pro XL and 11 Pro Fold this week – the phones are already available for pre-order and will be available from August 20. Are you…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-16T16:03:02.000Z"
+    },
+    {
+      "title": "Samsung is likely preparing Sony and Apple headphones rival for next year",
+      "link": "https://www.gsmarena.com/samsung_is_likely_preparing_sony_and_apple_headphones_rival_for_next_year-news-74195.php",
+      "excerpt": "A few days ago, a reference to the Samsung Galaxy Buds On popped up online - buds with an ear-hook design, along with some illustrations showing what they would look like. Now,…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-16T11:56:02.000Z"
+    },
+    {
+      "title": "Deals: the Google Pixel 11 series is now on pre-order with gift cards and trade-in bonuses",
+      "link": "https://www.gsmarena.com/deals_the_google_pixel_11_series_is_now_on_preorder_with_gift_cards_and_tradein_bonuses-news-74174.php",
+      "excerpt": "Google launched its new Pixel 11 series earlier this week – there is a new vanilla, two new Pro and one new foldable model. All that’s missing now is an affordable a-phone. The…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-16T09:51:02.000Z"
+    },
+    {
+      "title": "Weekly poll results: a surprising number of people are using feature phones",
+      "link": "https://www.gsmarena.com/weekly_poll_results_a_surprising_number_of_people_are_using_feature_phones-news-74159.php",
+      "excerpt": "Feature phones are not as dead as you may have thought – one third of voters in last week’s poll use one at least occasionally. Some even use a feature phone full time as their…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-16T06:31:02.000Z"
+    },
+    {
+      "title": "iQOO 16 tipped to come with a higher refresh rate screen, new design",
+      "link": "https://www.gsmarena.com/iqoo_16_165hz_refresh_rate_screen_tipped-news-74191.php",
+      "excerpt": "iQOO is said to launch the iQOO 16 in September, with the latest rumor from China claiming it will have a higher refresh-rate screen than its predecessor. The word comes from…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-16T00:45:02.000Z"
+    },
     {
       "title": "Deals: Pixel 11 series goes on pre-order, Galaxy Z8 foldables and S26 models drop prices",
       "link": "https://www.gsmarena.com/deals_pixel_11_series_goes_on_preorder_galaxy_z8_foldables_and_s26_models_drop_prices-news-74175.php",
@@ -143,62 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-08-15T05:02:02.000Z"
-    },
-    {
-      "title": "Honor Robot Phone hands-on review",
-      "link": "https://www.gsmarena.com/honor_robot_phone_handson_review-news-74184.php",
-      "excerpt": "In the somewhat stale smartphone market, Honor decided to shake things up a bit and finally launched the much-anticipated Honor Robot Phone. As the name implies, it's no ordinary…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-15T02:04:02.000Z"
-    },
-    {
-      "title": "Here's when Huawei's non-folding wide-screen phone is launching",
-      "link": "https://www.gsmarena.com/heres_when_huaweis_nonfolding_widescreen_phone_is_launching-news-74186.php",
-      "excerpt": "Following up on the success of the Pura X, Huawei has, for quite some time now, been working on a new non-folding smartphone with a similar 16:10 screen aspect ratio. This device…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-15T00:03:02.000Z"
-    },
-    {
-      "title": "Here's our first look at Samsung's upcoming One UI 9.5",
-      "link": "https://www.gsmarena.com/heres_our_first_look_at_samsungs_upcoming_one_ui_95-news-74185.php",
-      "excerpt": "While Samsung is still in the process of beta testing One UI 9, with the fifth beta having gone out to the Galaxy S26 series just a couple of days ago, the company is also already…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-14T22:07:03.000Z"
-    },
-    {
-      "title": "Snapdragon 8 Elite Gen 6 Pro emerges in AnTuTu test run",
-      "link": "https://www.gsmarena.com/snapdragon_8_elite_gen_6_pro_emerges_in_antutu_test_run_-news-74182.php",
-      "excerpt": "Qualcomm is expected to unveil its next-generation flagship chipset – the Snapdragon 8 Gen 6 Pro at the annual Snapdragon Summit next month, and it just leaked in an AnTuTu 11…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-14T20:11:02.000Z"
-    },
-    {
-      "title": "Here's a quick look at Google's new Pixel 11 series, Pixel Watch 5, and Fitbit Air",
-      "link": "https://www.gsmarena.com/heres_a_quick_look_at_googles_new_pixel_11_series_pixel_watch_5_and_fitbit_air-news-74181.php",
-      "excerpt": "Today, we are going to do a very quick hands-on with the new range of devices from Google for 2026, including but not limited to the new Pixel 11 series of smartphones. There are…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-14T15:51:02.000Z"
-    },
-    {
-      "title": "vivo Y31T image and specs leak",
-      "link": "https://www.gsmarena.com/vivo_y31t_image_and_specs_leak-news-74178.php",
-      "excerpt": "vivo launched the Y31 in September of last year, and now it's allegedly working on the Y31T. This will apparently be launching in India soon. The image below purportedly shows its…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-14T14:38:02.000Z"
-    },
-    {
-      "title": "Tecno Pova AI Buds Pro bring AI recording and call summarization",
-      "link": "https://www.gsmarena.com/tecno_pova_ai_buds_pro_bring_ai_recording_and_call_summarization-news-74179.php",
-      "excerpt": "Tecno recently unveiled the Pova 8 Pro and Pova 8 Pro 5G Tonino Lamborghini Limited Edition, with the standard model confirmed to launch in India on August 18. While we wait for…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-14T13:33:02.000Z"
     }
   ]
 }
