@@ -1,11 +1,19 @@
 {
-  "generated": "2026-08-30T01:23:35.154Z",
+  "generated": "2026-08-31T01:25:32.293Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Rekaan Huawei Mate XT 2 Dengan Skrin Trilipat Diperlihatkan",
+      "link": "https://cms.amanz.my/2026578941/",
+      "excerpt": "Huawei akan mengadakan acara khas pada 7 September bagi melancarkan peranti skrin trilipat terkini mereka Huawei Mate XT 2. Kali ini rekaan skrin lipat bukan lagi menggunakan…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-08-30T09:00:16.000Z"
+    },
     {
       "title": "Samsung Galaxy Z Fold8 dan Z Flip8 Adalah Peranti Komik K-Pop Kompak Kreatif",
       "link": "https://cms.amanz.my/2026578371/",
@@ -93,17 +101,65 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-08-28T04:05:57.000Z"
-    },
-    {
-      "title": "Aplikasi Android Perlu Menghadkan Penggunaan RAM Bermula Februari 2027",
-      "link": "https://cms.amanz.my/2026578763/",
-      "excerpt": "Krisis RAM global menyebabkan era telefon Android dengan 24GB RAM pupus tahun ini. Peranti kelas pertengahan dengan hanya 8GB RAM turut kembali menunjukkan tahap keseriusan…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-08-28T03:30:56.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Google Pixel 11 Pro in for review",
+      "link": "https://www.gsmarena.com/google_pixel_11_pro_in_for_review-news-74392.php",
+      "excerpt": "Just like in 2025, people who want a compact Pixel phone are faced with the same question: is the Pro worth the extra €200, or is the Pixel 11 good enough? And just like last…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-30T20:42:02.000Z"
+    },
+    {
+      "title": "Xperia 10 VIII, Galaxy S26 FE are official, Poco F9 Pro and Ultra coming, Week 35 in review",
+      "link": "https://www.gsmarena.com/xperia_10_viii_galaxy_s26_fe_are_official_poco_f9_pro_and_ultra_coming_week_35_in_review-news-74394.php",
+      "excerpt": "Sony unveiled the Xperia 10 VIII with a Snapdragon 6 Gen 4, a 6.1-inch OLED, a 5,000mAh battery, and a 50MP main camera. It starts at a rather steep $600. Why steep? Well, it's…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-30T17:19:02.000Z"
+    },
+    {
+      "title": "Samsung Galaxy A35 and Galaxy A56 could receive One UI 9 beta before stable build",
+      "link": "https://www.gsmarena.com/samsung_galaxy_a35_galaxy_a56_one_ui_9_beta_spotted-news-74405.php",
+      "excerpt": "Samsung is working on Android 17-based One UI 9 for several Galaxy devices, even though it has released the One UI 9 beta only for the Galaxy S26 series. While Samsung hasn't…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-30T14:07:02.000Z"
+    },
+    {
+      "title": "Deals: iPhone 17 lineup discounted, Galaxy S26 and Xiaomi 17 on sale",
+      "link": "https://www.gsmarena.com/deals_iphone_17_lineup_discounted_galaxy_s26_and_xiaomi_17_on_sale-news-74400.php",
+      "excerpt": "Apple’s iPhone 18 Pro lineup is expected to be unveiled at the upcoming Apple event scheduled for September 9. Ahead of the launch, the iPhone 17 lineup has received price cuts.…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-30T11:04:02.000Z"
+    },
+    {
+      "title": "Weekly poll: will you buy the Samsung Galaxy S26 FE?",
+      "link": "https://www.gsmarena.com/weekly_poll_will_you_buy_the_samsung_galaxy_s26_fe-news-74370.php",
+      "excerpt": "The Samsung Galaxy S26 FE is here and, in a way, it feels like it has been with us all along. The S25 FE was overall a decent upgrade over the S24 FE. The list of improvements…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-30T08:06:02.000Z"
+    },
+    {
+      "title": "Weekly poll results: the Honor Robot Phone draws in a crowd with its camera capabilities",
+      "link": "https://www.gsmarena.com/weekly_poll_results_the_honor_robot_phone_draws_in_a_crowd_with_its_camera_capabilities-news-74375.php",
+      "excerpt": "Last week’s poll shows that people are interested in the Honor Robot Phone for its camera and AI capabilities – but mostly the camera. For the purposes of the poll, we put aside…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-30T05:07:02.000Z"
+    },
+    {
+      "title": "WhatsApp's Scam Alert feature is now available to beta users on Android",
+      "link": "https://www.gsmarena.com/whatsapp_scam_alert_feature_android_beta_users-news-74404.php",
+      "excerpt": "Back in June, we learned that WhatsApp was developing a Scam Alert feature, which Meta officially detailed over two weeks ago. While WhatsApp hasn't yet revealed exactly when the…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-08-30T02:09:01.000Z"
+    },
     {
       "title": "Deals: the Galaxy S26 FE is coming, Galaxy S26 series on sale, Nothing Phone (3) also discounted",
       "link": "https://www.gsmarena.com/deals_the_galaxy_s26_fe_is_coming_galaxy_s26_series_on_sale_nothing_phone_3_also_discounted-news-74384.php",
@@ -143,62 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-08-29T08:09:02.000Z"
-    },
-    {
-      "title": "Deals: the Galaxy S26 FE is on pre-order, but the S26+ is cheaper - several Pocos are cheaper too",
-      "link": "https://www.gsmarena.com/deals_the_galaxy_s26_fe_is_on_preorder_but_the_s26_is_cheaper__several_pocos_are_cheaper_too-news-74388.php",
-      "excerpt": "Samsung unveiled the Galaxy S26 FE earlier this week – the phone is set to go on sale on Friday next week (September 4). Unfortunately, the new model costs more than its…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-29T05:07:02.000Z"
-    },
-    {
-      "title": "Oppo Reno17 series could get teleconverter support, new rumor claims",
-      "link": "https://www.gsmarena.com/oppo_reno17_series_could_get_teleconverter_support_new_rumor_claims-news-74396.php",
-      "excerpt": "Oppo unveiled the Reno16 series in China in May and later launched it in global markets. The lineup also made its way to India in July. The Reno16 series introduced the AI Snap…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-29T02:31:02.000Z"
-    },
-    {
-      "title": "Samsung Galaxy S26 FE in for review",
-      "link": "https://www.gsmarena.com/samsung_galaxy_s26_fe_in_for_review-news-74391.php",
-      "excerpt": "The Galaxy FE models have always enjoyed the attention of loyal and savvy Galaxy fans, but Samsung may be cutting it a bit too close with the Galaxy S26 FE. We called it the…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-29T00:02:02.000Z"
-    },
-    {
-      "title": "Google Pixel 11 in for review",
-      "link": "https://www.gsmarena.com/google_pixel_11_in_for_review-news-74377.php",
-      "excerpt": "Last year was a big step for the Pixel 10, which gained a zoom camera (but downgraded the main camera), but this year, Google is keeping things simpler (and less innovative). The…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-28T19:16:02.000Z"
-    },
-    {
-      "title": "Samsung Galaxy S26 series receives seventh One UI 9 beta with Galaxy Z Fold8 series' features",
-      "link": "https://www.gsmarena.com/samsung_galaxy_s26_series_one_ui_9_beta_7_update-news-74387.php",
-      "excerpt": "Samsung released the sixth One UI 9 beta for the Galaxy S26 series earlier this week. Now, in a surprising move, the brand has released the seventh One UI 9 beta for the Galaxy…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-28T17:47:02.000Z"
-    },
-    {
-      "title": "Huawei teases a slimmer Huawei Watch D3 and FreeBuds Neo",
-      "link": "https://www.gsmarena.com/huawei_teases_a_slimmer_huawei_watch_d3_and_freebuds_neo-news-74393.php",
-      "excerpt": "Huawei is preparing for the September 2 launch of the nova 16s Pro, but as it turns out, the company will also introduce two more products – a new smartwatch and new earbuds. The…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-28T16:18:03.000Z"
-    },
-    {
-      "title": "Xiaomi's privacy display user interface leaks, here are the options",
-      "link": "https://www.gsmarena.com/xiaomis_privacy_display_user_interface_leaks_here_are_the_options-news-74390.php",
-      "excerpt": "With the Galaxy S26 Ultra, Samsung this year unveiled the first ever built-in hardware-controlled privacy display on a smartphone. Now Xiaomi is apparently following suit with its…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-08-28T15:01:02.000Z"
     }
   ]
 }
