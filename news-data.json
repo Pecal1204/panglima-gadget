@@ -1,11 +1,27 @@
 {
-  "generated": "2026-09-20T01:20:03.122Z",
+  "generated": "2026-09-21T01:18:13.345Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Perbandingan Oppo A7 Pro Max, Redmi Note 17 Pro Max dan Realme P4 Power 5G",
+      "link": "https://cms.amanz.my/2026581315/",
+      "excerpt": "Oppo A7 Pro Max dilancarkan di Malaysia dengan ia sebuah lagi telefon dengan bateri 10,000 mAh. Maka ia serasi dibandingkan dengan Redmi Note 17 Pro Max dan Realme P4 Power 5G…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-09-20T18:44:02.000Z"
+    },
+    {
+      "title": "Ulasan Samsung 990 – SSD Untuk Gaming",
+      "link": "https://cms.amanz.my/2026580746/",
+      "excerpt": "Harga yang semakin meningkat membuatkan pembelian peranti baharu bukanlah pilihan paling bijak pada ketika ini. Antara isu yang dihadapi sekarang storan dalam peranti yang tidak…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-09-20T04:00:00.000Z"
+    },
     {
       "title": "Oppo A7 Pro Dan Pro Max Tiba Di Malaysia – Bateri 10,000mAh, Harga Bermula RM1699",
       "link": "https://cms.amanz.my/2026581356/",
@@ -85,25 +101,41 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-09-17T07:45:13.000Z"
-    },
-    {
-      "title": "Kod QR Di Belakang MyKad Baharu Hanya Boleh Dibaca Oleh Pihak Berkuasa Seperti JPN",
-      "link": "https://cms.amanz.my/2026581185/",
-      "excerpt": "Rekaan MyKad baru telah diperlihatkan oleh pihak Jabatan Pendaftaran Negara semalam, dan ia memperlihatkan sejumlah rekaan dan ciri-ciri keselamatan tambahan baharu yang telah…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-09-17T07:12:14.000Z"
-    },
-    {
-      "title": "Samsung Galaxy S26, S26+ Dan S26 Ultra Mula Menerima Android 17",
-      "link": "https://cms.amanz.my/2026581184/",
-      "excerpt": "Samsung Galaxy S26, S26+ Dan S26 Ultra mula menerima kemas kini One UI 9 yang berasaskan Android 17 di Korea Selatan hari ini. Di Korea Selatan, saiz kemas kini secara OTA ini…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-09-17T06:49:14.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Pixel 11 vs. Pixel 11 Pro",
+      "link": "https://www.gsmarena.com/pixel_11_vs_pixel_11_pro_battery_camera_price_compared-news-74597.php",
+      "excerpt": "The Pixel 11 models are now available, and many are already shopping for their next Google phone. If you are looking for a compact yet powerful flagship, it's inevitable to ask…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-09-20T15:31:02.000Z"
+    },
+    {
+      "title": "Weekly poll: will you buy a Redmi Note 17 Pro or a Redmi Note 17 Pro Max?",
+      "link": "https://www.gsmarena.com/weekly_poll_will_you_buy_a_redmi_note_17_pro_or_a_redmi_note_17_pro_max-news-74649.php",
+      "excerpt": "Once paragons of value-for-money, the Redmi Note phones have taken a turn – are they still a smart buy? The series launched globally on September 17 (Thursday), including in…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-09-20T11:03:02.000Z"
+    },
+    {
+      "title": "Deals: iPhone 18 Pro series goes on sale, Galaxy Z8 foldables get discounts",
+      "link": "https://www.gsmarena.com/deals_iphone_18_pro_series_goes_on_sale_galaxy_z8_foldables_get_discounts-news-74685.php",
+      "excerpt": "The iPhone 18 Pro series is now officially on sale in the UK. However, the latest iPhones are more expensive than last year, so it might be worth considering the iPhone 17 Pro…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-09-20T07:02:02.000Z"
+    },
+    {
+      "title": "Weekly poll results: the iPhone Duo nailed the form factor, iPhone 18 Pro Max upstages the 18 Pro",
+      "link": "https://www.gsmarena.com/weekly_poll_results_the_iphone_duo_nailed_the_form_factor_iphone_18_pro_max_upstages_the_18_pro-news-74650.php",
+      "excerpt": "Apple nailed it on its first try – no, Cupertino didn’t invent the wide foldable form factor, but the results from last week’s poll show that it was the best choice compared to…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-09-20T03:01:01.000Z"
+    },
     {
       "title": "Oppo Find X10 series launch set, Galaxy S27 Pro and Ultra to pack M16 OLEDs, Week 38 in review",
       "link": "https://www.gsmarena.com/oppo_find_x10_series_launch_set_galaxy_s27_pro_and_ultra_to_pack_m16_oleds_week_38_in_review-news-74682.php",
@@ -121,7 +153,7 @@
       "published": "2026-09-19T19:31:02.000Z"
     },
     {
-      "title": "Here's how Apple got around shipping restrictions for the iPhone 18 Pro Max's large battery",
+      "title": "Here's the clever new way Apple used to get around shipping restrictions for the iPhone 18 Pro Max's large battery",
       "link": "https://www.gsmarena.com/heres_apples_clever_way_of_circumventing_20wh_battery_shipping_restrictions-news-74689.php",
       "excerpt": "If you've been following the smartphone trends in recent years, you've probably noticed that the battery capacities of recent flagships have grown significantly. That's mainly…",
       "source": "GSMArena",
@@ -139,7 +171,7 @@
     {
       "title": "Don’t rush to replace your MyKad: New card faces eKYC verification issues",
       "link": "https://soyacincau.com/2026/09/19/new-mykad-nric-ekyc-online-verification-issues/",
-      "excerpt": "[ UPDATE 19/09/2026 23:45 ] New MyKad was also rejected for eKYC process by Ryt Bank, Aeon Bank and GXBank. === Malaysia’s next-generation MyKad has just started rolling out this…",
+      "excerpt": "[ UPDATE 20/09/2026 13:00 ] MyDigital ID does not accept new MyKad for online registrations yet. [ UPDATE 19/09/2026 23:45 ] New MyKad was also rejected for eKYC process by Ryt…",
       "source": "SoyaCincau",
       "lang": "en",
       "published": "2026-09-19T09:13:13.000Z"
@@ -167,38 +199,6 @@
       "source": "SoyaCincau",
       "lang": "en",
       "published": "2026-09-19T04:15:44.000Z"
-    },
-    {
-      "title": "The new itel A300C is tough, cheap and has a 6,000mAh battery",
-      "link": "https://www.gsmarena.com/the_new_itel_a300c_is_tough_cheap_and_has_a_6000mah_battery-news-74679.php",
-      "excerpt": "itel spent weeks teasing its new A300C model and it is finally go time. This is a rugged-but-affordable Android 16 Go Edition phone – it costs ₹11,000 and comes with 4GB of RAM…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-19T02:04:02.000Z"
-    },
-    {
-      "title": "This is when Motorola is unveiling the Signature 27",
-      "link": "https://www.gsmarena.com/this_is_when_motorola_is_unveiling_the_signature_27-news-74681.php",
-      "excerpt": "Motorola's Signature, its current flagship smartphone, came out in January, and now the company is almost ready to reveal its successor, the Signature 27. Motorola started teasing…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-18T23:02:02.000Z"
-    },
-    {
-      "title": "First iPhone 18 Pro teardown video is here",
-      "link": "https://www.gsmarena.com/first_iphone_18_pro_teardown_video_is_here-news-74683.php",
-      "excerpt": "The iPhone 18 Pro and iPhone 18 Pro Max have been released today, and there's already a teardown video of the former available on YouTube. Undoubtedly, many more will follow, but…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-18T21:02:02.000Z"
-    },
-    {
-      "title": "Apple iPhone 18 Pro Max in for review",
-      "link": "https://www.gsmarena.com/apple_iphone_18_pro_max_in_for_review-news-74680.php",
-      "excerpt": "The iPhone 18 Pro Max could very well have been called the 17S Pro Max. It brings a chip update, some minor tweaks to the camera and new colors. Back in the day that basically…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-18T19:30:02.000Z"
     }
   ]
 }
