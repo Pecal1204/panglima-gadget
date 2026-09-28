@@ -1,11 +1,35 @@
 {
-  "generated": "2026-09-27T01:36:49.429Z",
+  "generated": "2026-09-28T01:49:09.269Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Apple Perlu Membayar Pampasan $5.7 Bilion Kerana Melanggar Paten Taptic Engine",
+      "link": "https://cms.amanz.my/2026582418/",
+      "excerpt": "Juri persekutuan mahkamah di San Diego mendapati Apple melanggar paten milik Taction Technology pada Taptic Engine yang digunakan pada sistem haptik iPhone dan Apple Watch. Apple…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-09-28T01:00:33.000Z"
+    },
+    {
+      "title": "Samsung Galaxy A08 Berharga RM899 Di Malaysia – Hadir Dengan Bateri 6000mAh",
+      "link": "https://cms.amanz.my/2026582415/",
+      "excerpt": "Samsung Malaysia kini mengumumkan penawaran telefon pintar Galaxy A08 secara rasmi untuk pasaran Malaysia, dimana ia ditawarkan pada harga RM899. Telefon ini memfokuskan kepada…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-09-27T13:18:20.000Z"
+    },
+    {
+      "title": "Insta360 Dilaporkan Sedang Bangunkan Kaca Mata Pintar Tersendiri",
+      "link": "https://cms.amanz.my/2026582411/",
+      "excerpt": "Insta360 sedia menempa nama pada arena global melalui penawaran kamera aksi 360-darjah. Menariknya, kini dengan pelbagai pihak menawarkan kaca mata pintar, hadir laporan…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-09-27T13:00:10.000Z"
+    },
     {
       "title": "Samsung Peneraju Pembangunan Teknologi Peranti Pintar Boleh Lipat",
       "link": "https://cms.amanz.my/2026582340/",
@@ -77,33 +101,65 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-09-24T06:27:25.000Z"
-    },
-    {
-      "title": "Microsoft Surface Pro 12 Dan Surface Laptop Dikemaskini Dengan Cip Qualcomm Snapdragon X2 Plus",
-      "link": "https://cms.amanz.my/2026582109/",
-      "excerpt": "Microsoft baru sahaja mengumumkan bahawa siri komputer tablet dan komputer riba Microsoft Surface Pro 12 dan Surface Laptop 13 telah dikemaskini dengan pilihan cip pemprosesan…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-09-24T05:21:45.000Z"
-    },
-    {
-      "title": "Vivo V80 Mula Diperlihatkan Dengan Skrin 144Hz, Tri-Kamera ZEISS 50MP, Bateri 7200mAh",
-      "link": "https://cms.amanz.my/2026582112/",
-      "excerpt": "Vivo V80 mula diacah di laman web vivo India dengan rekaan premium menggunakan kaca ukiran khas dan modul kamera moden. Ia juga dilengkapi sistem kamera ZEISS dengan sensor utama…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-09-24T05:10:31.000Z"
-    },
-    {
-      "title": "Rekaan Cip Pemprosesan Untuk Konsol Sony PlayStation 6 Dan Project Helix Dilaporkan Sudah Siap",
-      "link": "https://cms.amanz.my/2026581962/",
-      "excerpt": "Sebelum ini terdapat beberapa laporan yang mengatakan bahawa konsol-konsol generasi akan datang, termasuklah Sony PlayStation 6 dan juga Project Helix oleh Microsoft akan…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-09-24T04:46:33.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Xiaomi UltraThin Magnetic Power Bank 5000 15W review",
+      "link": "https://www.gsmarena.com/xiaomi_ultrathin_magnetic_power_bank_5000_15w_review-news-74788.php",
+      "excerpt": "The Xiaomi MDY-20-EB, commonly known by its product name Xiaomi UltraThin Magnetic Power Bank 5000 15W, is exactly what its overly long title suggests. It’s an ultra-thin power…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-09-27T23:51:20.000Z"
+    },
+    {
+      "title": "vivo X500 Pro Max unboxing and hands-on",
+      "link": "https://www.gsmarena.com/vivo_x500_pro_max_in_for_review-news-74773.php",
+      "excerpt": "We had the pleasure of attending the vivo X500 Pro Max unveiling in China, but we're now back at HQ and can get our unboxing hats on! And boy, is there a lot to unpack here.…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-09-27T19:01:02.000Z"
+    },
+    {
+      "title": "TNB Electron activates 240kW DC charger at R&R Rawang Northbound",
+      "link": "https://soyacincau.com/2026/09/28/tnb-electron-rnr-rawang-north-240kw-live/",
+      "excerpt": "TNB Electron is activating its new DC charger at R&R Rawang Northbound, which bodes well for EV drivers heading northbound—especially those starting their journey from the Greater…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-09-27T18:07:02.000Z"
+    },
+    {
+      "title": "Xiaomi 18 Pro/Pro Max, vivo X500, Pro/Pro Max are all official, Week 39 in review",
+      "link": "https://www.gsmarena.com/xiaomi_18_pro_pro_max_vivo_x500_pro_pro_max_are_all_official_week_39_in_review-news-74776.php",
+      "excerpt": "It's been quite a busy week, and as we're now approaching the end of September, the calm and quiet of summer is truly behind us. Tech is in full swing again! So let's recap the…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-09-27T15:31:01.000Z"
+    },
+    {
+      "title": "Deals: Google’s Pixel 11 series gets price cuts, Samsung Galaxy Z8 foldables discounted",
+      "link": "https://www.gsmarena.com/deals_googles_pixel_11_series_gets_price_cuts_samsung_galaxy_z8_foldables_discounted-news-74778.php",
+      "excerpt": "The Google Pixel 11 series is currently available at a discount, along with last year’s Pixel 10 Pro. Samsung’s latest Galaxy Z Fold8 Ultra, Galaxy Z Fold8, and Galaxy Z Flip8 are…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-09-27T12:02:02.000Z"
+    },
+    {
+      "title": "Weekly poll: what do you think of the Xiaomi 18 Pro and Xiaomi 18 Pro Max?",
+      "link": "https://www.gsmarena.com/weekly_poll_what_do_you_think_of_the_xiaomi_18_pro_and_xiaomi_18_pro_max-news-74753.php",
+      "excerpt": "Hot on the heels of the Snapdragon 8 Elite Extreme Gen 6 and 8 Elite Gen 6 announcement, Xiaomi unveiled two flagships featuring the new chips. These two are already on sale in…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-09-27T08:31:02.000Z"
+    },
+    {
+      "title": "Weekly poll results: the Redmi Note 17 Pro and Note 17 Pro Max feel like a step back",
+      "link": "https://www.gsmarena.com/weekly_poll_results_the_redmi_note_17_pro_and_note_17_pro_max_feel_like_a_step_back-news-74756.php",
+      "excerpt": "While they were not universally loved, the Redmi Note 15 series from Xiaomi got a positive response in a poll a year ago. The Pro+ model was clearly the fan favorite, but the Pro…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-09-27T05:01:02.000Z"
+    },
     {
       "title": "WhatsApp is redesigning its Android app, here's how",
       "link": "https://www.gsmarena.com/whatsapp_is_redesigning_its_android_app_heres_how-news-74782.php",
@@ -143,62 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-09-26T09:51:02.000Z"
-    },
-    {
-      "title": "Deals: massive price cuts for the Galaxy Z Fold8 and Z Flip8, Pixel 11 series also discounted",
-      "link": "https://www.gsmarena.com/deals_massive_price_cuts_for_the_galaxy_z_fold8_and_z_flip8_pixel_11_series_also_discounted-news-74770.php",
-      "excerpt": "The Galaxy Z Fold8 and Z Flip8 are around one-third off this week – these are massive discounts for cutting-edge foldables that only launched last month. The big Z Fold8 Ultra…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-26T07:01:02.000Z"
-    },
-    {
-      "title": "Honor keeps teasing the Magic9 Pro Max's cinematic mic and teleconverter",
-      "link": "https://www.gsmarena.com/honor_keeps_teasing_the_magic9_pro_maxs_cinematic_mic_and_teleconverter-news-74780.php",
-      "excerpt": "Honor is unveiling the Magic9 series on September 28, and since we're just a few days away from the event, the company keeps on teasing the upcoming phones. The Magic9 devices, or…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-26T04:03:02.000Z"
-    },
-    {
-      "title": "Here's proof the vivo X500 Pro Max is a cameraphone to be reckoned with",
-      "link": "https://www.gsmarena.com/camera_samples_from_the_vivo_x500_pro_max_shanghai-news-74779.php",
-      "excerpt": "We had the distinct pleasure of attending vivo's X500 series unveiling in Shanghai, China. If you've never been to such an event, it's pretty nice; the maker usually arranges a…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-26T01:03:02.000Z"
-    },
-    {
-      "title": "Motorola Edge 60 Fusion starts receiving the Android 17 update",
-      "link": "https://www.gsmarena.com/motorola_edge_60_fusion_starts_receiving_the_android_17_update-news-74781.php",
-      "excerpt": "Motorola has started rolling out the update to Android 17 for the Edge 60 Fusion in India, according to reports on Reddit. The update arrives over-the-air as version A171VCH.41-9,…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-25T21:59:02.000Z"
-    },
-    {
-      "title": "Apple iPhone 18 Pro review",
-      "link": "https://www.gsmarena.com/apple_iphone_18_pro-review-3003.php",
-      "excerpt": "",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-25T20:57:28.000Z"
-    },
-    {
-      "title": "Samsung sued over Galaxy S23 Ultra, Galaxy Watch Ultra patent infringement",
-      "link": "https://www.gsmarena.com/samsung_sued_over_galaxy_s23_ultra_galaxy_watch_ultra_patent_infringement-news-74777.php",
-      "excerpt": "A US-based company called Ioengine is suing Samsung in the US District Court for the Eastern District of Texas, alleging that the Korean company is using five of its…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-25T20:09:02.000Z"
-    },
-    {
-      "title": "Qualcomm may be adding DirectX 12 support on its flagship Snapdragon chips",
-      "link": "https://www.gsmarena.com/qualcomm_may_be_adding_directx_12_support_on_its_flagship_snapdragon_chips-news-74774.php",
-      "excerpt": "Qualcomm is apparently considering an official solution to better support PC game emulation on Android. According to one Chinese YouTuber, the company may be adding proper support…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-09-25T18:21:02.000Z"
     }
   ]
 }
