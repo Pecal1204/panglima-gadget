@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-10T02:29:41.541Z",
+  "generated": "2026-10-11T02:01:23.054Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
@@ -63,6 +63,14 @@
       "published": "2026-10-09T04:00:06.000Z"
     },
     {
+      "title": "CEO Microsoft Mengatakan AI Memerlukan “Brek Kecemasan” Yang Dikawal Manusia",
+      "link": "https://cms.amanz.my/2026584286/",
+      "excerpt": "CEO Microsoft, Satya Nadella kini berkongsi pendapat berkenaan dengan pembangunan model kecerdasan buatan oleh pelbagai syarikat teknologi, dan menekankan pembangunan ini perlu…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-10-11T00:12:48.000Z"
+    },
+    {
       "title": "TIME Menawarkan Kelajuan Internet Dipertingkatkan Untuk Pengalaman Lebih Baik Ketika Musim Jerebu",
       "link": "https://cms.amanz.my/2026584279/",
       "excerpt": "Disebabkan oleh jerebu, ramai yang kini bekerja dari rumah, disamping penutupan sekolah turut membawa kepada pembelajaran dilakukan dari rumah secara atas-talian. Ini sekaligus…",
@@ -93,17 +101,65 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-10-09T09:19:43.000Z"
-    },
-    {
-      "title": "Belanjawan 2027 – Inisiatif Rakyat Digital Berikan 100,000 Lagi Langganan AI Percuma",
-      "link": "https://cms.amanz.my/2026584235/",
-      "excerpt": "inisiatif Rakyat Digital diperkenalkan pada penghujung Ogos lalu dengan ia menawarkan langganan perkhidmatan kecerdasan buatan (AI) percuma selama 3 bulan untuk mereka yang…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-10-09T09:19:28.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Xiaomi Watch S5 review",
+      "link": "https://www.gsmarena.com/xiaomi_watch_s5_review-news-73952.php",
+      "excerpt": "Introduction, unboxing People love the Xiaomi Watch S models and with good reason. They're affordable (€150 from Amazon), they're feature-rich and capable, but probably more…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-11T00:02:02.000Z"
+    },
+    {
+      "title": "Samsung Galaxy S27 might finally introduce DC dimming",
+      "link": "https://www.gsmarena.com/samsung_galaxy_s27_might_finally_introduce_dc_dimming-news-74994.php",
+      "excerpt": "We already heard word that Samsung Display is gearing up to start Galaxy S27 display manufacturing soon. That might have already happened; hence, these new leaks might be…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-10T21:01:02.000Z"
+    },
+    {
+      "title": "Deals: Some Galaxy and Pixel phones kept their Prime Day prices - no Prime required now, though",
+      "link": "https://www.gsmarena.com/deals_some_galaxy_and_pixel_phones_kept_their_prime_day_prices__no_prime_required_now_though-news-74975.php",
+      "excerpt": "Amazon’s Prime Big Deal Days only lasted two days and there were some really good deals to be had for Prime subscribers. But that is over, so today we will look at no-Prime deals…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-10T18:31:02.000Z"
+    },
+    {
+      "title": "Oppo Find N7's camera and display details surface",
+      "link": "https://www.gsmarena.com/oppo_find_n7_camera_display_details_tipped-news-74991.php",
+      "excerpt": "The Oppo Find N7 is expected in Q1 2027, possibly March, like its predecessor, the Find N6. While Oppo hasn't revealed anything about the Find N7, reliable tipster Digital Chat…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-10T13:38:02.000Z"
+    },
+    {
+      "title": "This is when the Infinix GT 50 Pro is finally launching in India",
+      "link": "https://www.gsmarena.com/this_is_when_the_infinix_gt_50_pro_is_finally_launching_in_india-news-74988.php",
+      "excerpt": "Infinix launched the GT 50 Pro back in April, but for some reason it still hasn't made the device available in India. That will thankfully change very soon. Following a brief…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-10T11:01:02.000Z"
+    },
+    {
+      "title": "Deals: vivo X Fold6 arrives, Galaxy S26 Ultra price remains low, iPhone 17 series on sale",
+      "link": "https://www.gsmarena.com/deals_vivo_x_fold6_arrives_galaxy_s26_ultra_price_remains_low_iphone_17_series_on_sale-news-74980.php",
+      "excerpt": "The Prime Big Deal Days sale must have gone well as a lot of smartphones are showing as “out of stock” on Amazon – and for those that are still available, supplies are limited, so…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-10T07:49:02.000Z"
+    },
+    {
+      "title": "Oppo Find X10 Pro Max Hasselblad teleconverter kit unboxing and hands-on",
+      "link": "https://www.gsmarena.com/oppo_find_x10_pro_max_hasselblad_teleconverter_kit_unboxing_and_handson-news-74979.php",
+      "excerpt": "The Oppo Find X10 series is going global on October 21, and we've already brought you guys a quick first look and unboxing of both the Find X10 and the Find X10 Pro Max. Now,…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-10T04:31:01.000Z"
+    },
     {
       "title": "Nothing's CMF is launching new products next week",
       "link": "https://www.gsmarena.com/nothings_cmf_is_launching_new_products_next_week-news-74987.php",
@@ -143,62 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-10-09T15:05:03.000Z"
-    },
-    {
-      "title": "Garmin Enduro 4: 1.4-inch MIP display, up to 320 hours of battery life; available on 30 October at RM3,899",
-      "link": "https://soyacincau.com/2026/10/09/garmin-enduro-4-1-4-inch-mip-display-up-to-320-hours-of-battery-life-available-on-30-october-at-rm3899/",
-      "excerpt": "Garmin Malaysia has officially announced the Enduro 4, its latest ultra-performance GPS smartwatch designed specifically for endurance athletes, trail runners, and outdoor…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-10-09T14:34:24.000Z"
-    },
-    {
-      "title": "Garmin Approach S72 Malaysia: 1.4-inch AMOLED display, ComfortFit band, up to 16 days of battery life for RM3,599",
-      "link": "https://soyacincau.com/2026/10/09/garmin-approach-s72-malaysia-1-4-inch-amoled-display-comfortfit-band-up-to-16-days-of-battery-life-for-rm3599/",
-      "excerpt": "Garmin Malaysia has introduced its latest flagship golf smartwatch, the Garmin Approach S72, which hits Malaysian shelves on 30 October 2026. You can pick it up in two sizes: 43mm…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-10-09T13:17:35.000Z"
-    },
-    {
-      "title": "Infinix Smart 20e arrives with military-grade shock resistance and IP64 rating, priced from RM499",
-      "link": "https://soyacincau.com/2026/10/09/infinix-smart-20e-malaysia-launch-spec-features/",
-      "excerpt": "Infinix has officially launched the SMART 20e in Malaysia and it is their new entry-level 4G smartphone priced under RM600. Despite its budget pricing, the device still offers…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-10-09T13:05:13.000Z"
-    },
-    {
-      "title": "MSI Prestige N16 Flip A+ with NVIDIA RTX Spark N1X now available for pre-order in Malaysia from RM19,699",
-      "link": "https://soyacincau.com/2026/10/09/msi-prestige-n16-flip-a-with-nvidia-rtx-spark-n1x-now-available-for-pre-order-in-malaysia-from-rm19699/",
-      "excerpt": "MSI has officially opened pre-orders in Malaysia for its latest high-end 2-in-1 convertible laptop, the Prestige N16 Flip AI+. Aimed squarely at creators, developers, and power…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-10-09T12:42:15.000Z"
-    },
-    {
-      "title": "Global Xiaomi 18 Pro Max has its chipset and RAM amount confirmed by a benchmark",
-      "link": "https://www.gsmarena.com/global_xiaomi_18_pro_max_has_its_chipset_and_ram_amount_confirmed_by_a_benchmark-news-74977.php",
-      "excerpt": "Xiaomi has already confirmed that the 18 Pro and 18 Pro Max will be launched internationally, unlike their predecessors from last year. And so with the 18 Ultra rumored to have…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-09T12:39:02.000Z"
-    },
-    {
-      "title": "OnePlus 15 receives ColorOS 17 Open Beta just days before the official OS launch",
-      "link": "https://www.gsmarena.com/oneplus_15_receives_coloros_17_open_beta_just_days_before_the_official_os_launch-news-74973.php",
-      "excerpt": "Oppo officially confirmed the ColorOS 17 global launch for October 13 next week, and OnePlus just opened up registrations for OnePlus users to get an early taste of the software.…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-09T11:14:02.000Z"
-    },
-    {
-      "title": "OnePlus 16 display specs confirmed",
-      "link": "https://www.gsmarena.com/oneplus_16_display_specs_confirmed-news-74972.php",
-      "excerpt": "The OnePlus 16 is going official next week and ahead of the big unveiling, the brand revealed more key info for the upcoming flagship. The phone will be equipped with a BOE X4…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-09T09:58:01.000Z"
     }
   ]
 }
