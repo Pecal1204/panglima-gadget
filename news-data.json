@@ -1,11 +1,35 @@
 {
-  "generated": "2026-10-11T02:01:23.054Z",
+  "generated": "2026-10-12T02:32:05.771Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Jepun Isytihar Darurat Keselamatan Siber Kerana Serangan Meningkat",
+      "link": "https://cms.amanz.my/2026584309/",
+      "excerpt": "Jepun mengisytiharkan darurat keselamatan siber selepas serangan siber yang menjejaskan lebih 20 syarikat utama di negara tersebut menurut laporan Financial Times. Antara yang…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-10-12T01:06:11.000Z"
+    },
+    {
+      "title": "Pengeluaran PC Merosot 20.1% Pada Q3 2026 Kerana Krisis RAM",
+      "link": "https://cms.amanz.my/2026584314/",
+      "excerpt": "Saya meminta maaf kerana memulakan hari Isnin dengan beberapa berita yang kurang enak tetapi fakta perlu dilaporkan dengan telus. Menurut laporan terkini IDC, pengeluaran PC pada…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-10-12T00:25:05.000Z"
+    },
+    {
+      "title": "DJI dan Insta360 Memegang 93% Pasaran Kamera Pintar Pada Q2 2026",
+      "link": "https://cms.amanz.my/2026584300/",
+      "excerpt": "Satu fenomena yang saya sedari sejak kebelakangan ini ialah penggunaan kamera gimbal oleh golongan penghasil kandungan serta pempengaruh. Dalam tempoh setahun sahaja kamera gimbal…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-10-12T00:24:11.000Z"
+    },
     {
       "title": "Apple Dikatakan Mengurangkan Pengeluaran iPhone 18 Pro",
       "link": "https://cms.amanz.my/2026584275/",
@@ -47,20 +71,12 @@
       "published": "2026-10-09T05:26:26.000Z"
     },
     {
-      "title": "Infinix Smart 20e Dilancarkan Di Malaysia – Skrin 120Hz, Harga Bermula RM499",
-      "link": "https://cms.amanz.my/2026584071/",
-      "excerpt": "Infinix hadir dengan penawaran baharu melalui Smart 20e yang direka untuk pengguna yang mencari peranti asas bagi kegunaan harian. Model ini merupakan tambahan terbaharu dalam…",
+      "title": "Star Citizen Squadron 42 Akan Dilancarkan Q2 2027 – 13 Tahun Selepas Diumumkan",
+      "link": "https://cms.amanz.my/2026584293/",
+      "excerpt": "Permainan video Star Citizen Squadron 42 disahkan akan dilancarkan pada Q2 2027 oleh Cloud Imperium Games yang tersasar daripada perancangan asal dilancarkan pada tahun 2014.…",
       "source": "Amanz",
       "lang": "bm",
-      "published": "2026-10-09T04:57:57.000Z"
-    },
-    {
-      "title": "Bagaimana Gemini Meningkatkan Produktiviti Pada Samsung Galaxy",
-      "link": "https://cms.amanz.my/2026583376/",
-      "excerpt": "Ketua syarikat teknologi utama mengatakan dalam masa terdekat, penggunaan kecerdasan buatan (AI) dalam kehidupan seharian akan menjadi seperti utiliti yang diakses setiap hari.…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-10-09T04:00:06.000Z"
+      "published": "2026-10-11T23:25:15.000Z"
     },
     {
       "title": "CEO Microsoft Mengatakan AI Memerlukan “Brek Kecemasan” Yang Dikawal Manusia",
@@ -85,25 +101,81 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-10-09T09:46:21.000Z"
-    },
-    {
-      "title": "Belanjawan 2027 – Duti Hiburan Filem Dan Teater Tempatan Dikecualikan Mulai 2027",
-      "link": "https://cms.amanz.my/2026584236/",
-      "excerpt": "Dalam Belanjawan 2027, kerajaan memberi tumpuan khusus kepada sektor hiburan dengan mengumumkan pengecualian duti hiburan bagi tiket filem serta persembahan teater tempatan mulai…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-10-09T09:25:23.000Z"
-    },
-    {
-      "title": "Belanjawan 2027 – MyDigital ID Mencatatkan Lebih 14 Juta Pengguna Berdaftar",
-      "link": "https://cms.amanz.my/2026584233/",
-      "excerpt": "MyDigital ID ialah platform pengesahan identiti rakyat Malaysia yang digunakan sebagai pengesahan log masuk tanpa kata laluan untuk pelbagai platform aplikasi perkhidmatan…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-10-09T09:19:43.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Oppo F35 and F35 Pro debut, we handle the Find X10 series, Week 41 in review",
+      "link": "https://www.gsmarena.com/oppo_f35_and_f35_pro_debut_we_handle_the_find_x10_series_week_41_in_review-news-74983.php",
+      "excerpt": "Another week over, so let's do a recap. We unboxed the Oppo Find X10 and Find X10 Pro Max - Oppo's latest Dimensity-equipped flagships. Both are still China-exclusive, but are…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-12T02:17:02.000Z"
+    },
+    {
+      "title": "vivo X500E moves a step closer to launch as it gets Bluetooth certified",
+      "link": "https://www.gsmarena.com/vivo_x500e_bluetooth_sig_certified-news-74993.php",
+      "excerpt": "vivo unveiled the X300 E in July, and the X500E is expected to arrive as its successor in the next few months, with Bluetooth SIG certification bringing it closer to launch. The…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-11T23:31:02.000Z"
+    },
+    {
+      "title": "New insider tip claims the Samsung Galaxy S27 Ultra will only be available with a Qualcomm chipset",
+      "link": "https://www.gsmarena.com/new_insider_tip_claims_the_samsung_galaxy_s27_ultra_will_only_be_available_with_a_qualcomm_chipset-news-74995.php",
+      "excerpt": "This always seems to be a pressing question as pretty much every new Galaxy S family of devices is on the horizon – what chipsets will they use? We already know that the Exynos…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-11T20:31:02.000Z"
+    },
+    {
+      "title": "The original Apple TV 4K from 2017 is now officially \"vintage\"",
+      "link": "https://www.gsmarena.com/the_original_apple_tv_4k_from_2017_is_now_officially_vintage-news-74992.php",
+      "excerpt": "The smart streaming box/stick market is a bit weird for sure. There are all sorts of options out there, but each with distinct problems and limitations. Generic Android boxes are…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-11T17:31:02.000Z"
+    },
+    {
+      "title": "Huawei Watch D3 in for review",
+      "link": "https://www.gsmarena.com/huawei_watch_d3_in_for_review-news-74981.php",
+      "excerpt": "Huawei's unique line of health-obsessed Watch D series' latest model is the Watch D3, and it's better in almost every way compared to its predecessor (review here). We'll get to…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-11T14:31:03.000Z"
+    },
+    {
+      "title": "Deals: Big discounts hit flagship phones from Samsung, Apple and Google",
+      "link": "https://www.gsmarena.com/deals_big_discounts_hit_flagship_phones_from_samsung_apple_and_google-news-74990.php",
+      "excerpt": "While Amazon’s Prime Big Deal Days have wrapped up, discounts are still available on several smartphones. In fact, some devices that received few or no notable discounts during…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-11T11:31:02.000Z"
+    },
+    {
+      "title": "Weekly poll: are you interested in the Samsung Galaxy Tab S12+ or Galaxy Tab S12 Ultra?",
+      "link": "https://www.gsmarena.com/weekly_poll_are_you_interested_in_the_samsung_galaxy_tab_s12_or_galaxy_tab_s12_ultra-news-74958.php",
+      "excerpt": "Last year, the global tablet market was up 8.5% in Q1 as people started to replace devices they bought during the pandemic. Apple led the quarter with 13.7 million units shipped,…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-11T08:31:02.000Z"
+    },
+    {
+      "title": "The vivo X Fold6 powers advanced productivity features with India's biggest battery in a foldable",
+      "link": "https://www.gsmarena.com/the_vivo_x_fold6_powers_advanced_productivity_features_with_indias_biggest_battery_in_a_foldable-news-74841.php",
+      "excerpt": "As folding technology matures, the focus has shifted from perfecting the hinge to slimming things down and now battery life has emerged as a key differentiating factor for…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-11T05:30:02.000Z"
+    },
+    {
+      "title": "Weekly poll results: the vivo X Fold6 is hot, but its price can singe your wallet",
+      "link": "https://www.gsmarena.com/weekly_poll_results_the_vivo_x_fold6_is_hot_but_its_price_can_singe_your_wallet-news-74962.php",
+      "excerpt": "As if foldables weren’t expensive enough, the skyrocketing costs of memory chips raised their prices even further – and that’s a problem for the vivo X Fold6. Not just for it, of…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-11T02:46:02.000Z"
+    },
     {
       "title": "Xiaomi Watch S5 review",
       "link": "https://www.gsmarena.com/xiaomi_watch_s5_review-news-73952.php",
@@ -127,78 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-10-10T18:31:02.000Z"
-    },
-    {
-      "title": "Oppo Find N7's camera and display details surface",
-      "link": "https://www.gsmarena.com/oppo_find_n7_camera_display_details_tipped-news-74991.php",
-      "excerpt": "The Oppo Find N7 is expected in Q1 2027, possibly March, like its predecessor, the Find N6. While Oppo hasn't revealed anything about the Find N7, reliable tipster Digital Chat…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-10T13:38:02.000Z"
-    },
-    {
-      "title": "This is when the Infinix GT 50 Pro is finally launching in India",
-      "link": "https://www.gsmarena.com/this_is_when_the_infinix_gt_50_pro_is_finally_launching_in_india-news-74988.php",
-      "excerpt": "Infinix launched the GT 50 Pro back in April, but for some reason it still hasn't made the device available in India. That will thankfully change very soon. Following a brief…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-10T11:01:02.000Z"
-    },
-    {
-      "title": "Deals: vivo X Fold6 arrives, Galaxy S26 Ultra price remains low, iPhone 17 series on sale",
-      "link": "https://www.gsmarena.com/deals_vivo_x_fold6_arrives_galaxy_s26_ultra_price_remains_low_iphone_17_series_on_sale-news-74980.php",
-      "excerpt": "The Prime Big Deal Days sale must have gone well as a lot of smartphones are showing as “out of stock” on Amazon – and for those that are still available, supplies are limited, so…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-10T07:49:02.000Z"
-    },
-    {
-      "title": "Oppo Find X10 Pro Max Hasselblad teleconverter kit unboxing and hands-on",
-      "link": "https://www.gsmarena.com/oppo_find_x10_pro_max_hasselblad_teleconverter_kit_unboxing_and_handson-news-74979.php",
-      "excerpt": "The Oppo Find X10 series is going global on October 21, and we've already brought you guys a quick first look and unboxing of both the Find X10 and the Find X10 Pro Max. Now,…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-10T04:31:01.000Z"
-    },
-    {
-      "title": "Nothing's CMF is launching new products next week",
-      "link": "https://www.gsmarena.com/nothings_cmf_is_launching_new_products_next_week-news-74987.php",
-      "excerpt": "Nothing's CMF sub-brand is on its way to becoming an independent Indian company, but that transition hasn't stopped it from churning out new products. Case in point: CMF has just…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-09T23:02:02.000Z"
-    },
-    {
-      "title": "HMD Pulse 2T Pro specs and images leak showing a dot matrix rear display",
-      "link": "https://www.gsmarena.com/hmd_pulse_2t_pro_specs_and_images_leak_showing_a_dot_matrix_rear_display-news-74986.php",
-      "excerpt": "At the beginning of September, the HMD Pulse 2 Pro got prematurely listed by a Swiss retailer, and that revealed its specs. The phone is still not official, but in the meantime we…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-09T21:02:02.000Z"
-    },
-    {
-      "title": "Apple iPhone 18 Pro Max running iOS 27.2 beta receives AT&T carrier update",
-      "link": "https://www.gsmarena.com/apple_iphone_18_pro_max_ios_27_2_beta_72_0_3_att_carrier_update-news-74974.php",
-      "excerpt": "Apple has released an emergency carrier bundle update for iPhone 18 Pro Max units on AT&T running iOS 27.2 beta. The update has version 72.0.3 and comes a week after Apple…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-09T16:31:02.000Z"
-    },
-    {
-      "title": "Budget 2027: Malaysian Highway Authority to deploy 50 EV charging stations?",
-      "link": "https://soyacincau.com/2026/10/09/budget-2027-malaysian-highway-llm-50-ev-charging-stations/",
-      "excerpt": "The Malaysian Highway Authority (LLM) will deploy 50 EV charging stations next year. This was revealed through the tabling of Budget 2027 earlier today. To be clear, LLM’s plan…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-10-09T15:56:49.000Z"
-    },
-    {
-      "title": "The RedMagic 12 Pro+ is shaping up to be an RGB lover’s dream",
-      "link": "https://www.gsmarena.com/the_redmagic_12_pro_is_shaping_up_to_be_an_rgb_lovers_dream-news-74978.php",
-      "excerpt": "RedMagic’s upcoming flagship, the 12 Pro+, is set to launch in China next week. After revealing the phone’s design and color options recently, the brand has now shared details…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-09T15:05:03.000Z"
     }
   ]
 }
