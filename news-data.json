@@ -1,11 +1,19 @@
 {
-  "generated": "2026-10-17T01:23:09.270Z",
+  "generated": "2026-10-18T01:17:54.302Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Samsung Dijangka Membawa Perubahan Besar Melalui One UI 10",
+      "link": "https://cms.amanz.my/2026585023/",
+      "excerpt": "Samsung sedia mula menawarkan One UI 9 kepada pengguna beberapa peranti mereka, dan untuk tahun 2027, Samsung bakal hadir dengan One UI 10. Selari dengan pengenalan versi ke…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-10-17T13:22:46.000Z"
+    },
     {
       "title": "Xperia 10 VI Tidak Akan Menerima Kemaskini Android 17 Yang Dijanjikan",
       "link": "https://cms.amanz.my/2026585021/",
@@ -93,17 +101,89 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-10-15T05:32:14.000Z"
-    },
-    {
-      "title": "Samsung Kini Menawarkan Mesin Basuh dan Pengering Untuk Perniagaan Di APAC",
-      "link": "https://cms.amanz.my/2026584780/",
-      "excerpt": "Mesin basuh dan pengering Samsung mempunyai reputasi menawarkan kemampuan membersih yang baik dengan ia digabungkan dengan penggunaan pelbagai teknologi terkini. Contoh terbaik…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-10-15T04:18:54.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Deals: latest Galaxy foldables and Galaxy S26 series are on sale",
+      "link": "https://www.gsmarena.com/deals_the_galaxy_z8_and_galaxy_s26_models_are_on_sale-news-75085.php",
+      "excerpt": "Last week, we covered Amazon’s Prime Big Deal Days and then the aftermath – some phones kept their promotional prices from the Prime sale even during the weekend, while others…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-17T23:24:02.000Z"
+    },
+    {
+      "title": "Qualcomm denies rumors about Snapdragon 8 Elite Extreme Gen 6 overheating",
+      "link": "https://www.gsmarena.com/qualcomm_denies_rumors_about_snapdragon_8_elite_extreme_gen_6_overheating-news-75100.php",
+      "excerpt": "Yesterday, a Korean news outlet shared some concerning news about the upcoming Samsung Galaxy S27 Ultra. According to the report, Samsung is thinking about going all Exynos next…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-17T20:01:02.000Z"
+    },
+    {
+      "title": "Apple's official silicone case for the iPhone Duo requires adhesive",
+      "link": "https://www.gsmarena.com/apples_official_silicone_case_for_the_iphone_duo_requires_adhesive-news-75099.php",
+      "excerpt": "If you are eyeing the iPhone Duo as your next, or even first, foldable, you might also be looking into Apple's official accessories like the $79 silicone case or the $129 folio…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-17T17:44:02.000Z"
+    },
+    {
+      "title": "Honor Win2 teased once again with world's first 2K 185Hz display",
+      "link": "https://www.gsmarena.com/honor_win2_teased_once_again_with_worlds_first_2k_185hz_display-news-75098.php",
+      "excerpt": "Honor is preparing to launch the Win2 series that consists of the Win2 itself, the Win2 RT and the Win2 Turbo. The Win2 series shapes up to be an interesting tech showcase since…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-17T15:12:02.000Z"
+    },
+    {
+      "title": "Insider reveals Samsung's plans to completely overhaul One UI 10",
+      "link": "https://www.gsmarena.com/insider_reveals_samsungs_plans_to_completely_overhaul_one_ui_10-news-75097.php",
+      "excerpt": "A source close to Nokia Power User claims that Samsung is planning a complete overhaul of One UI and a major shift in overall philosophy. In fact, the Korean tech giant is looking…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-17T12:43:02.000Z"
+    },
+    {
+      "title": "Honor Win2 runs AnTuTu too, its cooling fan helps it achieve a top score",
+      "link": "https://www.gsmarena.com/honor_win2_runs_antutu_too_its_cooling_fan_helps_it_achieve_a_top_score-news-75095.php",
+      "excerpt": "Honor is launching the Win2 in China on October 21, and not long ago it was purportedly spotted in the Geekbench online database, confirming the fact that it will be powered by…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-17T12:02:02.000Z"
+    },
+    {
+      "title": "Deals: iPhone Duo pre-orders begin as Galaxy Z Fold8 gets a price cut",
+      "link": "https://www.gsmarena.com/deals_iphone_duo_preorders_begin_as_galaxy_z_fold8_gets_a_price_cut-news-75096.php",
+      "excerpt": "Apple’s first foldable iPhone is now available for pre-order, but the iPhone Duo sold out quickly in most regions. Delivery estimates for the foldable have already slipped to late…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-17T09:01:02.000Z"
+    },
+    {
+      "title": "vivo V80 goes global",
+      "link": "https://www.gsmarena.com/vivo_v80_goes_global-news-75090.php",
+      "excerpt": "vivo launched the V80 in India last week, and today the brand has announced the device for other markets too - it mentions Southeast Asia, the Middle East, and \"other regions\" in…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-17T06:01:02.000Z"
+    },
+    {
+      "title": "Shell Recharge activates 180kW DC Charger at Temerloh RNR KL Bound, over 28 months after installation",
+      "link": "https://soyacincau.com/2026/10/17/shell-recharge-180kw-ev-dc-charger-temerloh-rnr-westbound/",
+      "excerpt": "After a long wait, the severely delayed EV Charger along LPT highway is finally online. Shell Recharge’s 180kW DC Charger at Temerloh RNR (KL Bound) is finally turned on after it…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-10-17T04:54:14.000Z"
+    },
+    {
+      "title": "iQOO 16R / Z12 Turbo's chipset leaks along with its screen size",
+      "link": "https://www.gsmarena.com/iqoo_16r_z12_turbos_chipset_leaks_along_with_its_screen_size-news-75094.php",
+      "excerpt": "According to Digital Chat Station on Weibo, the upcoming iQOO Z12 Turbo will have a 6.59-inch \"ultra-high refresh rate\" screen, and will be powered by the upcoming chipset that…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-17T03:01:01.000Z"
+    },
     {
       "title": "Honor reveals which global devices are getting MagicOS 11",
       "link": "https://www.gsmarena.com/honor_reveals_which_global_devices_are_getting_magicos_11-news-75093.php",
@@ -119,86 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-10-16T21:31:02.000Z"
-    },
-    {
-      "title": "If you haven't pre-ordered an iPhone Duo yet, you're in for a long, long wait",
-      "link": "https://www.gsmarena.com/if_you_havent_preordered_an_iphone_duo_yet_but_want_one_youre_in_for_a_long_long_wait-news-75091.php",
-      "excerpt": "The Apple iPhone Duo is available for pre-order starting today – or rather we should say that it was available. The very limited supply became painfully apparent when mere hours…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-16T20:02:02.000Z"
-    },
-    {
-      "title": "Samsung Galaxy S27+ might miss out on UWB",
-      "link": "https://www.gsmarena.com/samsung_galaxy_s27_might_miss_out_on_uwb-news-75084.php",
-      "excerpt": "According to new MIIT (Ministry of Industry and Information Technology) listings in China, the Samsung Galaxy S27+ will miss out on a connectivity feature that has been around…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-16T18:31:02.000Z"
-    },
-    {
-      "title": "Apple's own website now hints at a new iPad mini",
-      "link": "https://www.gsmarena.com/apples_own_website_now_hints_at_a_new_ipad_mini-news-75081.php",
-      "excerpt": "We already know when Apple will show off its touchscreen MacBooks and the OLED iPad mini thanks to a leak from yesterday, and now the company itself seems to have confirmed the…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-16T17:01:02.000Z"
-    },
-    {
-      "title": "The Galaxy S27 Ultra runs into issues with the Snapdragon 8 EE Gen 6, Exynos 2700 may return",
-      "link": "https://www.gsmarena.com/the_galaxy_s27_ultra_runs_into_issues_with_the_snapdragon_8_ee_gen_6_exynos_2700_may_return-news-75078.php",
-      "excerpt": "The Exynos 2700 reportedly beat the Snapdragon 8 Elite Extreme Gen 6 in internal benchmarks, outscoring it in multi-core Geekbench by around 10%. However, it may have another…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-16T15:51:02.000Z"
-    },
-    {
-      "title": "iPhone Duo pre-orders mostly sold out in Malaysia, Apple Store delivery slips to January 2027",
-      "link": "https://soyacincau.com/2026/10/16/iphone-duo-mostly-sold-out-in-malaysia-apple-store-delivery-slips-to-january-2027/",
-      "excerpt": "The highly anticipated iPhone Duo is now open for pre-orders in Malaysia but if you missed the first hour, you may have a long wait ahead. Pre-orders for Apple’s first foldable…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-10-16T14:13:16.000Z"
-    },
-    {
-      "title": "vivo X500 Pro and X500 Pro Max European prices leak",
-      "link": "https://www.gsmarena.com/vivo_x500_pro_and_x500_pro_max_european_prices_leak-news-75082.php",
-      "excerpt": "vivo unveiled the X500 family in China last month, and it's already revealed that the European launch event will take place on October 27. A new leak today tells us about the…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-16T13:43:02.000Z"
-    },
-    {
-      "title": "Sony bails on Xperia 10 VI’s Android 17 update",
-      "link": "https://www.gsmarena.com/sony_bails_on_xperia_10_vis_android_17_update_-news-75080.php",
-      "excerpt": "The Xperia 10 VI launched in May of 2024, booting Android 14, and at the time Sony pledged the device would be eligible for three Android updates. That meant that it would get…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-16T12:36:03.000Z"
-    },
-    {
-      "title": "JomCharge plans to deploy 1,000 EV charging stations across Selangor within 2 years",
-      "link": "https://soyacincau.com/2026/10/16/jomcharge-worldwide-to-deploy-1000-ev-charging-stations-selangor/",
-      "excerpt": "JomCharge is planning a major expansion of its EV charging network in Selangor, with at least 1,000 new EV charging stations targeted for deployment over the next two years. The…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-10-16T12:21:53.000Z"
-    },
-    {
-      "title": "Tecno Spark 50s and 50C unveiled with 120Hz displays",
-      "link": "https://www.gsmarena.com/tecno_spark_50s_spark_50c_features_price_sale_date-news-75083.php",
-      "excerpt": "The Tecno Spark 50 series includes three smartphones - the Spark 50 4G, the Spark 50 5G, and the Spark 50 Pro. As promised, the Chinese brand unveiled the Spark 50s today as the…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-16T11:33:02.000Z"
-    },
-    {
-      "title": "ChargeSini deploys 120kW DC Charger at Atria Shopping Gallery in Damansara Jaya",
-      "link": "https://soyacincau.com/2026/10/16/chargesini-120kw-dc-charger-atria-shopping-gallery-damansara-jaya/",
-      "excerpt": "If your EV needs a quick charge around Damansara Jaya, ChargeSini has just deployed a 120kW DC Charger at Atria Shopping Centre. Located outdoors, this would be an ideal place to…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-10-16T11:10:45.000Z"
     }
   ]
 }
