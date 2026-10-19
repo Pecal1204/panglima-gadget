@@ -1,11 +1,27 @@
 {
-  "generated": "2026-10-18T01:17:54.302Z",
+  "generated": "2026-10-19T01:27:11.855Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Tempoh Menanti Untuk Apple iPhone Duo Kini Sehingga Penghujung Januari 2027",
+      "link": "https://cms.amanz.my/2026585035/",
+      "excerpt": "Jika anda tidak sempat melakukan pratemapaha untuk membeli iPhone Duo minggu lalu, anda bernasib malang kerana tempoh menanti untuk telefon lipat pertama Apple ini kini adalah…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-10-19T00:46:35.000Z"
+    },
+    {
+      "title": "Apple Sedangkan Bangunkan HomeView Baharu Yang Boleh Berpaling Memfokuskan Orang Yang Sedang Berinteraksi",
+      "link": "https://cms.amanz.my/2026585032/",
+      "excerpt": "Apple baru-baru ini telah memperkenalkan sebuah peranti berbentuk hab di rumah, dinamakan HomeView. Melaluinya, ia menawarkan sebuah skrin pintar yang turut disokong Siri AI,…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-10-18T15:53:24.000Z"
+    },
     {
       "title": "Samsung Dijangka Membawa Perubahan Besar Melalui One UI 10",
       "link": "https://cms.amanz.my/2026585023/",
@@ -85,25 +101,73 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-10-15T14:06:43.000Z"
-    },
-    {
-      "title": "Honor Malaysia Dan UPSI Berganding Bahu Melahirkan Bakat Baharu Dalam Bidang AI",
-      "link": "https://cms.amanz.my/2026584828/",
-      "excerpt": "Honor Technology (Malaysia) Sdn Bhd mengukuhkan komitmen melahirkan bakat tempatan dalam bidang kecerdasan buatan (AI) dengan menandatangani Memorandum Perjanjian (MoA) bersama…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-10-15T07:54:53.000Z"
-    },
-    {
-      "title": "Peti Sejuk Pintar Samsung Dikemaskini Untuk Lebih Bijak Memberikan Maklumat, Peringatan dan Saranan",
-      "link": "https://cms.amanz.my/2026584797/",
-      "excerpt": "Beberapa tahun lalu Samsung mula menawarkan siri peti sejuk pintar di bawah payung Bespoke yang dikuasakan Bixby serta hadir dengan skrin besar di bahagian pintu. Jenaka mula…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-10-15T05:32:14.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Apple AirPods 5 review",
+      "link": "https://www.gsmarena.com/apple_airpods_5_review-news-75101.php",
+      "excerpt": "How do you update the most popular audio product in the world? That's a question that would keep many companies awake at night. But almost a decade after the original launched,…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-19T01:00:02.000Z"
+    },
+    {
+      "title": "What is variable aperture and why should you care?",
+      "link": "https://www.gsmarena.com/what_is_variable_aperture_and_why_should_you_care-news-75076.php",
+      "excerpt": "The iPhone 18 Pro is the first iPhone model to feature a variable aperture, a headlining feature for this year's Pro models. An adjustable aperture has been an invaluable tool for…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-18T21:55:01.000Z"
+    },
+    {
+      "title": "OnePlus 16 is official with 9,000mAh battery, Week 42 in review",
+      "link": "https://www.gsmarena.com/oneplus_16_is_official_with_9000mah_battery_week_42_in_review-news-75092.php",
+      "excerpt": "The OnePlus 16 is official, with a mammoth 9,000mAh battery. The power plant supports 100W wired and 50W wireless charging. Elsewhere on the phone, there's the latest Snapdragon 8…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-18T18:09:02.000Z"
+    },
+    {
+      "title": "Apple iPhone 18 Pro vs. iPhone 17 Pro",
+      "link": "https://www.gsmarena.com/apple_iphone_18_pro_vs_iphone_17_pro_battery_camera_price_compared-news-74915.php",
+      "excerpt": "We've got a new iPhone in town, but the age-old question remains: do I get the new iPhone, or is last year's model just as good? With the Apple iPhone 18 Pro now released, the…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-18T14:37:02.000Z"
+    },
+    {
+      "title": "Deals: Galaxy Z Fold8 is on sale as the iPhone Duo launches, other foldables also discounted",
+      "link": "https://www.gsmarena.com/deals_galaxy_z_fold8_is_on_sale_as_the_iphone_duo_launches_other_foldables_also_discounted-news-75088.php",
+      "excerpt": "Amazon’s Prime Big Deal Days soaked up almost all of the discounts last week, so there wasn’t much left over for the weekend. This week, however, we are seeing a return to form.…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-18T08:22:01.000Z"
+    },
+    {
+      "title": "Weekly poll results: the Galaxy Tab S12+ and Tab S12 Ultra make laptops look reasonably priced",
+      "link": "https://www.gsmarena.com/weekly_poll_results_the_galaxy_tab_s12_and_tab_s12_ultra_make_laptops_look_reasonably_priced-news-75069.php",
+      "excerpt": "One commenter under last week’s poll made an interesting point – the Samsung Galaxy Tab S12 Ultra starts at $1,400 for a 12/256GB model and this is without the keyboard, which is…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-18T05:23:01.000Z"
+    },
+    {
+      "title": "Charge+ deploys 50kW DC Charger at Tropical Villa Seri Kembangan, RM0.99 per kWh for limited time",
+      "link": "https://soyacincau.com/2026/10/18/chargeplus-50kw-dc-charger-tropical-villa-luxury-service-suites-seri-kembangan/",
+      "excerpt": "Charge+ has deployed a new EV charger at Tropical Villa Luxury Service Suites in Seri Kembangan. Located in Taman Jinma, the residential EV charger is marked as open to public and…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-10-18T03:27:21.000Z"
+    },
+    {
+      "title": "vivo V80 in for review",
+      "link": "https://www.gsmarena.com/vivo_v80_in_for_review-news-75087.php",
+      "excerpt": "This is the vivo V80, yes, the same V80 we handled earlier this month. Well, different unit; this one is Green (or is it Blue?). We're torn whether it's a green shade of blue or a…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-18T02:24:02.000Z"
+    },
     {
       "title": "Deals: latest Galaxy foldables and Galaxy S26 series are on sale",
       "link": "https://www.gsmarena.com/deals_the_galaxy_z8_and_galaxy_s26_models_are_on_sale-news-75085.php",
@@ -135,70 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-10-17T15:12:02.000Z"
-    },
-    {
-      "title": "Insider reveals Samsung's plans to completely overhaul One UI 10",
-      "link": "https://www.gsmarena.com/insider_reveals_samsungs_plans_to_completely_overhaul_one_ui_10-news-75097.php",
-      "excerpt": "A source close to Nokia Power User claims that Samsung is planning a complete overhaul of One UI and a major shift in overall philosophy. In fact, the Korean tech giant is looking…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-17T12:43:02.000Z"
-    },
-    {
-      "title": "Honor Win2 runs AnTuTu too, its cooling fan helps it achieve a top score",
-      "link": "https://www.gsmarena.com/honor_win2_runs_antutu_too_its_cooling_fan_helps_it_achieve_a_top_score-news-75095.php",
-      "excerpt": "Honor is launching the Win2 in China on October 21, and not long ago it was purportedly spotted in the Geekbench online database, confirming the fact that it will be powered by…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-17T12:02:02.000Z"
-    },
-    {
-      "title": "Deals: iPhone Duo pre-orders begin as Galaxy Z Fold8 gets a price cut",
-      "link": "https://www.gsmarena.com/deals_iphone_duo_preorders_begin_as_galaxy_z_fold8_gets_a_price_cut-news-75096.php",
-      "excerpt": "Apple’s first foldable iPhone is now available for pre-order, but the iPhone Duo sold out quickly in most regions. Delivery estimates for the foldable have already slipped to late…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-17T09:01:02.000Z"
-    },
-    {
-      "title": "vivo V80 goes global",
-      "link": "https://www.gsmarena.com/vivo_v80_goes_global-news-75090.php",
-      "excerpt": "vivo launched the V80 in India last week, and today the brand has announced the device for other markets too - it mentions Southeast Asia, the Middle East, and \"other regions\" in…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-17T06:01:02.000Z"
-    },
-    {
-      "title": "Shell Recharge activates 180kW DC Charger at Temerloh RNR KL Bound, over 28 months after installation",
-      "link": "https://soyacincau.com/2026/10/17/shell-recharge-180kw-ev-dc-charger-temerloh-rnr-westbound/",
-      "excerpt": "After a long wait, the severely delayed EV Charger along LPT highway is finally online. Shell Recharge’s 180kW DC Charger at Temerloh RNR (KL Bound) is finally turned on after it…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-10-17T04:54:14.000Z"
-    },
-    {
-      "title": "iQOO 16R / Z12 Turbo's chipset leaks along with its screen size",
-      "link": "https://www.gsmarena.com/iqoo_16r_z12_turbos_chipset_leaks_along_with_its_screen_size-news-75094.php",
-      "excerpt": "According to Digital Chat Station on Weibo, the upcoming iQOO Z12 Turbo will have a 6.59-inch \"ultra-high refresh rate\" screen, and will be powered by the upcoming chipset that…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-17T03:01:01.000Z"
-    },
-    {
-      "title": "Honor reveals which global devices are getting MagicOS 11",
-      "link": "https://www.gsmarena.com/honor_reveals_which_global_devices_are_getting_magicos_11-news-75093.php",
-      "excerpt": "Honor unveiled MagicOS 11 based on Android 17 last month, and today the company has finally revealed when the stable update will reach existing devices. Don't expect anything too…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-17T00:01:02.000Z"
-    },
-    {
-      "title": "Moto G47 Power is coming with a much larger battery than the G47",
-      "link": "https://www.gsmarena.com/moto_g47_power_is_coming_with_a_much_larger_battery_than_the_g47-news-75089.php",
-      "excerpt": "Motorola launched the Moto G47 in April, and interestingly, the company is now readying not a successor, but a new member of the Moto G47 family - the Moto G47 Power.…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-16T21:31:02.000Z"
     }
   ]
 }
