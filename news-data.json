@@ -1,11 +1,27 @@
 {
-  "generated": "2026-10-25T01:22:06.933Z",
+  "generated": "2026-10-26T01:25:58.345Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Ulasan Poco F9 Ultra – Premium Serba Serbi Kecuali Harga",
+      "link": "https://cms.amanz.my/2026583324/",
+      "excerpt": "Kerana krisis RAM yang semakin memuncak dipacu oleh permintaan pusat data, peranti dalam segmen harga patut atau mampu milik kini sudah diancam kepupusan. Harga peranti tahun ini…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-10-26T01:16:36.000Z"
+    },
+    {
+      "title": "Pemilik iPhone Duo Melaporkan Isu Skrin Mudah Rosak",
+      "link": "https://cms.amanz.my/2026585956/",
+      "excerpt": "Apple iPhone Duo mula dijual pada Jumaat lalu dengan ia segera tular di media sosial kerana menawarkan pengalaman skrin lipat yang tidak pernah dinikmati pengguna iPhone. Tetapi…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-10-26T00:31:45.000Z"
+    },
     {
       "title": "Pandang Pertama ASUS ProArt P14 – Ada Apa Dengan NVIDIA RTX Spark?",
       "link": "https://cms.amanz.my/2026585700/",
@@ -79,31 +95,55 @@
       "published": "2026-10-22T09:10:45.000Z"
     },
     {
-      "title": "Pra-tempahan Tempatan MSI Prestige N16 Flip AI+ Dibuka Dengan Harga Mencecah RM30,699",
-      "link": "https://cms.amanz.my/2026585547/",
-      "excerpt": "Pada awal bulan ini, NVIDIA telah memperlihatkan sejumlah penawaran komputer riba yang dikuasakan oleh platform cip pemprosesan NVIDIA RTX Spark mereka, yang menggabungkan…",
+      "title": "Foodie Media Bakal Perkenal Platform Menghubungkan Pempengaruh Dengan Pengiklan Dalam Masa Terdekat",
+      "link": "https://cms.amanz.my/2026585945/",
+      "excerpt": "Disamping sedang membangunkan platform khusus memfokuskan makanan, kini CEO Foodie Media, Pinn Yang turut berkongsi mengatakan mereka akan memperkenalkan platform yang…",
       "source": "Amanz",
       "lang": "bm",
-      "published": "2026-10-22T07:58:34.000Z"
-    },
-    {
-      "title": "Simfoni Sempurna Antara Skrin dan Speaker Dengan Samsung",
-      "link": "https://cms.amanz.my/2026585526/",
-      "excerpt": "Kali terakhir saya membeli TV ialah sebelum Covid dan akibatnya selepas lebih 7 tahun, TV Android di rumah sudah terlalu berusia sehingga tidak lagi menerima kemas kini tampalan…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-10-22T07:44:22.000Z"
-    },
-    {
-      "title": "Acara Apple “Pro and tell” Dijangka Memperlihatkan MacBook Pro Dengan Skrin Sesentuh",
-      "link": "https://cms.amanz.my/2026585521/",
-      "excerpt": "Pada pertengahan bulan ini, Apple telah mengadakan acara “Welcome home” untuk memperlihatkan penawaran produk seperti Apple HomePod Mini 2 dan Apple TV 4K baru untuk kegunaan di…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-10-22T05:51:38.000Z"
+      "published": "2026-10-25T15:30:59.000Z"
     }
   ],
   "en": [
+    {
+      "title": "OnePlus 15 starts receiving the stable ColorOS 17 update based on Android 17",
+      "link": "https://www.gsmarena.com/oneplus_15_starts_receiving_the_stable_coloros_17_update_based_on_android_17-news-75197.php",
+      "excerpt": "Back in July, OnePlus confirmed that all eligible OnePlus devices will switch from OxygenOS to ColorOS with the Android 17 update, in all regions. Now, that switch is starting to…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-25T20:02:02.000Z"
+    },
+    {
+      "title": "Early iPhone Duo buyers report inner display damage caused by a potential hinge defect",
+      "link": "https://www.gsmarena.com/early_iphone_duo_buyers_report_inner_display_damage_caused_by_a_potential_hinge_defect-news-75201.php",
+      "excerpt": "Buyers of Apple's first foldable, the iPhone Duo, are reporting a serious issue online with their purchase. All reports demonstrate a common pattern of a vertical and a horizontal…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-25T18:42:50.000Z"
+    },
+    {
+      "title": "Deals: Oppo Find X10 series gets pre-order discounts, iPhone Duo goes on sale",
+      "link": "https://www.gsmarena.com/deals_oppo_find_x10_series_gets_preorder_discounts_iphone_duo_goes_on_sale-news-75198.php",
+      "excerpt": "Oppo recently launched the Find X10 and Find X10 Pro Max in global markets, and both phones are now available for pre-order in the UK. Meanwhile, Apple’s iPhone Duo has finally…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-25T09:31:02.000Z"
+    },
+    {
+      "title": "Weekly poll: are you interested in the Oppo Find X10 or the Oppo Find X10 Pro Max?",
+      "link": "https://www.gsmarena.com/weekly_poll_are_you_interested_in_the_oppo_find_x10_or_the_oppo_find_x10_pro_max-news-75168.php",
+      "excerpt": "Oppo is working on faster launches for its new models in Europe – the Find X10 series launched in China a month ago and it arrived in Europe and in India earlier this week. Are…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-25T06:01:02.000Z"
+    },
+    {
+      "title": "Huawei Pura 90 Plus appears in live images ahead of launch, chipset revealed",
+      "link": "https://www.gsmarena.com/huawei_pura_90_plus_appears_in_live_images_ahead_of_launch_chipset_revealed-news-75199.php",
+      "excerpt": "Huawei officially confirmed the Pura 90 Plus earlier today and opened pre-orders for it in China ahead of its October 28 launch. The company hasn't revealed any specs yet, but…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-10-25T02:33:02.000Z"
+    },
     {
       "title": "Deals: iPhone Duo launches, faces off against Galaxy Z Fold8, Motorola Razr Fold and others",
       "link": "https://www.gsmarena.com/deals_iphone_duo_launches_faces_off_against_galaxy_z_fold8_motorola_razr_fold_and_others-news-75184.php",
@@ -159,46 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-10-23T21:54:02.000Z"
-    },
-    {
-      "title": "Samsung extends its Certified Re-Newed program to Amazon US",
-      "link": "https://www.gsmarena.com/samsung_extends_its_certified_renewed_program_to_amazon_us-news-75189.php",
-      "excerpt": "Samsung has put a new twist on its Certified Re-Newed program – the refurbished phones are now also available on Amazon.com in the US. Previously, you could only get them from…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-23T19:21:02.000Z"
-    },
-    {
-      "title": "vivo Y600 carrier listing reveals key specs ahead of launch",
-      "link": "https://www.gsmarena.com/vivo_y600_carrier_listing_reveals_key_specs_ahead_of_launch-news-75186.php",
-      "excerpt": "vivo has already confirmed that the Y600 will launch in China on October 30, with pre-orders opening on October 26. Now, the phone has shown up in China Telecom's terminal…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-23T13:56:02.000Z"
-    },
-    {
-      "title": "Huawei Enjoy 100 series launch date confirmed, pre-orders open",
-      "link": "https://www.gsmarena.com/huawei_enjoy_100_series_launch_date_confirmed_preorders_open-news-75187.php",
-      "excerpt": "The Huawei Enjoy 100 series now has a launch date. Huawei has announced that the lineup will be unveiled on October 28 at 14:30 local time in China, and pre-orders have already…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-23T12:54:02.000Z"
-    },
-    {
-      "title": "Pro and Tell: Is Apple finally dropping a touchscreen MacBook Pro on 28 October?",
-      "link": "https://soyacincau.com/2026/10/23/pro-and-tell-is-apple-finally-dropping-a-touchscreen-macbook-pro-on-28-october/",
-      "excerpt": "Just when you thought Apple was done for the year, the company has planned another massive surprise. According to Greg Joswiak, Apple’s Senior Vice President of Worldwide…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-10-23T11:45:39.000Z"
-    },
-    {
-      "title": "Here's your first look at Samsung's upcoming Galaxy Fit4",
-      "link": "https://www.gsmarena.com/heres_your_first_look_at_samsungs_upcoming_galaxy_fit4-news-75183.php",
-      "excerpt": "Samsung is expected to launch a successor to its affordable Galaxy Fit3 fitness tracker soon. While we await an official announcement, leaked renders of the alleged Galaxy Fit4…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-10-23T11:19:02.000Z"
     }
   ]
 }
