@@ -1,11 +1,19 @@
 {
-  "generated": "2026-11-08T02:36:03.749Z",
+  "generated": "2026-11-09T02:50:01.860Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Apple Dilaporkan Ingin Menjadikan Siri Lebih Kepada AI Berejen Seumpama Meta Muse Seawal 2027",
+      "link": "https://cms.amanz.my/2026587821/",
+      "excerpt": "Apple pada awalnya menjanjikan Siri AI sekitar dua tahun lepas, namun ia mengalami kelewatan. Walaupun telah diperkenalkan secara rasminya melalui iOS 27, ia masih terhad di…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-11-08T23:53:14.000Z"
+    },
     {
       "title": "Oppo Bakal Lancar Kamera Gimbal Tidak Lama Lagi – Menyaingi Insta360",
       "link": "https://cms.amanz.my/2026587731/",
@@ -93,17 +101,65 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-11-05T07:23:00.000Z"
-    },
-    {
-      "title": "20 Peratus Pengeluaran Pasaran PC Global Kini Dikuasakan Cip Pemprosesan Arm",
-      "link": "https://cms.amanz.my/2026587536/",
-      "excerpt": "Arm baru-baru ini telah membentangkan penyata kewangan untuk suku kedua tahun kewangan 2027 dimana mereka melaporkan pendapatan setinggi $1.44 bilion sepanjang suku tersebut,…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-11-05T07:12:33.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Motorola Signature 27 is official, Honor Magic9 Pro Max at HQ, Week 45 in review",
+      "link": "https://www.gsmarena.com/motorola_signature_27_is_official_honor_magic9_pro_max_at_hq_week_45_in_review-news-75388.php",
+      "excerpt": "Motorola finally made the Signature 27 fully official this week, revealing a 7,000mAh silicon-carbon battery with 90W wired and 50W wireless charging. The flagship is powered by…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-09T01:02:02.000Z"
+    },
+    {
+      "title": "Inside ARRI: From Hollywood cinema cameras to the Honor Magic9 Pro Max",
+      "link": "https://www.gsmarena.com/inside_arri_from_hollywood_cinema_cameras_to_the_honor_magic9_pro_max-news-75353.php",
+      "excerpt": "What does a $100,000 cinema camera have in common with a smartphone that's a hundred times cheaper? Honor recently invited us to California to answer that question by lifting the…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-08T20:01:02.000Z"
+    },
+    {
+      "title": "Deals: Latest Samsung foldables, Pixel 11 series, and more discounted",
+      "link": "https://www.gsmarena.com/deals_latest_samsung_foldables_pixel_11_series_and_more_discounted-news-75393.php",
+      "excerpt": "This week, Samsung’s latest Galaxy Z foldables, the Galaxy S26 Ultra, and the Galaxy S26 FE are on sale on Amazon UK. They’re joined by the entire Pixel 11 series, including the…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-08T16:01:02.000Z"
+    },
+    {
+      "title": "Google Pixel 11 Pro XL vs Samsung Galaxy S26 Ultra",
+      "link": "https://www.gsmarena.com/pixel_11_pro_xl_vs_galaxy_s26_ultra_battery_camera_price_compared-news-75303.php",
+      "excerpt": "Looking for a premium Android flagship? The Google Pixel 11 Pro XL and Samsung Galaxy S26 Ultra are two compelling options, but they take rather different approaches. Google's…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-08T12:31:02.000Z"
+    },
+    {
+      "title": "Deals: vivo X500 Pro and X500 Pro Max come with freebies, the Oppo Find X10 series has a small discount",
+      "link": "https://www.gsmarena.com/deals_vivo_x500_pro_and_x500_pro_max_come_with_freebies_the_oppo_find_x10_series_has_a_small_discoun-news-75384.php",
+      "excerpt": "The quality of cameras has reached stunning heights – and so have the prices of said phones. AI-driven memory price increases are certainly to blame, but those 200MP sensors…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-08T09:01:02.000Z"
+    },
+    {
+      "title": "PIAM: EV flood-related losses 4x lower than petrol cars",
+      "link": "https://soyacincau.com/2026/11/08/piam-ev-flood-related-losses-4x-lower-than-petrol-cars/",
+      "excerpt": "Think electric vehicles (EVs) are more expensive to repair after a flood? According to the General Insurance Association of Malaysia (PIAM), data shows that EVs recorded…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-11-08T05:55:19.000Z"
+    },
+    {
+      "title": "Weekly poll: are you interested in the Motorola Signature 27?",
+      "link": "https://www.gsmarena.com/weekly_poll_are_you_interested_in_the_motorola_signature_27-news-75364.php",
+      "excerpt": "For a while there, it felt like Motorola had given up on flagships, at least the non-folding kind. The Motorola Signature 27 is a return to form for the storied smartphone maker…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-08T05:31:02.000Z"
+    },
     {
       "title": "Weekly poll results: touchscreens on laptops only make sense if you can use the laptop as a tablet",
       "link": "https://www.gsmarena.com/weekly_poll_results_touchscreens_on_laptops_only_make_sense_if_you_can_use_the_laptop_as_a_tablet-news-75367.php",
@@ -143,62 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-11-07T15:47:02.000Z"
-    },
-    {
-      "title": "Xiaomi 18 might actually arrive this year, 3C reveals the charging capabilities",
-      "link": "https://www.gsmarena.com/xiaomi_18_might_actually_arrive_this_year_3c_reveals_the_charging_capabilities-news-75396.php",
-      "excerpt": "The Xiaomi 18 Pro series was announced in China in September, and the company confirmed that the duo is going global by the end of this year. In fact, we expect the Xiaomi 18 Pro…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-07T13:14:02.000Z"
-    },
-    {
-      "title": "WhatsApp is testing a feature that lets you control who sees your phone number",
-      "link": "https://www.gsmarena.com/whatsapp_phone_number_privacy_feature_development-news-75395.php",
-      "excerpt": "WhatsApp introduced the Username feature in June. It hasn't been fully rolled out yet, but users can already reserve their usernames. WhatsApp introduced usernames with a focus on…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-07T11:00:02.000Z"
-    },
-    {
-      "title": "We now have a more definite timeframe for Samsung Galaxy Buds On's Europe launch",
-      "link": "https://www.gsmarena.com/samsung_galaxy_buds_on_europe_launch_timeframe-news-75394.php",
-      "excerpt": "The Samsung Galaxy Buds On wireless earphones, unveiled last month, are currently only available in South Korea and the US. Samsung said the Buds On would come to Europe in early…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-07T08:00:02.000Z"
-    },
-    {
-      "title": "iOS 27 users report HDMI output issues and there's no fix in sight",
-      "link": "https://www.gsmarena.com/ios_27_users_report_hdmi_output_issues_and_theres_no_fix_in_sight-news-75385.php",
-      "excerpt": "As is usually the case with new software releases, rollouts rarely go smoothly, and developers work overtime to provide fixes. One problem that gained a lot of traction is the…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-07T05:00:02.000Z"
-    },
-    {
-      "title": "Poco X8s Malaysia: Best compact smartphone under RM2,000?",
-      "link": "https://soyacincau.com/2026/11/07/poco-x8s-malaysia-launch-official-price-specs/",
-      "excerpt": "Xiaomi Malaysia has announced what could be the best compact mid-range smartphone at the moment. They have just introduced the Poco X8s in Malaysia which offers a relatively…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-11-07T02:01:36.000Z"
-    },
-    {
-      "title": "New Realme 17 Pro spec leak helps clarify its place in the upcoming lineup",
-      "link": "https://www.gsmarena.com/realme_17_pro_leak_helps_clarify_its_place_in_the_upcoming_lineup-news-75392.php",
-      "excerpt": "Some key specs for an upcoming Realme 17 Pro-series phone leaked last month, but its identity wasn't clear - it could have been either the Pro or the Pro+. Today, a new report…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-07T01:33:02.000Z"
-    },
-    {
-      "title": "Future iPhones will have one less button, new rumor claims",
-      "link": "https://www.gsmarena.com/future_iphones_will_have_one_less_button_new_rumor_claims-news-75391.php",
-      "excerpt": "Apple introduced the Action button with the iPhone 15 Pro, and the iPhone 18 Pro still has it. Now, a tipster on Weibo claims the company is planning to combine the Action button…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-06T23:42:02.000Z"
     }
   ]
 }
