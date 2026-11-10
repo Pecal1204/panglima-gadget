@@ -1,11 +1,27 @@
 {
-  "generated": "2026-11-09T02:50:01.860Z",
+  "generated": "2026-11-10T04:42:01.406Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Samsung Menguji Langganan Galaxy AI Premium Bermula $4.99 Sebulan",
+      "link": "https://cms.amanz.my/2026587866/",
+      "excerpt": "Samsung ketika memperkenalkan Galaxy AI beberapa tahun sebelum ini, sedia memberikan petanda yang ia tidak akan percuma selamanya, dan akan tiba masa dimana mereka akan mengenakan…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-11-09T13:54:21.000Z"
+    },
+    {
+      "title": "Apple Mengatakan Lebih 100,000 Aplikasi Telah Dioptimumkan Untuk iPhone Duo",
+      "link": "https://cms.amanz.my/2026587836/",
+      "excerpt": "Apple mengatakan terdapat lebih 100,000 aplikasi kini telah dioptimumkan untuk iPhone Duo selepas dua minggu peranti lipat pertama mereka ini dijual ke pasaran. Mereka turut…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-11-09T03:13:13.000Z"
+    },
     {
       "title": "Apple Dilaporkan Ingin Menjadikan Siri Lebih Kepada AI Berejen Seumpama Meta Muse Seawal 2027",
       "link": "https://cms.amanz.my/2026587821/",
@@ -79,126 +95,110 @@
       "published": "2026-11-06T03:41:28.000Z"
     },
     {
-      "title": "Pengguna Apple Disarankan Mengemaskini Sistem Operasi Peranti Ke Versi iOS Dan iPadOS 27.2 Terbaru",
-      "link": "https://cms.amanz.my/2026587571/",
-      "excerpt": "Pada minggu lalu, Apple telah memperkenalkan kemaskini sistem operasi Apple iOS dan iPadOS kepada versi terbaru, iaitu iOS 27.2 dan iPadOS 27.2 untuk mengelakkan isu-isu…",
+      "title": "Apple Kini Mengatasi NVIDIA Sebagai Syarikat Paling Bernilai Di Dunia",
+      "link": "https://cms.amanz.my/2026588010/",
+      "excerpt": "NVIDIA kini dilanda dengan skandal Jensen Huang, dimana ia disahkan CEO NVIDIA berkenaan melakukan hubungan sulit bersama seorang wanita yang didakwa merupakan perisik untuk…",
       "source": "Amanz",
       "lang": "bm",
-      "published": "2026-11-05T09:43:10.000Z"
-    },
-    {
-      "title": "AMD Menjangkakan Jualan Komputer Pengguna Akan Menurun Pada Tahun Hadapan",
-      "link": "https://cms.amanz.my/2026587548/",
-      "excerpt": "Beberapa hari lalu kami ada melaporkan bahawa Intel kelak akan menggunakan proses pengilangan cip 18A terbaru mereka untuk menghasilkan lebih banyak cip pemprosesan Intel Xeon…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-11-05T08:19:02.000Z"
-    },
-    {
-      "title": "Pembekal ROM Terbesar Nintendo Akan Menamatkan Pengeluaran",
-      "link": "https://cms.amanz.my/2026587543/",
-      "excerpt": "Macronix ialah syarikat yang membekalkan sebahagian besar cip ROM kepada Nintendo untuk digunakan pada katrij permainan. Syarikat ini mengumumkan akan mula menarik daripada…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-11-05T07:23:00.000Z"
+      "published": "2026-11-10T04:25:26.000Z"
     }
   ],
   "en": [
     {
-      "title": "Motorola Signature 27 is official, Honor Magic9 Pro Max at HQ, Week 45 in review",
-      "link": "https://www.gsmarena.com/motorola_signature_27_is_official_honor_magic9_pro_max_at_hq_week_45_in_review-news-75388.php",
-      "excerpt": "Motorola finally made the Signature 27 fully official this week, revealing a 7,000mAh silicon-carbon battery with 90W wired and 50W wireless charging. The flagship is powered by…",
+      "title": "vivo X500, X500 Pro, and X500 Pro Max prices for India leak",
+      "link": "https://www.gsmarena.com/vivo_x500_x500_pro_and_x500_pro_max_prices_for_india_leak-news-75413.php",
+      "excerpt": "vivo launched the X500, X500 Pro, and X500 Pro Max in China in September and then they went global last month, but they're still not officially available in India. That will…",
       "source": "GSMArena",
       "lang": "en",
-      "published": "2026-11-09T01:02:02.000Z"
+      "published": "2026-11-10T03:30:02.000Z"
     },
     {
-      "title": "Inside ARRI: From Hollywood cinema cameras to the Honor Magic9 Pro Max",
-      "link": "https://www.gsmarena.com/inside_arri_from_hollywood_cinema_cameras_to_the_honor_magic9_pro_max-news-75353.php",
-      "excerpt": "What does a $100,000 cinema camera have in common with a smartphone that's a hundred times cheaper? Honor recently invited us to California to answer that question by lifting the…",
+      "title": "Samsung Galaxy Watch8 is now receiving the update to One UI 9 Watch based on Wear OS 7",
+      "link": "https://www.gsmarena.com/samsung_galaxy_watch8_is_now_receiving_the_update_to_one_ui_9_watch_based_on_wear_os_7-news-75410.php",
+      "excerpt": "Google unveiled Wear OS 7 in May, and then proceeded to roll it out to its Pixel Watches in June. Meanwhile, Samsung has been working on its own One UI 9 Watch, which is based on…",
       "source": "GSMArena",
       "lang": "en",
-      "published": "2026-11-08T20:01:02.000Z"
+      "published": "2026-11-09T23:01:02.000Z"
     },
     {
-      "title": "Deals: Latest Samsung foldables, Pixel 11 series, and more discounted",
-      "link": "https://www.gsmarena.com/deals_latest_samsung_foldables_pixel_11_series_and_more_discounted-news-75393.php",
-      "excerpt": "This week, Samsung’s latest Galaxy Z foldables, the Galaxy S26 Ultra, and the Galaxy S26 FE are on sale on Amazon UK. They’re joined by the entire Pixel 11 series, including the…",
+      "title": "Xiaomi 18 Pro Max in for review",
+      "link": "https://www.gsmarena.com/xiaomi_18_pro_max_in_for_review-news-75411.php",
+      "excerpt": "We got our hands on the latest Xiaomi 18 Pros, and we're unboxing both, starting with the Xiaomi 18 Pro Max. Here's the video unboxing over at our official TikTok. The global unit…",
       "source": "GSMArena",
       "lang": "en",
-      "published": "2026-11-08T16:01:02.000Z"
+      "published": "2026-11-09T21:31:02.000Z"
     },
     {
-      "title": "Google Pixel 11 Pro XL vs Samsung Galaxy S26 Ultra",
-      "link": "https://www.gsmarena.com/pixel_11_pro_xl_vs_galaxy_s26_ultra_battery_camera_price_compared-news-75303.php",
-      "excerpt": "Looking for a premium Android flagship? The Google Pixel 11 Pro XL and Samsung Galaxy S26 Ultra are two compelling options, but they take rather different approaches. Google's…",
+      "title": "Samsung made limited edition Galaxy Buds4 Pro with Nina Chuba",
+      "link": "https://www.gsmarena.com/samsung_made_limited_edition_galaxy_buds4_pro_with_nina_chuba-news-75409.php",
+      "excerpt": "Samsung launched the Galaxy Buds4 Pro back in February alongside the Galaxy S26 series smartphones, and now the company is coming out with a new special edition made in…",
       "source": "GSMArena",
       "lang": "en",
-      "published": "2026-11-08T12:31:02.000Z"
+      "published": "2026-11-09T20:02:02.000Z"
     },
     {
-      "title": "Deals: vivo X500 Pro and X500 Pro Max come with freebies, the Oppo Find X10 series has a small discount",
-      "link": "https://www.gsmarena.com/deals_vivo_x500_pro_and_x500_pro_max_come_with_freebies_the_oppo_find_x10_series_has_a_small_discoun-news-75384.php",
-      "excerpt": "The quality of cameras has reached stunning heights – and so have the prices of said phones. AI-driven memory price increases are certainly to blame, but those 200MP sensors…",
+      "title": "Google Pixel 11 Pro XL vs. Pixel 10 Pro XL",
+      "link": "https://www.gsmarena.com/pixel_11_pro_xl_vs_pixel_10_pro_xl_battery_camera_price_compared-news-75356.php",
+      "excerpt": "The shopping season is upon us, and if you're considering a new Pixel, there's an interesting choice to make. The latest Google Pixel 11 Pro XL can now be found for around €1,100,…",
       "source": "GSMArena",
       "lang": "en",
-      "published": "2026-11-08T09:01:02.000Z"
+      "published": "2026-11-09T18:31:02.000Z"
     },
     {
-      "title": "PIAM: EV flood-related losses 4x lower than petrol cars",
-      "link": "https://soyacincau.com/2026/11/08/piam-ev-flood-related-losses-4x-lower-than-petrol-cars/",
-      "excerpt": "Think electric vehicles (EVs) are more expensive to repair after a flood? According to the General Insurance Association of Malaysia (PIAM), data shows that EVs recorded…",
+      "title": "Leak details Samsung's plans for Galaxy AI Premium: new features on free and paid tiers",
+      "link": "https://www.gsmarena.com/leak_details_samsungs_plans_for_galaxy_ai_premium_new_features_on_free_and_paid_tiers-news-75408.php",
+      "excerpt": "Samsung organized its push into AI under the “Galaxy AI” umbrella, which includes a bunch of free features. There was always the understanding that at some point Samsung will…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-09T17:01:02.000Z"
+    },
+    {
+      "title": "iPhone 18 and 18e to feature same sized screens and batteries",
+      "link": "https://www.gsmarena.com/iphone_18_and_18e_to_feature_same_sized_screens_and_batteries__-news-75403.php",
+      "excerpt": "The iPhone 18 is expected to enter its production phase later this month and we already knew that it would get a battery upgrade but we now have some specific numbers to look at.…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-09T15:48:01.000Z"
+    },
+    {
+      "title": "Here's your first look at Huawei's wide-screen phone from sub-brand Osta",
+      "link": "https://www.gsmarena.com/heres_your_first_look_at_huaweis_widescreen_phone_from_subbrand_osta-news-75404.php",
+      "excerpt": "According to recent rumors, Huawei is preparing to introduce a new sub-brand called Xingmang, or Osta in English. The brand's first smartphones are expected to include a…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-09T14:46:02.000Z"
+    },
+    {
+      "title": "TNB Electron turns on 12 EV charging points at Balai Islam, TNB Bangsar",
+      "link": "https://soyacincau.com/2026/11/09/tnb-electron-ev-charger-balai-islam-mosque-tnb-bangsar/",
+      "excerpt": "TNB Electron has deployed a new EV charging hub in Bangsar which offers a total of 12 EV charge points. The latest deployment is at Balai Islam, which is a mosque and community…",
       "source": "SoyaCincau",
       "lang": "en",
-      "published": "2026-11-08T05:55:19.000Z"
+      "published": "2026-11-09T14:22:02.000Z"
     },
     {
-      "title": "Weekly poll: are you interested in the Motorola Signature 27?",
-      "link": "https://www.gsmarena.com/weekly_poll_are_you_interested_in_the_motorola_signature_27-news-75364.php",
-      "excerpt": "For a while there, it felt like Motorola had given up on flagships, at least the non-folding kind. The Motorola Signature 27 is a return to form for the storied smartphone maker…",
+      "title": "One UI 9.5 to make Bixby even smarter, capable of handling daily tasks",
+      "link": "https://www.gsmarena.com/one_ui_95_to_make_bixby_even_smarter_capable_of_handling_daily_tasks-news-75407.php",
+      "excerpt": "While One UI 10 is rumored to bring major UI and usability changes, the One UI 9.5 update shapes up to be a pretty major stepping stone itself. The latest report from SamMobile…",
       "source": "GSMArena",
       "lang": "en",
-      "published": "2026-11-08T05:31:02.000Z"
+      "published": "2026-11-09T13:43:02.000Z"
     },
     {
-      "title": "Weekly poll results: touchscreens on laptops only make sense if you can use the laptop as a tablet",
-      "link": "https://www.gsmarena.com/weekly_poll_results_touchscreens_on_laptops_only_make_sense_if_you_can_use_the_laptop_as_a_tablet-news-75367.php",
-      "excerpt": "The results from last week’s poll show that touchscreens do have a place on some laptops. It’s mainly the ones with a 360° hinge or the ones where the screen can detach from the…",
+      "title": "It's official: the Xiaomi 18 Pro and 18 Pro Max are launching globally next week",
+      "link": "https://www.gsmarena.com/its_official_the_xiaomi_18_pro_and_18_pro_max_are_launching_globally_next_week-news-75406.php",
+      "excerpt": "The Xiaomi 18 Pro series launched in China in late September. Since then, the company has dialed in the time frame for the global launch – initially, it only confirmed there will…",
       "source": "GSMArena",
       "lang": "en",
-      "published": "2026-11-08T02:03:02.000Z"
+      "published": "2026-11-09T12:41:02.000Z"
     },
     {
-      "title": "vivo X500 Ultra on track to launch next year, says tipster",
-      "link": "https://www.gsmarena.com/vivo_x500_ultra_launch_timeframe_corroborated-news-75399.php",
-      "excerpt": "Tipster Digital Chat Station recently said that the Oppo Find X10 Ultra is on hold and might not launch. Before that, we heard Xiaomi had canceled the 18 Ultra. This left some…",
+      "title": "The Oppo Pad Air6 (aka Oppo Pad 6) unveiled, sales start next week",
+      "link": "https://www.gsmarena.com/the_oppo_pad_air6_aka_oppo_pad_6_gets_unveiled_today_will_launch_next_week-news-75405.php",
+      "excerpt": "The Oppo Reno17 series is coming next week and instead of waiting until then, the company decided to reveal the new Oppo Pad Air6 today and launch it next week with the phones –…",
       "source": "GSMArena",
       "lang": "en",
-      "published": "2026-11-07T22:59:02.000Z"
-    },
-    {
-      "title": "Deals: Galaxy S26 Ultra and S25 Ultra on sale, Galaxy Z Fold8 price drops",
-      "link": "https://www.gsmarena.com/deals_galaxy_s26_ultra_and_s25_ultra_on_sale_galaxy_z_fold8_price_drops-news-75378.php",
-      "excerpt": "Patience pays off – some flagships were holding a fairly high price last week, but now they are down to a much better number. That is the case for the Samsung Galaxy S26 Ultra – a…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-07T20:45:02.000Z"
-    },
-    {
-      "title": "OnePlus releases its ColorOS 17 rollout schedule for November",
-      "link": "https://www.gsmarena.com/oneplus_releases_its_coloros_17_rollout_schedule_for_november-news-75398.php",
-      "excerpt": "With ColorOS 17, OnePlus officially kickstarts the transition from OxygenOS to ColorOS, but not all devices are running the latest version of the software based on Android 17.…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-07T18:12:02.000Z"
-    },
-    {
-      "title": "Google to add vocabulary for corrected words to Gboard's Rambler voice typing feature",
-      "link": "https://www.gsmarena.com/google_to_add_vocabulary_for_corrected_words_to_gboards_rambler_voice_typing_feature-news-75397.php",
-      "excerpt": "Android Authority app teardown reveals some cool new features coming to Gboard's AI-powered voice typing feature called Rambler. Rambler, however, is a Pixel-exclusive…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-07T15:47:02.000Z"
+      "published": "2026-11-09T11:46:02.000Z"
     }
   ]
 }
