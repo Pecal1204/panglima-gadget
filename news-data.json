@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-14T03:24:46.658Z",
+  "generated": "2026-11-15T02:54:10.492Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
@@ -79,6 +79,14 @@
       "published": "2026-11-13T01:20:01.000Z"
     },
     {
+      "title": "Facebook Akan Menamatkan Ciri Profil Tambahan Berkuat-kuasa 14 Disember",
+      "link": "https://cms.amanz.my/2026588567/",
+      "excerpt": "Facebook pada 2023 yang lepas, telah memperkenalkan ciri menambah profil kepada akaun anda, sekaligus membolehkan anda mempunyai profil berbeza dengan nama yang sama – digunakan…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-11-14T12:43:18.000Z"
+    },
+    {
       "title": "Selangor Akan Salur RM100 Sebulan Selama Setahun Kepada 5000 Anak Selangor Bekerja Gig Penghantar",
       "link": "https://cms.amanz.my/2026588565/",
       "excerpt": "Dengan lebih ramai yang bekerja dibawah platform gig, kini Selangor ingin memastikan mereka tidak ketinggalan dan akan menawarkan program latihan berkenaan pendedahan teknologi,…",
@@ -93,17 +101,57 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-11-13T11:36:12.000Z"
-    },
-    {
-      "title": "Anda Kini Boleh Menutup Pilihan Carian AI Pada Enjin Carian Microsoft Bing",
-      "link": "https://cms.amanz.my/2026588538/",
-      "excerpt": "Microsoft Bing merupakan salah satu daripada enjin carian yang popular di pasaran sekarang, dan sama seperti Google, tampil dengan jawapan carian yang menggunakan teknologi AI…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-11-13T09:23:02.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Honor Magic10 series might feature a 200MP primary camera with LOFIC tech",
+      "link": "https://www.gsmarena.com/honor_magic10_series_200mp_camera_lofic_tech_dual_layer_oled_display-news-75485.php",
+      "excerpt": "A few days ago, tipster Smart Pikachu suggested that the Magic10 series might mark the return of variable-aperture cameras on Honor smartphones. Now, a new Weibo post by the…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-14T23:01:02.000Z"
+    },
+    {
+      "title": "Deals: Samsung Galaxy S26 Ultra and Z Fold8 on sale, Nothing Phone (3) gets a price cut",
+      "link": "https://www.gsmarena.com/deals_samsung_galaxy_s26_ultra_and_z_fold8_on_sale_nothing_phone_3_gets_a_price_cut-news-75470.php",
+      "excerpt": "Black Friday is coming at the end of this month and some retailers have already started with “early Black Friday” deals – just like Amazon did “early Prime Day” deals. Samsung…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-14T20:07:02.000Z"
+    },
+    {
+      "title": "Oppo Reno17 and Reno17 Pro's full specs tipped ahead of November 16 launch",
+      "link": "https://www.gsmarena.com/oppo_reno17_reno17_pro_full_specs_tipped-news-75484.php",
+      "excerpt": "Oppo will unveil the Reno17 and Reno17 Pro in China on November 16. Oppo has confirmed the chipsets and main cameras for both phones; however, it hasn't detailed the full spec…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-14T17:04:02.000Z"
+    },
+    {
+      "title": "Deals: the Galaxy S26 series is up to £570 off, Pixel 11 series also discounted, Oppo Find X10 price drops",
+      "link": "https://www.gsmarena.com/deals_the_galaxy_s26_series_is_up_to_570_off_pixel_11_series_also_discounted_oppo_find_x10_price_dro-news-75473.php",
+      "excerpt": "Black Friday in the US falls on November 27 and most UK retailers have picked the same date. You don’t have to wait until the end of the month, however, since Amazon has some…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-14T11:02:02.000Z"
+    },
+    {
+      "title": "Samsung Galaxy A18 4G launched in Singapore, but with a different chip",
+      "link": "https://www.gsmarena.com/samsung_galaxy_a18_4g_singapore_price_sale_date-news-75483.php",
+      "excerpt": "The Samsung Galaxy A18 4G, unveiled in Europe in September, has debuted in Singapore, but with a different chip under the hood. The Galaxy A18 4G available in Europe is powered by…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-14T08:31:02.000Z"
+    },
+    {
+      "title": "Huawei's next nova Flip could switch to a wide form factor",
+      "link": "https://www.gsmarena.com/huaweis_next_nova_flip_could_switch_to_a_wide_form_factor-news-75479.php",
+      "excerpt": "Huawei launched the nova Flip S in China back in October last year, and it was mostly the nova Flip with new colors, a lower price, and a different chipset. Its successor is…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-14T05:01:02.000Z"
+    },
     {
       "title": "Motorola Razr 50 Ultra's Android 17 update becomes available in Europe, with a catch",
       "link": "https://www.gsmarena.com/motorola_razr_50_ultra_starts_getting_android_17_in_europe-news-75480.php",
@@ -151,54 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-11-13T08:37:03.000Z"
-    },
-    {
-      "title": "Samsung Galaxy A18 5G gets Bluetooth certified",
-      "link": "https://www.gsmarena.com/samsung_galaxy_a18_5g_bluetooth_certified-news-75465.php",
-      "excerpt": "Samsung unveiled the Galaxy A18 4G in September. In a few months, it could unveil the Galaxy A18 5G, which has received Bluetooth SIG certification. Samsung Galaxy A18 4G The…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T07:29:02.000Z"
-    },
-    {
-      "title": "Redmi Note 18 series spotted online, charging speed revealed",
-      "link": "https://www.gsmarena.com/redmi_note_18_charging_speed_revealed_via_online_listing-news-75464.php",
-      "excerpt": "Although Xiaomi launched the Redmi Note 17 series only a few months ago, the company appears to be gearing up to introduce its successors. A new Redmi smartphone, believed to be…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T06:30:02.000Z"
-    },
-    {
-      "title": "Huawei Mate X8 now has a rumored launch date",
-      "link": "https://www.gsmarena.com/huawei_mate_x8_now_has_a_rumored_launch_date-news-75463.php",
-      "excerpt": "Huawei will allegedly launch the Mate X8 on November 24, according to a new rumor out of China. The device will be both thinner and lighter than the Mate X5, Mate X6, and Mate X7,…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T05:01:02.000Z"
-    },
-    {
-      "title": "Gentari Go finally fixes its frustratingly slow EV charging app, and it’s a huge improvement",
-      "link": "https://soyacincau.com/2026/11/13/gentari-go-v2-11-0-review-ev-charging-app-upgraded/",
-      "excerpt": "After almost a year of frustratingly slow performance, Gentari Go has finally received a much-needed update that makes starting and stopping an EV charging session significantly…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-11-13T04:22:01.000Z"
-    },
-    {
-      "title": "Oppo confirms the Reno17 Pro's main camera and the chipsets powering it and the Reno17",
-      "link": "https://www.gsmarena.com/oppo_confirms_the_reno17_pros_main_camera_and_the_chipsets_powering_it_and_the_reno17-news-75462.php",
-      "excerpt": "Oppo is fully unveiling the Reno17 and Reno17 Pro in China on November 16, and just yesterday the company officially confirmed that the Reno17 will come with four 50MP cameras,…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T03:13:01.000Z"
-    },
-    {
-      "title": "New details about the vivo X500s surface",
-      "link": "https://www.gsmarena.com/new_details_about_the_vivo_x500s_surface-news-75458.php",
-      "excerpt": "Late last month, a tipster shared some details about the vivo X500s, which is expected to be the fourth model in the company’s X500 lineup. Now, the same tipster has revealed more…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T01:27:02.000Z"
     }
   ]
 }
