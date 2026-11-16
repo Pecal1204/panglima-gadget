@@ -1,11 +1,27 @@
 {
-  "generated": "2026-11-15T02:54:10.492Z",
+  "generated": "2026-11-16T02:53:54.196Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "Meta Didenda €805 juta Di Itali Kerana Mengakses Gambar dan Video Pengguna Android",
+      "link": "https://cms.amanz.my/2026588578/",
+      "excerpt": "Pengawal selia perlindungan data Itali mengenakan denda €805 juta (~RM 4 bilion) ke atas Meta kerana didakwa mengakses foto dan video pengguna Android tanpa persetujuan atau…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-11-16T02:48:38.000Z"
+    },
+    {
+      "title": "Apple Dijangka Perlihat Kaca Mata Siri AI Seawal WWDC 2027",
+      "link": "https://cms.amanz.my/2026588575/",
+      "excerpt": "Apple dibawah CEO baharu dilihat akan lebih memfokuskan kepada pengenalan pelbagai produk baharu. Selepas pengenalan iPhone boleh-lipat dan juga MacBook Pro dengan skrin sentuh,…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-11-16T00:47:34.000Z"
+    },
     {
       "title": "Selangor Umum Inisiatif “Laptop Kita Selangor” – Akan Agih 8,400 Unit Komputer Riba",
       "link": "https://cms.amanz.my/2026588563/",
@@ -79,31 +95,63 @@
       "published": "2026-11-13T01:20:01.000Z"
     },
     {
-      "title": "Facebook Akan Menamatkan Ciri Profil Tambahan Berkuat-kuasa 14 Disember",
-      "link": "https://cms.amanz.my/2026588567/",
-      "excerpt": "Facebook pada 2023 yang lepas, telah memperkenalkan ciri menambah profil kepada akaun anda, sekaligus membolehkan anda mempunyai profil berbeza dengan nama yang sama – digunakan…",
+      "title": "Jensen Huang Pertimbang Untuk Kembali Semula Sebagai CEO NVIDIA",
+      "link": "https://cms.amanz.my/2026588572/",
+      "excerpt": "Jensen Huang kini dilaporkan pertimbang semula untuk kembali sebagai CEO NVIDIA, selepas meletakkan jawatan pada minggu lepas. Langkah ini dilihat lanjutan daripada ramai pekerja…",
       "source": "Amanz",
       "lang": "bm",
-      "published": "2026-11-14T12:43:18.000Z"
-    },
-    {
-      "title": "Selangor Akan Salur RM100 Sebulan Selama Setahun Kepada 5000 Anak Selangor Bekerja Gig Penghantar",
-      "link": "https://cms.amanz.my/2026588565/",
-      "excerpt": "Dengan lebih ramai yang bekerja dibawah platform gig, kini Selangor ingin memastikan mereka tidak ketinggalan dan akan menawarkan program latihan berkenaan pendedahan teknologi,…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-11-13T11:52:52.000Z"
-    },
-    {
-      "title": "Selangor Umum Pemberian Akses Gemini Selama Setahun Kepada 50,000 Rakyat",
-      "link": "https://cms.amanz.my/2026588560/",
-      "excerpt": "Kerajaan negeri Selangor hari ini membentangkan Belanjawan Selangor 2027, sekaligus mengumumkan sejumlah inisiatif yang menarik. Salah satu yang diumumkan adalah usaha…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-11-13T11:36:12.000Z"
+      "published": "2026-11-15T23:43:09.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Gaming performance evolution: iPhone 15 Pro to iPhone 18 Pro",
+      "link": "https://www.gsmarena.com/gaming_performance_evolution_iphone_15_pro_to_iphone_18_pro-news-75486.php",
+      "excerpt": "The iPhone has always had a great selection of games, including some AAA titles from older console generations. However, it was with the launch of the iPhone 15 Pro that Apple…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-15T20:28:30.000Z"
+    },
+    {
+      "title": "Tilta Khronos Oppo Find X10 Pro Max Creator Kit hands-on",
+      "link": "https://www.gsmarena.com/tilta_khronos_oppo_find_x10_pro_max_creator_kit_handson-news-75476.php",
+      "excerpt": "Today, we've got another video creator kit for unboxing. It's the Tilta-made Khronos Oppo Find X10 Pro Max Creator Kit, and it's nearly identical to the one we tried with the Find…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-15T14:03:02.000Z"
+    },
+    {
+      "title": "Huawei MateBook Fold S: A laptop, tablet and “flip phone” in one?",
+      "link": "https://soyacincau.com/2026/11/15/huawei-matebook-fold-s-foldable-laptop-launching-soon/",
+      "excerpt": "Huawei is preparing to launch the MateBook Fold S, a more compact version of its foldable laptop that was introduced last year. Instead of a massive 18-inch display that folds…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-11-15T11:57:19.000Z"
+    },
+    {
+      "title": "Galaxy S27 dummies, Xiaomi 18s land in the office, Week 46 in review",
+      "link": "https://www.gsmarena.com/galaxy_s27_dummies_xiaomi_18s_land_in_the_office_week_46_in_review-news-75478.php",
+      "excerpt": "Samsung's upcoming Galaxy S27 series appeared in a new leak, courtesy of Sonny Dickson, who shared dummy units of the Galaxy S27 Ultra, S27 Pro, and S27+. The Ultra and Pro…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-15T10:01:02.000Z"
+    },
+    {
+      "title": "Malaysia mulls stricter WhatsApp verification to combat scam and impersonation calls",
+      "link": "https://soyacincau.com/2026/11/15/whatsapp-stricter-verification-mcmc-scam-calls-impersonation/",
+      "excerpt": "The Malaysian government is considering stricter WhatsApp account verification requirements to combat scams and impersonation calls, particularly those involving scammers posing…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-11-15T09:38:26.000Z"
+    },
+    {
+      "title": "Weekly poll: how long do you plan to keep your current phone?",
+      "link": "https://www.gsmarena.com/weekly_poll_how_long_do_you_plan_to_keep_your_current_phone-news-75477.php",
+      "excerpt": "Six years ago, we asked you “how often do you change your phone?”. The most common answer back then was once every three years, with once every two years coming in a close second.…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-15T06:07:02.000Z"
+    },
     {
       "title": "Honor Magic10 series might feature a 200MP primary camera with LOFIC tech",
       "link": "https://www.gsmarena.com/honor_magic10_series_200mp_camera_lofic_tech_dual_layer_oled_display-news-75485.php",
@@ -151,54 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-11-14T05:01:02.000Z"
-    },
-    {
-      "title": "Motorola Razr 50 Ultra's Android 17 update becomes available in Europe, with a catch",
-      "link": "https://www.gsmarena.com/motorola_razr_50_ultra_starts_getting_android_17_in_europe-news-75480.php",
-      "excerpt": "The Motorola Razr 50 Ultra, which is sold in the US as the Razr+ 2024, joined Motorola's Android 17 beta program back in April. Newer models like the Razr Ultra 2026 have since…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T22:08:02.000Z"
-    },
-    {
-      "title": "Xiaomi 18 Pro gets one step closer to launching in India",
-      "link": "https://www.gsmarena.com/xiaomi_18_pro_gets_one_step_closer_to_launching_in_india-news-75472.php",
-      "excerpt": "Xiaomi launched the 18 Pro and 18 Pro Max in China back in late September, and the duo is going global on November 17. Now the Xiaomi 18 Pro has taken an important step in its…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T14:51:02.000Z"
-    },
-    {
-      "title": "Honor 700 series launch date is official just as a carrier listing reveals most specs",
-      "link": "https://www.gsmarena.com/honor_700_series_launch_date_is_official_just_as_a_carrier_listing_reveals_most_specs-news-75471.php",
-      "excerpt": "Honor already revealed the design of the Honor 700 series last week, and now the company has finally given it a launch date too. The Honor 700, Honor 700 Pro, and Honor 700S will…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T13:17:02.000Z"
-    },
-    {
-      "title": "Motorola Signature 27's battery capacity in Germany is the same as other regions",
-      "link": "https://www.gsmarena.com/motorola_signature_27_battery_capacity_germany-news-75468.php",
-      "excerpt": "Motorola introduced the Signature 27 in September and fully unveiled it last week. The smartphone packs a 7,000 mAh battery. However, Motorola initially said it would come with a…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T10:47:02.000Z"
-    },
-    {
-      "title": "vivo X300 Ultra gets new OriginOS 7 update with camera and battery optimizations",
-      "link": "https://www.gsmarena.com/vivo_x300_ultra_china_originos_7_camera_update-news-75467.php",
-      "excerpt": "The vivo X300 Ultra, launched with Android 16-based OriginOS 6, is receiving a new OriginOS 7 update based on Android 17. The update is rolling out for the vivo X300 Ultra's…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T09:46:02.000Z"
-    },
-    {
-      "title": "Oppo's pocket gimbal camera said to debut this year, wide-foldable also coming soon",
-      "link": "https://www.gsmarena.com/oppos_pocket_gimbal_camera_said_to_debut_this_year_widefoldable_also_coming_soon-news-75466.php",
-      "excerpt": "Tipster Digital Chat Station has shared details of several flagship products Oppo is reportedly planning to launch soon. The products will include a pocket gimbal camera, a…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-13T08:37:03.000Z"
     }
   ]
 }
