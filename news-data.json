@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-21T04:06:23.197Z",
+  "generated": "2026-11-22T03:18:34.555Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
@@ -105,6 +105,86 @@
   ],
   "en": [
     {
+      "title": "vivo Y21s 5G, Y11s 5G, Y05s 4G specs and images leak",
+      "link": "https://www.gsmarena.com/vivo_y21s_5g_y11s_5g_y05s_4g_specs_and_images_leak-news-75584.php",
+      "excerpt": "Vivo will apparently be flushing out its budget lineup in India soon with at least three new devices. These are not particularly exciting in any meaningful way, but might just…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-22T02:33:02.000Z"
+    },
+    {
+      "title": "MYEVOC: Malaysia needs better enforcement of EV charging safety rules, not more regulations",
+      "link": "https://soyacincau.com/2026/11/22/myevoc-malaysia-needs-better-enforcement-ev-charging-safety-not-more-regulations/",
+      "excerpt": "The Malaysian EV Owners Club (MYEVOC) has responded to recent calls by the Federation of Malaysian Consumers Associations (FOMCA) for tougher safety regulations for EV charging…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-11-22T02:14:59.000Z"
+    },
+    {
+      "title": "Samsung testing Apple's Dynamic Island-style Live Notifications in One UI 9.5",
+      "link": "https://www.gsmarena.com/samsung_redesigned_live_notifications_one_ui_9_5-news-75583.php",
+      "excerpt": "Samsung introduced Live Notifications with One UI 7 and is now working on a visual change that would make the feature feel more like Apple's Dynamic Island. Right now, Live…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-21T21:33:02.000Z"
+    },
+    {
+      "title": "Deal: the Samsung Galaxy S26 FE finally drops to the right price during Amazon's Black Friday sale",
+      "link": "https://www.gsmarena.com/deal_the_samsung_galaxy_s26_fe_finally_drops_to_the_right_price_during_amazons_black_friday_sale-news-75571.php",
+      "excerpt": "Samsung’s strategy for the mid-range segment in the US left us scratching our heads – the Galaxy A57 launched at $550 for an 8/128GB unit, which later grew to $600 after a round…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-21T19:07:02.000Z"
+    },
+    {
+      "title": "Xiaomi 18 Pro Series: How That Back Display Transforms Notifications, GenAI Mini-Apps, and Mobile Photography",
+      "link": "https://soyacincau.com/2026/11/22/xiaomi-18-pro-malaysia-back-display-features/",
+      "excerpt": "This post is brought to you by Xiaomi. Smartphone flagships have reached a point where bumping processor clock speeds and tuning sensor megapixels often yield incremental gains.…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-11-21T17:40:57.000Z"
+    },
+    {
+      "title": "iPhone Air 2 shows off its dual-camera design in another dummy unit leak",
+      "link": "https://www.gsmarena.com/iphone_air_2_shows_off_its_dualcamera_design_in_another_dummy_unit_leak-news-75574.php",
+      "excerpt": "Earlier this month, the iPhone Air 2 and the standard iPhone 18 showed up as dummy units on Weibo. Now, another set of alleged dummies has surfaced on X, giving us a closer look…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-21T14:04:03.000Z"
+    },
+    {
+      "title": "DC Handal now has 14x EV Charge Points at Gurney Plaza, up to 50kW",
+      "link": "https://soyacincau.com/2026/11/21/dc-handal-gurney-plaza-penang-14-ev-charge-points/",
+      "excerpt": "Gurney Plaza is becoming a major EV charging hub in Georgetown, Penang. DC Handal has deployed an additional 11 EV charge points consisting of 22kW and 50kW DC Chargers in the…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-11-21T11:24:09.000Z"
+    },
+    {
+      "title": "Deal: the Samsung Galaxy Z Fold8 Ultra is up to £555 off for Amazon UK's Black Friday sale",
+      "link": "https://www.gsmarena.com/deal_the_samsung_galaxy_z_fold8_ultra_is_up_to_555_off_for_amazon_uks_black_friday_sale-news-75575.php",
+      "excerpt": "Earlier this month, the Samsung Galaxy Z Fold8 Ultra dropped to £1,600 for the base 12/256GB model. During the week of Black Friday sales on Amazon UK, that same unit will cost…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-21T11:01:02.000Z"
+    },
+    {
+      "title": "Honor reportedly has a 13,500 mAh phone coming, and the Power3 isn't far behind",
+      "link": "https://www.gsmarena.com/honor_reportedly_has_a_13500_mah_phone_coming_and_the_power3_isnt_far_behind-news-75577.php",
+      "excerpt": "Honor has been pushing smartphone battery capacities higher and higher, and earlier this month we heard that its 14,000 to 15,000 mAh battery has entered trial production. Now,…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-21T08:02:02.000Z"
+    },
+    {
+      "title": "Deal: the Oppo Find X10 and Find X10 Pro Max now have an even bigger discount for Black Friday",
+      "link": "https://www.gsmarena.com/deal_the_oppo_find_x10_and_find_x10_pro_max_now_have_an_even_bigger_discount_for_black_friday-news-75566.php",
+      "excerpt": "Oppo brought the Find X10 and the Find X10 Pro Max to the global stage earlier than its main rivals – Oppo’s rollout started on October 21, vivo launched its X500 series on…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-21T05:41:02.000Z"
+    },
+    {
       "title": "Zeekr opens 24/7 owners’ lounge at X Park Sunway Serene, with 480kW DC charging from RM1.20/kWh",
       "link": "https://soyacincau.com/2026/11/21/zeekr-owner-lounge-ev-charging-hub-sunway-serene-xpark/",
       "excerpt": "Zeekr owners in Malaysia now have an exclusive lounge where they can chill and relax while charging their EVs. Zeekr Sunway has officially opened its new Zeekr Lounge at X Park…",
@@ -119,86 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-11-21T03:32:02.000Z"
-    },
-    {
-      "title": "iPhone Duo shipping times are finally getting shorter",
-      "link": "https://www.gsmarena.com/iphone_duo_shipping_times_are_finally_getting_shorter-news-75573.php",
-      "excerpt": "Apple's iPhone Duo sold out within hours of pre-orders opening last month, and if you've tried to order one from Apple since, you've been looking at a delivery estimate in late…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-20T22:33:02.000Z"
-    },
-    {
-      "title": "Nothing's screen-less AI device gets an official launch date",
-      "link": "https://www.gsmarena.com/nothings_screenless_ai_device_gets_an_official_launch_date-news-75567.php",
-      "excerpt": "Earlier this month, Nothing CEO Carl Pei confirmed the company's first AI-native product is coming in December, and we've since gotten a first look at its design, followed by a…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-20T21:02:02.000Z"
-    },
-    {
-      "title": "Galaxy S27 Pro's Exynos 2700 runs Geekbench, here's how it stacks up against Snapdragon",
-      "link": "https://www.gsmarena.com/galaxy_s27_pros_exynos_2700_runs_geekbench_heres_how_it_stacks_up_against_snapdragon-news-75565.php",
-      "excerpt": "Back in April, Samsung's Exynos 2700 emerged in early Geekbench listings, but that engineering sample had its fastest core running at just 2.88GHz. Last month, insiders claimed…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-20T19:31:02.000Z"
-    },
-    {
-      "title": "Deal: the Poco F9 Ultra and Poco F9 Pro have £220 discounts on Amazon UK for Black Friday",
-      "link": "https://www.gsmarena.com/deal_the_poco_f9_ultra_and_poco_f9_pro_have_220_discounts_on_amazon_uk_for_black_friday-news-75569.php",
-      "excerpt": "Are “flagship killers” still a thing? They definitely should be, considering that some flagships have an MSRP of £1,400 or higher now. That’s how much Xiaomi is asking for a…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-20T18:02:03.000Z"
-    },
-    {
-      "title": "Samsung appoints new leadership, TM Roh remains CEO",
-      "link": "https://www.gsmarena.com/samsung_appoints_new_leadership_tm_roh_remains_ceo-news-75568.php",
-      "excerpt": "After seven years, Samsung is shaking up its leadership and is replacing the head of the mobile division. Interestingly enough, TM Roh will remain the CEO of the company, but he's…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-20T15:27:02.000Z"
-    },
-    {
-      "title": "Huawei Osta 1 Pro debuts",
-      "link": "https://www.gsmarena.com/huawei_osta_1_pro_debuts_in_china_-news-75562.php",
-      "excerpt": "Following several reports from earlier this month, Huawei went ahead and announced its new Osta sub-brand in China. As revealed by Huawei exec Richard Yu, Osta stands for Original…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-20T14:23:02.000Z"
-    },
-    {
-      "title": "Deal: the Xiaomi 18 Pro and 18 Pro Max come with a free Xiaomi Pad 8 on Amazon Germany",
-      "link": "https://www.gsmarena.com/deal_the_xiaomi_18_pro_and_18_pro_max_come_with_a_free_xiaomi_pad_8_on_amazon_germany-news-75564.php",
-      "excerpt": "Unlike Amazon UK, Amazon Germany doesn’t require a Prime subscription for its Xiaomi 18 Pro and Xiaomi 18 Pro Max deal. The flagship pair only started its global rollout so while…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-20T13:19:03.000Z"
-    },
-    {
-      "title": "Motorola Razr Flex certification reveals an unexpected chipset as a live image leaks",
-      "link": "https://www.gsmarena.com/motorola_razr_flex_certification_reveals_an_unexpected_chipset_as_a_live_image_leaks-news-75553.php",
-      "excerpt": "Motorola's wide foldable, the Razr Flex, showed up on Geekbench earlier this month with what was seemingly the Snapdragon 8 Gen 5 chipset. Now, a TrustCB security certification…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-20T13:19:02.000Z"
-    },
-    {
-      "title": "Xiaomi 18 pre-reservations are now live in China",
-      "link": "https://www.gsmarena.com/xiaomi_18_prereservations_are_now_live_in_china-news-75561.php",
-      "excerpt": "The Xiaomi 18 launch could be just around the corner, as the company has started accepting blind pre-reservations for the handset in China. This follows a recent listing by a…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-20T12:17:02.000Z"
-    },
-    {
-      "title": "Motorola shares a new list of smartphones eligible for Android 17 update",
-      "link": "https://www.gsmarena.com/motorola_smartphone_android_17_update_list-news-75558.php",
-      "excerpt": "In August, Lenovo shared a list of Motorola smartphones eligible for the Android 17 update. That list was missing some smartphones and has since been removed from the official…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-20T11:13:02.000Z"
     }
   ]
 }
