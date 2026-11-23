@@ -1,11 +1,35 @@
 {
-  "generated": "2026-11-22T03:18:34.555Z",
+  "generated": "2026-11-23T03:51:53.247Z",
   "sources": [
     "Amanz",
     "SoyaCincau",
     "GSMArena"
   ],
   "bm": [
+    {
+      "title": "HMD Akan Mengeluarkan Semula Peranti Dengan Kamera PureView",
+      "link": "https://cms.amanz.my/2026589537/",
+      "excerpt": "Sebelum era penggunaan jenama syarikat kamera pada telefon pintar, Nokia memperkenalkan siri telefon PureView yang menjanjikan kualiti gambar yang hebat. Nokia tidak lagi…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-11-23T01:44:12.000Z"
+    },
+    {
+      "title": "Firma Pelaburan MBK Partners Ambil-Alih Wacom",
+      "link": "https://cms.amanz.my/2026589529/",
+      "excerpt": "Wacom merupakan salah satu jenama terkemuka dalam penawaran sokongan tablet bersama pena, bagi memudahkan input dan lakaran menggunakan pena sekaligus mendigitalkan hasilnya.…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-11-22T16:04:19.000Z"
+    },
+    {
+      "title": "Nothing Menjadualkan Pelancaran Peranti AI Pada 8 Disember",
+      "link": "https://cms.amanz.my/2026589526/",
+      "excerpt": "Nothing kini mengumumkan mereka akan melancarkan peranti AI pertama mereka secara rasminya pada 8 Disember 2026. Melalui gambar acah yang dikongsikan, Nothing menggunakan slogan…",
+      "source": "Amanz",
+      "lang": "bm",
+      "published": "2026-11-22T12:56:25.000Z"
+    },
     {
       "title": "NVIDIA Tampal Pepijat Yang Memendekkan Hayat SSD",
       "link": "https://cms.amanz.my/2026589503/",
@@ -77,33 +101,81 @@
       "source": "Amanz",
       "lang": "bm",
       "published": "2026-11-20T02:30:32.000Z"
-    },
-    {
-      "title": "Perbandingan Vivo V80, Honor 600 dan Realme 16 Pro+",
-      "link": "https://cms.amanz.my/2026589326/",
-      "excerpt": "Vivo V80 dilancarkan di Malaysia hari ini sebagai sebuah lagi peranti kelas pertengahan dengan cip Snapdragon 7 Gen 4. Ia amat serasi dibandingkan dengan Honor 600 dan Realme 16…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-11-19T09:55:06.000Z"
-    },
-    {
-      "title": "Vivo V80 Rasmi Di Malaysia – Kamera ZEISS 50MP Dan Harga Serendah RM2399",
-      "link": "https://cms.amanz.my/2026589262/",
-      "excerpt": "Vivo Malaysia secara rasmi melancarkan Vivo V80 untuk pasaran Malaysia. Seperti generasi terdahulu, siri ini terus memfokuskan kepada fotografi potret ZEISS, di samping hadir…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-11-19T08:51:05.000Z"
-    },
-    {
-      "title": "Siri Huawei nova 16s Kini Rasmi Di Malaysia – Harga Bermula RM2,599",
-      "link": "https://cms.amanz.my/2026589299/",
-      "excerpt": "Sempena sambutan ulang tahun ke-10 Huawei XMAGE Awards Malaysia 2026, Huawei kini membawa Huawei nova 16s Series ke pasaran Malaysia dengan kamera utama 200MP, sokongan 5G dan…",
-      "source": "Amanz",
-      "lang": "bm",
-      "published": "2026-11-19T08:37:44.000Z"
     }
   ],
   "en": [
+    {
+      "title": "Xiaomi 18 Pro series goes global, anniversary iPhone details surface, Week 47 in review",
+      "link": "https://www.gsmarena.com/xiaomi_18_pro_series_goes_global_anniversary_iphone_details_surface_week_47_in_review-news-75581.php",
+      "excerpt": "This week's most popular article isn't about phones, it's about Instagram. It seems like the latest Instagram update got people's attention and introduced a feature that people…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-23T01:02:02.000Z"
+    },
+    {
+      "title": "Deal: Amazon's Black Friday deal discounts the Pixel 11 Pro and Pixel 11 Pro XL by 31%",
+      "link": "https://www.gsmarena.com/deal_amazons_black_friday_deal_discounts_the_pixel_11_pro_and_pixel_11_pro_xl_by_31-news-75570.php",
+      "excerpt": "Google was meant to offer a viable alternative to the Apple-Samsung duopoly in the US market, but its pricing strategy made that very difficult – the Pixel 11 series was $100 more…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-22T20:51:02.000Z"
+    },
+    {
+      "title": "The rumored vivo I2606 is powered by the Snapdragon 8s Gen 4",
+      "link": "https://www.gsmarena.com/the_rumored_vivo_i2606_is_powered_by_the_snapdragon_8s_gen_4-news-75586.php",
+      "excerpt": "A few days ago, we saw a BIS certification listing for the vivo I2606. Since we already know the iQOO 16 family is coming to the country, likely at an unfortunately high price, we…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-22T18:11:03.000Z"
+    },
+    {
+      "title": "Ulefone Armor 35 Pro with a 1.2 km laser rangefinder and 11,000 mAh battery goes on sale next month for $430",
+      "link": "https://www.gsmarena.com/ulefone_armor_35_pro_features_price_sale_date-news-75579.php",
+      "excerpt": "Ulefone introduced the Armor 35 Pro in September at IFA without revealing its pricing and availability. We now know from a reliable source that it will go on sale on December 7…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-22T15:21:03.000Z"
+    },
+    {
+      "title": "vivo S70 Pro/V90 Pro leaks with live photo and basic specs sheet",
+      "link": "https://www.gsmarena.com/vivo_s70_pro_v90_pro_leaks_with_live_photo_and_basic_specs_sheet-news-75582.php",
+      "excerpt": "A new leak has surfaced online, allegedly detailing and even depicting the unannounced vivo S70 Pro. Since vivo typically repackages its Chinese-only S-series devices as global…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-22T12:49:02.000Z"
+    },
+    {
+      "title": "Weekly poll: the Xiaomi 18 Pro and 18 Pro Max are global now, have you changed your mind about them?",
+      "link": "https://www.gsmarena.com/weekly_poll_the_xiaomi_18_pro_and_18_pro_max_are_global_now_have_you_changed_your_mind_about_them-news-75551.php",
+      "excerpt": "After the Xiaomi 18 Pro and the Xiaomi 18 Pro Max made their debut in China, we ran a poll to gauge the interest in their then-upcoming global release. The results indicated that…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-22T10:17:02.000Z"
+    },
+    {
+      "title": "Amazon UK Black Friday Week: best tablet deals UK edition",
+      "link": "https://www.gsmarena.com/amazon_uk_black_friday_week_best_tablet_deals_uk_edition_-news-75576.php",
+      "excerpt": "This year’s Black Friday deals are already underway for Amazon Prime subscribers, and we’re now bringing you some hand-picked tablet deals. As usual with these offers, you’ll need…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-22T07:39:02.000Z"
+    },
+    {
+      "title": "Samsung appoints Won-Joon Choi as new mobile chief, taking over from TM Roh",
+      "link": "https://soyacincau.com/2026/11/22/samsung-won-joon-choi-new-mobile-mx-chief-succeeds-tm-roh/",
+      "excerpt": "Samsung Electronics has announced a leadership reshuffle which sees President Won-Joon Choi appointed as the new Head of its Mobile eXperience (MX) Business. After leading…",
+      "source": "SoyaCincau",
+      "lang": "en",
+      "published": "2026-11-22T06:48:06.000Z"
+    },
+    {
+      "title": "Weekly poll results: people keep entry-level phones for 3 years, higher-end models for longer",
+      "link": "https://www.gsmarena.com/weekly_poll_results_people_keep_entrylevel_phones_for_3_years_higherend_models_for_longer-news-75563.php",
+      "excerpt": "This was an interesting experiment – last week, we asked you “how long do you plan to keep your current phone?” and some of the data shows what we expected to see, but there were…",
+      "source": "GSMArena",
+      "lang": "en",
+      "published": "2026-11-22T05:06:02.000Z"
+    },
     {
       "title": "vivo Y21s 5G, Y11s 5G, Y05s 4G specs and images leak",
       "link": "https://www.gsmarena.com/vivo_y21s_5g_y11s_5g_y05s_4g_specs_and_images_leak-news-75584.php",
@@ -127,78 +199,6 @@
       "source": "GSMArena",
       "lang": "en",
       "published": "2026-11-21T21:33:02.000Z"
-    },
-    {
-      "title": "Deal: the Samsung Galaxy S26 FE finally drops to the right price during Amazon's Black Friday sale",
-      "link": "https://www.gsmarena.com/deal_the_samsung_galaxy_s26_fe_finally_drops_to_the_right_price_during_amazons_black_friday_sale-news-75571.php",
-      "excerpt": "Samsung’s strategy for the mid-range segment in the US left us scratching our heads – the Galaxy A57 launched at $550 for an 8/128GB unit, which later grew to $600 after a round…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-21T19:07:02.000Z"
-    },
-    {
-      "title": "Xiaomi 18 Pro Series: How That Back Display Transforms Notifications, GenAI Mini-Apps, and Mobile Photography",
-      "link": "https://soyacincau.com/2026/11/22/xiaomi-18-pro-malaysia-back-display-features/",
-      "excerpt": "This post is brought to you by Xiaomi. Smartphone flagships have reached a point where bumping processor clock speeds and tuning sensor megapixels often yield incremental gains.…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-11-21T17:40:57.000Z"
-    },
-    {
-      "title": "iPhone Air 2 shows off its dual-camera design in another dummy unit leak",
-      "link": "https://www.gsmarena.com/iphone_air_2_shows_off_its_dualcamera_design_in_another_dummy_unit_leak-news-75574.php",
-      "excerpt": "Earlier this month, the iPhone Air 2 and the standard iPhone 18 showed up as dummy units on Weibo. Now, another set of alleged dummies has surfaced on X, giving us a closer look…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-21T14:04:03.000Z"
-    },
-    {
-      "title": "DC Handal now has 14x EV Charge Points at Gurney Plaza, up to 50kW",
-      "link": "https://soyacincau.com/2026/11/21/dc-handal-gurney-plaza-penang-14-ev-charge-points/",
-      "excerpt": "Gurney Plaza is becoming a major EV charging hub in Georgetown, Penang. DC Handal has deployed an additional 11 EV charge points consisting of 22kW and 50kW DC Chargers in the…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-11-21T11:24:09.000Z"
-    },
-    {
-      "title": "Deal: the Samsung Galaxy Z Fold8 Ultra is up to £555 off for Amazon UK's Black Friday sale",
-      "link": "https://www.gsmarena.com/deal_the_samsung_galaxy_z_fold8_ultra_is_up_to_555_off_for_amazon_uks_black_friday_sale-news-75575.php",
-      "excerpt": "Earlier this month, the Samsung Galaxy Z Fold8 Ultra dropped to £1,600 for the base 12/256GB model. During the week of Black Friday sales on Amazon UK, that same unit will cost…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-21T11:01:02.000Z"
-    },
-    {
-      "title": "Honor reportedly has a 13,500 mAh phone coming, and the Power3 isn't far behind",
-      "link": "https://www.gsmarena.com/honor_reportedly_has_a_13500_mah_phone_coming_and_the_power3_isnt_far_behind-news-75577.php",
-      "excerpt": "Honor has been pushing smartphone battery capacities higher and higher, and earlier this month we heard that its 14,000 to 15,000 mAh battery has entered trial production. Now,…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-21T08:02:02.000Z"
-    },
-    {
-      "title": "Deal: the Oppo Find X10 and Find X10 Pro Max now have an even bigger discount for Black Friday",
-      "link": "https://www.gsmarena.com/deal_the_oppo_find_x10_and_find_x10_pro_max_now_have_an_even_bigger_discount_for_black_friday-news-75566.php",
-      "excerpt": "Oppo brought the Find X10 and the Find X10 Pro Max to the global stage earlier than its main rivals – Oppo’s rollout started on October 21, vivo launched its X500 series on…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-21T05:41:02.000Z"
-    },
-    {
-      "title": "Zeekr opens 24/7 owners’ lounge at X Park Sunway Serene, with 480kW DC charging from RM1.20/kWh",
-      "link": "https://soyacincau.com/2026/11/21/zeekr-owner-lounge-ev-charging-hub-sunway-serene-xpark/",
-      "excerpt": "Zeekr owners in Malaysia now have an exclusive lounge where they can chill and relax while charging their EVs. Zeekr Sunway has officially opened its new Zeekr Lounge at X Park…",
-      "source": "SoyaCincau",
-      "lang": "en",
-      "published": "2026-11-21T04:03:25.000Z"
-    },
-    {
-      "title": "HMD could bring Nokia's PureView branding back with a new phone",
-      "link": "https://www.gsmarena.com/hmd_could_bring_nokias_pureview_branding_back_with_a_new_phone-news-75572.php",
-      "excerpt": "It's been a while since we last heard the PureView name, but a new report suggests it could be making a comeback. HMD Global is reportedly considering reviving the branding that…",
-      "source": "GSMArena",
-      "lang": "en",
-      "published": "2026-11-21T03:32:02.000Z"
     }
   ]
 }
